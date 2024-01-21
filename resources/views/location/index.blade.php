@@ -8,11 +8,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Company</h1>
+            <h1>Location</h1>
           </div>
           <div class="col-sm-6">
             <div class="float-sm-right">
-              <a href="/company/create" class="btn btn-primary">Create New</a>
+              <a href="/location/create" class="btn btn-primary">Create New</a>
             </div>
           </div>
         </div>
@@ -25,7 +25,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Company List</h3>
+          <h3 class="card-title">Location List</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -37,28 +37,31 @@
           <table id="example1" class="table table-bordered table-hover">
             <thead>
             <tr>
+              <th>Location Name</th>
               <th>Company Name</th>
-              <th>User</th>
-              <th>Assets</th>
-              <th>Accessories</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>City</th>
+              <th>State</th>
               <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            @foreach ($companies as $company)
+            {{-- @foreach ($companies as $company)
             <tr>
               <td>{{ $company->companyName }}</td>
               <td>55</td>
               <td>72</td>
               <td>109</td>
-              <td class="py-0 align-middle">
+              <td class="text-right py-0 align-middle">
                 <div class="btn-group btn-group-sm">
-                  <a href="/company/edit/{{ $company->companyId }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                  <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                   <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                 </div>
               </td>
             </tr>    
-            @endforeach
+            @endforeach --}}
             </tfoot>
           </table>
         </div>

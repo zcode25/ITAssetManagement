@@ -66,8 +66,8 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link {{ Request::is('company*') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('company*', 'location*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::is('company*', 'location*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-chart-pie"></i>
             <p>
               Master Data
@@ -79,6 +79,12 @@
               <a href="/company" class="nav-link {{ Request::is('company*') ? 'active' : '' }}">
                 <i class="far fa-building nav-icon"></i>
                 <p>Company</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/location" class="nav-link {{ Request::is('location*') ? 'active' : '' }}">
+                <i class="fa-solid fa-location-dot nav-icon"></i>
+                <p>Location</p>
               </a>
             </li>
             <li class="nav-item">
