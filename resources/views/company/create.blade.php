@@ -17,7 +17,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-xl-6">
+        <div class="col-xl-8">
             <!-- Horizontal Form -->
             <div class="card">
               <div class="card-header">
@@ -29,9 +29,9 @@
                 @csrf
                 <div class="card-body">
                   <div class="form-group row">
-                    <label for="companyName" class="col-sm-2 col-form-label">Company Name</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control @error('companyName') is-invalid @enderror" id="companyName" name="companyName">
+                    <label for="companyName" class="col-xl-3 col-form-label">Company Name</label>
+                    <div class="col-xl-9">
+                      <input type="text" class="form-control @error('companyName') is-invalid @enderror" id="companyName" name="companyName" value="{{ old('companyName') }}">
                       @error('companyName') 
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror

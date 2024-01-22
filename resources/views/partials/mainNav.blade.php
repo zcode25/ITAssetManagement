@@ -83,7 +83,7 @@
             </li>
             <li class="nav-item">
               <a href="/location" class="nav-link {{ Request::is('location*') ? 'active' : '' }}">
-                <i class="fa-solid fa-location-dot nav-icon"></i>
+                <i class="far fa-map nav-icon"></i>
                 <p>Location</p>
               </a>
             </li>

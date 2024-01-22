@@ -32,6 +32,9 @@
   <link rel="stylesheet" href="/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -98,6 +101,8 @@
 @include('sweetalert::alert')
 <!-- SweetAlert2 -->
 <script src="/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Select2 -->
+<script src="/plugins/select2/js/select2.full.min.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -105,6 +110,21 @@
       // "buttons": ["colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });
+</script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    
+
+  })
+  
 </script>
 </body>
 </html>

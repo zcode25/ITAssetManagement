@@ -39,4 +39,6 @@ Route::controller(MainCompanyController::class)->group(function() {
 
 Route::controller(MainLocationController::class)->group(function() {
     Route::get('/location', 'index')->name('location.index');
+    Route::get('/location/create', 'create')->name('location.create');
+    Route::post('/location/store', 'store')->name('location.store');
 });

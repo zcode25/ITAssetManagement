@@ -12,7 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('locations', function (Blueprint $table) {
-            $table->id();
+            $table->char('locationId', 8)->primary();
+            $table->char('companyId', 8);
+            $table->foreign('companyId')->references('companyId')->on('companies')->onUpdate('cascade')->onDelete('restrict');
+            $table->string('locationName', 100);
+            $table->string('locationPhone', 15);
+            $table->string('locationEmail', 100);
+            $table->string('locationAddress', 200);
+            $table->string('locationCity', 100);
+            $table->string('locationState', 100);
             $table->timestamps();
         });
     }
