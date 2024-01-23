@@ -10,7 +10,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 class CompanyController extends Controller
 {
     public function index() {
-        $title = 'Delete User!';
+        $title = 'Delete Data!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
 
@@ -25,7 +25,7 @@ class CompanyController extends Controller
 
     public function store(Request $request) {
         $validatedData = $request->validate([
-            'companyName' => 'required|max:50',
+            'companyName' => 'required|max:100',
         ]);
 
         $validatedData['companyId'] = IdGenerator::generate(['table' => 'companies', 'field' => 'companyId', 'length' => 8, 'prefix' => 'CPN']);

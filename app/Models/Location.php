@@ -16,4 +16,9 @@ class Location extends Model
     public function company(){
         return $this->belongsTo(Company::class, 'companyId');
     }
+
+    public function departement(){
+        return $this->hasMany(Departement::class, 'locationId', 'locationId');
+    }
+
 }

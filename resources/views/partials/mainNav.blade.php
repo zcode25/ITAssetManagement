@@ -60,36 +60,36 @@
         </li> --}}
         <li class="nav-item">
           <a href="/dashboard" class="nav-link {{ Request::is('dashboard*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <i class="nav-icon fas fa fa-tachometer-alt"></i>
             <p>
               Dashboard
             </p>
           </a>
         </li>
-        <li class="nav-item {{ Request::is('company*', 'location*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ Request::is('company*', 'location*') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('company*', 'location*', 'departement*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::is('company*', 'location*', 'departement*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-chart-pie"></i>
             <p>
               Master Data
-              <i class="right fas fa-angle-left"></i>
+              <i class="right fas fa fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="/company" class="nav-link {{ Request::is('company*') ? 'active' : '' }}">
-                <i class="far fa-building nav-icon"></i>
+                <i class="far fa fa-building nav-icon"></i>
                 <p>Company</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="/location" class="nav-link {{ Request::is('location*') ? 'active' : '' }}">
-                <i class="far fa-map nav-icon"></i>
+                <i class="far fa fa-map nav-icon"></i>
                 <p>Location</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+              <a href="/departement" class="nav-link {{ Request::is('departement*') ? 'active' : '' }}">
+                <i class="far fa fa-briefcase nav-icon"></i>
                 <p>Departement</p>
               </a>
             </li>
