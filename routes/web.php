@@ -35,6 +35,7 @@ Route::controller(MainCompanyController::class)->group(function() {
     Route::post('/company/store', 'store')->name('company.store');
     Route::get('/company/edit/{company:companyId}', 'edit')->name('company.edit');
     Route::post('/company/update/{company:companyId}', 'update')->name('company.update');
+    Route::delete('/company/destroy/{company:companyId}', 'destroy')->name('company.destroy');
 });
 
 Route::controller(MainLocationController::class)->group(function() {

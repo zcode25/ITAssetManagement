@@ -43,25 +43,35 @@
               <th>Email</th>
               <th>Address</th>
               <th>City</th>
-              <th>State</th>
+              <th>Province</th>
               <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            {{-- @foreach ($companies as $company)
+            @foreach ($locations as $location)
             <tr>
-              <td>{{ $company->companyName }}</td>
-              <td>55</td>
-              <td>72</td>
-              <td>109</td>
-              <td class="text-right py-0 align-middle">
-                <div class="btn-group btn-group-sm">
-                  <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                  <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                </div>
+              {{-- @php
+                  var_dump($location->company);
+              @endphp --}}
+              <td>{{ $location->locationName }}</td>
+              <td>{{ $location->company->companyName }}</td>
+              <td>{{ $location->locationPhone }}</td>
+              <td>{{ $location->locationEmail }}</td>
+              <td>{{ $location->locationAddress }}</td>
+              <td>{{ $location->locationCity }}</td>
+              <td>{{ $location->locationProvince }}</td>
+              <td class="py-0 align-middle">
+                <form action="/location/delete/{{ $location->locationId }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <div class="btn-group btn-group-sm">
+                    <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i></button>
+                  </div>
+                </form>
               </td>
             </tr>    
-            @endforeach --}}
+            @endforeach
             </tfoot>
           </table>
         </div>

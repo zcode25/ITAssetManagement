@@ -53,8 +53,8 @@
               <td>109</td>
               <td class="py-0 align-middle">
                 <div class="btn-group btn-group-sm">
-                  <a href="/company/edit/{{ $company->companyId }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                  <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                  <a href="/company/edit/{{ $company->companyId }}" class="btn btn-primary">Edit</a>
+                  <a href="/company/destroy/{{ $company->companyId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
                 </div>
               </td>
             </tr>    

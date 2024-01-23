@@ -10,8 +10,12 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 class CompanyController extends Controller
 {
     public function index() {
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
         return view('company.index', [
-            'companies' => Company::all() 
+            'companies' => Company::all()
         ]);
     }
 
@@ -45,5 +49,17 @@ class CompanyController extends Controller
         Company::where('companyId', $company->companyId)->update($validatedData);
 
         return redirect('/company')->with('success', 'Data updated successfully');
+    }
+
+    public function destroy(Company $company) {
+        try{
+            Company::where('companyId', $company->companyId)->delete();
+        } catch (\Illuminate\Database\QueryException){
+            return back()->with([
+                'error' => 'Data cannot be deleted, because the data is still needed!',
+            ]);
+        }
+
+        return redirect('/company')->with('success', 'Data deleted successfully');
     }
 }

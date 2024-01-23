@@ -8,9 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Location extends Model
 {
     use HasFactory;
-    use HasFactory;
     protected $guarded = [];
     protected $primaryKey = 'locationId';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    public function company(){
+        return $this->belongsTo(Company::class, 'companyId');
+    }
 }

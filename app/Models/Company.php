@@ -12,4 +12,8 @@ class Company extends Model
     protected $primaryKey = 'companyId';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    public function location(){
+        return $this->hasMany(Location::class, 'companyId', 'companyId');
+    }
 }

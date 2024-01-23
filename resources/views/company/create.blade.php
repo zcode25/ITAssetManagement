@@ -29,7 +29,7 @@
                 @csrf
                 <div class="card-body">
                   <div class="form-group row">
-                    <label for="companyName" class="col-xl-3 col-form-label">Company Name</label>
+                    <label for="companyName" class="col-xl-3 col-form-label">Company Name <span class="text-danger">*</span></label>
                     <div class="col-xl-9">
                       <input type="text" class="form-control @error('companyName') is-invalid @enderror" id="companyName" name="companyName" value="{{ old('companyName') }}">
                       @error('companyName') 

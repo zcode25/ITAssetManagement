@@ -30,7 +30,7 @@
                 <div class="card-body">
                   <div class="form-group row">
                     <input type="hidden" name="companyId" value="{{ $company->companyId }}">
-                    <label for="companyName" class="col-sm-3 col-form-label">Company Name</label>
+                    <label for="companyName" class="col-sm-3 col-form-label">Company Name <span class="text-danger">*</span></label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control @error('companyName') is-invalid @enderror" id="companyName" name="companyName" value="{{ old('companyName', $company->companyName) }}">
                       @error('companyName') 

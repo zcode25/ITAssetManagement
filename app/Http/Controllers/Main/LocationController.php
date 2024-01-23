@@ -11,7 +11,9 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 class LocationController extends Controller
 {
     public function index() {
-        return view('location.index');
+        return view('location.index', [
+            'locations' => Location::all()
+        ]);
     }
 
     public function create() {
@@ -28,7 +30,7 @@ class LocationController extends Controller
             'locationEmail' => 'required|max:100',
             'locationAddress' => 'required|max:200',
             'locationCity' => 'required|max:100',
-            'locationState' => 'required|max:100',
+            'locationProvince' => 'required|max:100',
         ]);
 
         $validatedData['locationId'] = IdGenerator::generate(['table' => 'locations', 'field' => 'locationId', 'length' => 8, 'prefix' => 'LCT']);

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('locationEmail', 100);
             $table->string('locationAddress', 200);
             $table->string('locationCity', 100);
-            $table->string('locationState', 100);
+            $table->string('locationProvince', 100);
             $table->timestamps();
         });
     }

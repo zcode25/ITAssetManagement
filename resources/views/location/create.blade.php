@@ -29,7 +29,7 @@
                 @csrf
                 <div class="card-body">
                   <div class="form-group row">
-                    <label for="companyName" class="col-xl-3 col-form-label">Company</label>
+                    <label for="companyId" class="col-xl-3 col-form-label">Company <span class="text-danger">*</span></label>
                     <div class="col-xl-9">
                       <select class="form-control select2bs4" id="companyId" name="companyId">
                         @foreach ($companies as $company)
@@ -43,7 +43,7 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="locationName" class="col-xl-3 col-form-label">Location Name</label>
+                    <label for="locationName" class="col-xl-3 col-form-label">Location Name <span class="text-danger">*</span></label>
                     <div class="col-xl-9">
                       <input type="text" class="form-control @error('locationName') is-invalid @enderror" id="locationName" name="locationName" value="{{ old('locationName') }}">
                       @error('locationName') 
@@ -52,7 +52,7 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="locationPhone" class="col-xl-3 col-form-label">Phone</label>
+                    <label for="locationPhone" class="col-xl-3 col-form-label">Phone <span class="text-danger">*</span></label>
                     <div class="col-xl-9">
                       <input type="tel" class="form-control @error('locationPhone') is-invalid @enderror" id="locationPhone" name="locationPhone">
                       @error('locationPhone') 
@@ -61,7 +61,7 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="locationEmail" class="col-xl-3 col-form-label">Email</label>
+                    <label for="locationEmail" class="col-xl-3 col-form-label">Email <span class="text-danger">*</span></label>
                     <div class="col-xl-9">
                       <input type="email" class="form-control @error('locationEmail') is-invalid @enderror" id="locationEmail" name="locationEmail">
                       @error('locationEmail') 
@@ -70,7 +70,7 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="locationAddress" class="col-xl-3 col-form-label">Address</label>
+                    <label for="locationAddress" class="col-xl-3 col-form-label">Address <span class="text-danger">*</span></label>
                     <div class="col-xl-9">
                       <textarea class="form-control @error('locationAddress') is-invalid @enderror" rows="3" id="locationAddress" name="locationAddress"></textarea>
                       @error('locationAddress') 
@@ -79,7 +79,7 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="locationCity" class="col-xl-3 col-form-label">City</label>
+                    <label for="locationCity" class="col-xl-3 col-form-label">City <span class="text-danger">*</span></label>
                     <div class="col-xl-9">
                       <input type="text" class="form-control @error('locationCity') is-invalid @enderror" id="locationCity" name="locationCity">
                       @error('locationCity') 
@@ -88,10 +88,10 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="locationState" class="col-xl-3 col-form-label">State</label>
+                    <label for="locationProvince" class="col-xl-3 col-form-label">Province <span class="text-danger">*</span></label>
                     <div class="col-xl-9">
-                      <input type="text" class="form-control @error('locationState') is-invalid @enderror" id="locationState" name="locationState">
-                      @error('locationState') 
+                      <input type="text" class="form-control @error('locationProvince') is-invalid @enderror" id="locationProvince" name="locationProvince">
+                      @error('locationProvince') 
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
                     </div>
