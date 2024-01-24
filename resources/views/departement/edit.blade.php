@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Create Departement</h1>
+            <h1>Update Departement</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -21,11 +21,11 @@
             <!-- Horizontal Form -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Form Create Departement</h3>
+                <h3 class="card-title">Form Update Departement</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="/departement/store" method="POST" class="form-horizontal">
+              <form action="/departement/update/{{ $departement->departementId }}" method="POST" class="form-horizontal">
                 @csrf
                 <div class="card-body">
                   <div class="form-group row">
@@ -33,7 +33,7 @@
                     <div class="col-xl-9">
                       <select class="form-control select2bs4" id="locationId" name="locationId">
                         @foreach ($locations as $location)
-                            @if (old('locationId') == $location->locationId)
+                            @if (old('locationId') == $departement->locationId)
                                 <option value="{{ $location->locationId }}" selected>{{ $location->company->companyName }} - {{ $location->locationName }}</option>
                                 @else
                                 <option value="{{ $location->locationId }}"> {{ $location->company->companyName }} - {{ $location->locationName }}</option>
@@ -45,7 +45,7 @@
                   <div class="form-group row">
                     <label for="departementName" class="col-xl-3 col-form-label">Departement Name <span class="text-danger">*</span></label>
                     <div class="col-xl-9">
-                      <input type="text" class="form-control @error('departementName') is-invalid @enderror" id="departementName" name="departementName" value="{{ old('departementName') }}">
+                      <input type="text" class="form-control @error('departementName') is-invalid @enderror" id="departementName" name="departementName" value="{{ old('departementName', $departement->departementName) }}">
                       @error('departementName') 
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror

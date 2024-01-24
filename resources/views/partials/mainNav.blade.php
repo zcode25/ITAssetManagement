@@ -93,6 +93,12 @@
                 <p>Departement</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="/user" class="nav-link {{ Request::is('user*') ? 'active' : '' }}">
+                <i class="far fa fa-user nav-icon"></i>
+                <p>User</p>
+              </a>
+            </li>
           </ul>
         </li>
       </ul>

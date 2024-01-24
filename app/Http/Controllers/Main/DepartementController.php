@@ -11,6 +11,10 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 class DepartementController extends Controller
 {
     public function index() {
+        $title = 'Delete Data!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+        
         return view('departement.index', [
             'departements' => Departement::all()
         ]);
@@ -41,5 +45,28 @@ class DepartementController extends Controller
             'locations' => Location::all(),
             'departement' => $departement
         ]);
+    }
+
+    public function update(Request $request, Departement $departement) {
+        $validatedData = $request->validate([
+            'locationId' => 'required',
+            'departementName' => 'required|max:100',
+        ]);
+
+        Departement::where('departementId', $departement->departementId)->update($validatedData);
+
+        return redirect('/departement')->with('success', 'Data updated successfully');
+    }
+
+    public function destroy(Departement $departement) {
+        try{
+            Departement::where('departementId', $departement->departementId)->delete();
+        } catch (\Illuminate\Database\QueryException){
+            return back()->with([
+                'error' => 'Data cannot be deleted, because the data is still needed!',
+            ]);
+        }
+
+        return redirect('/departement')->with('success', 'Data deleted successfully');
     }
 }

@@ -47,7 +47,7 @@
             @foreach ($departements as $departement)
             <tr>
               <td>{{ $departement->departementName }}</td>
-              <td>{{ $departement->location->company->companyName }}</td>
+              <td>{{ $departement->location->company->companyName }} </td>
               <td>{{ $departement->location->locationName }}</td>
               <td class="py-0 align-middle">
                 <div class="btn-group btn-group-sm">
