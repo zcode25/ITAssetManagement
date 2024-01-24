@@ -52,4 +52,5 @@ Route::controller(DepartementController::class)->group(function() {
     Route::get('/departement', 'index')->name('departement.index');
     Route::get('/departement/create', 'create')->name('departement.create');
     Route::post('/departement/store', 'store')->name('departement.store');
+    Route::get('/departement/edit/{departement:departementId}', 'edit')->name('departement.edit');
 });

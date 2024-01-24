@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Create Location</h1>
+            <h1>Update Location</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -21,7 +21,7 @@
             <!-- Horizontal Form -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Form Create Location</h3>
+                <h3 class="card-title">Form Update Location</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -33,7 +33,7 @@
                     <div class="col-xl-9">
                       <select class="form-control select2bs4" id="companyId" name="companyId">
                         @foreach($companies as $company)
-                            @if ($company['companyId'] == $company->companyId)
+                            @if ($company['companyId'] == $location->companyId)
                                 <option value="{{ $company['companyId'] }}" selected = "selected">{{ $company['companyName'] }}</option>
                             @else
                                 <option value="{{ $company['companyId'] }}">{{ $company['companyName'] }}</option>

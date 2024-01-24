@@ -35,4 +35,11 @@ class DepartementController extends Controller
         return redirect('/departement')->with('success', 'Data saved successfully');
         
     }
+
+    public function edit(Departement $departement) {
+        return view('departement.edit', [
+            'locations' => Location::all(),
+            'departement' => $departement
+        ]);
+    }
 }
