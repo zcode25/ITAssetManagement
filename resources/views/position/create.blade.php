@@ -28,19 +28,17 @@
               <form action="/position/store" method="POST" class="form-horizontal">
                 @csrf
                 <div class="card-body">
-                  <div class="form-group row">
-                    <label for="positionName" class="col-xl-3 col-form-label">Position Name <span class="text-danger">*</span></label>
-                    <div class="col-xl-9">
-                      <input type="text" class="form-control @error('positionName') is-invalid @enderror" id="positionName" name="positionName" value="{{ old('positionName') }}">
-                      @error('positionName') 
-                        <div class="invalid-feedback">{{ $message }}</div>
-                      @enderror
-                    </div>
+                  <div class="form-group">
+                    <label for="positionName" class="form-label">Position Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control @error('positionName') is-invalid @enderror" id="positionName" name="positionName" value="{{ old('positionName') }}">
+                    @error('positionName') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <a href="/company" class="btn btn-default">Cancel</a>
+                  <a href="/position" class="btn btn-default">Cancel</a>
                   <button type="submit" name="submit" class="btn btn-primary float-right">Save</button>
                 </div>
                 <!-- /.card-footer -->

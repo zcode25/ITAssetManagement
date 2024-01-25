@@ -5,11 +5,14 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\CompanyController as ControllersCompanyController;
 use App\Http\Controllers\DashboardController as ControllersDashboardController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Main\CompanyController as MainCompanyController;
 use App\Http\Controllers\Main\DashboardController as MainDashboardController;
 use App\Http\Controllers\Main\DepartementController;
 use App\Http\Controllers\Main\LocationController as MainLocationController;
 use App\Http\Controllers\Main\PositionController;
+use App\Http\Controllers\Main\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +29,13 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+
+Route::controller(LoginController::class)->group(function() {
+    Route::get('/', 'index')->name('login.index');
+    Route::post('/login/authenticate', 'authenticate')->name('login.authenticate');
+    Route::post('/logout', 'logout')->name('logout');
+});
 
 Route::controller(MainDashboardController::class)->group(function() {
     Route::get('/dashboard', 'index')->name('dashboard');
@@ -61,4 +71,14 @@ Route::controller(DepartementController::class)->group(function() {
 Route::controller(PositionController::class)->group(function() {
     Route::get('/position', 'index')->name('position.index');
     Route::get('/position/create', 'create')->name('position.create');
+    Route::post('/position/store', 'store')->name('position.store');
+    Route::get('/position/edit/{position:positionId}', 'edit')->name('position.edit');
+    Route::post('/position/update/{position:positionId}', 'update')->name('position.update');
+    Route::delete('/position/destroy/{position:positionId}', 'destroy')->name('position.destroy');
+});
+
+Route::controller(UserController::class)->group(function() {
+    Route::get('/user', 'index')->name('user.index');
+    Route::get('/user/create', 'create')->name('user.create');
+    Route::post('/user/store', 'store')->name('user.store');
 });

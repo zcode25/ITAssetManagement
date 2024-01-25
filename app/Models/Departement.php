@@ -16,4 +16,8 @@ class Departement extends Model
     public function location(){
         return $this->belongsTo(Location::class, 'locationId');
     }
+
+    public function user(){
+        return $this->hasMany(User::class, 'locationId', 'locationId');
+    }
 }

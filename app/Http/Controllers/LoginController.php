@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class LoginController extends Controller
+{
+    public function index() {
+        return view('login.index');
+    }
+
+    public function authenticate(Request $request)
+    {
+        // dd($request);
+        $credentials = $request->validate([
+            'employeeNumber'     => 'required',
+            'password'         => 'required',
+        ]);
+       
+ 
+        if (Auth::attempt(['employeeNumber' =>  $credentials['employeeNumber'], 'password' => $credentials['password']])) {
+            $request->session()->regenerate();
+ 
+            return redirect()->intended('/dashboard');
+        }
+
+        return back()->with([
+            'loginError' => 'Login field!',
+        ]);
+    }
+}

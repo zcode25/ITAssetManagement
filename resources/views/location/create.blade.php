@@ -28,73 +28,59 @@
               <form action="/location/store" method="POST" class="form-horizontal">
                 @csrf
                 <div class="card-body">
-                  <div class="form-group row">
-                    <label for="companyId" class="col-xl-3 col-form-label">Company <span class="text-danger">*</span></label>
-                    <div class="col-xl-9">
-                      <select class="form-control select2bs4" id="companyId" name="companyId">
-                        @foreach ($companies as $company)
-                            @if (old('companyId') == $company->companyId)
-                                <option value="{{ $company->companyId }}" selected>{{ $company->companyName }}</option>
-                                @else
-                                <option value="{{ $company->companyId }}">{{ $company->companyName }}</option>
-                            @endif
-                        @endforeach
-                      </select>
-                    </div>
+                  <div class="form-group">
+                    <label for="companyId" class="form-label">Company <span class="text-danger">*</span></label>
+                    <select class="form-control select2bs4" id="companyId" name="companyId">
+                      @foreach ($companies as $company)
+                          @if (old('companyId') == $company->companyId)
+                              <option value="{{ $company->companyId }}" selected>{{ $company->companyName }}</option>
+                              @else
+                              <option value="{{ $company->companyId }}">{{ $company->companyName }}</option>
+                          @endif
+                      @endforeach
+                    </select>
                   </div>
-                  <div class="form-group row">
-                    <label for="locationName" class="col-xl-3 col-form-label">Location Name <span class="text-danger">*</span></label>
-                    <div class="col-xl-9">
-                      <input type="text" class="form-control @error('locationName') is-invalid @enderror" id="locationName" name="locationName" value="{{ old('locationName') }}">
-                      @error('locationName') 
-                        <div class="invalid-feedback">{{ $message }}</div>
-                      @enderror
-                    </div>
+                  <div class="form-group">
+                    <label for="locationName" class="form-label">Location Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control @error('locationName') is-invalid @enderror" id="locationName" name="locationName" value="{{ old('locationName') }}">
+                    @error('locationName') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
-                  <div class="form-group row">
-                    <label for="locationPhone" class="col-xl-3 col-form-label">Phone <span class="text-danger">*</span></label>
-                    <div class="col-xl-9">
-                      <input type="tel" class="form-control @error('locationPhone') is-invalid @enderror" id="locationPhone" name="locationPhone" value="{{ old('locationPhone') }}">
-                      @error('locationPhone') 
-                        <div class="invalid-feedback">{{ $message }}</div>
-                      @enderror
-                    </div>
+                  <div class="form-group">
+                    <label for="locationPhone" class="form-label">Phone <span class="text-danger">*</span></label>
+                    <input type="tel" class="form-control @error('locationPhone') is-invalid @enderror" id="locationPhone" name="locationPhone" value="{{ old('locationPhone') }}">
+                    @error('locationPhone') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
-                  <div class="form-group row">
-                    <label for="locationEmail" class="col-xl-3 col-form-label">Email <span class="text-danger">*</span></label>
-                    <div class="col-xl-9">
-                      <input type="email" class="form-control @error('locationEmail') is-invalid @enderror" id="locationEmail" name="locationEmail" value="{{ old('locationEmail') }}">
-                      @error('locationEmail') 
-                        <div class="invalid-feedback">{{ $message }}</div>
-                      @enderror
-                    </div>
+                  <div class="form-group">
+                    <label for="locationEmail" class="form-label">Email <span class="text-danger">*</span></label>
+                    <input type="email" class="form-control @error('locationEmail') is-invalid @enderror" id="locationEmail" name="locationEmail" value="{{ old('locationEmail') }}">
+                    @error('locationEmail') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
-                  <div class="form-group row">
-                    <label for="locationAddress" class="col-xl-3 col-form-label">Address <span class="text-danger">*</span></label>
-                    <div class="col-xl-9">
-                      <textarea class="form-control @error('locationAddress') is-invalid @enderror" rows="3" id="locationAddress" name="locationAddress">{{ old('locationAddress') }}</textarea>
-                      @error('locationAddress') 
-                        <div class="invalid-feedback">{{ $message }}</div>
-                      @enderror
-                    </div>
+                  <div class="form-group">
+                    <label for="locationAddress" class="form-label">Address <span class="text-danger">*</span></label>
+                    <textarea class="form-control @error('locationAddress') is-invalid @enderror" rows="3" id="locationAddress" name="locationAddress">{{ old('locationAddress') }}</textarea>
+                    @error('locationAddress') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
-                  <div class="form-group row">
-                    <label for="locationCity" class="col-xl-3 col-form-label">City <span class="text-danger">*</span></label>
-                    <div class="col-xl-9">
-                      <input type="text" class="form-control @error('locationCity') is-invalid @enderror" id="locationCity" name="locationCity" value="{{ old('locationCity') }}">
-                      @error('locationCity') 
-                        <div class="invalid-feedback">{{ $message }}</div>
-                      @enderror
-                    </div>
+                  <div class="form-group">
+                    <label for="locationCity" class="form-label">City <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control @error('locationCity') is-invalid @enderror" id="locationCity" name="locationCity" value="{{ old('locationCity') }}">
+                    @error('locationCity') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
-                  <div class="form-group row">
-                    <label for="locationProvince" class="col-xl-3 col-form-label">Province <span class="text-danger">*</span></label>
-                    <div class="col-xl-9">
-                      <input type="text" class="form-control @error('locationProvince') is-invalid @enderror" id="locationProvince" name="locationProvince" value="{{ old('locationProvince') }}">
-                      @error('locationProvince') 
-                        <div class="invalid-feedback">{{ $message }}</div>
-                      @enderror
-                    </div>
+                  <div class="form-group">
+                    <label for="locationProvince" class="form-label">Province <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control @error('locationProvince') is-invalid @enderror" id="locationProvince" name="locationProvince" value="{{ old('locationProvince') }}">
+                    @error('locationProvince') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
                 <!-- /.card-body -->

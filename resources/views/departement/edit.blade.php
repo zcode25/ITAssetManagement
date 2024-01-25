@@ -28,19 +28,17 @@
               <form action="/departement/update/{{ $departement->departementId }}" method="POST" class="form-horizontal">
                 @csrf
                 <div class="card-body">
-                  <div class="form-group row">
-                    <label for="departementName" class="col-xl-3 col-form-label">Departement Name <span class="text-danger">*</span></label>
-                    <div class="col-xl-9">
-                      <input type="text" class="form-control @error('departementName') is-invalid @enderror" id="departementName" name="departementName" value="{{ old('departementName', $departement->departementName) }}">
-                      @error('departementName') 
-                        <div class="invalid-feedback">{{ $message }}</div>
-                      @enderror
-                    </div>
+                  <div class="form-group">
+                    <label for="departementName" class="form-label">Departement Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control @error('departementName') is-invalid @enderror" id="departementName" name="departementName" value="{{ old('departementName', $departement->departementName) }}">
+                    @error('departementName') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <a href="/location" class="btn btn-default">Cancel</a>
+                  <a href="/departement" class="btn btn-default">Cancel</a>
                   <button type="submit" name="submit" class="btn btn-primary float-right">Save</button>
                 </div>
                 <!-- /.card-footer -->

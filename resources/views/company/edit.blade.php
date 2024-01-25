@@ -28,15 +28,13 @@
               <form action="/company/update/{{ $company->companyId }}" method="POST" class="form-horizontal">
                 @csrf
                 <div class="card-body">
-                  <div class="form-group row">
+                  <div class="form-group">
                     <input type="hidden" name="companyId" value="{{ $company->companyId }}">
-                    <label for="companyName" class="col-sm-3 col-form-label">Company Name <span class="text-danger">*</span></label>
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control @error('companyName') is-invalid @enderror" id="companyName" name="companyName" value="{{ old('companyName', $company->companyName) }}">
-                      @error('companyName') 
-                        <div class="invalid-feedback">{{ $message }}</div>
-                      @enderror
-                    </div>
+                    <label for="companyName" class="form-label">Company Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control @error('companyName') is-invalid @enderror" id="companyName" name="companyName" value="{{ old('companyName', $company->companyName) }}">
+                    @error('companyName') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
                 <!-- /.card-body -->

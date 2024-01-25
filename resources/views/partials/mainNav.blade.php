@@ -66,8 +66,8 @@
             </p>
           </a>
         </li>
-        <li class="nav-item {{ Request::is('company*', 'location*', 'departement*', 'position*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ Request::is('company*', 'location*', 'departement*', 'position*') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('company*', 'location*', 'departement*', 'position*', 'user*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::is('company*', 'location*', 'departement*', 'position*', 'user*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-chart-pie"></i>
             <p>
               Master Data

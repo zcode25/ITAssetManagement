@@ -12,4 +12,8 @@ class Position extends Model
     protected $primaryKey = 'positionId';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    public function user(){
+        return $this->hasMany(User::class, 'locationId', 'locationId');
+    }
 }
