@@ -8,11 +8,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Company</h1>
+            <h1>Position</h1>
           </div>
           <div class="col-sm-6">
             <div class="float-sm-right">
-              <a href="/company/create" class="btn btn-primary">Create New</a>
+              <a href="/position/create" class="btn btn-primary">Create New</a>
             </div>
           </div>
         </div>
@@ -25,7 +25,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Company List</h3>
+          <h3 class="card-title">Position List</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -37,22 +37,24 @@
           <table id="example1" class="table table-bordered table-hover">
             <thead>
             <tr>
-              <th>Company Name</th>
+              <th>Position</th>
               <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            @foreach ($companies as $company)
+            {{-- @foreach ($departements as $departement)
             <tr>
-              <td>{{ $company->companyName }}</td>
+              <td>{{ $departement->departementName }}</td>
+              <td>{{ $departement->location->company->companyName }} </td>
+              <td>{{ $departement->location->locationName }}</td>
               <td class="py-0 align-middle">
                 <div class="btn-group btn-group-sm">
-                  <a href="/company/edit/{{ $company->companyId }}" class="btn btn-primary">Edit</a>
-                  <a href="/company/destroy/{{ $company->companyId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
+                  <a href="/departement/edit/{{ $departement->departementId }}" class="btn btn-primary">Edit</a>
+                  <a href="/departement/destroy/{{ $departement->departementId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
                 </div>
               </td>
             </tr>    
-            @endforeach
+            @endforeach --}}
             </tfoot>
           </table>
         </div>

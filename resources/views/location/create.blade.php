@@ -54,7 +54,7 @@
                   <div class="form-group row">
                     <label for="locationPhone" class="col-xl-3 col-form-label">Phone <span class="text-danger">*</span></label>
                     <div class="col-xl-9">
-                      <input type="tel" class="form-control @error('locationPhone') is-invalid @enderror" id="locationPhone" name="locationPhone">
+                      <input type="tel" class="form-control @error('locationPhone') is-invalid @enderror" id="locationPhone" name="locationPhone" value="{{ old('locationPhone') }}">
                       @error('locationPhone') 
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
@@ -63,7 +63,7 @@
                   <div class="form-group row">
                     <label for="locationEmail" class="col-xl-3 col-form-label">Email <span class="text-danger">*</span></label>
                     <div class="col-xl-9">
-                      <input type="email" class="form-control @error('locationEmail') is-invalid @enderror" id="locationEmail" name="locationEmail">
+                      <input type="email" class="form-control @error('locationEmail') is-invalid @enderror" id="locationEmail" name="locationEmail" value="{{ old('locationEmail') }}">
                       @error('locationEmail') 
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
@@ -72,7 +72,7 @@
                   <div class="form-group row">
                     <label for="locationAddress" class="col-xl-3 col-form-label">Address <span class="text-danger">*</span></label>
                     <div class="col-xl-9">
-                      <textarea class="form-control @error('locationAddress') is-invalid @enderror" rows="3" id="locationAddress" name="locationAddress"></textarea>
+                      <textarea class="form-control @error('locationAddress') is-invalid @enderror" rows="3" id="locationAddress" name="locationAddress">{{ old('locationAddress') }}</textarea>
                       @error('locationAddress') 
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
@@ -81,7 +81,7 @@
                   <div class="form-group row">
                     <label for="locationCity" class="col-xl-3 col-form-label">City <span class="text-danger">*</span></label>
                     <div class="col-xl-9">
-                      <input type="text" class="form-control @error('locationCity') is-invalid @enderror" id="locationCity" name="locationCity">
+                      <input type="text" class="form-control @error('locationCity') is-invalid @enderror" id="locationCity" name="locationCity" value="{{ old('locationCity') }}">
                       @error('locationCity') 
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
@@ -90,7 +90,7 @@
                   <div class="form-group row">
                     <label for="locationProvince" class="col-xl-3 col-form-label">Province <span class="text-danger">*</span></label>
                     <div class="col-xl-9">
-                      <input type="text" class="form-control @error('locationProvince') is-invalid @enderror" id="locationProvince" name="locationProvince">
+                      <input type="text" class="form-control @error('locationProvince') is-invalid @enderror" id="locationProvince" name="locationProvince" value="{{ old('locationProvince') }}">
                       @error('locationProvince') 
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror

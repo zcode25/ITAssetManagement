@@ -9,6 +9,7 @@ use App\Http\Controllers\Main\CompanyController as MainCompanyController;
 use App\Http\Controllers\Main\DashboardController as MainDashboardController;
 use App\Http\Controllers\Main\DepartementController;
 use App\Http\Controllers\Main\LocationController as MainLocationController;
+use App\Http\Controllers\Main\PositionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,4 +56,9 @@ Route::controller(DepartementController::class)->group(function() {
     Route::get('/departement/edit/{departement:departementId}', 'edit')->name('departement.edit');
     Route::post('/departement/update/{departement:departementId}', 'update')->name('departement.update');
     Route::delete('/departement/destroy/{departement:departementId}', 'destroy')->name('departement.destroy');
+});
+
+Route::controller(PositionController::class)->group(function() {
+    Route::get('/position', 'index')->name('position.index');
+    Route::get('/position/create', 'create')->name('position.create');
 });

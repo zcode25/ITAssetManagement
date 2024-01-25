@@ -21,14 +21,11 @@ class DepartementController extends Controller
     }
 
     public function create() {
-        return view('departement.create', [
-            'locations' => Location::all()
-        ]);
+        return view('departement.create');
     }
 
     public function store(Request $request) {
         $validatedData = $request->validate([
-            'locationId' => 'required',
             'departementName' => 'required|max:100',
         ]);
 
@@ -42,14 +39,12 @@ class DepartementController extends Controller
 
     public function edit(Departement $departement) {
         return view('departement.edit', [
-            'locations' => Location::all(),
             'departement' => $departement
         ]);
     }
 
     public function update(Request $request, Departement $departement) {
         $validatedData = $request->validate([
-            'locationId' => 'required',
             'departementName' => 'required|max:100',
         ]);
 

@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Create Departement</h1>
+            <h1>Create Position</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -21,18 +21,18 @@
             <!-- Horizontal Form -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Form Create Departement</h3>
+                <h3 class="card-title">Form Create Position</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="/departement/store" method="POST" class="form-horizontal">
+              <form action="/position/store" method="POST" class="form-horizontal">
                 @csrf
                 <div class="card-body">
                   <div class="form-group row">
-                    <label for="departementName" class="col-xl-3 col-form-label">Departement Name <span class="text-danger">*</span></label>
+                    <label for="positionName" class="col-xl-3 col-form-label">Position Name <span class="text-danger">*</span></label>
                     <div class="col-xl-9">
-                      <input type="text" class="form-control @error('departementName') is-invalid @enderror" id="departementName" name="departementName" value="{{ old('departementName') }}">
-                      @error('departementName') 
+                      <input type="text" class="form-control @error('positionName') is-invalid @enderror" id="positionName" name="positionName" value="{{ old('positionName') }}">
+                      @error('positionName') 
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
                     </div>
@@ -40,7 +40,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <a href="/location" class="btn btn-default">Cancel</a>
+                  <a href="/company" class="btn btn-default">Cancel</a>
                   <button type="submit" name="submit" class="btn btn-primary float-right">Save</button>
                 </div>
                 <!-- /.card-footer -->
