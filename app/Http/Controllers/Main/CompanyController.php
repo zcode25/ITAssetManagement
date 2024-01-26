@@ -10,6 +10,10 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 class CompanyController extends Controller
 {
     public function index() {
+        if(auth()->user()->employeeNumber !== '1234567892') {
+            abort(403);
+        }
+
         $title = 'Delete Data!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);

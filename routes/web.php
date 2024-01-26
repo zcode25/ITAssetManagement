@@ -32,53 +32,53 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::controller(LoginController::class)->group(function() {
-    Route::get('/', 'index')->name('login.index');
+    Route::get('/', 'index')->name('login.index')->middleware('guest');
     Route::post('/login/authenticate', 'authenticate')->name('login.authenticate');
-    Route::post('/logout', 'logout')->name('logout');
+    Route::get('/logout', 'logout')->name('logout')->middleware('auth');
 });
 
 Route::controller(MainDashboardController::class)->group(function() {
-    Route::get('/dashboard', 'index')->name('dashboard');
+    Route::get('/dashboard', 'index')->name('dashboard')->middleware('auth');
 });
 
 Route::controller(MainCompanyController::class)->group(function() {
-    Route::get('/company', 'index')->name('company.index');
-    Route::get('/company/create', 'create')->name('company.create');
-    Route::post('/company/store', 'store')->name('company.store');
-    Route::get('/company/edit/{company:companyId}', 'edit')->name('company.edit');
-    Route::post('/company/update/{company:companyId}', 'update')->name('company.update');
-    Route::delete('/company/destroy/{company:companyId}', 'destroy')->name('company.destroy');
+    Route::get('/company', 'index')->name('company.index')->middleware('auth');
+    Route::get('/company/create', 'create')->name('company.create')->middleware('auth');
+    Route::post('/company/store', 'store')->name('company.store')->middleware('auth');
+    Route::get('/company/edit/{company:companyId}', 'edit')->name('company.edit')->middleware('auth');
+    Route::post('/company/update/{company:companyId}', 'update')->name('company.update')->middleware('auth');
+    Route::delete('/company/destroy/{company:companyId}', 'destroy')->name('company.destroy')->middleware('auth');
 });
 
 Route::controller(MainLocationController::class)->group(function() {
-    Route::get('/location', 'index')->name('location.index');
-    Route::get('/location/create', 'create')->name('location.create');
-    Route::post('/location/store', 'store')->name('location.store');
-    Route::get('/location/edit/{location:locationId}', 'edit')->name('location.edit');
-    Route::post('/location/update/{location:locationId}', 'update')->name('location.update');
-    Route::delete('/location/destroy/{location:locationId}', 'destroy')->name('location.destroy');
+    Route::get('/location', 'index')->name('location.index')->middleware('auth');
+    Route::get('/location/create', 'create')->name('location.create')->middleware('auth');
+    Route::post('/location/store', 'store')->name('location.store')->middleware('auth');
+    Route::get('/location/edit/{location:locationId}', 'edit')->name('location.edit')->middleware('auth');
+    Route::post('/location/update/{location:locationId}', 'update')->name('location.update')->middleware('auth');
+    Route::delete('/location/destroy/{location:locationId}', 'destroy')->name('location.destroy')->middleware('auth');
 });
 
 Route::controller(DepartementController::class)->group(function() {
-    Route::get('/departement', 'index')->name('departement.index');
-    Route::get('/departement/create', 'create')->name('departement.create');
-    Route::post('/departement/store', 'store')->name('departement.store');
-    Route::get('/departement/edit/{departement:departementId}', 'edit')->name('departement.edit');
-    Route::post('/departement/update/{departement:departementId}', 'update')->name('departement.update');
-    Route::delete('/departement/destroy/{departement:departementId}', 'destroy')->name('departement.destroy');
+    Route::get('/departement', 'index')->name('departement.index')->middleware('auth');
+    Route::get('/departement/create', 'create')->name('departement.create')->middleware('auth');
+    Route::post('/departement/store', 'store')->name('departement.store')->middleware('auth');
+    Route::get('/departement/edit/{departement:departementId}', 'edit')->name('departement.edit')->middleware('auth');
+    Route::post('/departement/update/{departement:departementId}', 'update')->name('departement.update')->middleware('auth');
+    Route::delete('/departement/destroy/{departement:departementId}', 'destroy')->name('departement.destroy')->middleware('auth');
 });
 
 Route::controller(PositionController::class)->group(function() {
-    Route::get('/position', 'index')->name('position.index');
-    Route::get('/position/create', 'create')->name('position.create');
-    Route::post('/position/store', 'store')->name('position.store');
-    Route::get('/position/edit/{position:positionId}', 'edit')->name('position.edit');
-    Route::post('/position/update/{position:positionId}', 'update')->name('position.update');
-    Route::delete('/position/destroy/{position:positionId}', 'destroy')->name('position.destroy');
+    Route::get('/position', 'index')->name('position.index')->middleware('auth');
+    Route::get('/position/create', 'create')->name('position.create')->middleware('auth');
+    Route::post('/position/store', 'store')->name('position.store')->middleware('auth');
+    Route::get('/position/edit/{position:positionId}', 'edit')->name('position.edit')->middleware('auth');
+    Route::post('/position/update/{position:positionId}', 'update')->name('position.update')->middleware('auth');
+    Route::delete('/position/destroy/{position:positionId}', 'destroy')->name('position.destroy')->middleware('auth');
 });
 
 Route::controller(UserController::class)->group(function() {
-    Route::get('/user', 'index')->name('user.index');
-    Route::get('/user/create', 'create')->name('user.create');
-    Route::post('/user/store', 'store')->name('user.store');
+    Route::get('/user', 'index')->name('user.index')->middleware('auth');
+    Route::get('/user/create', 'create')->name('user.create')->middleware('auth');
+    Route::post('/user/store', 'store')->name('user.store')->middleware('auth');
 });

@@ -14,7 +14,7 @@
         <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">Adam Zein</a>
+        <a href="#" class="d-block">{{ auth()->user()->employeeName }}</a>
       </div>
     </div>
 
@@ -75,12 +75,14 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
+            @if (auth()->user()->employeeNumber == '1234567892')
             <li class="nav-item">
               <a href="/company" class="nav-link {{ Request::is('company*') ? 'active' : '' }}">
                 <i class="far fa fa-building nav-icon"></i>
                 <p>Company</p>
               </a>
             </li>
+            @endif
             <li class="nav-item">
               <a href="/location" class="nav-link {{ Request::is('location*') ? 'active' : '' }}">
                 <i class="far fa fa-map nav-icon"></i>
@@ -106,6 +108,14 @@
               </a>
             </li>
           </ul>
+        </li>
+        <li class="nav-item">
+          <a href="/logout" class="nav-link">
+            <i class="nav-icon fa fa-right-from-bracket"></i>
+            <p>
+              Logout
+            </p>
+          </a>
         </li>
       </ul>
     </nav>
