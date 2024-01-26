@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('employeeAddress', 200);
             $table->string('employeeCity', 100);
             $table->string('employeeProvince', 100);
+            $table->text('permission')->nullable();
             $table->timestamps();
         });
     }

@@ -33,31 +33,12 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
-             with font-awesome or any other icon font library -->
-        {{-- <li class="nav-item menu-open">
-          <a href="#" class="nav-link active">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Starter Pages
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" class="nav-link active">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Active Page</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Inactive Page</p>
-              </a>
-            </li>
-          </ul>
-        </li> --}}
+        @php
+            $jsonData = auth()->user()->permission;
+            $menuData = json_decode($jsonData, true);
+        @endphp
+        {{-- @if($menuData['dashboard.index']['index']) --}}
+        @if(auth()->check())
         <li class="nav-item">
           <a href="/dashboard" class="nav-link {{ Request::is('dashboard*') ? 'active' : '' }}">
             <i class="nav-icon fas fa fa-tachometer-alt"></i>
@@ -66,6 +47,7 @@
             </p>
           </a>
         </li>
+        @endif
         <li class="nav-item {{ Request::is('company*', 'location*', 'departement*', 'position*', 'user*') ? 'menu-open' : '' }}">
           <a href="#" class="nav-link {{ Request::is('company*', 'location*', 'departement*', 'position*', 'user*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-chart-pie"></i>
@@ -75,14 +57,14 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            @if (auth()->user()->employeeNumber == '1234567892')
+            {{-- @if (auth()->user()->employeeNumber == '1234567892') --}}
             <li class="nav-item">
               <a href="/company" class="nav-link {{ Request::is('company*') ? 'active' : '' }}">
                 <i class="far fa fa-building nav-icon"></i>
                 <p>Company</p>
               </a>
             </li>
-            @endif
+            {{-- @endif --}}
             <li class="nav-item">
               <a href="/location" class="nav-link {{ Request::is('location*') ? 'active' : '' }}">
                 <i class="far fa fa-map nav-icon"></i>

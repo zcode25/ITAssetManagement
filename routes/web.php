@@ -38,7 +38,7 @@ Route::controller(LoginController::class)->group(function() {
 });
 
 Route::controller(MainDashboardController::class)->group(function() {
-    Route::get('/dashboard', 'index')->name('dashboard')->middleware('auth');
+    Route::get('/dashboard', 'index')->name('dashboard')->middleware('auth', 'check.menu.access:dashboard.index');
 });
 
 Route::controller(MainCompanyController::class)->group(function() {
