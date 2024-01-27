@@ -37,8 +37,7 @@
             $jsonData = auth()->user()->permission;
             $menuData = json_decode($jsonData, true);
         @endphp
-        {{-- @if($menuData['dashboard.index']['index']) --}}
-        @if(auth()->check())
+        @if($menuData['dashboard.index']['index'])
         <li class="nav-item">
           <a href="/dashboard" class="nav-link {{ Request::is('dashboard*') ? 'active' : '' }}">
             <i class="nav-icon fas fa fa-tachometer-alt"></i>
@@ -57,14 +56,14 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            {{-- @if (auth()->user()->employeeNumber == '1234567892') --}}
+            @if($menuData['company.index']['index'])
             <li class="nav-item">
               <a href="/company" class="nav-link {{ Request::is('company*') ? 'active' : '' }}">
                 <i class="far fa fa-building nav-icon"></i>
                 <p>Company</p>
               </a>
             </li>
-            {{-- @endif --}}
+            @endif
             <li class="nav-item">
               <a href="/location" class="nav-link {{ Request::is('location*') ? 'active' : '' }}">
                 <i class="far fa fa-map nav-icon"></i>

@@ -56,6 +56,7 @@
               <td class="py-0 align-middle">
                 <div class="btn-group btn-group-sm">
                   <a href="/user/edit/{{ $user->userId }}" class="btn btn-primary">Edit</a>
+                  <a href="/user/permission/{{ $user->userId }}" class="btn btn-warning">Permission</a>
                   <a href="/user/destroy/{{ $user->userId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
                 </div>
               </td>

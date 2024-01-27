@@ -28,7 +28,6 @@ class UserController extends Controller
     }
 
     public function store(Request $request) {
-        // dd($request);
         $validatedData = $request->validate([
             'employeeNumber' => 'required|unique:users',
             'employeeName' => 'required|max:100',
@@ -50,5 +49,9 @@ class UserController extends Controller
         User::create($validatedData);
 
         return redirect('/user')->with('success', 'Data saved successfully');
+    }
+
+    public function permission() {
+        return view('user.permission');
     }
 }

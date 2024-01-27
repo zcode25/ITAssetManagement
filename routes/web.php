@@ -42,7 +42,7 @@ Route::controller(MainDashboardController::class)->group(function() {
 });
 
 Route::controller(MainCompanyController::class)->group(function() {
-    Route::get('/company', 'index')->name('company.index')->middleware('auth');
+    Route::get('/company', 'index')->name('company.index')->middleware('auth', 'check.menu.access:company.index');
     Route::get('/company/create', 'create')->name('company.create')->middleware('auth');
     Route::post('/company/store', 'store')->name('company.store')->middleware('auth');
     Route::get('/company/edit/{company:companyId}', 'edit')->name('company.edit')->middleware('auth');
@@ -81,4 +81,5 @@ Route::controller(UserController::class)->group(function() {
     Route::get('/user', 'index')->name('user.index')->middleware('auth');
     Route::get('/user/create', 'create')->name('user.create')->middleware('auth');
     Route::post('/user/store', 'store')->name('user.store')->middleware('auth');
+    Route::get('/user/permission/{user:userId}', 'permission')->name('user.permission')->middleware('auth');
 });

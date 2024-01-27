@@ -2,7 +2,7 @@
 @section('container')
     <div class="container">
       <div class="row align-items-center justify-content-center" style="min-height: 100vh">
-        <div class="col-xl-6 col-md-8">
+        <div class="col-xl-4 col-md-6">
           <div class="row">
             <div class="col">
               @if (session()->has('loginError'))  
@@ -17,7 +17,7 @@
             <div class="card-body p-4">
               <div class="row">
                 <div class="col text-center">
-                  <h3>IT Asset Management</h3>
+                  <h3>ITAM</h3>
                   <p>Welcome, please login.</p>
                   <hr>
                 </div>
