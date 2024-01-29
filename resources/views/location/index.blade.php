@@ -1,5 +1,9 @@
 @extends('layouts/main')
 @section('container')
+@php
+$jsonData = auth()->user()->permission;
+$menuData = json_decode($jsonData, true);
+@endphp
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -12,7 +16,9 @@
           </div>
           <div class="col-sm-6">
             <div class="float-sm-right">
+              @if($menuData['locationCreate']['index'])
               <a href="/location/create" class="btn btn-primary">Create New</a>
+              @endif
             </div>
           </div>
         </div>
@@ -44,7 +50,9 @@
               <th>Address</th>
               <th>City</th>
               <th>Province</th>
+              @if($menuData['locationEdit']['index'] || $menuData['locationDelete']['index'])
               <th>Action</th>
+              @endif
             </tr>
             </thead>
             <tbody>
@@ -60,12 +68,18 @@
               <td>{{ $location->locationAddress }}</td>
               <td>{{ $location->locationCity }}</td>
               <td>{{ $location->locationProvince }}</td>
+              @if($menuData['locationEdit']['index'] || $menuData['locationDelete']['index'])
               <td class="py-0 align-middle">
                 <div class="btn-group btn-group-sm">
+                  @if($menuData['companyEdit']['index'])
                   <a href="/location/edit/{{ $location->locationId }}" class="btn btn-primary">Edit</a>
+                  @endif
+                  @if($menuData['companyDelete']['index'])
                   <a href="/location/destroy/{{ $location->locationId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
+                  @endif
                 </div>
               </td>
+              @endif
             </tr>    
             @endforeach
             </tfoot>

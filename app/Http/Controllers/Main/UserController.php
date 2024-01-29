@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index() {
+        // $jsonData = auth()->user()->permission;
+        // $menuData = json_decode($jsonData, true);
+
+        // dd($menuData);
+
         return view('user.index', [
             'users' => User::all()
         ]);
@@ -48,10 +53,47 @@ class UserController extends Controller
 
         User::create($validatedData);
 
-        return redirect('/user')->with('success', 'Data saved successfully');
+        return redirect('/user/permission/'. $validatedData['userId'] .'')->with('success', 'Data saved successfully');
     }
 
-    public function permission() {
-        return view('user.permission');
+    public function permission(User $user) {
+        return view('user.permission', [
+            'user' => $user
+        ]);
+    }
+
+    public function permissionCreate(Request $request, User $user) {
+
+        // dd($request);
+
+        $permission = '{
+            "dashboardIndex":{"index":'. $request->dashboardIndex .'}, 
+            "companyIndex":{"index":'. $request->companyIndex .'}, 
+            "companyCreate":{"index":'. $request->companyCreate .'},
+            "companyEdit":{"index":'. $request->companyEdit .'},
+            "companyDelete":{"index":'. $request->companyDelete .'},
+            "locationIndex":{"index":'. $request->locationIndex .'}, 
+            "locationCreate":{"index":'. $request->locationCreate .'},
+            "locationEdit":{"index":'. $request->locationEdit .'},
+            "locationDelete":{"index":'. $request->locationDelete .'},
+            "departementIndex":{"index":'. $request->departementIndex .'}, 
+            "departementCreate":{"index":'. $request->departementCreate .'},
+            "departementEdit":{"index":'. $request->departementEdit .'},
+            "departementDelete":{"index":'. $request->departementDelete .'},
+            "positionIndex":{"index":'. $request->positionIndex .'}, 
+            "positionCreate":{"index":'. $request->positionCreate .'},
+            "positionEdit":{"index":'. $request->positionEdit .'},
+            "positionDelete":{"index":'. $request->positionDelete .'},
+            "userIndex":{"index":'. $request->userIndex .'}, 
+            "userCreate":{"index":'. $request->userCreate .'},
+            "userPermission":{"index":'. $request->userPermission .'},
+            "userEdit":{"index":'. $request->userEdit .'},
+            "userDelete":{"index":'. $request->userDelete .'}
+        }';
+
+        User::where('userId', $user->userId)->update(['permission' => $permission]);
+
+        return redirect('/user')->with('success', 'User permissions have been saved');
+
     }
 }

@@ -60,10 +60,13 @@
     </ul>
   </nav>
   <!-- /.navbar -->
-
-  @include('partials.mainNav')
-  @yield('container')
   
+  @php
+    $jsonData = auth()->user()->permission;
+    $menuData = json_decode($jsonData, true);
+  @endphp
+  @include('partials.mainNav', ['menuData' => $menuData])
+  @yield('container')
 
   <!-- Main Footer -->
   <footer class="main-footer">

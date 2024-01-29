@@ -33,11 +33,7 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        @php
-            $jsonData = auth()->user()->permission;
-            $menuData = json_decode($jsonData, true);
-        @endphp
-        @if($menuData['dashboard.index']['index'])
+        @if($menuData['dashboardIndex']['index'])
         <li class="nav-item">
           <a href="/dashboard" class="nav-link {{ Request::is('dashboard*') ? 'active' : '' }}">
             <i class="nav-icon fas fa fa-tachometer-alt"></i>
@@ -56,7 +52,7 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            @if($menuData['company.index']['index'])
+            @if($menuData['companyIndex']['index'])
             <li class="nav-item">
               <a href="/company" class="nav-link {{ Request::is('company*') ? 'active' : '' }}">
                 <i class="far fa fa-building nav-icon"></i>
@@ -64,30 +60,38 @@
               </a>
             </li>
             @endif
+            @if($menuData['locationIndex']['index'])
             <li class="nav-item">
               <a href="/location" class="nav-link {{ Request::is('location*') ? 'active' : '' }}">
                 <i class="far fa fa-map nav-icon"></i>
                 <p>Location</p>
               </a>
             </li>
+            @endif
+            @if($menuData['departementIndex']['index'])
             <li class="nav-item">
               <a href="/departement" class="nav-link {{ Request::is('departement*') ? 'active' : '' }}">
                 <i class="far fa fa-briefcase nav-icon"></i>
                 <p>Departement</p>
               </a>
             </li>
+            @endif
+            @if($menuData['positionIndex']['index'])
             <li class="nav-item">
               <a href="/position" class="nav-link {{ Request::is('position*') ? 'active' : '' }}">
                 <i class="far fa fa-feather nav-icon"></i>
                 <p>Position</p>
               </a>
             </li>
+            @endif
+            @if($menuData['userIndex']['index'])
             <li class="nav-item">
               <a href="/user" class="nav-link {{ Request::is('user*') ? 'active' : '' }}">
                 <i class="far fa fa-user nav-icon"></i>
                 <p>User</p>
               </a>
             </li>
+            @endif
           </ul>
         </li>
         <li class="nav-item">

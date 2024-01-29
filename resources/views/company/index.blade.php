@@ -1,5 +1,9 @@
 @extends('layouts/main')
 @section('container')
+@php
+$jsonData = auth()->user()->permission;
+$menuData = json_decode($jsonData, true);
+@endphp
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -12,7 +16,9 @@
           </div>
           <div class="col-sm-6">
             <div class="float-sm-right">
+              @if($menuData['companyCreate']['index'])
               <a href="/company/create" class="btn btn-primary">Create New</a>
+              @endif
             </div>
           </div>
         </div>
@@ -38,19 +44,27 @@
             <thead>
             <tr>
               <th>Company Name</th>
+              @if($menuData['companyEdit']['index'] || $menuData['companyDelete']['index'])
               <th>Action</th>
+              @endif
             </tr>
             </thead>
             <tbody>
             @foreach ($companies as $company)
             <tr>
               <td>{{ $company->companyName }}</td>
+              @if($menuData['companyEdit']['index'] || $menuData['companyDelete']['index'])
               <td class="py-0 align-middle">
                 <div class="btn-group btn-group-sm">
+                  @if($menuData['companyEdit']['index'])
                   <a href="/company/edit/{{ $company->companyId }}" class="btn btn-primary">Edit</a>
+                  @endif
+                  @if($menuData['companyDelete']['index'])
                   <a href="/company/destroy/{{ $company->companyId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
+                  @endif
                 </div>
               </td>
+              @endif
             </tr>    
             @endforeach
             </tfoot>
