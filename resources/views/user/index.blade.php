@@ -1,5 +1,9 @@
 @extends('layouts/main')
 @section('container')
+@php
+$jsonData = auth()->user()->permission;
+$menuData = json_decode($jsonData, true);
+@endphp
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -12,7 +16,9 @@
           </div>
           <div class="col-sm-6">
             <div class="float-sm-right">
+              @if($menuData['userCreate']['index'])
               <a href="/user/create" class="btn btn-primary">Create New</a>
+              @endif
             </div>
           </div>
         </div>
@@ -42,7 +48,9 @@
               <th>Location</th>
               <th>Departement</th>
               <th>Position</th>
+              @if($menuData['userEdit']['index'] || $menuData['userPermission']['index'] || $menuData['userDelete']['index'])
               <th>Action</th>
+              @endif
             </tr>
             </thead>
             <tbody>
@@ -55,9 +63,15 @@
               <td>{{ $user->position->positionName }}</td>
               <td class="py-0 align-middle">
                 <div class="btn-group btn-group-sm">
+                  @if($menuData['userCreate']['index'])
                   <a href="/user/edit/{{ $user->userId }}" class="btn btn-primary">Edit</a>
+                  @endif
+                  @if($menuData['userCreate']['index'])
                   <a href="/user/permission/{{ $user->userId }}" class="btn btn-warning">Permission</a>
+                  @endif
+                  @if($menuData['userCreate']['index'])
                   <a href="/user/destroy/{{ $user->userId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
+                  @endif
                 </div>
               </td>
             </tr>    

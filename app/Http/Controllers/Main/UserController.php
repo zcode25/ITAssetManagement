@@ -51,9 +51,34 @@ class UserController extends Controller
         $validatedData['userId'] = Str::uuid();
         $validatedData['password'] = Hash::make($request["password"]);
 
+        $validatedData['permission'] = '{
+            "dashboardIndex":{"index":true}, 
+            "companyIndex":{"index":false}, 
+            "companyCreate":{"index":false},
+            "companyEdit":{"index":false},
+            "companyDelete":{"index":false},
+            "locationIndex":{"index":false}, 
+            "locationCreate":{"index":false},
+            "locationEdit":{"index":false},
+            "locationDelete":{"index":false},
+            "departementIndex":{"index":false}, 
+            "departementCreate":{"index":false},
+            "departementEdit":{"index":false},
+            "departementDelete":{"index":false},
+            "positionIndex":{"index":false}, 
+            "positionCreate":{"index":false},
+            "positionEdit":{"index":false},
+            "positionDelete":{"index":false},
+            "userIndex":{"index":false}, 
+            "userCreate":{"index":false},
+            "userPermission":{"index":false},
+            "userEdit":{"index":false},
+            "userDelete":{"index":false}
+        }';
+
         User::create($validatedData);
 
-        return redirect('/user/permission/'. $validatedData['userId'] .'')->with('success', 'Data saved successfully');
+        return redirect('/user')->with('success', 'Data saved successfully');
     }
 
     public function permission(User $user) {

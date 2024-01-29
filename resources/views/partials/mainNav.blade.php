@@ -43,11 +43,49 @@
           </a>
         </li>
         @endif
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa fa-box"></i>
+            <p>
+              Master Asset
+              <i class="right fas fa fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            {{-- @if($menuData['companyIndex']['index']) --}}
+            <li class="nav-item">
+              <a href="/assetModel" class="nav-link {{ Request::is('assetModel*') ? 'active' : '' }}">
+                <i class="far fa fa-network-wired nav-icon"></i>
+                <p>Asset Model</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/category" class="nav-link {{ Request::is('category*') ? 'active' : '' }}">
+                <i class="far fa fa-network-wired nav-icon"></i>
+                <p>Category</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/manufacture" class="nav-link {{ Request::is('manufacture*') ? 'active' : '' }}">
+                <i class="far fa fa-network-wired nav-icon"></i>
+                <p>Manufacture</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/supllier" class="nav-link {{ Request::is('supllier*') ? 'active' : '' }}">
+                <i class="far fa fa-network-wired nav-icon"></i>
+                <p>Supllier</p>
+              </a>
+            </li>
+            {{-- @endif --}}
+          </ul>
+        </li>
+        @if($menuData['companyIndex']['index'] || $menuData['locationIndex']['index'] || $menuData['departementIndex']['index'] || $menuData['positionIndex']['index'] || $menuData['userIndex']['index'])
         <li class="nav-item {{ Request::is('company*', 'location*', 'departement*', 'position*', 'user*') ? 'menu-open' : '' }}">
           <a href="#" class="nav-link {{ Request::is('company*', 'location*', 'departement*', 'position*', 'user*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-chart-pie"></i>
+            <i class="nav-icon fas fa-users"></i>
             <p>
-              Master Data
+              Master User
               <i class="right fas fa fa-angle-left"></i>
             </p>
           </a>
@@ -94,9 +132,10 @@
             @endif
           </ul>
         </li>
+        @endif
         <li class="nav-item">
           <a href="/logout" class="nav-link">
-            <i class="nav-icon fa fa-right-from-bracket"></i>
+            <i class="far fa-solid fa-right-from-bracket nav-icon"></i>
             <p>
               Logout
             </p>

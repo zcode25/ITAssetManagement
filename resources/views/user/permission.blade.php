@@ -26,7 +26,7 @@
               <!-- /.card-header -->
               <!-- form start -->
               @php
-                  $jsonData = auth()->user()->permission;
+                  $jsonData = $user->permission;
                   $menuData = json_decode($jsonData, true);
               @endphp
               <form action="/user/permission/create/{{ $user->userId }}" method="POST" class="form-horizontal">
