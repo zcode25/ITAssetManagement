@@ -11,6 +11,7 @@ use App\Http\Controllers\Main\DashboardController as MainDashboardController;
 use App\Http\Controllers\Main\DepartementController;
 use App\Http\Controllers\Main\LocationController as MainLocationController;
 use App\Http\Controllers\Main\PositionController;
+use App\Http\Controllers\Main\SupplierController;
 use App\Http\Controllers\Main\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -83,4 +84,14 @@ Route::controller(UserController::class)->group(function() {
     Route::post('/user/store', 'store')->name('user.store')->middleware('auth', 'check.menu.access:userCreate');
     Route::get('/user/permission/{user:userId}', 'permission')->name('user.permission')->middleware('auth', 'check.menu.access:userPermission');
     Route::post('/user/permission/create/{user:userId}', 'permissionCreate')->name('user.permission.create')->middleware('auth', 'check.menu.access:userPermission');
+    Route::get('/user/edit/{user:userId}', 'edit')->name('user.edit')->middleware('auth');
+});
+
+Route::controller(SupplierController::class)->group(function() {
+    Route::get('/supplier', 'index')->name('supplier.index');
+    Route::get('/supplier/create', 'create')->name('supplier.create');
+    Route::post('/supplier/store', 'store')->name('supplier.store');
+    Route::get('/supplier/edit/{supplier:supplierId}', 'edit')->name('supplier.edit');
+    Route::post('/supplier/update/{supplier:supplierId}', 'update')->name('supplier.update');
+    Route::delete('/supplier/destroy/{supplier:supplierId}', 'destroy')->name('supplier.destroy');
 });

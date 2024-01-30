@@ -72,9 +72,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="/supllier" class="nav-link {{ Request::is('supllier*') ? 'active' : '' }}">
+              <a href="/supplier" class="nav-link {{ Request::is('supplier*') ? 'active' : '' }}">
                 <i class="far fa fa-network-wired nav-icon"></i>
-                <p>Supllier</p>
+                <p>Supplier</p>
               </a>
             </li>
             {{-- @endif --}}
@@ -135,8 +135,8 @@
         @endif
         <li class="nav-item">
           <a href="/logout" class="nav-link">
-            <i class="far fa-solid fa-right-from-bracket nav-icon"></i>
-            <p>
+            <i class="far fa fa-arrow-left nav-icon text-danger"></i>
+            <p class="text-danger">
               Logout
             </p>
           </a>

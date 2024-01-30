@@ -14,11 +14,6 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index() {
-        // $jsonData = auth()->user()->permission;
-        // $menuData = json_decode($jsonData, true);
-
-        // dd($menuData);
-
         return view('user.index', [
             'users' => User::all()
         ]);
@@ -120,5 +115,14 @@ class UserController extends Controller
 
         return redirect('/user')->with('success', 'User permissions have been saved');
 
+    }
+
+    public function edit(User $user) {
+        return view('user.edit', [
+            'user' => $user,
+            'locations' => Location::all(),
+            'departements' => Departement::all(),
+            'positions' => Position::all(),
+        ]);
     }
 }
