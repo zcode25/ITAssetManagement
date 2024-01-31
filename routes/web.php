@@ -10,6 +10,7 @@ use App\Http\Controllers\Main\CompanyController as MainCompanyController;
 use App\Http\Controllers\Main\DashboardController as MainDashboardController;
 use App\Http\Controllers\Main\DepartementController;
 use App\Http\Controllers\Main\LocationController as MainLocationController;
+use App\Http\Controllers\Main\ManufactureController;
 use App\Http\Controllers\Main\PositionController;
 use App\Http\Controllers\Main\SupplierController;
 use App\Http\Controllers\Main\UserController;
@@ -91,10 +92,19 @@ Route::controller(UserController::class)->group(function() {
 });
 
 Route::controller(SupplierController::class)->group(function() {
-    Route::get('/supplier', 'index')->name('supplier.index');
-    Route::get('/supplier/create', 'create')->name('supplier.create');
-    Route::post('/supplier/store', 'store')->name('supplier.store');
-    Route::get('/supplier/edit/{supplier:supplierId}', 'edit')->name('supplier.edit');
-    Route::post('/supplier/update/{supplier:supplierId}', 'update')->name('supplier.update');
-    Route::delete('/supplier/destroy/{supplier:supplierId}', 'destroy')->name('supplier.destroy');
+    Route::get('/supplier', 'index')->name('supplier.index')->middleware('auth', 'check.menu.access:supplierIndex');
+    Route::get('/supplier/create', 'create')->name('supplier.create')->middleware('auth', 'check.menu.access:supplierCreate');
+    Route::post('/supplier/store', 'store')->name('supplier.store')->middleware('auth', 'check.menu.access:supplierCreate');
+    Route::get('/supplier/edit/{supplier:supplierId}', 'edit')->name('supplier.edit')->middleware('auth', 'check.menu.access:supplierEdit');
+    Route::post('/supplier/update/{supplier:supplierId}', 'update')->name('supplier.update')->middleware('auth', 'check.menu.access:supplierEdit');
+    Route::delete('/supplier/destroy/{supplier:supplierId}', 'destroy')->name('supplier.destroy')->middleware('auth', 'check.menu.access:supplierDelete');
+});
+
+Route::controller(ManufactureController::class)->group(function() {
+    Route::get('/manufacture', 'index')->name('manufacture.index')->middleware('auth', 'check.menu.access:manufactureIndex');
+    Route::get('/manufacture/create', 'create')->name('manufacture.create')->middleware('auth', 'check.menu.access:manufactureCreate');
+    Route::post('/manufacture/store', 'store')->name('manufacture.store')->middleware('auth', 'check.menu.access:manufactureCreate');
+    Route::get('/manufacture/edit/{manufacture:manufactureId}', 'edit')->name('manufacture.edit')->middleware('auth', 'check.menu.access:manufactureEdit');
+    Route::post('/manufacture/update/{manufacture:manufactureId}', 'update')->name('manufacture.update')->middleware('auth', 'check.menu.access:manufactureEdit');
+    Route::delete('/manufacture/destroy/{manufacture:manufactureId}', 'destroy')->name('manufacture.destroy')->middleware('auth', 'check.menu.access:manufactureDelete');
 });

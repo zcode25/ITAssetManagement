@@ -72,7 +72,15 @@ class UserController extends Controller
             "userCreate":{"index":false},
             "userPermission":{"index":false},
             "userEdit":{"index":false},
-            "userDelete":{"index":false}
+            "userDelete":{"index":false},
+            "supplierIndex":{"index":false}, 
+            "supplierCreate":{"index":false},
+            "supplierEdit":{"index":false},
+            "supplierDelete":{"index":false},
+            "manufactureIndex":{"index":false}, 
+            "manufactureCreate":{"index":false},
+            "manufactureEdit":{"index":false},
+            "manufactureDelete":{"index":false}
         }';
 
         User::create($validatedData);
@@ -112,7 +120,15 @@ class UserController extends Controller
             "userCreate":{"index":'. $request->userCreate .'},
             "userPermission":{"index":'. $request->userPermission .'},
             "userEdit":{"index":'. $request->userEdit .'},
-            "userDelete":{"index":'. $request->userDelete .'}
+            "userDelete":{"index":'. $request->userDelete .'},
+            "supplierIndex":{"index":'. $request->supplierIndex .'}, 
+            "supplierCreate":{"index":'. $request->supplierCreate .'},
+            "supplierEdit":{"index":'. $request->supplierEdit .'},
+            "supplierDelete":{"index":'. $request->supplierDelete .'},
+            "manufactureIndex":{"index":'. $request->manufactureIndex .'}, 
+            "manufactureCreate":{"index":'. $request->manufactureCreate .'},
+            "manufactureEdit":{"index":'. $request->manufactureEdit .'},
+            "manufactureDelete":{"index":'. $request->manufactureDelete .'}
         }';
 
         User::where('userId', $user->userId)->update(['permission' => $permission]);

@@ -500,6 +500,172 @@
                       </table>
                     </div>
                   </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Supplier</h3>
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <table class="table table-sm">
+                        <thead>
+                          <tr>
+                            <th style="width: 40%">Permission</th>
+                            <th>Grant</th>
+                            <th>Deny</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>View</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="supplierIndex1" name="supplierIndex" value="true" @if ($menuData['supplierIndex']['index'] == true) checked @endif>
+                                    <label for="supplierIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="supplierIndex2" name="supplierIndex" value="false" @if ($menuData['supplierIndex']['index'] == false) checked @endif>
+                                    <label for="supplierIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Create</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="supplierCreate1" name="supplierCreate" value="true" @if ($menuData['supplierCreate']['index'] == true) checked @endif>
+                                    <label for="supplierCreate1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="supplierCreate2" name="supplierCreate" value="false" @if ($menuData['supplierCreate']['index'] == false) checked @endif>
+                                    <label for="supplierCreate2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Edit</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="supplierEdit1" name="supplierEdit" value="true" @if ($menuData['supplierEdit']['index'] == true) checked @endif>
+                                    <label for="supplierEdit1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="supplierEdit2" name="supplierEdit" value="false" @if ($menuData['supplierEdit']['index'] == false) checked @endif> 
+                                    <label for="supplierEdit2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Delete</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="supplierDelete1" name="supplierDelete" value="true" @if ($menuData['supplierDelete']['index'] == true) checked @endif>
+                                    <label for="supplierDelete1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="supplierDelete2" name="supplierDelete" value="false" @if ($menuData['supplierDelete']['index'] == false) checked @endif>
+                                    <label for="supplierDelete2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Manufacture</h3>
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <table class="table table-sm">
+                        <thead>
+                          <tr>
+                            <th style="width: 40%">Permission</th>
+                            <th>Grant</th>
+                            <th>Deny</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>View</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="manufactureIndex1" name="manufactureIndex" value="true" @if ($menuData['manufactureIndex']['index'] == true) checked @endif>
+                                    <label for="manufactureIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="manufactureIndex2" name="manufactureIndex" value="false" @if ($menuData['manufactureIndex']['index'] == false) checked @endif>
+                                    <label for="manufactureIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Create</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="manufactureCreate1" name="manufactureCreate" value="true" @if ($menuData['manufactureCreate']['index'] == true) checked @endif>
+                                    <label for="manufactureCreate1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="manufactureCreate2" name="manufactureCreate" value="false" @if ($menuData['manufactureCreate']['index'] == false) checked @endif>
+                                    <label for="manufactureCreate2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Edit</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="manufactureEdit1" name="manufactureEdit" value="true" @if ($menuData['manufactureEdit']['index'] == true) checked @endif>
+                                    <label for="manufactureEdit1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="manufactureEdit2" name="manufactureEdit" value="false" @if ($menuData['manufactureEdit']['index'] == false) checked @endif> 
+                                    <label for="manufactureEdit2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Delete</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="manufactureDelete1" name="manufactureDelete" value="true" @if ($menuData['manufactureDelete']['index'] == true) checked @endif>
+                                    <label for="manufactureDelete1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="manufactureDelete2" name="manufactureDelete" value="false" @if ($menuData['manufactureDelete']['index'] == false) checked @endif>
+                                    <label for="manufactureDelete2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                   
                 </div>
                 <!-- /.card-body -->

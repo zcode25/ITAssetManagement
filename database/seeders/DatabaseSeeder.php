@@ -75,7 +75,15 @@ class DatabaseSeeder extends Seeder
             "userCreate":{"index":true},
             "userPermission":{"index":true},
             "userEdit":{"index":true},
-            "userDelete":{"index":true}
+            "userDelete":{"index":true},
+            "supplierIndex":{"index":true}, 
+            "supplierCreate":{"index":true},
+            "supplierEdit":{"index":true},
+            "supplierDelete":{"index":true},
+            "manufactureIndex":{"index":true}, 
+            "manufactureCreate":{"index":true},
+            "manufactureEdit":{"index":true},
+            "manufactureDelete":{"index":true}
         }';
 
         // $permission = str_replace(array("\r", "\n", ' '), '', $permission);
