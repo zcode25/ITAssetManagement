@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index() {
+        $title = 'Delete Data!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+        
         return view('user.index', [
             'users' => User::all()
         ]);
@@ -124,5 +128,49 @@ class UserController extends Controller
             'departements' => Departement::all(),
             'positions' => Position::all(),
         ]);
+    }
+
+    public function update(Request $request, User $user) {
+        $validatedData = $request->validate([
+            'employeeName' => 'required|max:100',
+            'locationId' => 'required',
+            'departementId' => 'required',
+            'positionId' => 'required',
+            'employeeName' => 'required|max:100',
+            'employeePhone' => 'required|max:15',
+            'employeeEmail' => 'required|max:100',
+            'employeeAddress' => 'required|max:200',
+            'employeeCity' => 'required|max:100',
+            'employeeProvince' => 'required|max:100',
+        ]);
+
+        User::where('userId', $user->userId)->update($validatedData);
+
+        return redirect('/user')->with('success', 'Data updated successfully');
+    }
+
+    public function resetPassword(Request $request, User $user) {
+        $validatedData = $request->validate([
+            'password' => 'required|min:8|max:50',
+        ]);
+
+        $validatedData['password'] = Hash::make($request["password"]);
+
+        User::where('userId', $user->userId)->update($validatedData);
+
+        return redirect('/user')->with('success', 'Data updated successfully');
+        
+    }
+
+    public function destroy(User $user) {
+        try{
+            User::where('userId', $user->userId)->delete();
+        } catch (\Illuminate\Database\QueryException){
+            return back()->with([
+                'error' => 'Data cannot be deleted, because the data is still needed!',
+            ]);
+        }
+
+        return redirect('/user')->with('success', 'Data deleted successfully');
     }
 }

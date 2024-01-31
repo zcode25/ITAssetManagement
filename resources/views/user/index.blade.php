@@ -63,13 +63,13 @@ $menuData = json_decode($jsonData, true);
               <td>{{ $user->position->positionName }}</td>
               <td class="py-0 align-middle">
                 <div class="btn-group btn-group-sm">
-                  @if($menuData['userCreate']['index'])
+                  @if($menuData['userEdit']['index'])
                   <a href="/user/edit/{{ $user->userId }}" class="btn btn-primary">Edit</a>
                   @endif
-                  @if($menuData['userCreate']['index'])
+                  @if($menuData['userPermission']['index'])
                   <a href="/user/permission/{{ $user->userId }}" class="btn btn-warning">Permission</a>
                   @endif
-                  @if($menuData['userCreate']['index'])
+                  @if($menuData['userDelete']['index'])
                   <a href="/user/destroy/{{ $user->userId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
                   @endif
                 </div>

@@ -84,7 +84,10 @@ Route::controller(UserController::class)->group(function() {
     Route::post('/user/store', 'store')->name('user.store')->middleware('auth', 'check.menu.access:userCreate');
     Route::get('/user/permission/{user:userId}', 'permission')->name('user.permission')->middleware('auth', 'check.menu.access:userPermission');
     Route::post('/user/permission/create/{user:userId}', 'permissionCreate')->name('user.permission.create')->middleware('auth', 'check.menu.access:userPermission');
-    Route::get('/user/edit/{user:userId}', 'edit')->name('user.edit')->middleware('auth');
+    Route::get('/user/edit/{user:userId}', 'edit')->name('user.edit')->middleware('auth', 'check.menu.access:userEdit');
+    Route::post('/user/update/{user:userId}', 'update')->name('user.update')->middleware('auth', 'check.menu.access:userEdit');
+    Route::post('/user/resetPassword/{user:userId}', 'resetPassword')->name('user.resetPassword')->middleware('auth', 'check.menu.access:userEdit');
+    Route::delete('/user/destroy/{user:userId}', 'destroy')->name('user.destroy')->middleware('auth', 'check.menu.access:userDelete');
 });
 
 Route::controller(SupplierController::class)->group(function() {
