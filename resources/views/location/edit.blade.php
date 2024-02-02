@@ -32,7 +32,7 @@
                     <label for="companyId" class="form-label">Company <span class="text-danger">*</span></label>
                     <select class="form-control select2bs4" id="companyId" name="companyId">
                       @foreach($companies as $company)
-                          @if ($company['companyId'] == $location->companyId)
+                          @if (old('companyId', $location->companyId) == $company['companyId'])
                               <option value="{{ $company['companyId'] }}" selected = "selected">{{ $company['companyName'] }}</option>
                           @else
                               <option value="{{ $company['companyId'] }}">{{ $company['companyName'] }}</option>

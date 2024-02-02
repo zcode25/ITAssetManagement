@@ -6,6 +6,7 @@ use App\Http\Controllers\CompanyController as ControllersCompanyController;
 use App\Http\Controllers\DashboardController as ControllersDashboardController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Main\CategoryController;
 use App\Http\Controllers\Main\CompanyController as MainCompanyController;
 use App\Http\Controllers\Main\DashboardController as MainDashboardController;
 use App\Http\Controllers\Main\DepartementController;
@@ -107,4 +108,13 @@ Route::controller(ManufactureController::class)->group(function() {
     Route::get('/manufacture/edit/{manufacture:manufactureId}', 'edit')->name('manufacture.edit')->middleware('auth', 'check.menu.access:manufactureEdit');
     Route::post('/manufacture/update/{manufacture:manufactureId}', 'update')->name('manufacture.update')->middleware('auth', 'check.menu.access:manufactureEdit');
     Route::delete('/manufacture/destroy/{manufacture:manufactureId}', 'destroy')->name('manufacture.destroy')->middleware('auth', 'check.menu.access:manufactureDelete');
+});
+
+Route::controller(CategoryController::class)->group(function() {
+    Route::get('/category', 'index')->name('category.index');
+    Route::get('/category/create', 'create')->name('category.create');
+    Route::post('/category/store', 'store')->name('category.store');
+    Route::get('/category/edit/{category:categoryId}', 'edit')->name('category.edit');
+    Route::post('/category/update/{category:categoryId}', 'update')->name('category.update');
+    Route::delete('/category/destroy/{category:categoryId}', 'destroy')->name('category.destroy');
 });

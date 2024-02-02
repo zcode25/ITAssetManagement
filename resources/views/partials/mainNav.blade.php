@@ -44,8 +44,8 @@
         </li>
         @endif
         @if($menuData['supplierIndex']['index'] || $menuData['manufactureIndex']['index'])
-        <li class="nav-item {{ Request::is('supplier*', 'manufacture*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ Request::is('supplier*', 'manufacture*') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('supplier*', 'manufacture*', 'category*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::is('supplier*', 'manufacture*', 'category*') ? 'active' : '' }}">
             <i class="nav-icon fas fa fa-box"></i>
             <p>
               Master Asset
@@ -65,12 +65,13 @@
                 <p>Category</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="/manufacture" class="nav-link {{ Request::is('manufacture*') ? 'active' : '' }}">
-                <i class="far fa fa-network-wired nav-icon"></i>
-                <p>Manufacture</p>
-              </a>
             </li> --}}
+            <li class="nav-item">
+              <a href="/category" class="nav-link {{ Request::is('category*') ? 'active' : '' }}">
+                <i class="far fa fa-network-wired nav-icon"></i>
+                <p>Category</p>
+              </a>
+            </li>
             @if($menuData['manufactureIndex']['index'])
             <li class="nav-item">
               <a href="/manufacture" class="nav-link {{ Request::is('manufacture*') ? 'active' : '' }}">
