@@ -83,7 +83,11 @@ class DatabaseSeeder extends Seeder
             "manufactureIndex":{"index":true}, 
             "manufactureCreate":{"index":true},
             "manufactureEdit":{"index":true},
-            "manufactureDelete":{"index":true}
+            "manufactureDelete":{"index":true},
+            "categoryIndex":{"index":true}, 
+            "categoryCreate":{"index":true},
+            "categoryEdit":{"index":true},
+            "categoryDelete":{"index":true}
         }';
 
         // $permission = str_replace(array("\r", "\n", ' '), '', $permission);

@@ -51,7 +51,7 @@ $menuData = json_decode($jsonData, true);
             </tr>
             </thead>
             <tbody>
-            @foreach ($categories as $category)
+            {{-- @foreach ($categories as $category)
             <tr>
               <td>{{ $category->categoryName }}</td>
               <td>{{ $category->categoryType }}</td>
@@ -66,7 +66,7 @@ $menuData = json_decode($jsonData, true);
                   @endif
                 </div>
               </td>
-              @endif
+              @endif --}}
             </tr>    
             @endforeach
             </tfoot>

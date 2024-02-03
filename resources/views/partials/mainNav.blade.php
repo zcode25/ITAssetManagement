@@ -43,7 +43,7 @@
           </a>
         </li>
         @endif
-        @if($menuData['supplierIndex']['index'] || $menuData['manufactureIndex']['index'])
+        @if($menuData['supplierIndex']['index'] || $menuData['manufactureIndex']['index'] || $menuData['categoryIndex']['index'])
         <li class="nav-item {{ Request::is('supplier*', 'manufacture*', 'category*') ? 'menu-open' : '' }}">
           <a href="#" class="nav-link {{ Request::is('supplier*', 'manufacture*', 'category*') ? 'active' : '' }}">
             <i class="nav-icon fas fa fa-box"></i>
@@ -65,13 +65,15 @@
                 <p>Category</p>
               </a>
             </li>
-            </li> --}}
+          </li> --}}
+            @if($menuData['categoryIndex']['index'])
             <li class="nav-item">
               <a href="/category" class="nav-link {{ Request::is('category*') ? 'active' : '' }}">
-                <i class="far fa fa-network-wired nav-icon"></i>
+                <i class="far fa fa-layer-group nav-icon"></i>
                 <p>Category</p>
               </a>
             </li>
+            @endif
             @if($menuData['manufactureIndex']['index'])
             <li class="nav-item">
               <a href="/manufacture" class="nav-link {{ Request::is('manufacture*') ? 'active' : '' }}">

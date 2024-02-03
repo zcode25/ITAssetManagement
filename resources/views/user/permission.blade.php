@@ -666,6 +666,89 @@
                       </table>
                     </div>
                   </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Category</h3>
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <table class="table table-sm">
+                        <thead>
+                          <tr>
+                            <th style="width: 40%">Permission</th>
+                            <th>Grant</th>
+                            <th>Deny</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>View</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="categoryIndex1" name="categoryIndex" value="true" @if ($menuData['categoryIndex']['index'] == true) checked @endif>
+                                    <label for="categoryIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="categoryIndex2" name="categoryIndex" value="false" @if ($menuData['categoryIndex']['index'] == false) checked @endif>
+                                    <label for="categoryIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Create</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="categoryCreate1" name="categoryCreate" value="true" @if ($menuData['categoryCreate']['index'] == true) checked @endif>
+                                    <label for="categoryCreate1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="categoryCreate2" name="categoryCreate" value="false" @if ($menuData['categoryCreate']['index'] == false) checked @endif>
+                                    <label for="categoryCreate2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Edit</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="categoryEdit1" name="categoryEdit" value="true" @if ($menuData['categoryEdit']['index'] == true) checked @endif>
+                                    <label for="categoryEdit1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="categoryEdit2" name="categoryEdit" value="false" @if ($menuData['categoryEdit']['index'] == false) checked @endif> 
+                                    <label for="categoryEdit2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Delete</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="categoryDelete1" name="categoryDelete" value="true" @if ($menuData['categoryDelete']['index'] == true) checked @endif>
+                                    <label for="categoryDelete1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="categoryDelete2" name="categoryDelete" value="false" @if ($menuData['categoryDelete']['index'] == false) checked @endif>
+                                    <label for="categoryDelete2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                   
                 </div>
                 <!-- /.card-body -->

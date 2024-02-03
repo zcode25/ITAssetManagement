@@ -80,7 +80,11 @@ class UserController extends Controller
             "manufactureIndex":{"index":false}, 
             "manufactureCreate":{"index":false},
             "manufactureEdit":{"index":false},
-            "manufactureDelete":{"index":false}
+            "manufactureDelete":{"index":false},
+            "categoryIndex":{"index":false}, 
+            "categoryCreate":{"index":false},
+            "categoryEdit":{"index":false},
+            "categoryDelete":{"index":false}
         }';
 
         User::create($validatedData);
@@ -128,7 +132,11 @@ class UserController extends Controller
             "manufactureIndex":{"index":'. $request->manufactureIndex .'}, 
             "manufactureCreate":{"index":'. $request->manufactureCreate .'},
             "manufactureEdit":{"index":'. $request->manufactureEdit .'},
-            "manufactureDelete":{"index":'. $request->manufactureDelete .'}
+            "manufactureDelete":{"index":'. $request->manufactureDelete .'},
+            "categoryIndex":{"index":'. $request->categoryIndex .'}, 
+            "categoryCreate":{"index":'. $request->categoryCreate .'},
+            "categoryEdit":{"index":'. $request->categoryEdit .'},
+            "categoryDelete":{"index":'. $request->categoryDelete .'}
         }';
 
         User::where('userId', $user->userId)->update(['permission' => $permission]);
