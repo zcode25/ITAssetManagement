@@ -6,6 +6,7 @@ use App\Http\Controllers\CompanyController as ControllersCompanyController;
 use App\Http\Controllers\DashboardController as ControllersDashboardController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Main\AccessoryModelController;
 use App\Http\Controllers\Main\CategoryController;
 use App\Http\Controllers\Main\CompanyController as MainCompanyController;
 use App\Http\Controllers\Main\DashboardController as MainDashboardController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Main\ManufactureController;
 use App\Http\Controllers\Main\PositionController;
 use App\Http\Controllers\Main\SupplierController;
 use App\Http\Controllers\Main\UserController;
+use App\Models\AccessoryModel;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -111,10 +113,19 @@ Route::controller(ManufactureController::class)->group(function() {
 });
 
 Route::controller(CategoryController::class)->group(function() {
-    Route::get('/category', 'index')->name('category.index');
-    Route::get('/category/create', 'create')->name('category.create');
-    Route::post('/category/store', 'store')->name('category.store');
-    Route::get('/category/edit/{category:categoryId}', 'edit')->name('category.edit');
-    Route::post('/category/update/{category:categoryId}', 'update')->name('category.update');
-    Route::delete('/category/destroy/{category:categoryId}', 'destroy')->name('category.destroy');
+    Route::get('/category', 'index')->name('category.index')->middleware('auth', 'check.menu.access:categoryIndex');
+    Route::get('/category/create', 'create')->name('category.create')->middleware('auth', 'check.menu.access:categoryCreate');
+    Route::post('/category/store', 'store')->name('category.store')->middleware('auth', 'check.menu.access:categoryCreate');
+    Route::get('/category/edit/{category:categoryId}', 'edit')->name('category.edit')->middleware('auth', 'check.menu.access:categoryEdit');
+    Route::post('/category/update/{category:categoryId}', 'update')->name('category.update')->middleware('auth', 'check.menu.access:categoryEdit');
+    Route::delete('/category/destroy/{category:categoryId}', 'destroy')->name('category.destroy')->middleware('auth', 'check.menu.access:categoryDelete');
+});
+
+Route::controller(AccessoryModelController::class)->group(function() {
+    Route::get('/accessoryModel', 'index')->name('accesoryModel.index')->middleware('auth', 'check.menu.access:accessoryModelIndex');
+    Route::get('/accessoryModel/create', 'create')->name('accesoryModel.create')->middleware('auth', 'check.menu.access:accessoryModelCreate');
+    Route::post('/accessoryModel/store', 'store')->name('accesoryModel.store')->middleware('auth', 'check.menu.access:accessoryModelCreate');
+    Route::get('/accessoryModel/edit/{accessoryModel:accessoryModelId}', 'edit')->name('accessoryModel.edit')->middleware('auth', 'check.menu.access:accessoryModelEdit');
+    Route::post('/accessoryModel/update/{accessoryModel:accessoryModelId}', 'update')->name('accessoryModel.update')->middleware('auth', 'check.menu.access:accessoryModelEdit');
+    Route::delete('/accessoryModel/destroy/{accessoryModel:accessoryModelId}', 'destroy')->name('accessoryModel.destroy')->middleware('auth', 'check.menu.access:accessoryModelDelete');
 });

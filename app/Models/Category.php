@@ -9,7 +9,11 @@ class Category extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $primaryKey = 'manufactureId';
+    protected $primaryKey = 'categoryId';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    public function accessoryModel(){
+        return $this->hasMany(AccessoryModel::class, 'categoryId', 'categoryId');
+    }
 }

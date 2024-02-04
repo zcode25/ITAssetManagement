@@ -12,4 +12,8 @@ class Manufacture extends Model
     protected $primaryKey = 'manufactureId';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    public function accessoryModel(){
+        return $this->hasMany(AccessoryModel::class, 'manufactureId', 'manufactureId');
+    }
 }

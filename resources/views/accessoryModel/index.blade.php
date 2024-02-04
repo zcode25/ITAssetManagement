@@ -12,12 +12,12 @@ $menuData = json_decode($jsonData, true);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Category</h1>
+            <h1>Accessory Model</h1>
           </div>
           <div class="col-sm-6">
             <div class="float-sm-right">
               @if($menuData['categoryCreate']['index'])
-              <a href="/category/create" class="btn btn-primary">Create New</a>
+              <a href="/accessoryModel/create" class="btn btn-primary">Create New</a>
               @endif
             </div>
           </div>
@@ -31,7 +31,7 @@ $menuData = json_decode($jsonData, true);
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Category List</h3>
+          <h3 class="card-title">Accessory Model List</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -43,30 +43,36 @@ $menuData = json_decode($jsonData, true);
           <table id="example1" class="table table-bordered table-hover">
             <thead>
             <tr>
+              <th>Name</th>
+              <th>Image</th>
+              <th>Model No.</th>
               <th>Category</th>
-              <th>Type</th>
+              <th>Manufacture</th>
               @if($menuData['categoryEdit']['index'] || $menuData['categoryDelete']['index'])
               <th>Action</th>
               @endif
             </tr>
             </thead>
             <tbody>
-            {{-- @foreach ($categories as $category)
+            @foreach ($accessoryModels as $accessoryModel)
             <tr>
-              <td>{{ $category->categoryName }}</td>
-              <td>{{ $category->categoryType }}</td>
+              <td>{{ $accessoryModel->accessoryModelName }}</td>
+              <td><img src="{{ asset('storage/' .  $accessoryModel->accessoryModelImage ) }}" alt="{{ $accessoryModel->accessoryModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
+              <td>{{ $accessoryModel->accessoryModelNumber }}</td>
+              <td>{{ $accessoryModel->category->categoryName }}</td>
+              <td>{{ $accessoryModel->manufacture->manufactureName }}</td>
               @if($menuData['categoryEdit']['index'] || $menuData['categoryDelete']['index'])
               <td class="py-0 align-middle">
                 <div class="btn-group btn-group-sm">
                   @if($menuData['categoryEdit']['index'])
-                  <a href="/category/edit/{{ $category->categoryId }}" class="btn btn-primary">Edit</a>
+                  <a href="/accessoryModel/edit/{{ $accessoryModel->accessoryModelId }}" class="btn btn-primary">Edit</a>
                   @endif
                   @if($menuData['categoryDelete']['index'])
-                  <a href="/category/destroy/{{ $category->categoryId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
+                  <a href="/accessoryModel/destroy/{{ $accessoryModel->accessoryModelId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
                   @endif
                 </div>
               </td>
-              @endif --}}
+              @endif
             </tr>    
             @endforeach
             </tfoot>

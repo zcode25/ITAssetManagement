@@ -12,4 +12,12 @@ class AccessoryModel extends Model
     protected $primaryKey = 'accessoryModelId';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    public function category(){
+        return $this->belongsTo(Category::class, 'categoryId');
+    }
+
+    public function manufacture(){
+        return $this->belongsTo(Manufacture::class, 'manufactureId');
+    }
 }

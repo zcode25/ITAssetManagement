@@ -87,7 +87,11 @@ class DatabaseSeeder extends Seeder
             "categoryIndex":{"index":true}, 
             "categoryCreate":{"index":true},
             "categoryEdit":{"index":true},
-            "categoryDelete":{"index":true}
+            "categoryDelete":{"index":true},
+            "accessoryModelIndex":{"index":true}, 
+            "accessoryModelCreate":{"index":true},
+            "accessoryModelEdit":{"index":true},
+            "accessoryModelDelete":{"index":true}
         }';
 
         // $permission = str_replace(array("\r", "\n", ' '), '', $permission);
