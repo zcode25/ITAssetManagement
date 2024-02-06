@@ -12,12 +12,12 @@ $menuData = json_decode($jsonData, true);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Accessory Model</h1>
+            <h1>Asset Model</h1>
           </div>
           <div class="col-sm-6">
             <div class="float-sm-right">
               @if($menuData['accessoryModelCreate']['index'])
-              <a href="/accessoryModel/create" class="btn btn-primary">Create New</a>
+              <a href="/assetModel/create" class="btn btn-primary">Create New</a>
               @endif
             </div>
           </div>
@@ -31,7 +31,7 @@ $menuData = json_decode($jsonData, true);
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Accessory Model List</h3>
+          <h3 class="card-title">Asset Model List</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -54,25 +54,25 @@ $menuData = json_decode($jsonData, true);
             </tr>
             </thead>
             <tbody>
-            @foreach ($accessoryModels as $accessoryModel)
+            @foreach ($assetModels as $assetModel)
             <tr>
-              <td>{{ $accessoryModel->accessoryModelName }}</td>
-              <td><img src="{{ asset('storage/' .  $accessoryModel->accessoryModelImage ) }}" alt="{{ $accessoryModel->accessoryModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
-              <td>{{ $accessoryModel->accessoryModelNumber }}</td>
-              <td>{{ $accessoryModel->category->categoryName }}</td>
-              <td>{{ $accessoryModel->manufacture->manufactureName }}</td>
-              @if($menuData['accessoryEdit']['index'] || $menuData['accessoryDelete']['index'])
+              <td>{{ $assetModel->assetModelName }}</td>
+              <td><img src="{{ asset('storage/' .  $assetModel->assetModelImage ) }}" alt="{{ $assetModel->assetModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
+              <td>{{ $assetModel->assetModelNumber }}</td>
+              <td>{{ $assetModel->category->categoryName }}</td>
+              <td>{{ $assetModel->manufacture->manufactureName }}</td>
+              {{-- @if($menuData['assetEdit']['index'] || $menuData['assetDelete']['index']) --}}
               <td class="py-0 align-middle">
                 <div class="btn-group btn-group-sm">
-                  @if($menuData['accessoryEdit']['index'])
-                  <a href="/accessoryModel/edit/{{ $accessoryModel->accessoryModelId }}" class="btn btn-primary">Edit</a>
-                  @endif
-                  @if($menuData['accessoryDelete']['index'])
-                  <a href="/accessoryModel/destroy/{{ $accessoryModel->accessoryModelId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
-                  @endif
+                  {{-- @if($menuData['assetEdit']['index']) --}}
+                  <a href="/assetModel/edit/{{ $assetModel->assetModelId }}" class="btn btn-primary">Edit</a>
+                  {{-- @endif --}}
+                  {{-- @if($menuData['assetDelete']['index']) --}}
+                  <a href="/assetModel/destroy/{{ $assetModel->assetModelId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
+                  {{-- @endif --}}
                 </div>
               </td>
-              @endif
+              {{-- @endif --}}
             </tr>    
             @endforeach
             </tfoot>

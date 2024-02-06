@@ -16,4 +16,8 @@ class Category extends Model
     public function accessoryModel(){
         return $this->hasMany(AccessoryModel::class, 'categoryId', 'categoryId');
     }
+
+    public function assetModel(){
+        return $this->hasMany(assetModel::class, 'categoryId', 'categoryId');
+    }
 }

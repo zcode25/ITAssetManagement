@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController as ControllersDashboardController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Main\AccessoryModelController;
+use App\Http\Controllers\Main\AssetModelController;
 use App\Http\Controllers\Main\CategoryController;
 use App\Http\Controllers\Main\CompanyController as MainCompanyController;
 use App\Http\Controllers\Main\DashboardController as MainDashboardController;
@@ -122,10 +123,17 @@ Route::controller(CategoryController::class)->group(function() {
 });
 
 Route::controller(AccessoryModelController::class)->group(function() {
-    Route::get('/accessoryModel', 'index')->name('accesoryModel.index')->middleware('auth', 'check.menu.access:accessoryModelIndex');
-    Route::get('/accessoryModel/create', 'create')->name('accesoryModel.create')->middleware('auth', 'check.menu.access:accessoryModelCreate');
-    Route::post('/accessoryModel/store', 'store')->name('accesoryModel.store')->middleware('auth', 'check.menu.access:accessoryModelCreate');
+    Route::get('/accessoryModel', 'index')->name('accessoryModel.index')->middleware('auth', 'check.menu.access:accessoryModelIndex');
+    Route::get('/accessoryModel/create', 'create')->name('accessoryModel.create')->middleware('auth', 'check.menu.access:accessoryModelCreate');
+    Route::post('/accessoryModel/store', 'store')->name('accessoryModel.store')->middleware('auth', 'check.menu.access:accessoryModelCreate');
     Route::get('/accessoryModel/edit/{accessoryModel:accessoryModelId}', 'edit')->name('accessoryModel.edit')->middleware('auth', 'check.menu.access:accessoryModelEdit');
     Route::post('/accessoryModel/update/{accessoryModel:accessoryModelId}', 'update')->name('accessoryModel.update')->middleware('auth', 'check.menu.access:accessoryModelEdit');
     Route::delete('/accessoryModel/destroy/{accessoryModel:accessoryModelId}', 'destroy')->name('accessoryModel.destroy')->middleware('auth', 'check.menu.access:accessoryModelDelete');
+});
+
+Route::controller(AssetModelController::class)->group(function() {
+    Route::get('/assetModel', 'index')->name('assetModel.index')->middleware('auth');
+    Route::get('/assetModel/create', 'create')->name('assetModel.create')->middleware('auth');
+    Route::post('/assetModel/store', 'store')->name('assetModel.store')->middleware('auth');
+    Route::get('/assetModel/edit/{assetModel:assetModelId}', 'edit')->name('assetModel.edit')->middleware('auth');
 });

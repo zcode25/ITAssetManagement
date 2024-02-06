@@ -749,6 +749,89 @@
                       </table>
                     </div>
                   </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Accessory Model</h3>
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <table class="table table-sm">
+                        <thead>
+                          <tr>
+                            <th style="width: 40%">Permission</th>
+                            <th>Grant</th>
+                            <th>Deny</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>View</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="accessoryModelIndex1" name="accessoryModelIndex" value="true" @if ($menuData['accessoryModelIndex']['index'] == true) checked @endif>
+                                    <label for="accessoryModelIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="accessoryModelIndex2" name="accessoryModelIndex" value="false" @if ($menuData['accessoryModelIndex']['index'] == false) checked @endif>
+                                    <label for="accessoryModelIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Create</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="accessoryModelCreate1" name="accessoryModelCreate" value="true" @if ($menuData['accessoryModelCreate']['index'] == true) checked @endif>
+                                    <label for="accessoryModelCreate1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="accessoryModelCreate2" name="accessoryModelCreate" value="false" @if ($menuData['accessoryModelCreate']['index'] == false) checked @endif>
+                                    <label for="accessoryModelCreate2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Edit</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="accessoryModelEdit1" name="accessoryModelEdit" value="true" @if ($menuData['accessoryModelEdit']['index'] == true) checked @endif>
+                                    <label for="accessoryModelEdit1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="accessoryModelEdit2" name="accessoryModelEdit" value="false" @if ($menuData['accessoryModelEdit']['index'] == false) checked @endif> 
+                                    <label for="accessoryModelEdit2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Delete</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="accessoryModelDelete1" name="accessoryModelDelete" value="true" @if ($menuData['accessoryModelDelete']['index'] == true) checked @endif>
+                                    <label for="accessoryModelDelete1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="accessoryModelDelete2" name="accessoryModelDelete" value="false" @if ($menuData['accessoryModelDelete']['index'] == false) checked @endif>
+                                    <label for="accessoryModelDelete2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                   
                 </div>
                 <!-- /.card-body -->
