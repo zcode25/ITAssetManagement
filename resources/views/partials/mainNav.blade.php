@@ -55,8 +55,8 @@
           <ul class="nav nav-treeview">
             {{-- @if($menuData['assetModelIndex']['index']) --}}
             <li class="nav-item">
-              <a href="/procurement" class="nav-link {{ Request::is('procurement*') ? 'active' : '' }}">
-                <i class="far fa fa-truck-ramp-box nav-icon"></i>
+              <a href="/assetProcurement" class="nav-link {{ Request::is('assetProcurement*') ? 'active' : '' }}">
+                <i class="far fa fa-store nav-icon"></i>
                 <p>Procurement</p>
               </a>
             </li>

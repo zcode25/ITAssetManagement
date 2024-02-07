@@ -42,7 +42,7 @@ class AssetModelController extends Controller
             $validatedData['assetModelImage'] = $request->file('assetModelImage')->store('assetModelImage');
         }
 
-        $validatedData['assetModelId'] = IdGenerator::generate(['table' => 'asset_models', 'field' => 'assetModelId', 'length' => 8, 'prefix' => 'ACM']);
+        $validatedData['assetModelId'] = IdGenerator::generate(['table' => 'asset_models', 'field' => 'assetModelId', 'length' => 8, 'prefix' => 'ASM']);
 
         AssetModel::create($validatedData);
 

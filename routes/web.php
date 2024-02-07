@@ -8,6 +8,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Main\AccessoryModelController;
 use App\Http\Controllers\Main\AssetModelController;
+use App\Http\Controllers\Main\AssetProcurement;
 use App\Http\Controllers\Main\CategoryController;
 use App\Http\Controllers\Main\CompanyController as MainCompanyController;
 use App\Http\Controllers\Main\DashboardController as MainDashboardController;
@@ -138,4 +139,9 @@ Route::controller(AssetModelController::class)->group(function() {
     Route::get('/assetModel/edit/{assetModel:assetModelId}', 'edit')->name('assetModel.edit')->middleware('auth', 'check.menu.access:assetModelUpdate');
     Route::post('/assetModel/update/{assetModel:assetModelId}', 'update')->name('assetModel.update')->middleware('auth', 'check.menu.access:assetModelUpdate');
     Route::delete('/assetModel/destroy/{assetModel:assetModelId}', 'destroy')->name('assetModel.destroy')->middleware('auth', 'check.menu.access:assetModelDelete');
+});
+
+Route::controller(AssetProcurement::class)->group(function () {
+    Route::get('/assetProcurement', 'index')->name('assetProcurement.index')->middleware('auth');
+    Route::get('/assetProcurement/create', 'create')->name('assetProcurement.create')->middleware('auth');
 });
