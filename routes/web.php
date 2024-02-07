@@ -132,8 +132,10 @@ Route::controller(AccessoryModelController::class)->group(function() {
 });
 
 Route::controller(AssetModelController::class)->group(function() {
-    Route::get('/assetModel', 'index')->name('assetModel.index')->middleware('auth');
-    Route::get('/assetModel/create', 'create')->name('assetModel.create')->middleware('auth');
-    Route::post('/assetModel/store', 'store')->name('assetModel.store')->middleware('auth');
-    Route::get('/assetModel/edit/{assetModel:assetModelId}', 'edit')->name('assetModel.edit')->middleware('auth');
+    Route::get('/assetModel', 'index')->name('assetModel.index')->middleware('auth', 'check.menu.access:assetModelIndex');
+    Route::get('/assetModel/create', 'create')->name('assetModel.create')->middleware('auth', 'check.menu.access:assetModelCreate');
+    Route::post('/assetModel/store', 'store')->name('assetModel.store')->middleware('auth', 'check.menu.access:assetModelCreate');
+    Route::get('/assetModel/edit/{assetModel:assetModelId}', 'edit')->name('assetModel.edit')->middleware('auth', 'check.menu.access:assetModelUpdate');
+    Route::post('/assetModel/update/{assetModel:assetModelId}', 'update')->name('assetModel.update')->middleware('auth', 'check.menu.access:assetModelUpdate');
+    Route::delete('/assetModel/destroy/{assetModel:assetModelId}', 'destroy')->name('assetModel.destroy')->middleware('auth', 'check.menu.access:assetModelDelete');
 });

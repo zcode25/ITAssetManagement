@@ -832,6 +832,89 @@
                       </table>
                     </div>
                   </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Asset Model</h3>
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <table class="table table-sm">
+                        <thead>
+                          <tr>
+                            <th style="width: 40%">Permission</th>
+                            <th>Grant</th>
+                            <th>Deny</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>View</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetModelIndex1" name="assetModelIndex" value="true" @if ($menuData['assetModelIndex']['index'] == true) checked @endif>
+                                    <label for="assetModelIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetModelIndex2" name="assetModelIndex" value="false" @if ($menuData['assetModelIndex']['index'] == false) checked @endif>
+                                    <label for="assetModelIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Create</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetModelCreate1" name="assetModelCreate" value="true" @if ($menuData['assetModelCreate']['index'] == true) checked @endif>
+                                    <label for="assetModelCreate1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetModelCreate2" name="assetModelCreate" value="false" @if ($menuData['assetModelCreate']['index'] == false) checked @endif>
+                                    <label for="assetModelCreate2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Edit</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetModelEdit1" name="assetModelEdit" value="true" @if ($menuData['assetModelEdit']['index'] == true) checked @endif>
+                                    <label for="assetModelEdit1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetModelEdit2" name="assetModelEdit" value="false" @if ($menuData['assetModelEdit']['index'] == false) checked @endif> 
+                                    <label for="assetModelEdit2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Delete</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetModelDelete1" name="assetModelDelete" value="true" @if ($menuData['assetModelDelete']['index'] == true) checked @endif>
+                                    <label for="assetModelDelete1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetModelDelete2" name="assetModelDelete" value="false" @if ($menuData['assetModelDelete']['index'] == false) checked @endif>
+                                    <label for="assetModelDelete2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                   
                 </div>
                 <!-- /.card-body -->

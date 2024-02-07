@@ -43,7 +43,28 @@
           </a>
         </li>
         @endif
-        @if($menuData['supplierIndex']['index'] || $menuData['manufactureIndex']['index'] || $menuData['categoryIndex']['index'] || $menuData['accessoryModelIndex']['index'])
+        {{-- @if($menuData['supplierIndex']['index'] || $menuData['manufactureIndex']['index'] || $menuData['categoryIndex']['index'] || $menuData['accessoryModelIndex']['index'] || $menuData['assetModelIndex']['index']) --}}
+        <li class="nav-item {{ Request::is('procurement*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::is('procurement*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa fa-barcode"></i>
+            <p>
+              Asset
+              <i class="right fas fa fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            {{-- @if($menuData['assetModelIndex']['index']) --}}
+            <li class="nav-item">
+              <a href="/procurement" class="nav-link {{ Request::is('procurement*') ? 'active' : '' }}">
+                <i class="far fa fa-truck-ramp-box nav-icon"></i>
+                <p>Procurement</p>
+              </a>
+            </li>
+            {{-- @endif --}}
+          </ul>
+        </li>
+        {{-- @endif --}}
+        @if($menuData['supplierIndex']['index'] || $menuData['manufactureIndex']['index'] || $menuData['categoryIndex']['index'] || $menuData['accessoryModelIndex']['index'] || $menuData['assetModelIndex']['index'])
         <li class="nav-item {{ Request::is('supplier*', 'manufacture*', 'category*', 'accessoryModel*', 'assetModel*') ? 'menu-open' : '' }}">
           <a href="#" class="nav-link {{ Request::is('supplier*', 'manufacture*', 'category*', 'accessoryModel*', 'assetModel*') ? 'active' : '' }}">
             <i class="nav-icon fas fa fa-box"></i>
@@ -53,16 +74,18 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
+            @if($menuData['assetModelIndex']['index'])
             <li class="nav-item">
               <a href="/assetModel" class="nav-link {{ Request::is('assetModel*') ? 'active' : '' }}">
-                <i class="far fa fa-layer-group nav-icon"></i>
+                <i class="far fa fa-barcode nav-icon"></i>
                 <p>Asset Model</p>
               </a>
             </li>
+            @endif
             @if($menuData['accessoryModelIndex']['index'])
             <li class="nav-item">
               <a href="/accessoryModel" class="nav-link {{ Request::is('accessoryModel*') ? 'active' : '' }}">
-                <i class="far fa fa-layer-group nav-icon"></i>
+                <i class="far fa fa-keyboard nav-icon"></i>
                 <p>Accessory Model</p>
               </a>
             </li>

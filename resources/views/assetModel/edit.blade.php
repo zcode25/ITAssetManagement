@@ -29,7 +29,7 @@
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="assetModelName" class="form-label">asset Model Name <span class="text-danger">*</span></label>
+                    <label for="assetModelName" class="form-label">Asset Model Name <span class="text-danger">*</span></label>
                     <input type="text" class="form-control @error('assetModelName') is-invalid @enderror" id="assetModelName" name="assetModelName" value="{{ old('assetModelName', $assetModel->assetModelName) }}">
                     @error('assetModelName') 
                       <div class="invalid-feedback">{{ $message }}</div>

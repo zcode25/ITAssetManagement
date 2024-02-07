@@ -91,7 +91,11 @@ class DatabaseSeeder extends Seeder
             "accessoryModelIndex":{"index":true}, 
             "accessoryModelCreate":{"index":true},
             "accessoryModelEdit":{"index":true},
-            "accessoryModelDelete":{"index":true}
+            "accessoryModelDelete":{"index":true},
+            "assetModelIndex":{"index":true}, 
+            "assetModelCreate":{"index":true},
+            "assetModelEdit":{"index":true},
+            "assetModelDelete":{"index":true}
         }';
 
         // $permission = str_replace(array("\r", "\n", ' '), '', $permission);

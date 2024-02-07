@@ -16,7 +16,7 @@ $menuData = json_decode($jsonData, true);
           </div>
           <div class="col-sm-6">
             <div class="float-sm-right">
-              @if($menuData['accessoryModelCreate']['index'])
+              @if($menuData['assetModelCreate']['index'])
               <a href="/assetModel/create" class="btn btn-primary">Create New</a>
               @endif
             </div>
@@ -48,7 +48,7 @@ $menuData = json_decode($jsonData, true);
               <th>Model No.</th>
               <th>Category</th>
               <th>Manufacture</th>
-              @if($menuData['accessoryModelEdit']['index'] || $menuData['accessoryModelDelete']['index'])
+              @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index'])
               <th>Action</th>
               @endif
             </tr>
@@ -61,18 +61,18 @@ $menuData = json_decode($jsonData, true);
               <td>{{ $assetModel->assetModelNumber }}</td>
               <td>{{ $assetModel->category->categoryName }}</td>
               <td>{{ $assetModel->manufacture->manufactureName }}</td>
-              {{-- @if($menuData['assetEdit']['index'] || $menuData['assetDelete']['index']) --}}
+              @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index'])
               <td class="py-0 align-middle">
                 <div class="btn-group btn-group-sm">
-                  {{-- @if($menuData['assetEdit']['index']) --}}
+                  @if($menuData['assetModelEdit']['index'])
                   <a href="/assetModel/edit/{{ $assetModel->assetModelId }}" class="btn btn-primary">Edit</a>
-                  {{-- @endif --}}
-                  {{-- @if($menuData['assetDelete']['index']) --}}
+                  @endif
+                  @if($menuData['assetModelDelete']['index'])
                   <a href="/assetModel/destroy/{{ $assetModel->assetModelId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
-                  {{-- @endif --}}
+                  @endif
                 </div>
               </td>
-              {{-- @endif --}}
+              @endif
             </tr>    
             @endforeach
             </tfoot>

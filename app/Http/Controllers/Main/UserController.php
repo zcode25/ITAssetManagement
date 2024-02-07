@@ -88,7 +88,11 @@ class UserController extends Controller
             "accessoryModelIndex":{"index":false}, 
             "accessoryModelCreate":{"index":false},
             "accessoryModelEdit":{"index":false},
-            "accessoryModelDelete":{"index":false}
+            "accessoryModelDelete":{"index":false},
+            "assetyModelIndex":{"index":false}, 
+            "assetyModelCreate":{"index":false},
+            "assetyModelEdit":{"index":false},
+            "assetyModelDelete":{"index":false}
         }';
 
         User::create($validatedData);
@@ -144,7 +148,11 @@ class UserController extends Controller
             "accessoryModelIndex":{"index":'. $request->accessoryModelIndex .'}, 
             "accessoryModelCreate":{"index":'. $request->accessoryModelCreate .'},
             "accessoryModelEdit":{"index":'. $request->accessoryModelEdit .'},
-            "accessoryModelDelete":{"index":'. $request->accessoryModelDelete .'}
+            "accessoryModelDelete":{"index":'. $request->accessoryModelDelete .'},
+            "assetModelIndex":{"index":'. $request->assetModelIndex .'}, 
+            "assetModelCreate":{"index":'. $request->assetModelCreate .'},
+            "assetModelEdit":{"index":'. $request->assetModelEdit .'},
+            "assetModelDelete":{"index":'. $request->assetModelDelete .'}
         }';
 
         User::where('userId', $user->userId)->update(['permission' => $permission]);
