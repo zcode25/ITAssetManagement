@@ -47,7 +47,7 @@
                     <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
                     <select class="form-control select2bs4" id="locationId" name="locationId">
                       @foreach($locations as $location)
-                          @if ($location['locationId'] == $user->locationId)
+                          @if (old('locationId', $user->locationId) == $location['locationId'])
                               <option value="{{ $location['locationId'] }}" selected = "selected">{{ $location->company->companyName }} - {{ $location['locationName'] }}</option>
                           @else
                               <option value="{{ $location['locationId'] }}">{{ $location->company->companyName }} - {{ $location['locationName'] }}</option>
@@ -59,7 +59,7 @@
                     <label for="departementId" class="form-label">Departement <span class="text-danger">*</span></label>
                     <select class="form-control select2bs4" id="departementId" name="departementId">
                       @foreach($departements as $departement)
-                          @if ($departement['departementId'] == $user->departementId)
+                          @if (old('departementId', $user->departementId) == $departement['departementId'])
                               <option value="{{ $departement['departementId'] }}" selected = "selected">{{ $departement['departementName'] }}</option>
                           @else
                               <option value="{{ $departement['departementId'] }}">{{ $departement['departementName'] }}</option>
@@ -71,10 +71,23 @@
                     <label for="positionId" class="form-label">Position <span class="text-danger">*</span></label>
                     <select class="form-control select2bs4" id="positionId" name="positionId">
                       @foreach($positions as $position)
-                          @if ($position['positionId'] == $user->positionId)
+                          @if (old('positionId', $user->positionId) == $position['positionId'])
                               <option value="{{ $position['positionId'] }}" selected = "selected">{{ $position['positionName'] }}</option>
                           @else
                               <option value="{{ $position['positionId'] }}">{{ $position['positionName'] }}</option>
+                          @endif
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
+                    <select class="form-control select2bs4" id="managerId" name="managerId" data-placeholder="Select a Manager">
+                      <option value=""></option>
+                      @foreach ($managers as $manager)
+                          @if (old('managerId', $user->managerId) == $manager->userId)
+                              <option value="{{ $manager->userId }}" selected>{{ $manager->employeeName }}</option>
+                              @else
+                              <option value="{{ $manager->userId }}">{{ $manager->employeeName }}</option>
                           @endif
                       @endforeach
                     </select>

@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Main\AccessoryModelController;
 use App\Http\Controllers\Main\AssetModelController;
 use App\Http\Controllers\Main\AssetProcurement;
+use App\Http\Controllers\Main\AssetProcurementDevice;
 use App\Http\Controllers\Main\CategoryController;
 use App\Http\Controllers\Main\CompanyController as MainCompanyController;
 use App\Http\Controllers\Main\DashboardController as MainDashboardController;
@@ -144,4 +145,10 @@ Route::controller(AssetModelController::class)->group(function() {
 Route::controller(AssetProcurement::class)->group(function () {
     Route::get('/assetProcurement', 'index')->name('assetProcurement.index')->middleware('auth');
     Route::get('/assetProcurement/create', 'create')->name('assetProcurement.create')->middleware('auth');
+    Route::post('/assetProcurement/store', 'store')->name('assetProcurement.store')->middleware('auth');
+    Route::get('/assetProcurement/device/{assetProcurement:assetProcurementId}', 'device')->name('assetProcurement.device')->middleware('auth');
 });
+
+// Route::controller(AssetProcurementDevice::class)->group(function() {
+//     Route::get('/assetProcurementDevice/create', 'create')->name('assetProcurementDevice.create')->middleware('auth');
+// });

@@ -16,9 +16,9 @@ $menuData = json_decode($jsonData, true);
           </div>
           <div class="col-sm-6">
             <div class="float-sm-right">
-              @if($menuData['assetModelCreate']['index'])
+              {{-- @if($menuData['assetModelCreate']['index']) --}}
               <a href="/assetProcurement/create" class="btn btn-primary">Create New</a>
-              @endif
+              {{-- @endif --}}
             </div>
           </div>
         </div>

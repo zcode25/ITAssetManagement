@@ -1,6 +1,7 @@
 @extends('layouts/main')
 @section('container')
 @php
+use App\Models\User;
 $jsonData = auth()->user()->permission;
 $menuData = json_decode($jsonData, true);
 @endphp
@@ -48,6 +49,7 @@ $menuData = json_decode($jsonData, true);
               <th>Location</th>
               <th>Departement</th>
               <th>Position</th>
+              <th>Manager</th>
               @if($menuData['userEdit']['index'] || $menuData['userPermission']['index'] || $menuData['userDelete']['index'])
               <th>Action</th>
               @endif
@@ -56,18 +58,27 @@ $menuData = json_decode($jsonData, true);
             <tbody>
             @foreach ($users as $user)
             <tr>
+
               <td>{{ $user->employeeName }}</td>
               <td>{{ $user->location->company->companyName }}</td>
               <td>{{ $user->location->locationName }}</td>
               <td>{{ $user->departement->departementName }}</td>
               <td>{{ $user->position->positionName }}</td>
+              @if ($user->managerId)
+                @php
+                  $manager = User::where('userId', $user->managerId)->first()
+                @endphp
+                <td>{{ $manager->employeeName }}</td>
+              @else
+                <td></td>                  
+              @endif
               <td class="py-0 align-middle">
                 <div class="btn-group btn-group-sm">
                   @if($menuData['userEdit']['index'])
                   <a href="/user/edit/{{ $user->userId }}" class="btn btn-primary">Edit</a>
                   @endif
                   @if($menuData['userPermission']['index'])
-                  <a href="/user/permission/{{ $user->userId }}" class="btn btn-warning">Permission</a>
+                  <a href="/user/permission/{{ $user->userId }}" class="btn btn-success">Permission</a>
                   @endif
                   @if($menuData['userDelete']['index'])
                   <a href="/user/destroy/{{ $user->userId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>

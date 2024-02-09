@@ -76,12 +76,26 @@
                   </div>
                   <div class="form-group">
                     <label for="positionId" class="form-label">Position <span class="text-danger">*</span></label>
-                    <select class="form-control select2bs4" id="positionId" name="positionId">
+                    <select class="form-control select2bs4" id="positionId" name="positionId" data-placeholder="Select a Position">
+                      <option value=""></option>
                       @foreach ($positions as $position)
                           @if (old('positionId') == $position->positionId)
                               <option value="{{ $position->positionId }}" selected>{{ $position->positionName }}</option>
                               @else
                               <option value="{{ $position->positionId }}">{{ $position->positionName }}</option>
+                          @endif
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
+                    <select class="form-control select2bs4" id="managerId" name="managerId" data-placeholder="Select a Manager">
+                      <option value=""></option>
+                      @foreach ($managers as $manager)
+                          @if (old('managerId') == $manager->userId)
+                              <option value="{{ $manager->userId }}" selected>{{ $manager->employeeName }}</option>
+                              @else
+                              <option value="{{ $manager->userId }}">{{ $manager->employeeName }}</option>
                           @endif
                       @endforeach
                     </select>

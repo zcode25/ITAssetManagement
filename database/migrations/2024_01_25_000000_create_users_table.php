@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreign('departementId')->references('departementId')->on('departements')->onUpdate('cascade')->onDelete('restrict');
             $table->char('positionId', 8);
             $table->foreign('positionId')->references('positionId')->on('positions')->onUpdate('cascade')->onDelete('restrict');
+            $table->uuid('managerId')->nullable();
             $table->string('employeePhone', 15);
             $table->string('employeeEmail', 100);
             $table->string('employeeAddress', 200);

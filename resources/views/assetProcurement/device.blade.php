@@ -31,48 +31,43 @@
               <form action="/assetProcurement/store" method="POST" enctype="multipart/form-data" class="form-horizontal">
                 @csrf
                 <div class="card-body">
-                  <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}">
+                  {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
                   <div class="form-group">
                     <label for="employeeName" class="form-label">Name <span class="text-danger">*</span></label>
-                    <p>{{ $user->employeeName }}</p>
+                    {{-- <p>{{ $user->employeeName }}</p> --}}
                   </div>
                   <div class="form-group">
                     <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
-                    <p>{{ $user->location->company->companyName }} - {{ $user->location->locationName }}</p>
+                    {{-- <p>{{ $user->location->company->companyName }} - {{ $user->location->locationName }}</p> --}}
                   </div>
                   <div class="form-group">
                     <label for="departementId" class="form-label">Departement <span class="text-danger">*</span></label>
-                    <p>{{ $user->departement->departementName }}</p>
+                    {{-- <p>{{ $user->departement->departementName }}</p> --}}
                   </div>
                   <div class="form-group">
                     <label for="positionId" class="form-label">Position <span class="text-danger">*</span></label>
-                    <p>{{ $user->position->positionName }}</p>
-                  </div>
-                  <div class="form-group">
+                    {{-- <p>{{ $user->position->positionName }}</p> --}}
+                </div>
+                <div class="form-group">
                     <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
-                    @if ($user->managerId)
+                    {{-- @if ($user->managerId)
                       @php
                         $manager = User::where('userId', $user->managerId)->first()
                       @endphp
                       <p>{{ $manager->employeeName }}</p>
                     @else
                       <p></p>                  
-                    @endif
+                    @endif --}}
                   </div>
                   <hr>
+             
                   <div class="form-group">
                     <label for="assetProcurementDate" class="form-label">Procurement Date <span class="text-danger">*</span></label>
-                    <input type="date" class="form-control @error('assetProcurementDate') is-invalid @enderror" id="assetProcurementDate" name="assetProcurementDate" value="{{ old('assetProcurementDate') }}">
-                    @error('assetProcurementDate') 
-                      <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <p>{{ $assetProcurement->assetProcurementDate }}</p>
                   </div>
                   <div class="form-group">
                     <label for="assetProcurementNote" class="form-label">Procurement Note <span class="text-danger">*</span></label>
-                    <textarea class="form-control @error('assetProcurementNote') is-invalid @enderror"s="3" id="assetProcurementNote" name="assetProcurementNote">{{ old('assetProcurementNote') }}</textarea>
-                    @error('assetProcurementNote') 
-                      <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <p>{{ $assetProcurement->assetProcurementNote }}</p>
                   </div>
 
                 <!-- /.card-body -->
