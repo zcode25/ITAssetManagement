@@ -1,8 +1,5 @@
 @extends('layouts/main')
 @section('container')
-@php
-    use App\Models\User;
-@endphp
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -11,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Create Procurement</h1>
+            <h1>Create Position</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -24,61 +21,98 @@
             <!-- Horizontal Form -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Form Create Procurement</h3>
+                <h3 class="card-title">Form Create Position</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="/assetProcurement/store" method="POST" enctype="multipart/form-data" class="form-horizontal">
+              <form action="/assetProcurement/device/store/{{ $assetProcurement->assetProcurementId }}" method="POST" class="form-horizontal">
                 @csrf
                 <div class="card-body">
-                  {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
                   <div class="form-group">
-                    <label for="employeeName" class="form-label">Name <span class="text-danger">*</span></label>
-                    {{-- <p>{{ $user->employeeName }}</p> --}}
+                    <label for="assetModelId" class="form-label">Asset Model <span class="text-danger">*</span></label>
+                    <select class="form-control select2bs4" id="assetModelId" name="assetModelId">
+                      @foreach ($assetModels as $assetModel)
+                          @if (old('assetModelId') == $assetModel->assetModelId)
+                              <option value="{{ $assetModel->assetModelId }}" selected>{{ $assetModel->assetModelName }}</option>
+                              @else
+                              <option value="{{ $assetModel->assetModelId }}">{{ $assetModel->assetModelName }}</option>
+                          @endif
+                      @endforeach
+                    </select>
                   </div>
                   <div class="form-group">
-                    <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
-                    {{-- <p>{{ $user->location->company->companyName }} - {{ $user->location->locationName }}</p> --}}
+                    <label for="assetProcurementDeviceQuantity" class="form-label">Quantity <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control @error('assetProcurementDeviceQuantity') is-invalid @enderror" id="assetProcurementDeviceQuantity" name="assetProcurementDeviceQuantity" value="{{ old('assetProcurementDeviceQuantity') }}">
+                    @error('assetProcurementDeviceQuantity') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
-                  <div class="form-group">
-                    <label for="departementId" class="form-label">Departement <span class="text-danger">*</span></label>
-                    {{-- <p>{{ $user->departement->departementName }}</p> --}}
-                  </div>
-                  <div class="form-group">
-                    <label for="positionId" class="form-label">Position <span class="text-danger">*</span></label>
-                    {{-- <p>{{ $user->position->positionName }}</p> --}}
-                </div>
-                <div class="form-group">
-                    <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
-                    {{-- @if ($user->managerId)
-                      @php
-                        $manager = User::where('userId', $user->managerId)->first()
-                      @endphp
-                      <p>{{ $manager->employeeName }}</p>
-                    @else
-                      <p></p>                  
-                    @endif --}}
+                  <div class="d-grid gap-2">
+                    <button type="submit" name="submit" class="btn btn-primary btn-block">Add</button>
                   </div>
                   <hr>
-             
-                  <div class="form-group">
-                    <label for="assetProcurementDate" class="form-label">Procurement Date <span class="text-danger">*</span></label>
-                    <p>{{ $assetProcurement->assetProcurementDate }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="assetProcurementNote" class="form-label">Procurement Note <span class="text-danger">*</span></label>
-                    <p>{{ $assetProcurement->assetProcurementNote }}</p>
-                  </div>
-
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th style="width: 20px">No</th>
+                        <th>Device</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @php
+                          $i = 1;
+                      @endphp
+                      @foreach ($assetProcurementDevices as $assetProcurementDevice)
+                      <tr>
+                        <td>{{ $i++ }}</td>
+                        <td>{{ $assetProcurementDevice->assetModel->assetModelName }}</td>
+                        <td>{{ $assetProcurementDevice->assetProcurementDeviceQuantity }}</td>
+                        <td><button class="btn btn-danger btn-sm">Delete</button></td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+                </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <a href="/assetModel" class="btn btn-default">Cancel</a>
-                  <button type="submit" id="submit" name="submit" class="btn btn-primary float-right">Save</button>
+                  <a href="/assetProcurement" class="btn btn-primary float-right">Save</a>
+                  {{-- <button type="submit" name="submit" class="btn btn-primary float-right">Save</button> --}}
                 </div>
                 <!-- /.card-footer -->
               </form>
             </div>
             <!-- /.card -->
+        </div>
+        <div class="col-xl-6">
+          <!-- Horizontal Form -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Form Create Position</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form action="/position/store" method="POST" class="form-horizontal">
+              @csrf
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="positionName" class="form-label">Position Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control @error('positionName') is-invalid @enderror" id="positionName" name="positionName" value="{{ old('positionName') }}">
+                  @error('positionName') 
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <a href="/position" class="btn btn-default">Cancel</a>
+                <button type="submit" name="submit" class="btn btn-primary float-right">Save</button>
+              </div>
+              <!-- /.card-footer -->
+            </form>
+          </div>
+          <!-- /.card -->
         </div>
       </div>
 

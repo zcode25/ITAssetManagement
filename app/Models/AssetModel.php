@@ -20,4 +20,8 @@ class AssetModel extends Model
     public function manufacture(){
         return $this->belongsTo(Manufacture::class, 'manufactureId');
     }
+
+    public function assetProcurementDevice(){
+        return $this->hasMany(AssetProcurement::class, 'assetModelId', 'assetModelId');
+    }
 }

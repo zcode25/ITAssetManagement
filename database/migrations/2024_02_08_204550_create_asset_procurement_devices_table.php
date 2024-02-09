@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('asset_procurement_devices', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('assetProcurementDeviceId')->primary();
+            $table->uuid('assetProcurementId');
+            $table->foreign('assetProcurementId')->references('assetProcurementId')->on('asset_procurements')->onUpdate('cascade')->onDelete('restrict');
+            $table->char('assetModelId', 8);
+            $table->foreign('assetModelId')->references('assetModelId')->on('asset_models')->onUpdate('cascade')->onDelete('restrict');
+            $table->integer('assetProcurementDeviceQuantity');
             $table->timestamps();
         });
     }

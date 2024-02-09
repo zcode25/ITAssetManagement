@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\AssetProcurement as ModelsAssetProcurement;
+use App\Models\AssetProcurementDevice;
 
 class AssetProcurement extends Controller
 {
@@ -44,15 +45,36 @@ class AssetProcurement extends Controller
         $validatedData['assetProcurementId'] = Str::uuid();
         $validatedData['assetProcurementNumber'] = IdGenerator::generate(['table' => 'asset_procurements', 'field' => 'assetProcurementId', 'length' => 20, 'prefix' => 'IT/PO/' . date('d/m/y/')]);
         $validatedData['assetProcurementStatus'] = 'Need Approval';
-
+        
         ModelsAssetProcurement::create($validatedData);
 
-        return redirect('/assetProcurement/device'. '/' . $validatedData['assetProcurementId'])->with('success', 'Data saved successfully');
+        return redirect('/assetProcurement/device'. '/' . $validatedData['assetProcurementId']);
     }
 
     public function device(ModelsAssetProcurement $assetProcurement) {
         return view('assetProcurement.device', [
+            'assetModels' => AssetModel::all(),
             'assetProcurement' => ModelsAssetProcurement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first(),
+            'assetProcurementDevices' => AssetProcurementDevice::where('assetProcurementId', $assetProcurement->assetProcurementId)->get()
         ]);
+    }
+
+    public function deviceStore(ModelsAssetProcurement  $assetProcurement, Request $request) {
+        // dd($request);
+        $validatedData = $request->validate([
+            'assetModelId' => 'required',
+            'assetProcurementDeviceQuantity' => 'required',
+        ]);
+
+        $validatedData['assetProcurementDeviceId'] = Str::uuid();
+        $validatedData['assetProcurementId'] = $assetProcurement->assetProcurementId;
+
+        AssetProcurementDevice::create($validatedData);
+
+        return back();
+    }
+
+    public function deviceSave() {
+        return redirect('/assetProcurement')->with('success', 'Data saved successfully');
     }
 }

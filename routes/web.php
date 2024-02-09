@@ -147,6 +147,8 @@ Route::controller(AssetProcurement::class)->group(function () {
     Route::get('/assetProcurement/create', 'create')->name('assetProcurement.create')->middleware('auth');
     Route::post('/assetProcurement/store', 'store')->name('assetProcurement.store')->middleware('auth');
     Route::get('/assetProcurement/device/{assetProcurement:assetProcurementId}', 'device')->name('assetProcurement.device')->middleware('auth');
+    Route::post('/assetProcurement/device/store/{assetProcurement:assetProcurementId}', 'deviceStore')->name('assetProcurement.deviceStore')->middleware('auth');
+    Route::post('/assetProcurement/device/save', 'deviceSave')->name('assetProcurement.deviceSave')->middleware('auth');
 });
 
 // Route::controller(AssetProcurementDevice::class)->group(function() {
