@@ -40,7 +40,7 @@ class UserController extends Controller
             'locationId' => 'required',
             'departementId' => 'required',
             'positionId' => 'required',
-            'managerId' => 'max:100',
+            'managerId' => 'required|max:100',
             'employeeName' => 'required|max:100',
             'employeePhone' => 'required|max:15',
             'employeeEmail' => 'required|max:100',
@@ -169,7 +169,7 @@ class UserController extends Controller
             'locations' => Location::all(),
             'departements' => Departement::all(),
             'positions' => Position::all(),
-            'managers' => User::where('positionId', 'PST00001')->where('userId', '!=', $user->userId)->get(),
+            'managers' => User::where('positionId', 'PST00001')->get(),
         ]);
     }
 
@@ -179,7 +179,7 @@ class UserController extends Controller
             'locationId' => 'required',
             'departementId' => 'required',
             'positionId' => 'required',
-            'managerId' => 'max:100',
+            'managerId' => 'required|max:100',
             'employeeName' => 'required|max:100',
             'employeePhone' => 'required|max:15',
             'employeeEmail' => 'required|max:100',

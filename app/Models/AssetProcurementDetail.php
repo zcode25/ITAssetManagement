@@ -5,16 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AssetProcurement extends Model
+class AssetProcurementDetail extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $primaryKey = 'assetProcurementId';
+    protected $primaryKey = 'assetProcurementDetailId';
     public $incrementing = false;
     protected $keyType = 'string';
-
-    public function user(){
-        return $this->belongsTo(User::class, 'userId');
-    }
-    
 }

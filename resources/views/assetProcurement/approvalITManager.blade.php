@@ -2,6 +2,7 @@
 @section('container')
 @php
 use App\Models\User;
+$ITManager = User::where('userId', auth()->user()->userId)->first();
 $jsonData = auth()->user()->permission;
 $menuData = json_decode($jsonData, true);
 @endphp
@@ -18,7 +19,7 @@ $menuData = json_decode($jsonData, true);
           <div class="col-sm-6">
             <div class="float-sm-right">
               {{-- @if($menuData['assetModelCreate']['index']) --}}
-              <a href="/assetProcurement/create" class="btn btn-primary">Create New</a>
+              {{-- <a href="/assetProcurement/create" class="btn btn-primary">Create New</a> --}}
               {{-- @endif --}}
             </div>
           </div>
@@ -32,7 +33,7 @@ $menuData = json_decode($jsonData, true);
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Asset Procurement List</h3>
+          <h3 class="card-title">Approval Manager List</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -56,6 +57,7 @@ $menuData = json_decode($jsonData, true);
             </tr>
             </thead>
             <tbody>
+            @if ($ITManager->departementId == 'DPT00001' && $ITManager->positionId == 'PST00001')
             @foreach ($assetProcurements as $assetProcurement)
             <tr>
               <td>{{ $assetProcurement->assetProcurementNumber }}</td>
@@ -75,10 +77,10 @@ $menuData = json_decode($jsonData, true);
               <td class="py-0 align-middle">
                 <div class="btn-group btn-group-sm">
                   {{-- @if($menuData['assetModelEdit']['index']) --}}
-                  @if($assetProcurement->assetProcurementStatus == 'Approval Required')
-                    <a href="/assetProcurement/device/{{ $assetProcurement->assetProcurementId }}" class="btn btn-success">Device</a>
+                  @if($assetProcurement->assetProcurementStatus == 'Approved by Manager')
+                  <a href="/assetProcurementApprovalITManager/approval/{{ $assetProcurement->assetProcurementId }}" class="btn btn-success">Approval</a>
                   @endif
-                  <a href="/assetProcurement/detail/{{ $assetProcurement->assetProcurementId }}" class="btn btn-primary">Detail</a>
+                  <a href="/assetProcurementApprovalITManager/detail/{{ $assetProcurement->assetProcurementId }}" class="btn btn-primary">Detail</a>
                   {{-- @endif --}}
                   {{-- @if($menuData['assetModelDelete']['index']) --}}
                   {{-- <a href="/assetModel/destroy/{{ $assetProcurement->assetProcurementId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a> --}}
@@ -88,6 +90,8 @@ $menuData = json_decode($jsonData, true);
               {{-- @endif --}}
             </tr>    
             @endforeach
+            @endif
+            
             </tfoot>
           </table>
         </div>

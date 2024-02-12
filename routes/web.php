@@ -143,14 +143,22 @@ Route::controller(AssetModelController::class)->group(function() {
 });
 
 Route::controller(AssetProcurement::class)->group(function () {
+    Route::get('/assetProcurementAll', 'all')->name('assetProcurementAll.all')->middleware('auth');
+    Route::get('/assetProcurementAll/detail/{assetProcurement:assetProcurementId}', 'detail')->name('assetProcurementDetail.detail')->middleware('auth');
     Route::get('/assetProcurement', 'index')->name('assetProcurement.index')->middleware('auth');
+    Route::get('/assetProcurement/detail/{assetProcurement:assetProcurementId}', 'detail')->name('assetProcurementDetail.detail')->middleware('auth');
     Route::get('/assetProcurement/create', 'create')->name('assetProcurement.create')->middleware('auth');
     Route::post('/assetProcurement/store', 'store')->name('assetProcurement.store')->middleware('auth');
     Route::get('/assetProcurement/device/{assetProcurement:assetProcurementId}', 'device')->name('assetProcurement.device')->middleware('auth');
     Route::post('/assetProcurement/device/store/{assetProcurement:assetProcurementId}', 'deviceStore')->name('assetProcurement.deviceStore')->middleware('auth');
-    Route::post('/assetProcurement/device/save', 'deviceSave')->name('assetProcurement.deviceSave')->middleware('auth');
+    Route::delete('/assetProcurement/device/destroy/{assetProcurementDevice:assetProcurementDeviceId}', 'deviceDestroy')->name('assetProcurement.deviceDestroy')->middleware('auth');
+    Route::get('/assetProcurement/save', 'deviceSave');
+    Route::get('/assetProcurementApprovalManager', 'approvalManager')->name('assetProcurementApprovalManager.index')->middleware('auth');
+    Route::get('/assetProcurementApprovalManager/approval/{assetProcurement:assetProcurementId}', 'approvalManagerCreate')->name('assetProcurementApprovalManager.create')->middleware('auth');
+    Route::post('/assetProcurementApprovalManager/approval/store/{assetProcurement:assetProcurementId}', 'approvalManagerStore')->name('assetProcurement.approvalManagerStore')->middleware('auth');
+    Route::get('/assetProcurementApprovalManager/detail/{assetProcurement:assetProcurementId}', 'detail')->name('assetProcurementDetail.detail')->middleware('auth');
+    Route::get('/assetProcurementApprovalITManager', 'approvalITManager')->name('/assetProcurementApprovalITManager.index')->middleware('auth');
+    Route::get('/assetProcurementApprovalITManager/approval/{assetProcurement:assetProcurementId}', 'approvalITManagerCreate')->name('assetProcurementApprovalITManager.create')->middleware('auth');
+    Route::post('/assetProcurementApprovalITManager/approval/store/{assetProcurement:assetProcurementId}', 'approvalITManagerStore')->name('assetProcurement.approvalITManagerStore')->middleware('auth');
+    Route::get('/assetProcurementApprovalITManager/detail/{assetProcurement:assetProcurementId}', 'detail')->name('assetProcurementDetail.detail')->middleware('auth');
 });
-
-// Route::controller(AssetProcurementDevice::class)->group(function() {
-//     Route::get('/assetProcurementDevice/create', 'create')->name('assetProcurementDevice.create')->middleware('auth');
-// });

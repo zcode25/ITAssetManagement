@@ -28,5 +28,8 @@ class User extends Authenticatable
         return $this->belongsTo(Position::class, 'positionId');
     }
 
+    public function assetProcurement(){
+        return $this->hasMany(AssetProcurement::class, 'userId', 'userId');
+    }
     
 }

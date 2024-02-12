@@ -61,13 +61,13 @@ $menuData = json_decode($jsonData, true);
               <td>{{ $accessoryModel->accessoryModelNumber }}</td>
               <td>{{ $accessoryModel->category->categoryName }}</td>
               <td>{{ $accessoryModel->manufacture->manufactureName }}</td>
-              @if($menuData['accessoryEdit']['index'] || $menuData['accessoryDelete']['index'])
+              @if($menuData['accessoryModelEdit']['index'] || $menuData['accessoryModelDelete']['index'])
               <td class="py-0 align-middle">
                 <div class="btn-group btn-group-sm">
-                  @if($menuData['accessoryEdit']['index'])
+                  @if($menuData['accessoryModelEdit']['index'])
                   <a href="/accessoryModel/edit/{{ $accessoryModel->accessoryModelId }}" class="btn btn-primary">Edit</a>
                   @endif
-                  @if($menuData['accessoryDelete']['index'])
+                  @if($menuData['accessoryModelDelete']['index'])
                   <a href="/accessoryModel/destroy/{{ $accessoryModel->accessoryModelId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
                   @endif
                 </div>

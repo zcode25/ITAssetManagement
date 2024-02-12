@@ -44,23 +44,58 @@
         </li>
         @endif
         {{-- @if($menuData['supplierIndex']['index'] || $menuData['manufactureIndex']['index'] || $menuData['categoryIndex']['index'] || $menuData['accessoryModelIndex']['index'] || $menuData['assetModelIndex']['index']) --}}
-        <li class="nav-item {{ Request::is('procurement*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ Request::is('procurement*') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('assetProcurement*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::is('assetProcurement*') ? 'active' : '' }}">
             <i class="nav-icon fas fa fa-barcode"></i>
             <p>
               Asset
               <i class="right fas fa fa-angle-left"></i>
             </p>
-          </a>
+          </a>          
           <ul class="nav nav-treeview">
-            {{-- @if($menuData['assetModelIndex']['index']) --}}
-            <li class="nav-item">
-              <a href="/assetProcurement" class="nav-link {{ Request::is('assetProcurement*') ? 'active' : '' }}">
-                <i class="far fa fa-store nav-icon"></i>
-                <p>Procurement</p>
+            <li class="nav-item {{ Request::is('assetProcurement*') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link {{ Request::is('assetProcurement*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa fa-truck"></i>
+                <p>
+                  Asset Procurement
+                  <i class="right fas fa fa-angle-left"></i>
+                </p>
               </a>
+              <ul class="nav nav-treeview">
+                {{-- @if($menuData['assetModelIndex']['index']) --}}
+                <li class="nav-item">
+                  <a href="/assetProcurementAll" class="nav-link {{ Request::is('assetProcurementAll*') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>All Procurement</p>
+                  </a>
+                </li>
+                {{-- @endif --}}
+                {{-- @if($menuData['assetModelIndex']['index']) --}}
+                <li class="nav-item">
+                  <a href="/assetProcurement" class="nav-link {{ Request::is('assetProcurement', 'assetProcurement/create', 'assetProcurement/device*', 'assetProcurement/detail*') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>My Procurement</p>
+                  </a>
+                </li>
+                {{-- @endif --}}
+                {{-- @if($menuData['assetModelIndex']['index']) --}}
+                <li class="nav-item">
+                  <a href="/assetProcurementApprovalManager" class="nav-link {{ Request::is('assetProcurementApprovalManager*') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Approval Manager</p>
+                  </a>
+                </li>
+                {{-- @endif --}}
+                {{-- @if($menuData['assetModelIndex']['index']) --}}
+                <li class="nav-item">
+                  <a href="/assetProcurementApprovalITManager" class="nav-link {{ Request::is('assetProcurementApprovalITManager*') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Approval IT Manager</p>
+                  </a>
+                </li>
+                {{-- @endif --}}
+              </ul>
             </li>
-            {{-- @endif --}}
           </ul>
         </li>
         {{-- @endif --}}

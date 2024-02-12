@@ -18,7 +18,7 @@ $menuData = json_decode($jsonData, true);
           <div class="col-sm-6">
             <div class="float-sm-right">
               {{-- @if($menuData['assetModelCreate']['index']) --}}
-              <a href="/assetProcurement/create" class="btn btn-primary">Create New</a>
+              {{-- <a href="/assetProcurement/create" class="btn btn-primary">Create New</a> --}}
               {{-- @endif --}}
             </div>
           </div>
@@ -73,17 +73,17 @@ $menuData = json_decode($jsonData, true);
               <td>{{ $assetProcurement->assetProcurementStatus }}</td>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
               <td class="py-0 align-middle">
-                <div class="btn-group btn-group-sm">
+                  {{-- @if($assetProcurement->assetProcurementStatus == 'Approval Required') --}}
+                  <div class="btn-group btn-group-sm">
+                  <a href="/assetProcurementAll/detail/{{ $assetProcurement->assetProcurementId }}" class="btn btn-primary">Detail</a>
                   {{-- @if($menuData['assetModelEdit']['index']) --}}
-                  @if($assetProcurement->assetProcurementStatus == 'Approval Required')
-                    <a href="/assetProcurement/device/{{ $assetProcurement->assetProcurementId }}" class="btn btn-success">Device</a>
-                  @endif
-                  <a href="/assetProcurement/detail/{{ $assetProcurement->assetProcurementId }}" class="btn btn-primary">Detail</a>
+                  {{-- <a href="/assetProcurement/device/{{ $assetProcurement->assetProcurementId }}" class="btn btn-primary">Edit</a> --}}
                   {{-- @endif --}}
                   {{-- @if($menuData['assetModelDelete']['index']) --}}
                   {{-- <a href="/assetModel/destroy/{{ $assetProcurement->assetProcurementId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a> --}}
                   {{-- @endif --}}
                 </div>
+                {{-- @endif --}}
               </td>
               {{-- @endif --}}
             </tr>    

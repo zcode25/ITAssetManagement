@@ -1,5 +1,8 @@
 @extends('layouts/main')
 @section('container')
+@php
+    use App\Models\User;
+@endphp
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -8,7 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Create Position</h1>
+            <h1>Create Procurement</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -18,10 +21,64 @@
     <section class="content">
       <div class="row">
         <div class="col-xl-6">
+          <!-- Horizontal Form -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Form Create Procurement</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form action="/assetProcurementApprovalManager/approval/store/{{ $assetProcurement->assetProcurementId }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+              @csrf
+              <div class="card-body">
+                {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
+                <div class="form-group">
+                  <label for="employeeName" class="form-label">Name <span class="text-danger">*</span></label>
+                  <p>{{ $assetProcurement->user->employeeName }}</p>
+                </div>
+                <div class="form-group">
+                  <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
+                  <p>{{ $assetProcurement->user->location->company->companyName }} - {{ $assetProcurement->user->location->locationName }}</p>
+                </div>
+                <div class="form-group">
+                  <label for="departementId" class="form-label">Departement <span class="text-danger">*</span></label>
+                  <p>{{ $assetProcurement->user->departement->departementName }}</p>
+                </div>
+                <div class="form-group">
+                  <label for="positionId" class="form-label">Position <span class="text-danger">*</span></label>
+                  <p>{{ $assetProcurement->user->position->positionName }}</p>
+                </div>
+                <div class="form-group">
+                  <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
+                  @if ($assetProcurement->user->managerId)
+                    @php
+                      $manager = User::where('userId', $assetProcurement->user->managerId)->first()
+                    @endphp
+                    <p>{{ $manager->employeeName }}</p>
+                  @else
+                    <p></p>                  
+                  @endif
+                </div>
+                <hr>
+                <div class="form-group">
+                  <label for="assetProcurementDate" class="form-label">Procurement Date <span class="text-danger">*</span></label>
+                  <p>{{ $assetProcurement->assetProcurementDate }}</p>
+                </div>
+                <div class="form-group">
+                  <label for="assetProcurementNote" class="form-label">Procurement Note <span class="text-danger">*</span></label>
+                  <p>{{ $assetProcurement->assetProcurementNote }}</p>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <div class="col-xl-6">
             <!-- Horizontal Form -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Form Create Position</h3>
+                <h3 class="card-title">Form Create Procurement</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -51,11 +108,16 @@
                     <button type="submit" name="submit" class="btn btn-primary btn-block">Add</button>
                   </div>
                   <hr>
+                  {{-- @php
+                      dd(count($assetProcurementDevices))
+                  @endphp --}}
+                  @if (count($assetProcurementDevices) > 0)
                   <table class="table table-sm">
                     <thead>
                       <tr>
-                        <th style="width: 20px">No</th>
+                        <th>No</th>
                         <th>Device</th>
+                        <th>Device Image</th>
                         <th>Quantity</th>
                         <th>Action</th>
                       </tr>
@@ -68,51 +130,28 @@
                       <tr>
                         <td>{{ $i++ }}</td>
                         <td>{{ $assetProcurementDevice->assetModel->assetModelName }}</td>
+                        <td><img src="{{ asset('storage/' .  $assetProcurementDevice->assetModel->assetModelImage ) }}" alt="{{ $assetProcurementDevice->assetModel->assetModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
                         <td>{{ $assetProcurementDevice->assetProcurementDeviceQuantity }}</td>
-                        <td><button class="btn btn-danger btn-sm">Delete</button></td>
+                        <td>
+                          <a href="/assetProcurement/device/destroy/{{ $assetProcurementDevice->assetProcurementDeviceId }}" class="btn btn-outline-danger btn-sm" data-confirm-delete="true">Delete</a>
+                        </td>
                       </tr>
                       @endforeach
                     </tbody>
                   </table>
+                  @else
+                    <p class="text-center">No data available in table</p>
+                  @endif
+                  
                 </div>
+              </form>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <a href="/assetProcurement" class="btn btn-primary float-right">Save</a>
-                  {{-- <button type="submit" name="submit" class="btn btn-primary float-right">Save</button> --}}
+                  <a href="/assetProcurement/save" class="btn btn-success float-right">Save</a>
                 </div>
                 <!-- /.card-footer -->
-              </form>
             </div>
             <!-- /.card -->
-        </div>
-        <div class="col-xl-6">
-          <!-- Horizontal Form -->
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Form Create Position</h3>
-            </div>
-            <!-- /.card-header -->
-            <!-- form start -->
-            <form action="/position/store" method="POST" class="form-horizontal">
-              @csrf
-              <div class="card-body">
-                <div class="form-group">
-                  <label for="positionName" class="form-label">Position Name <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control @error('positionName') is-invalid @enderror" id="positionName" name="positionName" value="{{ old('positionName') }}">
-                  @error('positionName') 
-                    <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-                </div>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer">
-                <a href="/position" class="btn btn-default">Cancel</a>
-                <button type="submit" name="submit" class="btn btn-primary float-right">Save</button>
-              </div>
-              <!-- /.card-footer -->
-            </form>
-          </div>
-          <!-- /.card -->
         </div>
       </div>
 
