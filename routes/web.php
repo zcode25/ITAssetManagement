@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\AssetPurchase;
 use App\Http\Controllers\CompanyController as ControllersCompanyController;
 use App\Http\Controllers\DashboardController as ControllersDashboardController;
 use App\Http\Controllers\LocationController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Main\AccessoryModelController;
 use App\Http\Controllers\Main\AssetModelController;
 use App\Http\Controllers\Main\AssetProcurement;
 use App\Http\Controllers\Main\AssetProcurementDevice;
+use App\Http\Controllers\Main\AssetPurchase as MainAssetPurchase;
 use App\Http\Controllers\Main\CategoryController;
 use App\Http\Controllers\Main\CompanyController as MainCompanyController;
 use App\Http\Controllers\Main\DashboardController as MainDashboardController;
@@ -161,4 +163,11 @@ Route::controller(AssetProcurement::class)->group(function () {
     Route::get('/assetProcurementApprovalITManager/approval/{assetProcurement:assetProcurementId}', 'approvalITManagerCreate')->name('assetProcurementApprovalITManager.create')->middleware('auth');
     Route::post('/assetProcurementApprovalITManager/approval/store/{assetProcurement:assetProcurementId}', 'approvalITManagerStore')->name('assetProcurement.approvalITManagerStore')->middleware('auth');
     Route::get('/assetProcurementApprovalITManager/detail/{assetProcurement:assetProcurementId}', 'detail')->name('assetProcurementDetail.detail')->middleware('auth');
+});
+
+Route::controller(MainAssetPurchase::class)->group(function() {
+    Route::get('/assetPurchase', 'index')->name('assetPurchase.index')->middleware('auth');
+    Route::get('/assetPurchase/detail/{assetProcurement:assetProcurementId}', 'detail')->name('assetPurchase.detail')->middleware('auth');
+    Route::get('/assetPurchase/purchase/{assetProcurement:assetProcurementId}', 'purchase')->name('assetPurchase.purchase')->middleware('auth');
+    Route::post('/assetPurchase/purchase/store/{assetProcurement:assetProcurementId}', 'purchaseStore')->name('assetPurchase.purchaseStore')->middleware('auth');
 });

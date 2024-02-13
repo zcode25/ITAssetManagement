@@ -168,13 +168,6 @@ class AssetProcurement extends Controller
             ],
         ];
         return view('assetProcurement.approvalITManagerCreate', [
-            'user' => User::where('userId', auth()->user()->userId)->first(),
-            'departements' => Departement::all(),
-            'locations' => Location::all(),
-            'positions' => Position::all(),
-            'assetModels' => AssetModel::all(),
-            'categories' => Category::where('categoryType', 'Asset')->get(),
-            'manufactures' => Manufacture::all(),
             'assetProcurement' => ModelsAssetProcurement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first(),
             'assetProcurementDevices' => AssetProcurementDevice::where('assetProcurementId', $assetProcurement->assetProcurementId)->get(),
             'types' => $types

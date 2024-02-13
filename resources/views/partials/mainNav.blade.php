@@ -44,8 +44,8 @@
         </li>
         @endif
         {{-- @if($menuData['supplierIndex']['index'] || $menuData['manufactureIndex']['index'] || $menuData['categoryIndex']['index'] || $menuData['accessoryModelIndex']['index'] || $menuData['assetModelIndex']['index']) --}}
-        <li class="nav-item {{ Request::is('assetProcurement*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ Request::is('assetProcurement*') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('assetProcurement*', 'assetPurchase*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::is('assetProcurement*', 'assetPurchase*') ? 'active' : '' }}">
             <i class="nav-icon fas fa fa-barcode"></i>
             <p>
               Asset
@@ -53,8 +53,8 @@
             </p>
           </a>          
           <ul class="nav nav-treeview">
-            <li class="nav-item {{ Request::is('assetProcurement*') ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link {{ Request::is('assetProcurement*') ? 'active' : '' }}">
+            <li class="nav-item {{ Request::is('assetProcurement*', 'assetPurchase*') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link {{ Request::is('assetProcurement*', 'assetPurchase*') ? 'active' : '' }}">
                 <i class="nav-icon fas fa fa-truck"></i>
                 <p>
                   Asset Procurement
@@ -91,6 +91,14 @@
                   <a href="/assetProcurementApprovalITManager" class="nav-link {{ Request::is('assetProcurementApprovalITManager*') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Approval IT Manager</p>
+                  </a>
+                </li>
+                {{-- @endif --}}
+                {{-- @if($menuData['assetModelIndex']['index']) --}}
+                <li class="nav-item">
+                  <a href="/assetPurchase" class="nav-link {{ Request::is('assetPurchase*') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Asset Purchase</p>
                   </a>
                 </li>
                 {{-- @endif --}}

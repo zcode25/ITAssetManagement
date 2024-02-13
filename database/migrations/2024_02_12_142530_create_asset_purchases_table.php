@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('asset_procurement_devices', function (Blueprint $table) {
-            $table->uuid('assetProcurementDeviceId')->primary();
+        Schema::create('asset_purchases', function (Blueprint $table) {
+            $table->uuid('assetPurchaseId')->primary();
+            $table->char('assetPurchaseNumber', 20)->unique();
             $table->uuid('assetProcurementId');
             $table->foreign('assetProcurementId')->references('assetProcurementId')->on('asset_procurements')->onUpdate('cascade')->onDelete('restrict');
-            $table->char('assetModelId', 8);
-            $table->foreign('assetModelId')->references('assetModelId')->on('asset_models')->onUpdate('cascade')->onDelete('restrict');
-            $table->integer('assetProcurementDeviceQuantity');
-            $table->integer('assetProcurementDevicePrice')->nullable();
-            $table->integer('assetProcurementDeviceTotal')->nullable();
+            $table->char('supplierId', 8);
+            $table->foreign('supplierId')->references('supplierId')->on('suppliers')->onUpdate('cascade')->onDelete('restrict');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('asset_procurement_devices');
+        Schema::dropIfExists('asset_purchases');
     }
 };
