@@ -12,4 +12,8 @@ class AssetPurchase extends Model
     protected $primaryKey = 'assetPurchaseId';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    public function supplier(){
+        return $this->belongsTo(Supplier::class, 'supplierId');
+    }
 }

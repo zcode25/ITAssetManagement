@@ -170,4 +170,6 @@ Route::controller(MainAssetPurchase::class)->group(function() {
     Route::get('/assetPurchase/detail/{assetProcurement:assetProcurementId}', 'detail')->name('assetPurchase.detail')->middleware('auth');
     Route::get('/assetPurchase/purchase/{assetProcurement:assetProcurementId}', 'purchase')->name('assetPurchase.purchase')->middleware('auth');
     Route::post('/assetPurchase/purchase/store/{assetProcurement:assetProcurementId}', 'purchaseStore')->name('assetPurchase.purchaseStore')->middleware('auth');
+    Route::get('/assetPurchase/deployment/{assetProcurement:assetProcurementId}', 'deployment')->name('assetPurchase.deployment')->middleware('auth');
+    Route::post('/assetPurchase/deployment/store/{assetProcurement:assetProcurementId}', 'deploymentStore')->name('assetPurchase.deploymentStore')->middleware('auth');
 });

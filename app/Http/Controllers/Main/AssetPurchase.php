@@ -71,6 +71,46 @@ class AssetPurchase extends Controller
 
         ModelsAssetPurchase::Create($validatedData);
 
+        AssetProcurement::where('assetProcurementId', $assetProcurement->assetProcurementId)->update([
+            'assetProcurementStatus' => 'Asset Purchase',
+        ]);
+
+        $assetProcurementDetail['assetProcurementDetailId'] =  Str::uuid();
+        $assetProcurementDetail['assetProcurementId'] =  $assetProcurement->assetProcurementId;
+        $assetProcurementDetail['assetProcurementDetailDate'] = date('Y-m-d');
+        $assetProcurementDetail['assetProcurementDetailStatus'] = 'Asset Purchase';
+        
+        AssetProcurementDetail::Create($assetProcurementDetail);
+
         return redirect('/assetPurchase')->with('success', 'Data updated successfully');
+    }
+
+    public function deployment(AssetProcurement $assetProcurement) {
+        return view('assetPurchase.deployment', [
+            'assetProcurement' => AssetProcurement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first(),
+            'assetProcurementDevices' => AssetProcurementDevice::where('assetProcurementId', $assetProcurement->assetProcurementId)->get(),
+            'assetPurchase' => ModelsAssetPurchase::where('assetProcurementId', $assetProcurement->assetProcurementId)->first(),
+            'suppliers' => Supplier::all() 
+        ]);
+    }
+
+    public function deploymentStore(AssetProcurement $assetProcurement, Request $request) {
+        $validatedData = $request->validate([
+            'assetProcurementStatus' => 'required',
+        ]);
+
+        AssetProcurement::where('assetProcurementId', $assetProcurement->assetProcurementId)->update([
+            'assetProcurementStatus' => $validatedData['assetProcurementStatus'],
+        ]);
+
+        $assetProcurementDetail['assetProcurementDetailId'] =  Str::uuid();
+        $assetProcurementDetail['assetProcurementId'] =  $assetProcurement->assetProcurementId;
+        $assetProcurementDetail['assetProcurementDetailDate'] = date('Y-m-d');
+        $assetProcurementDetail['assetProcurementDetailStatus'] = $validatedData['assetProcurementStatus'];
+        
+        AssetProcurementDetail::Create($assetProcurementDetail);
+
+        return redirect('/assetPurchase')->with('success', 'Data updated successfully');
+    
     }
 }

@@ -74,18 +74,19 @@
                     @foreach($assetProcurementDetails as $assetProcurementDetail)
                     <!-- timeline item -->
                     <div>
-                      <i class="fas fa-envelope bg-blue"></i>
+                      <i class="fas fa-circle bg-blue"></i>
                       <div class="timeline-item">
                         <span class="time">{{ $assetProcurementDetail->assetProcurementDetailDate }}</span>
-                        <h3 class="timeline-header"><a href="#">{{ $assetProcurement->assetProcurementNumber }}</a> {{ $assetProcurementDetail->assetProcurementDetailStatus }}</h3>
-      
-                        <div class="timeline-body">{{ $assetProcurementDetail->assetProcurementDetailNote }}</div>
+                        <h3 class="timeline-header"><a href="">{{ $assetProcurement->assetProcurementNumber }}</a> {{ $assetProcurementDetail->assetProcurementDetailStatus }}</h3>
+                        @if($assetProcurementDetail->assetProcurementDetailNote)
+                          <div class="timeline-body">{{ $assetProcurementDetail->assetProcurementDetailNote }}</div>
+                        @endif
                       </div>
                     </div>
                     <!-- END timeline item -->
                     @endforeach
                     <div>
-                      <i class="fas fa-clock bg-gray"></i>
+                      <i class="fas fa-circle bg-green"></i>
                     </div>
                   </div>
                 </div>

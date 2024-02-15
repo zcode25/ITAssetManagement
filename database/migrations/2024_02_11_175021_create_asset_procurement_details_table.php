@@ -15,9 +15,9 @@ return new class extends Migration
             $table->uuid('assetProcurementDetailId')->primary();
             $table->uuid('assetProcurementId');
             $table->foreign('assetProcurementId')->references('assetProcurementId')->on('asset_procurements')->onUpdate('cascade')->onDelete('restrict');
-            $table->text('assetProcurementDetailNote');
+            $table->text('assetProcurementDetailNote')->nullable();
             $table->date('assetProcurementDetailDate');
-            $table->enum('assetProcurementDetailStatus', ['Approval Required', 'Approved by Manager', 'Rejected by Manager', 'Approved by IT Manager', 'Rejected by IT Manager']);
+            $table->enum('assetProcurementDetailStatus', ['Approval Required', 'Approved by Manager', 'Rejected by Manager', 'Approved by IT Manager', 'Rejected by IT Manager', 'Asset Purchase', 'Asset Deployment']);
             $table->timestamps();
         });
     }

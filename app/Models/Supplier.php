@@ -12,4 +12,8 @@ class Supplier extends Model
     protected $primaryKey = 'supplierId';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    public function assetPurchase(){
+        return $this->hasMany(AssetPurchase::class, 'supplierId', 'supplierId');
+    }
 }

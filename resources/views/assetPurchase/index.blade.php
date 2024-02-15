@@ -75,9 +75,13 @@ $menuData = json_decode($jsonData, true);
               <td class="py-0 align-middle">
                 <div class="btn-group btn-group-sm">
                   {{-- @if($menuData['assetModelEdit']['index']) --}}
-                  {{-- @if($assetProcurement->assetProcurementStatus == 'Approval Required') --}}
-                  <a href="/assetPurchase/purchase/{{ $assetProcurement->assetProcurementId }}" class="btn btn-success">Purchase</a>
-                  {{-- @endif --}}
+                  @if($assetProcurement->assetProcurementStatus == 'Approved by IT Manager')
+                    <a href="/assetPurchase/purchase/{{ $assetProcurement->assetProcurementId }}" class="btn btn-success">Purchase</a>
+                  @endif
+                  @if($assetProcurement->assetProcurementStatus == 'Asset Purchase')
+                    <a href="/assetPurchase/deployment/{{ $assetProcurement->assetProcurementId }}" class="btn btn-success">Deploy</a>
+                  @endif
+                  
                   <a href="/assetPurchase/detail/{{ $assetProcurement->assetProcurementId }}" class="btn btn-primary">Detail</a>
                   {{-- @endif --}}
                   {{-- @if($menuData['assetModelDelete']['index']) --}}

@@ -28,7 +28,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="/assetPurchase/purchase/store/{{ $assetProcurement->assetProcurementId }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+              <form action="/assetPurchase/deployment/store/{{ $assetProcurement->assetProcurementId }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                 @csrf
                 <div class="card-body">
                   {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
@@ -62,29 +62,15 @@
                   <hr>
                   <div class="form-group">
                     <label for="assetPurchaseDate" class="form-label">Purchase Date <span class="text-danger">*</span></label>
-                    <input type="date" class="form-control @error('assetPurchaseDate') is-invalid @enderror" id="assetPurchaseDate" name="assetPurchaseDate" value="{{ old('assetPurchaseDate') }}">
-                    @error('assetPurchaseDate') 
-                      <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <p>{{ $assetPurchase->assetPurchaseDate }}</p>
                   </div>
                   <div class="form-group">
                     <label for="assetPurchaseNumber" class="form-label">Purchase Number <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control @error('assetPurchaseNumber') is-invalid @enderror" id="assetPurchaseNumber" name="assetPurchaseNumber" value="{{ old('assetPurchaseNumber') }}">
-                    @error('assetPurchaseNumber') 
-                      <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <p>{{ $assetPurchase->assetPurchaseNumber }}</p>
                   </div>
                   <div class="form-group">
                     <label for="supplierId" class="form-label">Supplier <span class="text-danger">*</span></label>
-                    <select class="form-control select2bs4" id="supplierId" name="supplierId">
-                      @foreach ($suppliers as $supplier)
-                          @if (old('supplierId') == $supplier->supplierId)
-                              <option value="{{ $supplier->supplierId }}" selected>{{ $supplier->supplierName }}</option>
-                              @else
-                              <option value="{{ $supplier->supplierId }}">{{ $supplier->supplierName }}</option>
-                          @endif
-                      @endforeach
-                    </select>
+                    <p>{{ $assetPurchase->supplier->supplierName }}</p>
                   </div>
                   <hr>
                   <div class="card">
@@ -100,9 +86,10 @@
                         <tr>
                           <th>No</th>
                           <th>Device</th>
-                          <th>Device Image</th>
+                          <th>Image</th>
                           <th>Quantity</th>
                           <th>Price / Unit</th>
+                          <th>Total</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -115,13 +102,8 @@
                           <td>{{ $assetProcurementDevice->assetModel->assetModelName }}</td>
                           <td><img src="{{ asset('storage/' .  $assetProcurementDevice->assetModel->assetModelImage ) }}" alt="{{ $assetProcurementDevice->assetModel->assetModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
                           <td>{{ $assetProcurementDevice->assetProcurementDeviceQuantity }}</td>
-                          <td>
-                            <input type="hidden" class="form-control" id="assetProcurementDeviceId-{{ $i }}" name="assetProcurementDeviceId-{{ $i }}" value="{{ $assetProcurementDevice->assetProcurementDeviceId }}">
-                            <input type="number" class="form-control @error('assetProcurementDevicePrice-{{ $i }}') is-invalid @enderror" id="assetProcurementDevicePrice-{{ $i }}" name="assetProcurementDevicePrice-{{ $i }}" value="{{ old('assetProcurementDevicePrice'. $i ) }}">
-                            @error('assetProcurementDevicePrice-{{ $i }}') 
-                              <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                          </td>
+                          <td>{{ $assetProcurementDevice->assetProcurementDevicePrice }}</td>
+                          <td>{{ $assetProcurementDevice->assetProcurementDeviceTotal }}</td>
                         </tr>
                         @php
                             $i++;
@@ -138,7 +120,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <a href="/assetPurchase" class="btn btn-default">Cancel</a>
-                  <button type="submit" name="submit" class="btn btn-primary float-right">Save</button>
+                  <button type="submit" name="assetProcurementStatus" value="Asset Deployment" class="btn btn-success float-right">Asset Deployment</button>
                 </div>
                 <!-- /.card-footer -->
               </form>

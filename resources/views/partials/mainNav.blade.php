@@ -105,6 +105,27 @@
               </ul>
             </li>
           </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item {{ Request::is() ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link {{ Request::is() ? 'active' : '' }}">
+                <i class="nav-icon fas fa fa-truck"></i>
+                <p>
+                  Asset Procurement
+                  <i class="right fas fa fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                {{-- @if($menuData['assetModelIndex']['index']) --}}
+                <li class="nav-item">
+                  <a href="/assetDeploymentAll" class="nav-link {{ Request::is('assetDeploymentAll*') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>All Deployment</p>
+                  </a>
+                </li>
+                {{-- @endif --}}
+              </ul>
+            </li>
+          </ul>
         </li>
         {{-- @endif --}}
         @if($menuData['supplierIndex']['index'] || $menuData['manufactureIndex']['index'] || $menuData['categoryIndex']['index'] || $menuData['accessoryModelIndex']['index'] || $menuData['assetModelIndex']['index'])
