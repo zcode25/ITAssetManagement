@@ -111,17 +111,21 @@
                         @endphp
                         @foreach ($assetProcurementDevices as $assetProcurementDevice)
                         <tr>
-                          <td>{{ $i++ }}</td>
+                          <td>{{ $i }}</td>
                           <td>{{ $assetProcurementDevice->assetModel->assetModelName }}</td>
                           <td><img src="{{ asset('storage/' .  $assetProcurementDevice->assetModel->assetModelImage ) }}" alt="{{ $assetProcurementDevice->assetModel->assetModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
                           <td>{{ $assetProcurementDevice->assetProcurementDeviceQuantity }}</td>
                           <td>
-                            <input type="number" class="form-control @error('assetProcurementDevicePrice') is-invalid @enderror" id="assetProcurementDevicePrice" name="assetProcurementDevicePrice" value="{{ old('assetProcurementDevicePrice') }}">
-                            @error('assetProcurementDevicePrice') 
+                            <input type="hidden" class="form-control" id="assetProcurementDeviceId-{{ $i }}" name="assetProcurementDeviceId-{{ $i }}" value="{{ $assetProcurementDevice->assetProcurementDeviceId }}">
+                            <input type="number" class="form-control @error('assetProcurementDevicePrice-{{ $i }}') is-invalid @enderror" id="assetProcurementDevicePrice-{{ $i }}" name="assetProcurementDevicePrice-{{ $i }}" value="{{ old('assetProcurementDevicePrice'. $i ) }}">
+                            @error('assetProcurementDevicePrice-{{ $i }}') 
                               <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                           </td>
                         </tr>
+                        @php
+                            $i++;
+                        @endphp
                         @endforeach
                       </tbody>
                     </table>

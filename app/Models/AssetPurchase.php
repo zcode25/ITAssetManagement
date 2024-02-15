@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class AssetPurchase extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+    protected $primaryKey = 'assetPurchaseId';
+    public $incrementing = false;
+    protected $keyType = 'string';
 }

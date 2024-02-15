@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('asset_purchases', function (Blueprint $table) {
             $table->uuid('assetPurchaseId')->primary();
             $table->char('assetPurchaseNumber', 20)->unique();
+            $table->date('assetPurchaseDate');
             $table->uuid('assetProcurementId');
             $table->foreign('assetProcurementId')->references('assetProcurementId')->on('asset_procurements')->onUpdate('cascade')->onDelete('restrict');
             $table->char('supplierId', 8);
