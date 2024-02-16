@@ -108,9 +108,9 @@
           <ul class="nav nav-treeview">
             <li class="nav-item {{ Request::is() ? 'menu-open' : '' }}">
               <a href="#" class="nav-link {{ Request::is() ? 'active' : '' }}">
-                <i class="nav-icon fas fa fa-truck"></i>
+                <i class="nav-icon fas fa fa-wifi"></i>
                 <p>
-                  Asset Procurement
+                  Asset Deployment
                   <i class="right fas fa fa-angle-left"></i>
                 </p>
               </a>
