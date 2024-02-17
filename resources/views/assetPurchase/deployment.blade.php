@@ -99,6 +99,7 @@
                         @foreach ($assetProcurementDevices as $assetProcurementDevice)
                         <tr>
                           <td>{{ $i }}</td>
+                          {{-- <input type="hidden" class="form-control" id="assetModelId-{{ $i }}" name="assetModelId-{{ $i }}" value="{{ $assetProcurementDevice->assetModel->assetModelId }}"> --}}
                           <td>{{ $assetProcurementDevice->assetModel->assetModelName }}</td>
                           <td><img src="{{ asset('storage/' .  $assetProcurementDevice->assetModel->assetModelImage ) }}" alt="{{ $assetProcurementDevice->assetModel->assetModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
                           <td>{{ $assetProcurementDevice->assetProcurementDeviceQuantity }}</td>

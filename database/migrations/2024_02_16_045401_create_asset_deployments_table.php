@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('assetProcurementId')->references('assetProcurementId')->on('asset_procurements')->onUpdate('cascade')->onDelete('restrict');
             $table->char('assetModelId', 8);
             $table->foreign('assetModelId')->references('assetModelId')->on('asset_models')->onUpdate('cascade')->onDelete('restrict');
-            $table->char('assetSerialNumber', 30)->unique();
+            $table->char('assetSerialNumber', 50)->nullable()->unique();
             $table->timestamps();
         });
     }
