@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('asset_deployments', function (Blueprint $table) {
             $table->uuid('assetDeploymentId')->primary();
+            $table->char('assetDeploymentNumber', 20)->unique();
+            $table->date('assetDeploymentDate');
             $table->uuid('assetProcurementId');
             $table->foreign('assetProcurementId')->references('assetProcurementId')->on('asset_procurements')->onUpdate('cascade')->onDelete('restrict');
             $table->char('assetModelId', 8);
             $table->foreign('assetModelId')->references('assetModelId')->on('asset_models')->onUpdate('cascade')->onDelete('restrict');
             $table->char('assetSerialNumber', 50)->nullable()->unique();
+            $table->enum('assetDeploymentStatus', ['Pre Deployment', 'Ready Deployment']);
             $table->timestamps();
         });
     }

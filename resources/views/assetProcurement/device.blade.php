@@ -52,7 +52,7 @@
                   <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
                   @if ($assetProcurement->user->managerId)
                     @php
-                      $manager = User::where('userId', $assetProcurement->user->managerId)->first()
+                      $manager = User::where('userId', $assetProcurement->managerId)->first()
                     @endphp
                     <p>{{ $manager->employeeName }}</p>
                   @else

@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Main;
 use App\Models\Supplier;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\AssetDeployment;
 use App\Models\AssetProcurement;
 use App\Http\Controllers\Controller;
-use App\Models\AssetDeployment;
+use App\Models\AssetDeploymentDetail;
 use App\Models\AssetProcurementDetail;
 use App\Models\AssetProcurementDevice;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\AssetPurchase as ModelsAssetPurchase;
 
 class AssetPurchase extends Controller
@@ -42,7 +44,7 @@ class AssetPurchase extends Controller
         // dd($request);
         $validatedData = $request->validate([
             'assetPurchaseDate' => 'required',
-            'assetPurchaseNumber' => 'required',
+            'assetPurchaseNumber' => 'required|unique:asset_purchases',
             'supplierId' => 'required',
         ]);
 
@@ -98,6 +100,7 @@ class AssetPurchase extends Controller
     public function deploymentStore(AssetProcurement $assetProcurement, Request $request) {
         $validatedData = $request->validate([
             'assetProcurementStatus' => 'required',
+            'assetDeploymentDate' => 'required',
         ]);
 
         $devices = AssetProcurementDevice::where('assetProcurementId', $assetProcurement->assetProcurementId)->get();
@@ -106,46 +109,33 @@ class AssetPurchase extends Controller
             $qty = $device->assetProcurementDeviceQuantity;
             for ($i=0; $i < $qty; $i++) { 
                 $assetDeployment['assetDeploymentId'] =  Str::uuid();
+                $assetDeployment['assetDeploymentNumber'] = IdGenerator::generate(['table' => 'asset_deployments', 'field' => 'assetDeploymentNumber', 'length' => 20, 'prefix' => 'IT/DO/'. date('d/m/y', strtotime($validatedData['assetDeploymentDate'])) . '/']);
+                $assetDeployment['assetDeploymentDate'] =  $validatedData['assetDeploymentDate'];
                 $assetDeployment['assetProcurementId'] =  $device->assetProcurementId;
                 $assetDeployment['assetModelId'] =  $device->assetModelId;
-                $assetDeployment['assetSerialNumber'] =  '-';
+                $assetDeployment['assetDeploymentStatus'] =  'Pre Deployment';
                 AssetDeployment::Create($assetDeployment);
-
+                
+                $assetDeploymentDetail['assetDeploymentDetailId'] = Str::uuid();
+                $assetDeploymentDetail['assetDeploymentId'] = $assetDeployment['assetDeploymentNumber'];
+                $assetDeploymentDetail['assetDeploymentDetailDate'] = date('Y-m-d');
+                $assetDeploymentDetail['assetDeploymentDetailStatus'] = 'Pre Deployment';
+                AssetDeploymentDetail::Create($assetDeployment);
             }
         }
 
+        AssetProcurement::where('assetProcurementId', $assetProcurement->assetProcurementId)->update([
+            'assetProcurementStatus' => $validatedData['assetProcurementStatus'],
+        ]);
+
+        $assetProcurementDetail['assetProcurementDetailId'] =  Str::uuid();
+        $assetProcurementDetail['assetProcurementId'] =  $assetProcurement->assetProcurementId;
+        $assetProcurementDetail['assetProcurementDetailDate'] = date('Y-m-d');
+        $assetProcurementDetail['assetProcurementDetailStatus'] = $validatedData['assetProcurementStatus'];
         
+        AssetProcurementDetail::Create($assetProcurementDetail);
 
-
-        // AssetProcurement::where('assetProcurementId', $assetProcurement->assetProcurementId)->update([
-        //     'assetProcurementStatus' => $validatedData['assetProcurementStatus'],
-        // ]);
-
-        // $assetProcurementDetail['assetProcurementDetailId'] =  Str::uuid();
-        // $assetProcurementDetail['assetProcurementId'] =  $assetProcurement->assetProcurementId;
-        // $assetProcurementDetail['assetProcurementDetailDate'] = date('Y-m-d');
-        // $assetProcurementDetail['assetProcurementDetailStatus'] = $validatedData['assetProcurementStatus'];
         
-        // AssetProcurementDetail::Create($assetProcurementDetail);
-
-        // foreach ($request->all() as $key => $value) {
-        //     if (strpos($key, 'assetModelId-') === 0) {
-        //         $index = str_replace('assetModelId-', '', $key);
-        //         $deviceId = $value;
-                
-        //         $device = AssetProcurementDevice::where('assetProcurementDeviceId', $deviceId)->first();
-        //         $deviceQuantity = $device->assetProcurementDeviceQuantity;
-                
-        //         dd($deviceQuantity);
-
-        //         $assetDeployment['assetDeploymentId'] =  Str::uuid();
-        //         $assetDeployment['assetProcurementId'] =  $assetProcurement->assetProcurementId;
-        //         $assetDeployment['assetProcurementId'] =  $assetProcurement->assetProcurementId;
-        //     }
-        // }
-        
-        
-
         return redirect('/assetPurchase')->with('success', 'Data updated successfully');
     
     }

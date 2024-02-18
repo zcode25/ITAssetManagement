@@ -12,4 +12,12 @@ class AssetDeployment extends Model
     protected $primaryKey = 'assetDeploymentId';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    public function assetProcurement(){
+        return $this->belongsTo(AssetProcurement::class, 'assetProcurementId');
+    }
+
+    public function assetModel(){
+        return $this->belongsTo(AssetModel::class, 'assetModelId');
+    }
 }

@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a href="index3.html" class="brand-link">
+  <a href="" class="brand-link">
     {{-- <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> --}}
     <span class="brand-text font-weight-light">IT Asset Management</span>
   </a>
@@ -44,14 +44,15 @@
         </li>
         @endif
         {{-- @if($menuData['supplierIndex']['index'] || $menuData['manufactureIndex']['index'] || $menuData['categoryIndex']['index'] || $menuData['accessoryModelIndex']['index'] || $menuData['assetModelIndex']['index']) --}}
-        <li class="nav-item {{ Request::is('assetProcurement*', 'assetPurchase*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ Request::is('assetProcurement*', 'assetPurchase*') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('assetProcurement*', 'assetPurchase*', 'assetDeployment*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::is('assetProcurement*', 'assetPurchase*', 'assetDeployment*') ? 'active' : '' }}">
             <i class="nav-icon fas fa fa-barcode"></i>
             <p>
               Asset
               <i class="right fas fa fa-angle-left"></i>
             </p>
-          </a>          
+          </a>
+          @if($menuData['assetProcurementAllIndex']['index'] || $menuData['assetProcurementIndex']['index'] || $menuData['assetProcurementApprovalManager']['index'] || $menuData['assetProcurementApprovalITManager']['index'] || $menuData['assetPurchaseIndex']['index'])      
           <ul class="nav nav-treeview">
             <li class="nav-item {{ Request::is('assetProcurement*', 'assetPurchase*') ? 'menu-open' : '' }}">
               <a href="#" class="nav-link {{ Request::is('assetProcurement*', 'assetPurchase*') ? 'active' : '' }}">
@@ -62,52 +63,53 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                {{-- @if($menuData['assetModelIndex']['index']) --}}
+                @if($menuData['assetProcurementAllIndex']['index'])
                 <li class="nav-item">
                   <a href="/assetProcurementAll" class="nav-link {{ Request::is('assetProcurementAll*') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>All Procurement</p>
                   </a>
                 </li>
-                {{-- @endif --}}
-                {{-- @if($menuData['assetModelIndex']['index']) --}}
+                @endif
+                @if($menuData['assetProcurementIndex']['index'])
                 <li class="nav-item">
                   <a href="/assetProcurement" class="nav-link {{ Request::is('assetProcurement', 'assetProcurement/create', 'assetProcurement/device*', 'assetProcurement/detail*') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>My Procurement</p>
                   </a>
                 </li>
-                {{-- @endif --}}
-                {{-- @if($menuData['assetModelIndex']['index']) --}}
+                @endif
+                @if($menuData['assetProcurementApprovalManager']['index'])
                 <li class="nav-item">
                   <a href="/assetProcurementApprovalManager" class="nav-link {{ Request::is('assetProcurementApprovalManager*') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Approval Manager</p>
                   </a>
                 </li>
-                {{-- @endif --}}
-                {{-- @if($menuData['assetModelIndex']['index']) --}}
+                @endif
+                @if($menuData['assetProcurementApprovalITManager']['index'])
                 <li class="nav-item">
                   <a href="/assetProcurementApprovalITManager" class="nav-link {{ Request::is('assetProcurementApprovalITManager*') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Approval IT Manager</p>
                   </a>
                 </li>
-                {{-- @endif --}}
-                {{-- @if($menuData['assetModelIndex']['index']) --}}
+                @endif
+                @if($menuData['assetPurchaseIndex']['index'])
                 <li class="nav-item">
                   <a href="/assetPurchase" class="nav-link {{ Request::is('assetPurchase*') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Asset Purchase</p>
                   </a>
                 </li>
-                {{-- @endif --}}
+                @endif
               </ul>
             </li>
           </ul>
+          @endif
           <ul class="nav nav-treeview">
-            <li class="nav-item {{ Request::is() ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link {{ Request::is() ? 'active' : '' }}">
+            <li class="nav-item {{ Request::is('assetDeployment*') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link {{ Request::is('assetDeployment*') ? 'active' : '' }}">
                 <i class="nav-icon fas fa fa-wifi"></i>
                 <p>
                   Asset Deployment

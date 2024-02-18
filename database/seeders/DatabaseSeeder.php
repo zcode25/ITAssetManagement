@@ -121,7 +121,13 @@ class DatabaseSeeder extends Seeder
             "assetModelIndex":{"index":true}, 
             "assetModelCreate":{"index":true},
             "assetModelEdit":{"index":true},
-            "assetModelDelete":{"index":true}
+            "assetModelDelete":{"index":true},
+            "assetProcurementAllIndex":{"index":true},
+            "assetProcurementIndex":{"index":true},
+            "assetProcurementApprovalManager":{"index":true},
+            "assetProcurementApprovalITManager":{"index":true},
+            "assetPurchaseIndex":{"index":true},
+            "assetDeploymentAllIndex":{"index":true}
         }';
 
         // $permission = str_replace(array("\r", "\n", ' '), '', $permission);
@@ -186,7 +192,13 @@ class DatabaseSeeder extends Seeder
             "assetModelIndex":{"index":false}, 
             "assetModelCreate":{"index":false},
             "assetModelEdit":{"index":false},
-            "assetModelDelete":{"index":false}
+            "assetModelDelete":{"index":false},
+            "assetProcurementAllIndex":{"index":false},
+            "assetProcurementIndex":{"index":false},
+            "assetProcurementApprovalManager":{"index":false},
+            "assetProcurementApprovalITManager":{"index":false},
+            "assetPurchaseIndex":{"index":false},
+            "assetDeploymentAllIndex":{"index":false}
         }';
 
         User::create([
@@ -247,7 +259,13 @@ class DatabaseSeeder extends Seeder
             "assetModelIndex":{"index":false}, 
             "assetModelCreate":{"index":false},
             "assetModelEdit":{"index":false},
-            "assetModelDelete":{"index":false}
+            "assetModelDelete":{"index":false},
+            "assetProcurementAllIndex":{"index":false},
+            "assetProcurementIndex":{"index":false},
+            "assetProcurementApprovalManager":{"index":false},
+            "assetProcurementApprovalITManager":{"index":false},
+            "assetPurchaseIndex":{"index":false},
+            "assetDeploymentAllIndex":{"index":false}
         }';
 
         User::create([

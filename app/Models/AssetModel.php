@@ -22,6 +22,10 @@ class AssetModel extends Model
     }
 
     public function assetProcurementDevice(){
-        return $this->hasMany(AssetProcurement::class, 'assetModelId', 'assetModelId');
+        return $this->hasMany(AssetProcurementDevice::class, 'assetModelId', 'assetModelId');
+    }
+
+    public function assetDeployment(){
+        return $this->hasMany(AssetDeployment::class, 'assetModelId', 'assetModelId');
     }
 }

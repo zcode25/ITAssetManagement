@@ -915,6 +915,104 @@
                       </table>
                     </div>
                   </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Asset Procurement</h3>
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <table class="table table-sm">
+                        <thead>
+                          <tr>
+                            <th style="width: 40%">Permission</th>
+                            <th>Grant</th>
+                            <th>Deny</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>All Procurement</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetProcurementAllIndex1" name="assetProcurementAllIndex" value="true" @if ($menuData['assetProcurementAllIndex']['index'] == true) checked @endif>
+                                    <label for="assetProcurementAllIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetProcurementAllIndex2" name="assetProcurementAllIndex" value="false" @if ($menuData['assetProcurementAllIndex']['index'] == false) checked @endif>
+                                    <label for="assetProcurementAllIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>My Procurement</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetProcurementIndex1" name="assetProcurementIndex" value="true" @if ($menuData['assetProcurementIndex']['index'] == true) checked @endif>
+                                    <label for="assetProcurementIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetProcurementIndex2" name="assetProcurementIndex" value="false" @if ($menuData['assetProcurementIndex']['index'] == false) checked @endif>
+                                    <label for="assetProcurementIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Approval Manager</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetProcurementApprovalManager1" name="assetProcurementApprovalManager" value="true" @if ($menuData['assetProcurementApprovalManager']['index'] == true) checked @endif>
+                                    <label for="assetProcurementApprovalManager1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetProcurementApprovalManager2" name="assetProcurementApprovalManager" value="false" @if ($menuData['assetProcurementApprovalManager']['index'] == false) checked @endif> 
+                                    <label for="assetProcurementApprovalManager2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Approval IT Manager</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetProcurementApprovalITManager1" name="assetProcurementApprovalITManager" value="true" @if ($menuData['assetProcurementApprovalITManager']['index'] == true) checked @endif>
+                                    <label for="assetProcurementApprovalITManager1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetProcurementApprovalITManager2" name="assetProcurementApprovalITManager" value="false" @if ($menuData['assetProcurementApprovalITManager']['index'] == false) checked @endif>
+                                    <label for="assetProcurementApprovalITManager2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Asset Purchase</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetPurchaseIndex1" name="assetPurchaseIndex" value="true" @if ($menuData['assetPurchaseIndex']['index'] == true) checked @endif>
+                                    <label for="assetPurchaseIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetPurchaseIndex2" name="assetPurchaseIndex" value="false" @if ($menuData['assetPurchaseIndex']['index'] == false) checked @endif>
+                                    <label for="assetPurchaseIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                   
                 </div>
                 <!-- /.card-body -->

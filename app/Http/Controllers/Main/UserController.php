@@ -94,7 +94,13 @@ class UserController extends Controller
             "assetyModelIndex":{"index":false}, 
             "assetyModelCreate":{"index":false},
             "assetyModelEdit":{"index":false},
-            "assetyModelDelete":{"index":false}
+            "assetyModelDelete":{"index":false},
+            "assetProcurementAllIndex":{"index":false},
+            "assetProcurementIndex":{"index":false},
+            "assetProcurementApprovalManager":{"index":false},
+            "assetProcurementApprovalITManager":{"index":false},
+            "assetPurchaseIndex":{"index":false},
+            "assetDeploymentAllIndex":{"index":false}
         }';
 
         User::create($validatedData);
@@ -110,7 +116,7 @@ class UserController extends Controller
 
     public function permissionCreate(Request $request, User $user) {
 
-        // dd($request);
+        // dd($request->dashboardIndex);
 
         $permission = '{
             "dashboardIndex":{"index":'. $request->dashboardIndex .'}, 
@@ -154,7 +160,13 @@ class UserController extends Controller
             "assetModelIndex":{"index":'. $request->assetModelIndex .'}, 
             "assetModelCreate":{"index":'. $request->assetModelCreate .'},
             "assetModelEdit":{"index":'. $request->assetModelEdit .'},
-            "assetModelDelete":{"index":'. $request->assetModelDelete .'}
+            "assetModelDelete":{"index":'. $request->assetModelDelete .'},
+            "assetProcurementAllIndex":{"index":'. $request->assetProcurementAllIndex .'},
+            "assetProcurementIndex":{"index":'. $request->assetProcurementIndex .'},
+            "assetProcurementApprovalManager":{"index":'. $request->assetProcurementApprovalManager .'},
+            "assetProcurementApprovalITManager":{"index":'. $request->assetProcurementApprovalITManager .'},
+            "assetPurchaseIndex":{"index":'. $request->assetPurchaseIndex .'},
+            "assetDeploymentAllIndex":{"index":false}
         }';
 
         User::where('userId', $user->userId)->update(['permission' => $permission]);

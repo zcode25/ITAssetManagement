@@ -73,6 +73,14 @@
                     <p>{{ $assetPurchase->supplier->supplierName }}</p>
                   </div>
                   <hr>
+                  <div class="form-group">
+                    <label for="assetDeploymentDate" class="form-label">Deployment Date <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control @error('assetDeploymentDate') is-invalid @enderror" id="assetDeploymentDate" name="assetDeploymentDate" value="{{ old('assetDeploymentDate') }}">
+                    @error('assetDeploymentDate') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
+                  <hr>
                   <div class="card">
                     <div class="card-header">
                       <h3 class="card-title">Form Create Procurement</h3>

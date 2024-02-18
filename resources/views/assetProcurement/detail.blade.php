@@ -52,7 +52,7 @@
                     <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
                     @if ($assetProcurement->user->managerId)
                       @php
-                        $manager = User::where('userId', $assetProcurement->user->managerId)->first()
+                        $manager = User::where('userId', $assetProcurement->managerId)->first()
                       @endphp
                       <p>{{ $manager->employeeName }}</p>
                     @else
@@ -77,7 +77,7 @@
                       <i class="fas fa-circle bg-blue"></i>
                       <div class="timeline-item">
                         <span class="time">{{ $assetProcurementDetail->assetProcurementDetailDate }}</span>
-                        <h3 class="timeline-header"><a href="">{{ $assetProcurement->assetProcurementNumber }}</a> {{ $assetProcurementDetail->assetProcurementDetailStatus }}</h3>
+                        <h3 class="timeline-header"><span class="text-bold">{{ $assetProcurement->assetProcurementNumber }}</span> - {{ $assetProcurementDetail->assetProcurementDetailStatus }}</h3>
                         @if($assetProcurementDetail->assetProcurementDetailNote)
                           <div class="timeline-body">{{ $assetProcurementDetail->assetProcurementDetailNote }}</div>
                         @endif

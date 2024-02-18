@@ -16,5 +16,9 @@ class AssetProcurement extends Model
     public function user(){
         return $this->belongsTo(User::class, 'userId');
     }
+
+    public function assetDeployment(){
+        return $this->hasMany(AssetDeployment::class, 'assetProcurementId', 'assetProcurementId');
+    }
     
 }

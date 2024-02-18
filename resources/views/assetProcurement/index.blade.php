@@ -63,7 +63,7 @@ $menuData = json_decode($jsonData, true);
               <td>{{ $assetProcurement->user->employeeName }}</td>
               @if ($assetProcurement->user->managerId)
                 @php
-                  $manager = User::where('userId', $assetProcurement->user->managerId)->first()
+                  $manager = User::where('userId', $assetProcurement->managerId)->first()
                 @endphp
                 <td>{{ $manager->employeeName }}</td>
               @else
