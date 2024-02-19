@@ -117,10 +117,10 @@ class AssetPurchase extends Controller
                 AssetDeployment::Create($assetDeployment);
                 
                 $assetDeploymentDetail['assetDeploymentDetailId'] = Str::uuid();
-                $assetDeploymentDetail['assetDeploymentId'] = $assetDeployment['assetDeploymentNumber'];
+                $assetDeploymentDetail['assetDeploymentId'] = $assetDeployment['assetDeploymentId'];
                 $assetDeploymentDetail['assetDeploymentDetailDate'] = date('Y-m-d');
                 $assetDeploymentDetail['assetDeploymentDetailStatus'] = 'Pre Deployment';
-                AssetDeploymentDetail::Create($assetDeployment);
+                AssetDeploymentDetail::Create($assetDeploymentDetail);
             }
         }
 
