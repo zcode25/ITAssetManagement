@@ -17,9 +17,15 @@ class AssetDeployment extends Controller
         ]);
     }
 
-    public function manage(ModelsAssetDeployment $assetDeployment) {
-        return view('assetDeployment.manage', [
+    public function preDeploymentManage(ModelsAssetDeployment $assetDeployment) {
+        return view('assetDeployment.preDeploymentManage', [
             'assetDeployment' => ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->first()
+        ]);
+    }
+
+    public function preDeployment() {
+        return view('assetDeployment.preDeployment', [
+            'assetDeployments' => ModelsAssetDeployment::where('assetDeploymentStatus', 'Pre Deployment')->get(),
         ]);
     }
 }

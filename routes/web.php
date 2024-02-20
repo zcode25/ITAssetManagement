@@ -177,5 +177,6 @@ Route::controller(MainAssetPurchase::class)->group(function() {
 
 Route::controller(AssetDeployment::class)->group(function() {
     Route::get('/assetDeploymentAll', 'all')->name('assetDeploymentAll.all')->middleware('auth');
-    Route::get('/assetDeploymentAll/manage/{assetDeployment:assetDeploymentId}', 'manage')->name('assetDeploymentAll.manage')->middleware('auth');
+    Route::get('/assetDeploymentPre', 'preDeployment')->name('assetDeployment.preDeployment')->middleware('auth');
+    Route::get('/assetDeploymentPre/manage/{assetDeployment:assetDeploymentId}', 'preDeploymentManage')->name('assetDeploymentAll.preDeploymentManage')->middleware('auth');
 });

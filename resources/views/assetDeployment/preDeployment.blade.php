@@ -13,7 +13,7 @@ $menuData = json_decode($jsonData, true);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Asset Procurement</h1>
+            <h1>Asset Deployment</h1>
           </div>
           <div class="col-sm-6">
             <div class="float-sm-right">
@@ -32,7 +32,7 @@ $menuData = json_decode($jsonData, true);
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Asset Procurement List</h3>
+          <h3 class="card-title">Asset Deployment List</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">

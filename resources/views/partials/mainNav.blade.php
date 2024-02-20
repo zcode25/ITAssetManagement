@@ -125,6 +125,14 @@
                   </a>
                 </li>
                 {{-- @endif --}}
+                {{-- @if($menuData['assetModelIndex']['index']) --}}
+                <li class="nav-item">
+                  <a href="/assetDeploymentPre" class="nav-link {{ Request::is('assetDeploymentPre*') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Pre-Deployment</p>
+                  </a>
+                </li>
+                {{-- @endif --}}
               </ul>
             </li>
           </ul>

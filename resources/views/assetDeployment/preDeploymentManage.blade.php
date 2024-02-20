@@ -61,9 +61,28 @@
                         <img src="{{ asset('storage/' .  $assetDeployment->assetModel->assetModelImage ) }}" alt="{{ $assetDeployment->assetModel->assetModelName }}" class="img-responsive" style="max-height: 300px; width: auto;">
                     </div>
                   </div>
-                  
+                  <hr>
+                  <div class="form-group">
+                    <label for="assetDeploymentImage" class="form-label">Deployment Image <span class="text-danger">*</span></label>
+                    <input type="file" class="form-control @error('assetDeploymentImage') is-invalid @enderror" id="assetDeploymentImage" name="assetDeploymentImage" value="{{ old('assetDeploymentImage') }}">
+                    @error('assetDeploymentImage') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
+                  <div class="form-group">
+                    <label for="assetSerialNumber" class="form-label">Serial Number <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control @error('assetSerialNumber') is-invalid @enderror" id="assetSerialNumber" name="assetSerialNumber" value="{{ old('assetSerialNumber') }}">
+                    @error('assetSerialNumber') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
                 </div>
                 <!-- /.card-body -->
+                <div class="card-footer">
+                  <a href="/preDeployment" class="btn btn-default">Cancel</a>
+                  <button type="submit" name="assetDeploymentStatus" value="Ready to Deploy" class="btn btn-success float-right mr-2">Ready to Deploy</button>
+                </div>
+                <!-- /.card-footer -->
               </form>
             </div>
             <!-- /.card -->
@@ -109,6 +128,7 @@
                   </div>
                 </div>
                 <!-- /.card-body -->
+                
               </form>
             </div>
             <!-- /.card -->
