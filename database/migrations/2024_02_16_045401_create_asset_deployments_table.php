@@ -19,9 +19,9 @@ return new class extends Migration
             $table->foreign('assetProcurementId')->references('assetProcurementId')->on('asset_procurements')->onUpdate('cascade')->onDelete('restrict');
             $table->char('assetModelId', 8);
             $table->foreign('assetModelId')->references('assetModelId')->on('asset_models')->onUpdate('cascade')->onDelete('restrict');
-            $table->string('assetDeploymentImage', 100);
+            $table->string('assetDeploymentImage', 100)->nullable();
             $table->char('assetSerialNumber', 50)->nullable()->unique();
-            $table->enum('assetDeploymentStatus', ['Pre Deployment', 'Ready Deployment']);
+            $table->enum('assetDeploymentStatus', ['Pre Deployment', 'Deployment Ready']);
             $table->timestamps();
         });
     }

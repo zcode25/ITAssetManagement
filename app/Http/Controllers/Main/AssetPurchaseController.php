@@ -14,7 +14,7 @@ use App\Models\AssetProcurementDevice;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\AssetPurchase as ModelsAssetPurchase;
 
-class AssetPurchase extends Controller
+class AssetPurchaseController extends Controller
 {
     public function index() {
         return view('assetPurchase.index', [

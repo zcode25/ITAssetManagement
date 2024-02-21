@@ -28,7 +28,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="/assetProcurementApprovalITManager/approval/store/{{ $assetDeployment->assetDeploymentId }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+              <form action="/assetDeploymentPre/manage/store/{{ $assetDeployment->assetDeploymentId }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
@@ -80,7 +80,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <a href="/preDeployment" class="btn btn-default">Cancel</a>
-                  <button type="submit" name="assetDeploymentStatus" value="Ready to Deploy" class="btn btn-success float-right mr-2">Ready to Deploy</button>
+                  <button type="submit" name="assetDeploymentStatus" value="Deployment Ready" class="btn btn-success float-right mr-2">Ready to Deploy</button>
                 </div>
                 <!-- /.card-footer -->
               </form>

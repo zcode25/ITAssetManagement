@@ -17,7 +17,7 @@ use App\Models\AssetProcurement as ModelsAssetProcurement;
 use App\Models\AssetProcurementDetail;
 use App\Models\AssetProcurementDevice;
 
-class AssetProcurement extends Controller
+class AssetProcurementController extends Controller
 {
     
     public function all() {

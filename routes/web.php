@@ -1,18 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\CompanyController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\AssetPurchase;
-use App\Http\Controllers\CompanyController as ControllersCompanyController;
-use App\Http\Controllers\DashboardController as ControllersDashboardController;
-use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Main\AccessoryModelController;
-use App\Http\Controllers\Main\AssetDeployment;
+use App\Http\Controllers\Main\AssetDeploymentController;
 use App\Http\Controllers\Main\AssetModelController;
-use App\Http\Controllers\Main\AssetProcurement;
-use App\Http\Controllers\Main\AssetProcurementDevice;
-use App\Http\Controllers\Main\AssetPurchase as MainAssetPurchase;
+use App\Http\Controllers\Main\AssetProcurementController;
+use App\Http\Controllers\Main\AssetPurchaseController as MainAssetPurchaseController;
 use App\Http\Controllers\Main\CategoryController;
 use App\Http\Controllers\Main\CompanyController as MainCompanyController;
 use App\Http\Controllers\Main\DashboardController as MainDashboardController;
@@ -22,8 +15,6 @@ use App\Http\Controllers\Main\ManufactureController;
 use App\Http\Controllers\Main\PositionController;
 use App\Http\Controllers\Main\SupplierController;
 use App\Http\Controllers\Main\UserController;
-use App\Models\AccessoryModel;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -145,7 +136,7 @@ Route::controller(AssetModelController::class)->group(function() {
     Route::delete('/assetModel/destroy/{assetModel:assetModelId}', 'destroy')->name('assetModel.destroy')->middleware('auth', 'check.menu.access:assetModelDelete');
 });
 
-Route::controller(AssetProcurement::class)->group(function () {
+Route::controller(AssetProcurementController::class)->group(function () {
     Route::get('/assetProcurementAll', 'all')->name('assetProcurementAll.all')->middleware('auth', 'check.menu.access:assetProcurementAllIndex');
     Route::get('/assetProcurementAll/detail/{assetProcurement:assetProcurementId}', 'detail')->name('assetProcurementAllDetail.detail')->middleware('auth', 'check.menu.access:assetProcurementAllIndex');
     Route::get('/assetProcurement', 'index')->name('assetProcurement.index')->middleware('auth', 'check.menu.access:assetProcurementIndex');
@@ -166,7 +157,7 @@ Route::controller(AssetProcurement::class)->group(function () {
     Route::get('/assetProcurementApprovalITManager/detail/{assetProcurement:assetProcurementId}', 'detail')->name('assetProcurementDetail.detail')->middleware('auth', 'check.menu.access:assetProcurementApprovalITManager');
 });
 
-Route::controller(MainAssetPurchase::class)->group(function() {
+Route::controller(MainAssetPurchaseController::class)->group(function() {
     Route::get('/assetPurchase', 'index')->name('assetPurchase.index')->middleware('auth', 'check.menu.access:assetPurchaseIndex');
     Route::get('/assetPurchase/detail/{assetProcurement:assetProcurementId}', 'detail')->name('assetPurchase.detail')->middleware('auth', 'check.menu.access:assetPurchaseIndex');
     Route::get('/assetPurchase/purchase/{assetProcurement:assetProcurementId}', 'purchase')->name('assetPurchase.purchase')->middleware('auth', 'check.menu.access:assetPurchaseIndex');
@@ -175,8 +166,9 @@ Route::controller(MainAssetPurchase::class)->group(function() {
     Route::post('/assetPurchase/deployment/store/{assetProcurement:assetProcurementId}', 'deploymentStore')->name('assetPurchase.deploymentStore')->middleware('auth', 'check.menu.access:assetPurchaseIndex');
 });
 
-Route::controller(AssetDeployment::class)->group(function() {
+Route::controller(AssetDeploymentController::class)->group(function() {
     Route::get('/assetDeploymentAll', 'all')->name('assetDeploymentAll.all')->middleware('auth');
     Route::get('/assetDeploymentPre', 'preDeployment')->name('assetDeployment.preDeployment')->middleware('auth');
     Route::get('/assetDeploymentPre/manage/{assetDeployment:assetDeploymentId}', 'preDeploymentManage')->name('assetDeploymentAll.preDeploymentManage')->middleware('auth');
+    Route::post('/assetDeploymentPre/manage/store/{assetDeployment:assetDeploymentId}', 'preDeploymentManageStore')->name('assetDeploymentAll.preDeploymentManageStore')->middleware('auth');
 });
