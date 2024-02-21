@@ -15,6 +15,10 @@ return new class extends Migration
             $table->uuid('assetDeploymentId')->primary();
             $table->char('assetDeploymentNumber', 20)->unique();
             $table->date('assetDeploymentDate');
+            $table->uuid('userId')->nullable();
+            $table->foreign('userId')->references('userId')->on('users')->onUpdate('cascade')->onDelete('restrict');
+            $table->uuid('locationId')->nullable();
+            $table->foreign('locationId')->references('locationId')->on('locations')->onUpdate('cascade')->onDelete('restrict');
             $table->uuid('assetProcurementId');
             $table->foreign('assetProcurementId')->references('assetProcurementId')->on('asset_procurements')->onUpdate('cascade')->onDelete('restrict');
             $table->char('assetModelId', 8);

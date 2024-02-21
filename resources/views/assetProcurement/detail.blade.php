@@ -74,7 +74,11 @@
                     @foreach($assetProcurementDetails as $assetProcurementDetail)
                     <!-- timeline item -->
                     <div>
-                      <i class="fas fa-circle bg-blue"></i>
+                      @if ($loop->first)
+                        <i class="fas fa-circle bg-success"></i> <!-- Untuk item pertama -->
+                      @else
+                        <i class="fas fa-circle bg-secondary"></i> <!-- Untuk item terakhir -->
+                      @endif
                       <div class="timeline-item">
                         <span class="time">{{ $assetProcurementDetail->assetProcurementDetailDate }}</span>
                         <h3 class="timeline-header"><span class="text-bold">{{ $assetProcurement->assetProcurementNumber }}</span> - {{ $assetProcurementDetail->assetProcurementDetailStatus }}</h3>
@@ -86,7 +90,7 @@
                     <!-- END timeline item -->
                     @endforeach
                     <div>
-                      <i class="fas fa-circle bg-green"></i>
+                      <i class="fas fa-circle bg-secondary"></i>
                     </div>
                   </div>
                 </div>

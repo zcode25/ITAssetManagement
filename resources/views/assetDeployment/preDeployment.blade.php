@@ -46,12 +46,12 @@ $menuData = json_decode($jsonData, true);
             <tr>
               <th>Deployment Number</th>
               <th>Deployment Date</th>
-              <th>Procurement Number</th>
               <th>Device</th>
               <th>Image</th>
               <th>Model No</th>
               <th>Category</th>
               <th>Manufacture</th>
+              <th>Deployment Status</th>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
               <th>Action</th>
               {{-- @endif --}}
@@ -62,12 +62,12 @@ $menuData = json_decode($jsonData, true);
             <tr>
               <td>{{ $assetDeployment->assetDeploymentNumber }}</td>
               <td>{{ $assetDeployment->assetDeploymentDate }}</td>
-              <td><a href="/assetProcurementAll/detail/{{ $assetDeployment->assetProcurementId }}">{{ $assetDeployment->assetProcurement->assetProcurementNumber }}</a></td>
               <td>{{ $assetDeployment->assetModel->assetModelName }}</td>
               <td><img src="{{ asset('storage/' .  $assetDeployment->assetModel->assetModelImage ) }}" alt="{{ $assetDeployment->assetModel->assetModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
               <td>{{ $assetDeployment->assetModel->assetModelNumber }}</td>
               <td>{{ $assetDeployment->assetModel->category->categoryName }}</td>
               <td>{{ $assetDeployment->assetModel->manufacture->manufactureName }}</td>
+              <td>{{ $assetDeployment->assetDeploymentStatus }}</td>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
               <td class="py-0 align-middle">
                   <div class="btn-group btn-group-sm">

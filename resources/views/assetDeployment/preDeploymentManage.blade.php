@@ -91,7 +91,7 @@
             <!-- Horizontal Form -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Form Create Procurement</h3>
+                <h3 class="card-title">Form Procurement</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -99,6 +99,10 @@
                 @csrf
                 <div class="card-body">
                   {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
+                  <div class="form-group">
+                    <label for="assetProcurementNumber" class="form-label">Procurement Number <span class="text-danger">*</span></label>
+                    <p>{{ $assetDeployment->assetprocurement->assetProcurementNumber }}</p>
+                  </div>
                   <div class="form-group">
                     <label for="employeeName" class="form-label">Name <span class="text-danger">*</span></label>
                     <p>{{ $assetDeployment->assetProcurement->user->employeeName }}</p>

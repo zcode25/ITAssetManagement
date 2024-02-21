@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('assetDeploymentId')->references('assetDeploymentId')->on('asset_deployments')->onUpdate('cascade')->onDelete('restrict');
             $table->uuid('userId')->nullable();
             $table->foreign('userId')->references('userId')->on('users')->onUpdate('cascade')->onDelete('restrict');
+            $table->uuid('locationId')->nullable();
+            $table->foreign('locationId')->references('locationId')->on('locations')->onUpdate('cascade')->onDelete('restrict');
             $table->date('assetDeploymentDetailDate');
             $table->enum('assetDeploymentDetailStatus', ['Pre Deployment', 'Deployment Ready']);
             $table->timestamps();
