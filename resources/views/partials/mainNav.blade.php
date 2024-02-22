@@ -133,6 +133,14 @@
                   </a>
                 </li>
                 {{-- @endif --}}
+                {{-- @if($menuData['assetModelIndex']['index']) --}}
+                <li class="nav-item">
+                  <a href="/assetDeploymentReady" class="nav-link {{ Request::is('assetDeploymentReady') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Deployment Ready</p>
+                  </a>
+                </li>
+                {{-- @endif --}}
               </ul>
             </li>
           </ul>

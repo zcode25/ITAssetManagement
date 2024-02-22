@@ -13,7 +13,7 @@ $menuData = json_decode($jsonData, true);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Asset Procurement</h1>
+            <h1>Asset Deployment</h1>
           </div>
           <div class="col-sm-6">
             <div class="float-sm-right">
@@ -32,7 +32,7 @@ $menuData = json_decode($jsonData, true);
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Asset Procurement List</h3>
+          <h3 class="card-title">Asset Deployment List</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -41,17 +41,17 @@ $menuData = json_decode($jsonData, true);
           </div>
         </div>
         <div class="card-body">
-          <table id="example1" class="table table-bordered table-hover">
+          <table id="example1" class="table table-hover">
             <thead>
             <tr>
               <th>Deployment Number</th>
               <th>Deployment Date</th>
-              <th>Procurement Number</th>
               <th>Device</th>
               <th>Image</th>
-              <th>Model No</th>
               <th>Category</th>
               <th>Manufacture</th>
+              <th>Location</th>
+              <th>Status</th>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
               <th>Action</th>
               {{-- @endif --}}
@@ -62,16 +62,15 @@ $menuData = json_decode($jsonData, true);
             <tr>
               <td>{{ $assetDeployment->assetDeploymentNumber }}</td>
               <td>{{ $assetDeployment->assetDeploymentDate }}</td>
-              <td><a href="/assetProcurementAll/detail/{{ $assetDeployment->assetProcurementId }}">{{ $assetDeployment->assetProcurement->assetProcurementNumber }}</a></td>
               <td>{{ $assetDeployment->assetModel->assetModelName }}</td>
               <td><img src="{{ asset('storage/' .  $assetDeployment->assetModel->assetModelImage ) }}" alt="{{ $assetDeployment->assetModel->assetModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
-              <td>{{ $assetDeployment->assetModel->assetModelNumber }}</td>
               <td>{{ $assetDeployment->assetModel->category->categoryName }}</td>
               <td>{{ $assetDeployment->assetModel->manufacture->manufactureName }}</td>
+              <td>{{ $assetDeployment->location->company->companyName }} - {{ $assetDeployment->location->locationName }}</td>
+              <td>{{ $assetDeployment->assetDeploymentStatus }}</td>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
               <td class="py-0 align-middle">
                   <div class="btn-group btn-group-sm">
-                    <a href="/assetDeploymentPre/manage/{{ $assetDeployment->assetDeploymentId }}" class="btn btn-success">Manage</a>
                     <a href="/assetProcurement/detail/{{ $assetDeployment->assetProcurementId }}" class="btn btn-primary">Detail</a>
                   </div>
                 {{-- @endif --}}

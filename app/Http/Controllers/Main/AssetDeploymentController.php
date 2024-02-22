@@ -49,4 +49,10 @@ class AssetDeploymentController extends Controller
 
         return redirect('/assetDeploymentPre')->with('success', 'Data updated successfully');
     }
+
+    public function deploymentReady() {
+        return view('assetDeployment.deploymentReady', [
+            'assetDeployments' => ModelsAssetDeployment::where('assetDeploymentStatus', 'Deployment Ready')->get(),
+        ]);
+    }
 }

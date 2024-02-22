@@ -71,7 +71,7 @@ $menuData = json_decode($jsonData, true);
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
               <td class="py-0 align-middle">
                   <div class="btn-group btn-group-sm">
-                    <a href="/assetDeploymentPre/manage/{{ $assetDeployment->assetDeploymentId }}" class="btn btn-success">Manage</a>
+                    <a href="/assetDeploymentReady/checkout/{{ $assetDeployment->assetDeploymentId }}" class="btn btn-success">Checkout</a>
                     <a href="/assetProcurement/detail/{{ $assetDeployment->assetProcurementId }}" class="btn btn-primary">Detail</a>
                   </div>
                 {{-- @endif --}}

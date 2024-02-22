@@ -171,4 +171,5 @@ Route::controller(AssetDeploymentController::class)->group(function() {
     Route::get('/assetDeploymentPre', 'preDeployment')->name('assetDeployment.preDeployment')->middleware('auth');
     Route::get('/assetDeploymentPre/manage/{assetDeployment:assetDeploymentId}', 'preDeploymentManage')->name('assetDeploymentAll.preDeploymentManage')->middleware('auth');
     Route::post('/assetDeploymentPre/manage/store/{assetDeployment:assetDeploymentId}', 'preDeploymentManageStore')->name('assetDeploymentAll.preDeploymentManageStore')->middleware('auth');
+    Route::get('/assetDeploymentReady', 'deploymentReady')->name('assetDeployment.deploymentReady')->middleware('auth');
 });
