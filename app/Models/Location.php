@@ -21,6 +21,14 @@ class Location extends Model
         return $this->hasMany(User::class, 'locationId', 'locationId');
     }
 
+    public function assetDeployment(){
+        return $this->hasMany(AssetDeployment::class, 'locationId', 'locationId');
+    }
+
+    public function assetDeploymentDetail(){
+        return $this->hasMany(AssetDeploymentDetail::class, 'locationId', 'locationId');
+    }
+
     // public function departement(){
     //     return $this->hasMany(Departement::class, 'locationId', 'locationId');
     // }

@@ -78,7 +78,7 @@
             <!-- Horizontal Form -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Form Create Procurement</h3>
+                <h3 class="card-title">Form Asset Device</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->

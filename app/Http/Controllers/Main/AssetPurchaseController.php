@@ -111,6 +111,7 @@ class AssetPurchaseController extends Controller
                 $assetDeployment['assetDeploymentId'] =  Str::uuid();
                 $assetDeployment['assetDeploymentNumber'] = IdGenerator::generate(['table' => 'asset_deployments', 'field' => 'assetDeploymentNumber', 'length' => 20, 'prefix' => 'IT/DO/'. date('d/m/y', strtotime($validatedData['assetDeploymentDate'])) . '/']);
                 $assetDeployment['assetDeploymentDate'] =  $validatedData['assetDeploymentDate'];
+                $assetDeployment['locationId'] = $assetProcurement->user->locationId;
                 $assetDeployment['assetProcurementId'] =  $device->assetProcurementId;
                 $assetDeployment['assetModelId'] =  $device->assetModelId;
                 $assetDeployment['assetDeploymentStatus'] =  'Pre Deployment';
@@ -118,6 +119,7 @@ class AssetPurchaseController extends Controller
                 
                 $assetDeploymentDetail['assetDeploymentDetailId'] = Str::uuid();
                 $assetDeploymentDetail['assetDeploymentId'] = $assetDeployment['assetDeploymentId'];
+                $assetDeploymentDetail['locationId'] = $assetDeployment['locationId'];
                 $assetDeploymentDetail['assetDeploymentDetailDate'] = date('Y-m-d');
                 $assetDeploymentDetail['assetDeploymentDetailStatus'] = 'Pre Deployment';
                 AssetDeploymentDetail::Create($assetDeploymentDetail);

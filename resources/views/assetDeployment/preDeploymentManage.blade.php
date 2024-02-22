@@ -40,6 +40,10 @@
                     <p>{{ $assetDeployment->assetDeploymentDate }}</p>
                   </div>
                   <div class="form-group">
+                    <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
+                    <p>{{ $assetDeployment->location->company->companyName }} - {{ $assetDeployment->location->locationName }}</p>
+                  </div>
+                  <div class="form-group">
                     <label for="assetModelName" class="form-label">Device <span class="text-danger">*</span></label>
                     <p>{{ $assetDeployment->assetModel->assetModelName }}</p>
                   </div>

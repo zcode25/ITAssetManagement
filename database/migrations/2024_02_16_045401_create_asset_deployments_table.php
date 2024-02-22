@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('assetDeploymentDate');
             $table->uuid('userId')->nullable();
             $table->foreign('userId')->references('userId')->on('users')->onUpdate('cascade')->onDelete('restrict');
-            $table->uuid('locationId')->nullable();
+            $table->char('locationId', 8)->nullable();
             $table->foreign('locationId')->references('locationId')->on('locations')->onUpdate('cascade')->onDelete('restrict');
             $table->uuid('assetProcurementId');
             $table->foreign('assetProcurementId')->references('assetProcurementId')->on('asset_procurements')->onUpdate('cascade')->onDelete('restrict');

@@ -51,6 +51,7 @@ $menuData = json_decode($jsonData, true);
               <th>Model No</th>
               <th>Category</th>
               <th>Manufacture</th>
+              <th>Location</th>
               <th>Deployment Status</th>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
               <th>Action</th>
@@ -67,6 +68,7 @@ $menuData = json_decode($jsonData, true);
               <td>{{ $assetDeployment->assetModel->assetModelNumber }}</td>
               <td>{{ $assetDeployment->assetModel->category->categoryName }}</td>
               <td>{{ $assetDeployment->assetModel->manufacture->manufactureName }}</td>
+              <td>{{ $assetDeployment->location->company->companyName }} - {{ $assetDeployment->location->locationName }}</td>
               <td>{{ $assetDeployment->assetDeploymentStatus }}</td>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
               <td class="py-0 align-middle">

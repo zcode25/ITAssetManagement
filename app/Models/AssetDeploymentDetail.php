@@ -12,4 +12,8 @@ class AssetDeploymentDetail extends Model
     protected $primaryKey = 'assetDeploymentDetailId';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    public function location(){
+        return $this->belongsTo(Location::class, 'locationId');
+    }
 }
