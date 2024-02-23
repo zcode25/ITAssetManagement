@@ -29,8 +29,4 @@ class Location extends Model
         return $this->hasMany(AssetDeploymentDetail::class, 'locationId', 'locationId');
     }
 
-    // public function departement(){
-    //     return $this->hasMany(Departement::class, 'locationId', 'locationId');
-    // }
-
 }

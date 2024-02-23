@@ -40,12 +40,12 @@ $menuData = json_decode($jsonData, true);
           </div>
         </div>
         <div class="card-body">
-          <table id="example1" class="table table-bordered table-hover">
+          <table id="example1" class="table table-hover">
             <thead>
             <tr>
               <th>Name</th>
               <th>Image</th>
-              <th>Model No.</th>
+              <th>Model No</th>
               <th>Category</th>
               <th>Manufacture</th>
               @if($menuData['accessoryModelEdit']['index'] || $menuData['accessoryModelDelete']['index'])

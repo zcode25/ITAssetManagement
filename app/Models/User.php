@@ -32,4 +32,8 @@ class User extends Authenticatable
         return $this->hasMany(AssetProcurement::class, 'userId', 'userId');
     }
     
+    public function assetDeploymentDetail(){
+        return $this->hasMany(AssetDeploymentDetail::class, 'userId', 'userId');
+    }
+    
 }

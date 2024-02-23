@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\AssetDeploymentDetail;
 use App\Models\AssetDeployment as ModelsAssetDeployment;
+use App\Models\User;
 
 class AssetDeploymentController extends Controller
 {
@@ -30,7 +31,7 @@ class AssetDeploymentController extends Controller
 
     public function preDeploymentManageStore(ModelsAssetDeployment $assetDeployment, Request $request) {
         $validatedData = $request->validate([
-            'assetSerialNumber' => 'required',
+            'assetSerialNumber' => 'required|unique:asset_deployments',
             'assetDeploymentStatus' => 'required',
             'assetDeploymentImage' => 'required|mimes:png,jpg|max:2048',
         ]);
@@ -53,6 +54,44 @@ class AssetDeploymentController extends Controller
     public function deploymentReady() {
         return view('assetDeployment.deploymentReady', [
             'assetDeployments' => ModelsAssetDeployment::where('assetDeploymentStatus', 'Deployment Ready')->get(),
+        ]);
+    }
+
+    public function deploymentReadyCheckout(ModelsAssetDeployment $assetDeployment) {
+        return view('assetDeployment.deploymentReadyCheckout', [
+            'assetDeployment' => ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->first(),
+            'users'  => User::where('locationId', $assetDeployment->locationId)->get()
+        ]);
+    }
+
+    public function deploymentReadyCheckoutStore(ModelsAssetDeployment $assetDeployment, Request $request) {
+        $validatedData = $request->validate([
+            'assetDeploymentDetailDate' => 'required',
+            'userId' => 'required',
+            'assetDeploymentStatus' => 'required',
+        ]);
+
+        ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->update([
+            'userId' => $validatedData['userId'],
+            'assetDeploymentStatus' => $validatedData['assetDeploymentStatus'],
+        ]);
+
+        $assetDeploymentDetail['assetDeploymentDetailId'] = Str::uuid();
+        $assetDeploymentDetail['assetDeploymentId'] = $assetDeployment['assetDeploymentId'];
+        $assetDeploymentDetail['userId'] = $validatedData['userId'];
+        $assetDeploymentDetail['locationId'] = $assetDeployment['locationId'];
+        $assetDeploymentDetail['assetDeploymentDetailDate'] = $validatedData['assetDeploymentDetailDate'];
+        $assetDeploymentDetail['assetDeploymentDetailStatus'] = $validatedData['assetDeploymentStatus'];
+        AssetDeploymentDetail::Create($assetDeploymentDetail);
+
+        return redirect('/assetDeploymentReady')->with('success', 'Data updated successfully');
+    }
+
+    public function detail(ModelsAssetDeployment $assetDeployment) {
+        return view('assetDeployment.detail', [
+            'assetDeployment' => ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->first(),
+            'users'  => User::where('locationId', $assetDeployment->locationId)->get(),
+            'assetDeploymentDetails' => AssetDeploymentDetail::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->orderBy('created_at', 'desc')->get(),
         ]);
     }
 }

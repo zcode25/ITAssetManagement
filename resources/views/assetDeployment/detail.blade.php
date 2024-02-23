@@ -88,32 +88,31 @@
                     </div>
                   </div>
                   <hr>
-                  <div class="form-group">
-                    <label for="assetDeploymentDetailDate" class="form-label">Checkout Date <span class="text-danger">*</span></label>
-                    <input type="date" class="form-control @error('assetDeploymentDetailDate') is-invalid @enderror" id="assetDeploymentDetailDate" name="assetDeploymentDetailDate" value="{{ old('assetDeploymentDetailDate') }}">
-                    @error('assetDeploymentDetailDate') 
-                      <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                  </div>
-                  <div class="form-group">
-                    <label for="userId" class="form-label">User <span class="text-danger">*</span></label>
-                    <select class="form-control select2bs4" id="userId" name="userId">
-                      @foreach ($users as $user)
-                          @if (old('userId') == $user->userId)
-                              <option value="{{ $user->userId }}" selected>{{ $user->employeeName }}</option>
-                              @else
-                              <option value="{{ $user->userId }}">{{ $user->employeeName }}</option>
-                          @endif
-                      @endforeach
-                    </select>
+                  <hr>
+                  <label for="assetProcurementHistory" class="form-label mb-3">Procurement History <span class="text-danger">*</span></label>
+                  <div class="timeline">
+                    @foreach($assetDeploymentDetails as $assetDeploymentDetail)
+                    <!-- timeline item -->
+                    <div>
+                      @if ($loop->first)
+                        <i class="fas fa-circle bg-success"></i> <!-- Untuk item pertama -->
+                      @else
+                        <i class="fas fa-circle bg-secondary"></i> <!-- Untuk item terakhir -->
+                      @endif
+                      <div class="timeline-item">
+                        <span class="time">{{ $assetDeploymentDetail->assetDeploymentDetailDate }}</span>
+                        <h3 class="timeline-header"><span class="text-bold">{{ $assetDeployment->assetDeploymentNumber }}</span> - {{ $assetDeploymentDetail->assetDeploymentDetailStatus }}</h3>
+                        <div class="timeline-body">{{ $assetDeployment->user->employeeName }}</div>
+                      </div>
+                    </div>
+                    <!-- END timeline item -->
+                    @endforeach
+                    <div>
+                      <i class="fas fa-circle bg-secondary"></i>
+                    </div>
                   </div>
                 </div>
                 <!-- /.card-body -->
-                <div class="card-footer">
-                  <a href="/preDeployment" class="btn btn-default">Cancel</a>
-                  <button type="submit" name="assetDeploymentStatus" value="Checkout" class="btn btn-success float-right mr-2">Checkout</button>
-                </div>
-                <!-- /.card-footer -->
               </form>
             </div>
             <!-- /.card -->
