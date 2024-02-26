@@ -61,6 +61,12 @@
                 <p>My Asset</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="/assetArchive" class="nav-link {{ Request::is('assetArchive*') ? 'active' : '' }}">
+                <i class="far fa fa-barcode nav-icon"></i>
+                <p>Asset Archive</p>
+              </a>
+            </li>
             {{-- @endif --}}
             <li class="nav-item {{ Request::is('assetProcurement*', 'assetPurchase*') ? 'menu-open' : '' }}">
               <a href="#" class="nav-link {{ Request::is('assetProcurement*', 'assetPurchase*') ? 'active' : '' }}">

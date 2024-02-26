@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Main\AccessoryModelController;
+use App\Http\Controllers\Main\AssetArchiveController;
 use App\Http\Controllers\Main\AssetController;
 use App\Http\Controllers\Main\AssetDeploymentController;
 use App\Http\Controllers\Main\AssetModelController;
@@ -187,4 +188,8 @@ Route::controller(AssetDeploymentController::class)->group(function() {
 Route::controller(AssetController::class)->group(function() {
     Route::get('/asset', 'index')->name('asset.index')->middleware('auth');
     Route::get('/asset/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('asset.detail')->middleware('auth');
+});
+
+Route::controller(AssetArchiveController::class)->group(function() {
+    Route::get('/assetArchive', 'index')->name('assetArchive.index')->middleware('auth');
 });
