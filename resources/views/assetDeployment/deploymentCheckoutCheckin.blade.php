@@ -28,7 +28,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="/assetDeploymentReady/checkout/store/{{ $assetDeployment->assetDeploymentId }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+              <form action="/assetDeploymentCheckout/checkin/store/{{ $assetDeployment->assetDeploymentId }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
@@ -59,7 +59,6 @@
                     <label for="assetModelNumber" class="form-label">Model No <span class="text-danger">*</span></label>
                     <p>{{ $assetDeployment->assetModel->assetModelNumber }}</p>
                   </div>
-                  @if ( $assetDeployment->assetDeploymentStatus != 'Pre Deployment' )
                   <div class="form-group">
                     <label for="assetSerialNumber" class="form-label">Serial Number <span class="text-danger">*</span></label>
                     <p>{{ $assetDeployment->assetSerialNumber }}</p>
@@ -67,11 +66,9 @@
                   <div class="form-group">
                     <label for="assetDeploymentlImage" class="form-label">Image <span class="text-danger">*</span></label>
                     <div class="mb-3">
-                      <img src="{{ asset('storage/' .  $assetDeployment->assetDeploymentImage ) }}" alt="{{ $assetDeployment->assetDeploymentNumber }}" class="img-responsive" style="max-height: 300px; width: auto;">
+                        <img src="{{ asset('storage/' .  $assetDeployment->assetDeploymentImage ) }}" alt="{{ $assetDeployment->assetDeploymentNumber }}" class="img-responsive" style="max-height: 300px; width: auto;">
                     </div>
                   </div>
-                  @endif
-                  @if ( $assetDeployment->assetDeploymentStatus != 'Pre Deployment' )
                   <hr>
                   <div class="form-group">
                     <label for="assetDeploymentQR" class="form-label">Asset Deployment QR <span class="text-danger">*</span></label>
@@ -90,48 +87,34 @@
                       </table>
                     </div>
                   </div>
-                  @endif
                   <hr>
-                  <label for="assetProcurementHistory" class="form-label mb-3">Deployment History <span class="text-danger">*</span></label>
-                  <div class="timeline">
-                    @foreach($assetDeploymentDetails as $assetDeploymentDetail)
-                    <!-- timeline item -->
-                    <div>
-                      @if ($loop->first)
-                        <i class="fas fa-circle bg-success"></i> <!-- Untuk item pertama -->
-                      @else
-                        <i class="fas fa-circle bg-secondary"></i> <!-- Untuk item terakhir -->
-                      @endif
-                      <div class="timeline-item">
-                        <span class="time">{{ $assetDeploymentDetail->assetDeploymentDetailDate }}</span>
-                        <h3 class="timeline-header"><span class="text-bold">{{ $assetDeployment->assetDeploymentNumber }}</span> - {{ $assetDeploymentDetail->assetDeploymentDetailStatus }}</h3>
-                        <div class="timeline-body">
-                          <div class="row">
-                            @if ($assetDeploymentDetail->locationId != null)
-                              <div class="col-md-6">
-                                <p class="text-bold mb-2">Location</p>
-                                <p>{{ $assetDeploymentDetail->location->company->companyName }} - {{ $assetDeploymentDetail->location->locationName }}</p>
-                              </div>
-                            @endif
-                            @if ($assetDeploymentDetail->userId != null)
-                              <div class="col-md-6">
-                                <p class="text-bold mb-2">User</p>
-                                <p>{{ $assetDeploymentDetail->user->employeeName }}</p>
-                              </div>
-                            @endif
-                          </div>
-                          
-                        </div>
-                      </div>
-                    </div>
-                    <!-- END timeline item -->
-                    @endforeach
-                    <div>
-                      <i class="fas fa-circle bg-secondary"></i>
-                    </div>
+                  <div class="form-group">
+                    <label for="assetDeploymentDetailDate" class="form-label">Checkin Date <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control @error('assetDeploymentDetailDate') is-invalid @enderror" id="assetDeploymentDetailDate" name="assetDeploymentDetailDate" value="{{ old('assetDeploymentDetailDate') }}">
+                    @error('assetDeploymentDetailDate') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
+                  <div class="form-group">
+                    <label for="assetDeploymentStatus" class="form-label">Status <span class="text-danger">*</span></label>
+                    <select class="form-control select2bs4" id="assetDeploymentStatus" name="assetDeploymentStatus" data-placeholder="Select a Type">
+                      <option value=""></option>
+                      @foreach ($types as $type)
+                          @if (old('assetDeploymentStatus') == $type['type'])
+                              <option value="{{ $type['type'] }}" selected>{{ $type['type'] }}</option>
+                              @else
+                              <option value="{{ $type['type'] }}">{{ $type['type'] }}</option>
+                          @endif
+                      @endforeach
+                    </select>
                   </div>
                 </div>
                 <!-- /.card-body -->
+                <div class="card-footer">
+                  <a href="/preDeployment" class="btn btn-default">Cancel</a>
+                  <button type="submit" name="submit" class="btn btn-success float-right mr-2">Checkin</button>
+                </div>
+                <!-- /.card-footer -->
               </form>
             </div>
             <!-- /.card -->
@@ -186,46 +169,6 @@
             </div>
             <!-- /.card -->
         </div>
-        {{-- <div class="col-xl-6">
-          <!-- Horizontal Form -->
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Form Create Procurement</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <!-- form start -->
-            @if (count($assetProcurementDevices) > 0)
-            <table class="table table-sm">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Device</th>
-                  <th>Device Image</th>
-                  <th>Quantity</th>
-                </tr>
-              </thead>
-              <tbody>
-                @php
-                    $i = 1;
-                @endphp
-                @foreach ($assetProcurementDevices as $assetProcurementDevice)
-                <tr>
-                  <td>{{ $i++ }}</td>
-                  <td>{{ $assetProcurementDevice->assetModel->assetModelName }}</td>
-                  <td><img src="{{ asset('storage/' .  $assetProcurementDevice->assetModel->assetModelImage ) }}" alt="{{ $assetProcurementDevice->assetModel->assetModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
-                  <td>{{ $assetProcurementDevice->assetProcurementDeviceQuantity }}</td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-            @else
-              <p class="text-center">No data available in table</p>
-            @endif
-            </div>
-          </div>
-          <!-- /.card -->
-        </div> --}}
       </div>
       
 

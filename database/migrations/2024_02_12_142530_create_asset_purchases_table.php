@@ -17,8 +17,6 @@ return new class extends Migration
             $table->date('assetPurchaseDate');
             $table->uuid('assetProcurementId');
             $table->foreign('assetProcurementId')->references('assetProcurementId')->on('asset_procurements')->onUpdate('cascade')->onDelete('restrict');
-            $table->char('supplierId', 8);
-            $table->foreign('supplierId')->references('supplierId')->on('suppliers')->onUpdate('cascade')->onDelete('restrict');
             $table->timestamps();
         });
     }

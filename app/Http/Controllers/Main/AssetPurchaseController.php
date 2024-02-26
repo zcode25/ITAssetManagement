@@ -45,7 +45,6 @@ class AssetPurchaseController extends Controller
         $validatedData = $request->validate([
             'assetPurchaseDate' => 'required',
             'assetPurchaseNumber' => 'required|unique:asset_purchases',
-            'supplierId' => 'required',
         ]);
 
         $validatedData['assetPurchaseId'] =  Str::uuid();
@@ -61,6 +60,7 @@ class AssetPurchaseController extends Controller
                 $deviceId = $value;
                 // Dapatkan harga device berdasarkan index yang sama
                 $devicePrice = $request->input('assetProcurementDevicePrice-' . $index);
+                $supplierId = $request->input('supplierId-' . $index);
                 
                 $device = AssetProcurementDevice::where('assetProcurementDeviceId', $deviceId)->first();
                 $deviceTotal = $devicePrice * $device->assetProcurementDeviceQuantity;
@@ -68,6 +68,7 @@ class AssetPurchaseController extends Controller
                 AssetProcurementDevice::where('assetProcurementDeviceId', $deviceId)->update([
                     'assetProcurementDevicePrice' => $devicePrice,
                     'assetProcurementDeviceTotal' => $deviceTotal,
+                    'supplierId' => $supplierId,
                 ]);
             }
         }

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('assetProcurementId')->references('assetProcurementId')->on('asset_procurements')->onUpdate('cascade')->onDelete('restrict');
             $table->char('assetModelId', 8);
             $table->foreign('assetModelId')->references('assetModelId')->on('asset_models')->onUpdate('cascade')->onDelete('restrict');
+            $table->char('supplierId', 8)->nullable();
+            $table->foreign('supplierId')->references('supplierId')->on('suppliers')->onUpdate('cascade')->onDelete('restrict');
             $table->integer('assetProcurementDeviceQuantity');
             $table->integer('assetProcurementDevicePrice')->nullable();
             $table->integer('assetProcurementDeviceTotal')->nullable();

@@ -13,7 +13,7 @@ class Supplier extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
-    public function assetPurchase(){
-        return $this->hasMany(AssetPurchase::class, 'supplierId', 'supplierId');
+    public function assetProcurementDevice(){
+        return $this->hasMany(AssetProcurementDevice::class, 'supplierId', 'supplierId');
     }
 }

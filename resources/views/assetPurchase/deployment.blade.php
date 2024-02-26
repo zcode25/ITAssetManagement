@@ -68,10 +68,6 @@
                     <label for="assetPurchaseNumber" class="form-label">Purchase Number <span class="text-danger">*</span></label>
                     <p>{{ $assetPurchase->assetPurchaseNumber }}</p>
                   </div>
-                  <div class="form-group">
-                    <label for="supplierId" class="form-label">Supplier <span class="text-danger">*</span></label>
-                    <p>{{ $assetPurchase->supplier->supplierName }}</p>
-                  </div>
                   <hr>
                   <div class="form-group">
                     <label for="assetDeploymentDate" class="form-label">Deployment Date <span class="text-danger">*</span></label>
@@ -98,6 +94,7 @@
                           <th>Quantity</th>
                           <th>Price / Unit</th>
                           <th>Total</th>
+                          <th>Supplier</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -113,6 +110,7 @@
                           <td>{{ $assetProcurementDevice->assetProcurementDeviceQuantity }}</td>
                           <td>{{ $assetProcurementDevice->assetProcurementDevicePrice }}</td>
                           <td>{{ $assetProcurementDevice->assetProcurementDeviceTotal }}</td>
+                          <td>{{ $assetProcurementDevice->supplier->supplierName }}</td>
                         </tr>
                         @php
                             $i++;

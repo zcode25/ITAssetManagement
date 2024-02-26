@@ -11,7 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Create Procurement</h1>
+            <h1>Asset Procurement</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -24,7 +24,7 @@
           <!-- Horizontal Form -->
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Form Create Procurement</h3>
+              <h3 class="card-title">Form Procurement</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
@@ -87,7 +87,8 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="assetModelId" class="form-label">Asset Model <span class="text-danger">*</span></label>
-                    <select class="form-control select2bs4" id="assetModelId" name="assetModelId">
+                    <select class="form-control select2bs4" id="assetModelId" name="assetModelId" data-placeholder="Select a Asset Model">
+                      <option value=""></option>
                       @foreach ($assetModels as $assetModel)
                           @if (old('assetModelId') == $assetModel->assetModelId)
                               <option value="{{ $assetModel->assetModelId }}" selected>{{ $assetModel->assetModelName }}</option>

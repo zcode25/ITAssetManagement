@@ -100,9 +100,9 @@
                     <select class="form-control select2bs4" id="userId" name="userId">
                       @foreach ($users as $user)
                           @if (old('userId') == $user->userId)
-                              <option value="{{ $user->userId }}" selected>{{ $user->employeeName }}</option>
+                              <option value="{{ $user->userId }}" selected>{{ $user->employeeName }} - {{ $user->departement->departementName }}</option>
                               @else
-                              <option value="{{ $user->userId }}">{{ $user->employeeName }}</option>
+                              <option value="{{ $user->userId }}">{{ $user->employeeName }} - {{ $user->departement->departementName }}</option>
                           @endif
                       @endforeach
                     </select>

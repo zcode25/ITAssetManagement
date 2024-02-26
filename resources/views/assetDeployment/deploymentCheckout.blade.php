@@ -50,6 +50,7 @@ $menuData = json_decode($jsonData, true);
               <th>Image</th>
               <th>Category</th>
               <th>Manufacture</th>
+              <th>User</th>
               <th>Location</th>
               <th>Status</th>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
@@ -66,13 +67,14 @@ $menuData = json_decode($jsonData, true);
               <td><img src="{{ asset('storage/' .  $assetDeployment->assetModel->assetModelImage ) }}" alt="{{ $assetDeployment->assetModel->assetModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
               <td>{{ $assetDeployment->assetModel->category->categoryName }}</td>
               <td>{{ $assetDeployment->assetModel->manufacture->manufactureName }}</td>
+              <td>{{ $assetDeployment->user->employeeName }}</td>
               <td>{{ $assetDeployment->location->company->companyName }} - {{ $assetDeployment->location->locationName }}</td>
               <td>{{ $assetDeployment->assetDeploymentStatus }}</td>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
               <td class="py-0 align-middle">
                   <div class="btn-group btn-group-sm">
-                    <a href="/assetDeploymentPre/manage/{{ $assetDeployment->assetDeploymentId }}" class="btn btn-success">Manage</a>
-                    <a href="/assetDeploymentPre/detail/{{ $assetDeployment->assetDeploymentId }}" class="btn btn-primary">Detail</a>
+                    <a href="/assetDeploymentCheckout/checkin/{{ $assetDeployment->assetDeploymentId }}" class="btn btn-success">Checkin</a>
+                    <a href="/assetDeploymentCheckout/detail/{{ $assetDeployment->assetDeploymentId }}" class="btn btn-primary">Detail</a>
                   </div>
                 {{-- @endif --}}
               </td>

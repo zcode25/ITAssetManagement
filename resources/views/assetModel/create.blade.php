@@ -37,7 +37,8 @@
                   </div>
                   <div class="form-group">
                     <label for="categoryId" class="form-label">Category <span class="text-danger">*</span></label>
-                    <select class="form-control select2bs4" id="categoryId" name="categoryId">
+                    <select class="form-control select2bs4" id="categoryId" name="categoryId" data-placeholder="Select a Category">
+                      <option value=""></option>
                       @foreach ($categories as $category)
                           @if (old('categoryId') == $category->categoryId)
                               <option value="{{ $category->categoryId }}" selected>{{ $category->categoryName }}</option>
@@ -49,7 +50,8 @@
                   </div>
                   <div class="form-group">
                     <label for="manufactureId" class="form-label">Manufacture <span class="text-danger">*</span></label>
-                    <select class="form-control select2bs4" id="manufactureId" name="manufactureId">
+                    <select class="form-control select2bs4" id="manufactureId" name="manufactureId" data-placeholder="Select a Manufacture">
+                      <option value=""></option>
                       @foreach ($manufactures as $manufacture)
                           @if (old('manufactureId') == $manufacture->manufactureId)
                               <option value="{{ $manufacture->manufactureId }}" selected>{{ $manufacture->manufactureName }}</option>

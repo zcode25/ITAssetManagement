@@ -74,22 +74,10 @@
                       <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                   </div>
-                  <div class="form-group">
-                    <label for="supplierId" class="form-label">Supplier <span class="text-danger">*</span></label>
-                    <select class="form-control select2bs4" id="supplierId" name="supplierId">
-                      @foreach ($suppliers as $supplier)
-                          @if (old('supplierId') == $supplier->supplierId)
-                              <option value="{{ $supplier->supplierId }}" selected>{{ $supplier->supplierName }}</option>
-                              @else
-                              <option value="{{ $supplier->supplierId }}">{{ $supplier->supplierName }}</option>
-                          @endif
-                      @endforeach
-                    </select>
-                  </div>
                   <hr>
                   <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title">Form Create Procurement</h3>
+                      <h3 class="card-title">Form Asset Device</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -100,9 +88,10 @@
                         <tr>
                           <th>No</th>
                           <th>Device</th>
-                          <th>Device Image</th>
-                          <th>Quantity</th>
+                          <th>Image</th>
+                          <th>Qty</th>
                           <th>Price / Unit</th>
+                          <th>Supplier</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -121,6 +110,20 @@
                             @error('assetProcurementDevicePrice-{{ $i }}') 
                               <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                          </td>
+                          <td>
+                            <div class="form-group">
+                              <select class="form-control select2bs4" id="supplierId-{{ $i }}" name="supplierId-{{ $i }}" data-placeholder="Select a Supplier">
+                                <option value=""></option>
+                                @foreach ($suppliers as $supplier)
+                                    @if (old('supplierId') == $supplier->supplierId)
+                                        <option value="{{ $supplier->supplierId }}" selected>{{ $supplier->supplierName }}</option>
+                                        @else
+                                        <option value="{{ $supplier->supplierId }}">{{ $supplier->supplierName }}</option>
+                                    @endif
+                                @endforeach
+                              </select>
+                            </div>
                           </td>
                         </tr>
                         @php

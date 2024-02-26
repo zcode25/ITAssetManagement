@@ -37,7 +37,8 @@
                   </div>
                   <div class="form-group">
                     <label for="categoryType" class="form-label">Type <span class="text-danger">*</span></label>
-                    <select class="form-control select2bs4" id="categoryType" name="categoryType">
+                    <select class="form-control select2bs4" id="categoryType" name="categoryType" data-placeholder="Select a Type">
+                      <option value=""></option>
                       @foreach ($types as $type)
                           @if (old('categoryType') == $type['type'])
                               <option value="{{ $type['type'] }}" selected>{{ $type['type'] }}</option>

@@ -16,4 +16,8 @@ class AssetProcurementDevice extends Model
     public function assetModel(){
         return $this->belongsTo(AssetModel::class, 'assetModelId');
     }
+
+    public function supplier(){
+        return $this->belongsTo(Supplier::class, 'supplierId');
+    }
 }

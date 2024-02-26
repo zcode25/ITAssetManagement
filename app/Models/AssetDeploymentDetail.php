@@ -16,4 +16,8 @@ class AssetDeploymentDetail extends Model
     public function user(){
         return $this->belongsTo(User::class, 'userId');
     }
+
+    public function location(){
+        return $this->belongsTo(Location::class, 'locationId');
+    }
 }

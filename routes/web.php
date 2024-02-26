@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Main\AccessoryModelController;
+use App\Http\Controllers\Main\AssetController;
 use App\Http\Controllers\Main\AssetDeploymentController;
 use App\Http\Controllers\Main\AssetModelController;
 use App\Http\Controllers\Main\AssetProcurementController;
@@ -172,7 +173,18 @@ Route::controller(AssetDeploymentController::class)->group(function() {
     Route::get('/assetDeploymentPre', 'preDeployment')->name('assetDeployment.preDeployment')->middleware('auth');
     Route::get('/assetDeploymentPre/manage/{assetDeployment:assetDeploymentId}', 'preDeploymentManage')->name('assetDeploymentAll.preDeploymentManage')->middleware('auth');
     Route::post('/assetDeploymentPre/manage/store/{assetDeployment:assetDeploymentId}', 'preDeploymentManageStore')->name('assetDeploymentAll.preDeploymentManageStore')->middleware('auth');
+    Route::get('/assetDeploymentPre/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetDeploymentPre.detail')->middleware('auth');
     Route::get('/assetDeploymentReady', 'deploymentReady')->name('assetDeployment.deploymentReady')->middleware('auth');
     Route::get('/assetDeploymentReady/checkout/{assetDeployment:assetDeploymentId}', 'deploymentReadyCheckout')->name('assetDeployment.deploymentReadyCheckout')->middleware('auth');
+    Route::get('/assetDeploymentReady/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetDeploymentReady.detail')->middleware('auth');
     Route::post('/assetDeploymentReady/checkout/store/{assetDeployment:assetDeploymentId}', 'deploymentReadyCheckoutStore')->name('assetDeployment.deploymentReadyCheckoutStore')->middleware('auth');
+    Route::get('/assetDeploymentCheckout', 'deploymentCheckout')->name('assetDeployment.deploymentCheckout')->middleware('auth');
+    Route::get('/assetDeploymentCheckout/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetDeploymentCheckout.detail')->middleware('auth');
+    Route::get('/assetDeploymentCheckout/checkin/{assetDeployment:assetDeploymentId}', 'deploymentCheckoutCheckin')->name('assetDeploymentCheckout.checkin')->middleware('auth');
+    Route::post('/assetDeploymentCheckout/checkin/store/{assetDeployment:assetDeploymentId}', 'deploymentCheckoutCheckinStore')->name('assetDeploymentCheckout.checkinStore')->middleware('auth');
+});
+
+Route::controller(AssetController::class)->group(function() {
+    Route::get('/asset', 'index')->name('asset.index')->middleware('auth');
+    Route::get('/asset/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('asset.detail')->middleware('auth');
 });
