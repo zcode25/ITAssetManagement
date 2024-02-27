@@ -8,6 +8,7 @@ use App\Http\Controllers\Main\AssetDeploymentController;
 use App\Http\Controllers\Main\AssetModelController;
 use App\Http\Controllers\Main\AssetProcurementController;
 use App\Http\Controllers\Main\AssetPurchaseController as MainAssetPurchaseController;
+use App\Http\Controllers\Main\AssetRepairController;
 use App\Http\Controllers\Main\CategoryController;
 use App\Http\Controllers\Main\CompanyController as MainCompanyController;
 use App\Http\Controllers\Main\DashboardController as MainDashboardController;
@@ -192,4 +193,8 @@ Route::controller(AssetController::class)->group(function() {
 
 Route::controller(AssetArchiveController::class)->group(function() {
     Route::get('/assetArchive', 'index')->name('assetArchive.index')->middleware('auth');
+});
+
+Route::controller(AssetRepairController::class)->group(function() {
+    Route::get('/assetRepair', 'index')->name('assetRepair.index')->middleware('auth');
 });

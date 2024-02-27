@@ -52,21 +52,18 @@
               <i class="right fas fa fa-angle-left"></i>
             </p>
           </a>
-          @if($menuData['assetProcurementAllIndex']['index'] || $menuData['assetProcurementIndex']['index'] || $menuData['assetProcurementApprovalManager']['index'] || $menuData['assetProcurementApprovalITManager']['index'] || $menuData['assetPurchaseIndex']['index'])      
           <ul class="nav nav-treeview">
-            {{-- @if($menuData['assetModelIndex']['index']) --}}
             <li class="nav-item">
               <a href="/asset" class="nav-link {{ Request::is('asset', 'asset/detail*') ? 'active' : '' }}">
-                <i class="far fa fa-barcode nav-icon"></i>
+                <i class="far fa fa-laptop nav-icon"></i>
                 <p>My Asset</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="/assetArchive" class="nav-link {{ Request::is('assetArchive*') ? 'active' : '' }}">
-                <i class="far fa fa-barcode nav-icon"></i>
-                <p>Asset Archive</p>
-              </a>
-            </li>
+          </ul>
+          @if($menuData['assetProcurementAllIndex']['index'] || $menuData['assetProcurementIndex']['index'] || $menuData['assetProcurementApprovalManager']['index'] || $menuData['assetProcurementApprovalITManager']['index'] || $menuData['assetPurchaseIndex']['index'])      
+          <ul class="nav nav-treeview">
+            {{-- @if($menuData['assetModelIndex']['index']) --}}
+            
             {{-- @endif --}}
             <li class="nav-item {{ Request::is('assetProcurement*', 'assetPurchase*') ? 'menu-open' : '' }}">
               <a href="#" class="nav-link {{ Request::is('assetProcurement*', 'assetPurchase*') ? 'active' : '' }}">
@@ -124,7 +121,7 @@
           <ul class="nav nav-treeview">
             <li class="nav-item {{ Request::is('assetDeployment*') ? 'menu-open' : '' }}">
               <a href="#" class="nav-link {{ Request::is('assetDeployment*') ? 'active' : '' }}">
-                <i class="nav-icon fas fa fa-wifi"></i>
+                <i class="nav-icon fas fa fa-globe"></i>
                 <p>
                   Asset Deployment
                   <i class="right fas fa fa-angle-left"></i>
@@ -164,6 +161,30 @@
                 </li>
                 {{-- @endif --}}
               </ul>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/assetArchive" class="nav-link {{ Request::is('assetArchive*') ? 'active' : '' }}">
+                <i class="far fa fa-box-archive nav-icon"></i>
+                <p>Asset Archive</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/assetRepair" class="nav-link {{ Request::is('assetRepair*') ? 'active' : '' }}">
+                <i class="far fa fa-toolbox nav-icon"></i>
+                <p>Asset Repair</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/assetBroken" class="nav-link {{ Request::is('assetBroken*') ? 'active' : '' }}">
+                <i class="far fa fa-circle-xmark nav-icon"></i>
+                <p>Asset Broken</p>
+              </a>
             </li>
           </ul>
         </li>
