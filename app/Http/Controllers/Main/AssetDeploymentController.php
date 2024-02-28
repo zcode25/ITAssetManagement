@@ -110,9 +110,6 @@ class AssetDeploymentController extends Controller
             [
                 "type" => "Repair"
             ],
-            [
-                "type" => "Broken"
-            ],
         ];
 
         return view('assetDeployment.deploymentCheckoutCheckin', [

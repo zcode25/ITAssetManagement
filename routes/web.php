@@ -193,8 +193,12 @@ Route::controller(AssetController::class)->group(function() {
 
 Route::controller(AssetArchiveController::class)->group(function() {
     Route::get('/assetArchive', 'index')->name('assetArchive.index')->middleware('auth');
+    Route::get('/assetArchive/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetArchive.detail')->middleware('auth');
+    Route::get('/assetArchive/manage/{assetDeployment:assetDeploymentId}', 'manage')->name('assetArchive.manage')->middleware('auth');
+    Route::post('/assetArchive/manage/store/{assetDeployment:assetDeploymentId}', 'manageStore')->name('assetArchive.manageStore')->middleware('auth');
 });
 
 Route::controller(AssetRepairController::class)->group(function() {
     Route::get('/assetRepair', 'index')->name('assetRepair.index')->middleware('auth');
+    Route::get('/assetRepair/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetRepair.detail')->middleware('auth');
 });
