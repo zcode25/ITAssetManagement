@@ -23,4 +23,21 @@ class AssetRepairController extends Controller
             'assetDeploymentDetails' => AssetDeploymentDetail::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->orderBy('created_at', 'desc')->get(),
         ]);
     }
+
+    public function manage(AssetDeployment $assetDeployment) {
+        $types = [
+            [
+                "type" => "Deployment Ready"
+            ],
+            [
+                "type" => "Repair"
+            ],
+        ];
+
+        return view('assetRepair.manage', [
+            'assetDeployment' => AssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->first(),
+            'users'  => User::where('locationId', $assetDeployment->locationId)->get(),
+            'types' => $types
+        ]); 
+    }
 }

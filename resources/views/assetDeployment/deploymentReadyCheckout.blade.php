@@ -107,6 +107,13 @@
                       @endforeach
                     </select>
                   </div>
+                  <div class="form-group">
+                    <label for="assetDeploymentDetailNote" class="form-label">Note <span class="text-danger">*</span></label>
+                    <textarea class="form-control @error('assetDeploymentDetailNote') is-invalid @enderror"s="3" id="assetDeploymentDetailNote" name="assetDeploymentDetailNote">{{ old('assetDeploymentDetailNote') }}</textarea>
+                    @error('assetDeploymentDetailNote') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
@@ -161,6 +168,7 @@
                       <p></p>                  
                     @endif
                   </div>
+                  
                 </div>
                 <!-- /.card-body -->
                 

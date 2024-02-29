@@ -201,4 +201,5 @@ Route::controller(AssetArchiveController::class)->group(function() {
 Route::controller(AssetRepairController::class)->group(function() {
     Route::get('/assetRepair', 'index')->name('assetRepair.index')->middleware('auth');
     Route::get('/assetRepair/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetRepair.detail')->middleware('auth');
+    Route::get('/assetRepair/manage/{assetDeployment:assetDeploymentId}', 'manage')->name('assetRepair.manage')->middleware('auth');
 });

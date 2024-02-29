@@ -110,7 +110,7 @@
                             @if ($assetDeploymentDetail->locationId != null)
                               <div class="col-md-6">
                                 <p class="text-bold mb-2">Location</p>
-                                <p>{{ $assetDeploymentDetail->location->company->companyName }} - {{ $assetDeploymentDetail->location->locationName }}</p>
+                                <p>{{ $assetDeploymentDetail->location->company->companyName }} <br> {{ $assetDeploymentDetail->location->locationName }}</p>
                               </div>
                             @endif
                             @if ($assetDeploymentDetail->userId != null)
@@ -118,8 +118,17 @@
                                 <p class="text-bold mb-2">User</p>
                                 <p>{{ $assetDeploymentDetail->user->employeeName }}</p>
                               </div>
+                              @endif
+                            </div>
+                            <div class="row">
+                            @if($assetDeploymentDetail->assetDeploymentDetailNote)
+                            <div class="col">
+                              <p class="text-bold mb-2">Note</p>
+                              <div class="timeline-body">{{ $assetDeploymentDetail->assetDeploymentDetailNote }}</div>
+                            </div>
                             @endif
                           </div>
+                          
                           
                         </div>
                       </div>

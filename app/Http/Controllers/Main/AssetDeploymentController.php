@@ -70,6 +70,7 @@ class AssetDeploymentController extends Controller
             'assetDeploymentDetailDate' => 'required',
             'userId' => 'required',
             'assetDeploymentStatus' => 'required',
+            'assetDeploymentDetailNote' => 'required',
         ]);
 
         ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->update([
@@ -82,6 +83,7 @@ class AssetDeploymentController extends Controller
         $assetDeploymentDetail['userId'] = $validatedData['userId'];
         $assetDeploymentDetail['locationId'] = $assetDeployment['locationId'];
         $assetDeploymentDetail['assetDeploymentDetailDate'] = $validatedData['assetDeploymentDetailDate'];
+        $assetDeploymentDetail['assetDeploymentDetailNote'] = $validatedData['assetDeploymentDetailNote'];
         $assetDeploymentDetail['assetDeploymentDetailStatus'] = $validatedData['assetDeploymentStatus'];
         AssetDeploymentDetail::Create($assetDeploymentDetail);
 

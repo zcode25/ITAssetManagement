@@ -44,8 +44,8 @@
         </li>
         @endif
         {{-- @if($menuData['supplierIndex']['index'] || $menuData['manufactureIndex']['index'] || $menuData['categoryIndex']['index'] || $menuData['accessoryModelIndex']['index'] || $menuData['assetModelIndex']['index']) --}}
-        <li class="nav-item {{ Request::is('asset*', 'assetProcurement*', 'assetPurchase*', 'assetDeployment*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ Request::is('asset*', 'assetProcurement*', 'assetPurchase*', 'assetDeployment*') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('asset', 'assetProcurement*', 'assetPurchase*', 'assetDeployment*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::is('asset', 'assetProcurement*', 'assetPurchase*', 'assetDeployment*') ? 'active' : '' }}">
             <i class="nav-icon fas fa fa-barcode"></i>
             <p>
               Asset
@@ -166,7 +166,7 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="/assetArchive" class="nav-link {{ Request::is('assetArchive*') ? 'active' : '' }}">
-                <i class="far fa fa-box-archive nav-icon"></i>
+                <i class="far fa fa-box-open nav-icon"></i>
                 <p>Asset Archive</p>
               </a>
             </li>
@@ -182,7 +182,7 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="/assetBroken" class="nav-link {{ Request::is('assetBroken*') ? 'active' : '' }}">
-                <i class="far fa fa-circle-xmark nav-icon"></i>
+                <i class="far fa fa-exclamation nav-icon"></i>
                 <p>Asset Broken</p>
               </a>
             </li>
