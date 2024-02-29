@@ -114,7 +114,7 @@
                     @error('assetDeploymentDetailNote') 
                       <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                  </div>
+                  </div> 
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
