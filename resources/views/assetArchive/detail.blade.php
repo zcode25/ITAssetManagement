@@ -119,6 +119,12 @@
                                 <p>{{ $assetDeploymentDetail->user->employeeName }}</p>
                               </div>
                             @endif
+                            @if($assetDeploymentDetail->assetDeploymentDetailNote)
+                            <div class="col">
+                              <p class="text-bold mb-2">Note</p>
+                              <div class="timeline-body">{{ $assetDeploymentDetail->assetDeploymentDetailNote }}</div>
+                            </div>
+                            @endif
                           </div>
                           
                         </div>

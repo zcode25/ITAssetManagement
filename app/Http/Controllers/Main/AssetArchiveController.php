@@ -46,6 +46,7 @@ class AssetArchiveController extends Controller
         $validatedData = $request->validate([
             'assetDeploymentDetailDate' => 'required',
             'assetDeploymentStatus' => 'required',
+            'assetDeploymentDetailNote' => 'required',
         ]);
 
         AssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->update([

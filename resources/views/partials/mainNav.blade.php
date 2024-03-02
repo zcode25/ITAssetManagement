@@ -44,8 +44,8 @@
         </li>
         @endif
         {{-- @if($menuData['supplierIndex']['index'] || $menuData['manufactureIndex']['index'] || $menuData['categoryIndex']['index'] || $menuData['accessoryModelIndex']['index'] || $menuData['assetModelIndex']['index']) --}}
-        <li class="nav-item {{ Request::is('asset', 'assetProcurement*', 'assetPurchase*', 'assetDeployment*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ Request::is('asset', 'assetProcurement*', 'assetPurchase*', 'assetDeployment*') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('asset', 'assetArchive*', 'assetProcurement*', 'assetPurchase*', 'assetDeployment*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::is('asset', 'assetArchive*', 'assetProcurement*', 'assetPurchase*', 'assetDeployment*') ? 'active' : '' }}">
             <i class="nav-icon fas fa fa-barcode"></i>
             <p>
               Asset
