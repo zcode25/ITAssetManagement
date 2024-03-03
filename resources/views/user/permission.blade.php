@@ -917,6 +917,89 @@
                   </div>
                   <div class="card">
                     <div class="card-header">
+                      <h3 class="card-title">Asset</h3>
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <table class="table table-sm">
+                        <thead>
+                          <tr>
+                            <th style="width: 40%">Permission</th>
+                            <th>Grant</th>
+                            <th>Deny</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>My Asset</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetIndex1" name="assetIndex" value="true" @if ($menuData['assetIndex']['index'] == true) checked @endif>
+                                    <label for="assetIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetIndex2" name="assetIndex" value="false" @if ($menuData['assetIndex']['index'] == false) checked @endif>
+                                    <label for="assetIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Asset Archive</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetArchiveIndex1" name="assetArchiveIndex" value="true" @if ($menuData['assetArchiveIndex']['index'] == true) checked @endif>
+                                    <label for="assetArchiveIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetArchiveIndex2" name="assetArchiveIndex" value="false" @if ($menuData['assetArchiveIndex']['index'] == false) checked @endif>
+                                    <label for="assetArchiveIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Asset Repair</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetRepairIndex1" name="assetRepairIndex" value="true" @if ($menuData['assetRepairIndex']['index'] == true) checked @endif>
+                                    <label for="assetRepairIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetRepairIndex2" name="assetRepairIndex" value="false" @if ($menuData['assetRepairIndex']['index'] == false) checked @endif> 
+                                    <label for="assetRepairIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Asset Broken</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetBrokenIndex1" name="assetBrokenIndex" value="true" @if ($menuData['assetBrokenIndex']['index'] == true) checked @endif>
+                                    <label for="assetBrokenIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetBrokenIndex2" name="assetBrokenIndex" value="false" @if ($menuData['assetBrokenIndex']['index'] == false) checked @endif>
+                                    <label for="assetBrokenIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header">
                       <h3 class="card-title">Asset Procurement</h3>
                       <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -1006,6 +1089,89 @@
                                 <div class="icheck-danger">
                                     <input type="radio" id="assetPurchaseIndex2" name="assetPurchaseIndex" value="false" @if ($menuData['assetPurchaseIndex']['index'] == false) checked @endif>
                                     <label for="assetPurchaseIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Asset Deployment</h3>
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <table class="table table-sm">
+                        <thead>
+                          <tr>
+                            <th style="width: 40%">Permission</th>
+                            <th>Grant</th>
+                            <th>Deny</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>All Deployment</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetDeploymentAllIndex1" name="assetDeploymentAllIndex" value="true" @if ($menuData['assetDeploymentAllIndex']['index'] == true) checked @endif>
+                                    <label for="assetDeploymentAllIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetDeploymentAllIndex2" name="assetDeploymentAllIndex" value="false" @if ($menuData['assetDeploymentAllIndex']['index'] == false) checked @endif>
+                                    <label for="assetDeploymentAllIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Pre-Deployment</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetPreDeploymentIndex1" name="assetPreDeploymentIndex" value="true" @if ($menuData['assetPreDeploymentIndex']['index'] == true) checked @endif>
+                                    <label for="assetPreDeploymentIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetPreDeploymentIndex2" name="assetPreDeploymentIndex" value="false" @if ($menuData['assetPreDeploymentIndex']['index'] == false) checked @endif>
+                                    <label for="assetPreDeploymentIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Deployment Ready</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetDeploymentReadyIndex1" name="assetDeploymentReadyIndex" value="true" @if ($menuData['assetDeploymentReadyIndex']['index'] == true) checked @endif>
+                                    <label for="assetDeploymentReadyIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetDeploymentReadyIndex2" name="assetDeploymentReadyIndex" value="false" @if ($menuData['assetDeploymentReadyIndex']['index'] == false) checked @endif> 
+                                    <label for="assetDeploymentReadyIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Deployment Checkout</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetDeploymentCheckoutIndex1" name="assetDeploymentCheckoutIndex" value="true" @if ($menuData['assetDeploymentCheckoutIndex']['index'] == true) checked @endif>
+                                    <label for="assetDeploymentCheckoutIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetDeploymentCheckoutIndex2" name="assetDeploymentCheckoutIndex" value="false" @if ($menuData['assetDeploymentCheckoutIndex']['index'] == false) checked @endif>
+                                    <label for="assetDeploymentCheckoutIndex2"></label>
                                 </div>
                             </td>
                           </tr>

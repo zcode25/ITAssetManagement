@@ -29,4 +29,8 @@ class Location extends Model
         return $this->hasMany(AssetDeploymentDetail::class, 'locationId', 'locationId');
     }
 
+    public function assetMovement(){
+        return $this->hasMany(AssetMovement::class, 'locationId', 'locationId');
+    }
+
 }

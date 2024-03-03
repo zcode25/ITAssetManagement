@@ -122,12 +122,19 @@ class DatabaseSeeder extends Seeder
             "assetModelCreate":{"index":true},
             "assetModelEdit":{"index":true},
             "assetModelDelete":{"index":true},
+            "assetIndex":{"index":true},
             "assetProcurementAllIndex":{"index":true},
             "assetProcurementIndex":{"index":true},
             "assetProcurementApprovalManager":{"index":true},
             "assetProcurementApprovalITManager":{"index":true},
             "assetPurchaseIndex":{"index":true},
-            "assetDeploymentAllIndex":{"index":true}
+            "assetDeploymentAllIndex":{"index":true},
+            "assetPreDeploymentIndex":{"index":true},
+            "assetDeploymentReadyIndex":{"index":true},
+            "assetDeploymentCheckoutIndex":{"index":true},
+            "assetArchiveIndex":{"index":true},
+            "assetRepairIndex":{"index":true},
+            "assetBrokenIndex":{"index":true}
         }';
 
         // $permission = str_replace(array("\r", "\n", ' '), '', $permission);
@@ -193,12 +200,20 @@ class DatabaseSeeder extends Seeder
             "assetModelCreate":{"index":false},
             "assetModelEdit":{"index":false},
             "assetModelDelete":{"index":false},
+            "assetModelDelete":{"index":false},
+            "assetIndex":{"index":false},
             "assetProcurementAllIndex":{"index":false},
             "assetProcurementIndex":{"index":false},
             "assetProcurementApprovalManager":{"index":false},
             "assetProcurementApprovalITManager":{"index":false},
             "assetPurchaseIndex":{"index":false},
-            "assetDeploymentAllIndex":{"index":false}
+            "assetDeploymentAllIndex":{"index":false},
+            "assetPreDeploymentIndex":{"index":false},
+            "assetDeploymentReadyIndex":{"index":false},
+            "assetDeploymentCheckoutIndex":{"index":false},
+            "assetArchiveIndex":{"index":false},
+            "assetRepairIndex":{"index":false},
+            "assetBrokenIndex":{"index":false}
         }';
 
         User::create([
@@ -260,12 +275,19 @@ class DatabaseSeeder extends Seeder
             "assetModelCreate":{"index":false},
             "assetModelEdit":{"index":false},
             "assetModelDelete":{"index":false},
+            "assetIndex":{"index":false},
             "assetProcurementAllIndex":{"index":false},
             "assetProcurementIndex":{"index":false},
             "assetProcurementApprovalManager":{"index":false},
             "assetProcurementApprovalITManager":{"index":false},
             "assetPurchaseIndex":{"index":false},
-            "assetDeploymentAllIndex":{"index":false}
+            "assetDeploymentAllIndex":{"index":false},
+            "assetPreDeploymentIndex":{"index":false},
+            "assetDeploymentReadyIndex":{"index":false},
+            "assetDeploymentCheckoutIndex":{"index":false},
+            "assetArchiveIndex":{"index":false},
+            "assetRepairIndex":{"index":false},
+            "assetBrokenIndex":{"index":false}
         }';
 
         User::create([

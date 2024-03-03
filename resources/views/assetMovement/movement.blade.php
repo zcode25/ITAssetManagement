@@ -11,7 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Asset Procurement</h1>
+            <h1>Asset Movement</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -24,11 +24,11 @@
             <!-- Horizontal Form -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Form Procurement</h3>
+                <h3 class="card-title">Form Asset Movement</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="/assetProcurementApprovalManager/approval/store/{{ $assetProcurement->assetProcurementId }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+              <form action="/assetMovement/movement/store/{{ $assetProcurement->assetProcurementId }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                 @csrf
                 <div class="card-body">
                   {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
@@ -56,7 +56,7 @@
                     <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
                     @if ($assetProcurement->user->managerId)
                       @php
-                        $manager = User::where('userId', $assetProcurement->managerId)->first()
+                        $manager = User::where('userId', $assetProcurement->user->managerId)->first()
                       @endphp
                       <p>{{ $manager->employeeName }}</p>
                     @else
@@ -65,27 +65,29 @@
                   </div>
                   <hr>
                   <div class="form-group">
-                    <label for="assetProcurementDate" class="form-label">Procurement Date <span class="text-danger">*</span></label>
-                    <p>{{ $assetProcurement->assetProcurementDate }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="assetProcurementNote" class="form-label">Procurement Note <span class="text-danger">*</span></label>
-                    <p>{{ $assetProcurement->assetProcurementNote }}</p>
-                  </div>
-                  <hr>
-                  <div class="form-group">
-                    <label for="assetProcurementDetailNote" class="form-label">Note <span class="text-danger">*</span></label>
-                    <textarea class="form-control @error('assetProcurementDetailNote') is-invalid @enderror"s="3" id="assetProcurementDetailNote" name="assetProcurementDetailNote">{{ old('assetProcurementDetailNote') }}</textarea>
-                    @error('assetProcurementDetailNote') 
+                    <label for="assetMovementDate" class="form-label">Movement Date <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control @error('assetMovementDate') is-invalid @enderror" id="assetMovementDate" name="assetMovementDate" value="{{ old('assetMovementDate') }}">
+                    @error('assetMovementDate') 
                       <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
+                  </div>
+                  <div class="form-group">
+                    <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
+                    <select class="form-control select2bs4" id="locationId" name="locationId">
+                      @foreach ($locations as $location)
+                          @if (old('locationId') == $location->locationId)
+                              <option value="{{ $location->locationId }}" selected>{{ $location->company->companyName }} - {{ $location->locationName }}</option>
+                              @else
+                              <option value="{{ $location->locationId }}">{{ $location->company->companyName }} - {{ $location->locationName }}</option>
+                          @endif
+                      @endforeach
+                    </select>
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <a href="/assetProcurement" class="btn btn-default">Cancel</a>
-                  <button type="submit" name="assetProcurementStatus" value="Approved by Manager" class="btn btn-success float-right">Approve</button>
-                  <button type="submit" name="assetProcurementStatus" value="Rejected by Manager" class="btn btn-danger float-right mr-2">Reject</button>
+                  <a href="/assetPurchase" class="btn btn-default">Cancel</a>
+                  <button type="submit" name="submit" class="btn btn-primary float-right">Save</button>
                 </div>
                 <!-- /.card-footer -->
               </form>

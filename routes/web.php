@@ -6,6 +6,7 @@ use App\Http\Controllers\Main\AssetArchiveController;
 use App\Http\Controllers\Main\AssetController;
 use App\Http\Controllers\Main\AssetDeploymentController;
 use App\Http\Controllers\Main\AssetModelController;
+use App\Http\Controllers\Main\AssetMovementController;
 use App\Http\Controllers\Main\AssetProcurementController;
 use App\Http\Controllers\Main\AssetPurchaseController as MainAssetPurchaseController;
 use App\Http\Controllers\Main\AssetRepairController;
@@ -169,37 +170,44 @@ Route::controller(MainAssetPurchaseController::class)->group(function() {
     Route::post('/assetPurchase/deployment/store/{assetProcurement:assetProcurementId}', 'deploymentStore')->name('assetPurchase.deploymentStore')->middleware('auth', 'check.menu.access:assetPurchaseIndex');
 });
 
+Route::controller(AssetMovementController::class)->group(function() {
+    Route::get('/assetMovement', 'index')->name('assetMovement.index')->middleware('auth');
+    Route::get('/assetMovement/movement/{assetProcurement:assetProcurementId}', 'movement')->name('assetMovement.movement')->middleware('auth');
+    Route::post('/assetMovement/movement/store/{assetProcurement:assetProcurementId}', 'movementStore')->name('assetMovement.movementStore')->middleware('auth');
+    Route::get('/assetMovement/device/{assetProcurement:assetProcurementId}', 'device')->name('assetMovement.device')->middleware('auth');
+});
+
 Route::controller(AssetDeploymentController::class)->group(function() {
-    Route::get('/assetDeploymentAll', 'all')->name('assetDeploymentAll.all')->middleware('auth');
-    Route::get('/assetDeploymentAll/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetDeploymentAll.detail')->middleware('auth');
-    Route::get('/assetDeploymentPre', 'preDeployment')->name('assetDeployment.preDeployment')->middleware('auth');
-    Route::get('/assetDeploymentPre/manage/{assetDeployment:assetDeploymentId}', 'preDeploymentManage')->name('assetDeploymentAll.preDeploymentManage')->middleware('auth');
-    Route::post('/assetDeploymentPre/manage/store/{assetDeployment:assetDeploymentId}', 'preDeploymentManageStore')->name('assetDeploymentAll.preDeploymentManageStore')->middleware('auth');
-    Route::get('/assetDeploymentPre/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetDeploymentPre.detail')->middleware('auth');
-    Route::get('/assetDeploymentReady', 'deploymentReady')->name('assetDeployment.deploymentReady')->middleware('auth');
-    Route::get('/assetDeploymentReady/checkout/{assetDeployment:assetDeploymentId}', 'deploymentReadyCheckout')->name('assetDeployment.deploymentReadyCheckout')->middleware('auth');
-    Route::get('/assetDeploymentReady/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetDeploymentReady.detail')->middleware('auth');
-    Route::post('/assetDeploymentReady/checkout/store/{assetDeployment:assetDeploymentId}', 'deploymentReadyCheckoutStore')->name('assetDeployment.deploymentReadyCheckoutStore')->middleware('auth');
-    Route::get('/assetDeploymentCheckout', 'deploymentCheckout')->name('assetDeployment.deploymentCheckout')->middleware('auth');
-    Route::get('/assetDeploymentCheckout/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetDeploymentCheckout.detail')->middleware('auth');
-    Route::get('/assetDeploymentCheckout/checkin/{assetDeployment:assetDeploymentId}', 'deploymentCheckoutCheckin')->name('assetDeploymentCheckout.checkin')->middleware('auth');
-    Route::post('/assetDeploymentCheckout/checkin/store/{assetDeployment:assetDeploymentId}', 'deploymentCheckoutCheckinStore')->name('assetDeploymentCheckout.checkinStore')->middleware('auth');
+    Route::get('/assetDeploymentAll', 'all')->name('assetDeploymentAll.all')->middleware('auth', 'check.menu.access:assetDeploymentAllIndex');
+    Route::get('/assetDeploymentAll/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetDeploymentAll.detail')->middleware('auth', 'check.menu.access:assetDeploymentAllIndex');
+    Route::get('/assetDeploymentPre', 'preDeployment')->name('assetDeployment.preDeployment')->middleware('auth', 'check.menu.access:assetDeploymentIndex');
+    Route::get('/assetDeploymentPre/manage/{assetDeployment:assetDeploymentId}', 'preDeploymentManage')->name('assetDeployment.preDeploymentManage')->middleware('auth', 'check.menu.access:assetPreDeploymentIndex');
+    Route::post('/assetDeploymentPre/manage/store/{assetDeployment:assetDeploymentId}', 'preDeploymentManageStore')->name('assetDeployment.preDeploymentManageStore')->middleware('auth', 'check.menu.access:assetPreDeploymentAllIndex');
+    Route::get('/assetDeploymentPre/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetDeploymentPre.detail')->middleware('auth', 'check.menu.access:assetPreDeploymentIndex');
+    Route::get('/assetDeploymentReady', 'deploymentReady')->name('assetDeployment.deploymentReady')->middleware('auth', 'check.menu.access:assetDeploymentReadyIndex');
+    Route::get('/assetDeploymentReady/checkout/{assetDeployment:assetDeploymentId}', 'deploymentReadyCheckout')->name('assetDeployment.deploymentReadyCheckout')->middleware('auth', 'check.menu.access:assetDeploymentReadyIndex');
+    Route::get('/assetDeploymentReady/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetDeploymentReady.detail')->middleware('auth', 'check.menu.access:assetDeploymentReadyIndex');
+    Route::post('/assetDeploymentReady/checkout/store/{assetDeployment:assetDeploymentId}', 'deploymentReadyCheckoutStore')->name('assetDeployment.deploymentReadyCheckoutStore')->middleware('auth', 'check.menu.access:assetDeploymentReadyIndex');
+    Route::get('/assetDeploymentCheckout', 'deploymentCheckout')->name('assetDeployment.deploymentCheckout')->middleware('auth', 'check.menu.access:assetDeploymentCheckoutIndex');
+    Route::get('/assetDeploymentCheckout/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetDeploymentCheckout.detail')->middleware('auth', 'check.menu.access:assetDeploymentCheckoutIndex');
+    Route::get('/assetDeploymentCheckout/checkin/{assetDeployment:assetDeploymentId}', 'deploymentCheckoutCheckin')->name('assetDeploymentCheckout.checkin')->middleware('auth', 'check.menu.access:assetDeploymentCheckoutIndex');
+    Route::post('/assetDeploymentCheckout/checkin/store/{assetDeployment:assetDeploymentId}', 'deploymentCheckoutCheckinStore')->name('assetDeploymentCheckout.checkinStore')->middleware('auth', 'check.menu.access:assetDeploymentCheckoutIndex');
 });
 
 Route::controller(AssetController::class)->group(function() {
-    Route::get('/asset', 'index')->name('asset.index')->middleware('auth');
-    Route::get('/asset/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('asset.detail')->middleware('auth');
+    Route::get('/asset', 'index')->name('asset.index')->middleware('auth', 'check.menu.access:assetIndex');
+    Route::get('/asset/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('asset.detail')->middleware('auth', 'check.menu.access:assetIndex');
 });
 
 Route::controller(AssetArchiveController::class)->group(function() {
-    Route::get('/assetArchive', 'index')->name('assetArchive.index')->middleware('auth');
-    Route::get('/assetArchive/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetArchive.detail')->middleware('auth');
-    Route::get('/assetArchive/manage/{assetDeployment:assetDeploymentId}', 'manage')->name('assetArchive.manage')->middleware('auth');
-    Route::post('/assetArchive/manage/store/{assetDeployment:assetDeploymentId}', 'manageStore')->name('assetArchive.manageStore')->middleware('auth');
+    Route::get('/assetArchive', 'index')->name('assetArchive.index')->middleware('auth', 'check.menu.access:assetArchiveIndex');
+    Route::get('/assetArchive/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetArchive.detail')->middleware('auth', 'check.menu.access:assetArchiveIndex');
+    Route::get('/assetArchive/manage/{assetDeployment:assetDeploymentId}', 'manage')->name('assetArchive.manage')->middleware('auth', 'check.menu.access:assetArchiveIndex');
+    Route::post('/assetArchive/manage/store/{assetDeployment:assetDeploymentId}', 'manageStore')->name('assetArchive.manageStore')->middleware('auth', 'check.menu.access:assetArchiveIndex');
 });
 
 Route::controller(AssetRepairController::class)->group(function() {
-    Route::get('/assetRepair', 'index')->name('assetRepair.index')->middleware('auth');
-    Route::get('/assetRepair/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetRepair.detail')->middleware('auth');
-    Route::get('/assetRepair/manage/{assetDeployment:assetDeploymentId}', 'manage')->name('assetRepair.manage')->middleware('auth');
+    Route::get('/assetRepair', 'index')->name('assetRepair.index')->middleware('auth', 'check.menu.access:assetRepairIndex');
+    Route::get('/assetRepair/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetRepair.detail')->middleware('auth', 'check.menu.access:assetRepairIndex');
+    Route::get('/assetRepair/manage/{assetDeployment:assetDeploymentId}', 'manage')->name('assetRepair.manage')->middleware('auth', 'check.menu.access:assetRepairIndex');
 });

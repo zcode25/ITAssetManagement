@@ -95,12 +95,19 @@ class UserController extends Controller
             "assetyModelCreate":{"index":false},
             "assetyModelEdit":{"index":false},
             "assetyModelDelete":{"index":false},
+            "assetIndex":{"index":false},
             "assetProcurementAllIndex":{"index":false},
             "assetProcurementIndex":{"index":false},
             "assetProcurementApprovalManager":{"index":false},
             "assetProcurementApprovalITManager":{"index":false},
             "assetPurchaseIndex":{"index":false},
-            "assetDeploymentAllIndex":{"index":false}
+            "assetDeploymentAllIndex":{"index":false},
+            "assetPreDeploymentIndex":{"index":false},
+            "assetDeploymentReadyIndex":{"index":false},
+            "assetDeploymentCheckoutIndex":{"index":false},
+            "assetArchiveIndex":{"index":false},
+            "assetRepairIndex":{"index":false},
+            "assetBrokenIndex":{"index":false}
         }';
 
         User::create($validatedData);
@@ -161,12 +168,19 @@ class UserController extends Controller
             "assetModelCreate":{"index":'. $request->assetModelCreate .'},
             "assetModelEdit":{"index":'. $request->assetModelEdit .'},
             "assetModelDelete":{"index":'. $request->assetModelDelete .'},
+            "assetIndex":{"index":'. $request->assetIndex .'},
             "assetProcurementAllIndex":{"index":'. $request->assetProcurementAllIndex .'},
             "assetProcurementIndex":{"index":'. $request->assetProcurementIndex .'},
             "assetProcurementApprovalManager":{"index":'. $request->assetProcurementApprovalManager .'},
             "assetProcurementApprovalITManager":{"index":'. $request->assetProcurementApprovalITManager .'},
             "assetPurchaseIndex":{"index":'. $request->assetPurchaseIndex .'},
-            "assetDeploymentAllIndex":{"index":false}
+            "assetDeploymentAllIndex":{"index":'. $request->assetDeploymentAllIndex .'},
+            "assetPreDeploymentIndex":{"index":'. $request->assetPreDeploymentIndex .'},
+            "assetDeploymentReadyIndex":{"index":'. $request->assetDeploymentReadyIndex .'},
+            "assetDeploymentCheckoutIndex":{"index":'. $request->assetDeploymentCheckoutIndex .'},
+            "assetArchiveIndex":{"index":'. $request->assetArchiveIndex .'},
+            "assetRepairIndex":{"index":'. $request->assetRepairIndex .'},
+            "assetBrokenIndex":{"index":'. $request->assetBrokenIndex .'}
         }';
 
         User::where('userId', $user->userId)->update(['permission' => $permission]);

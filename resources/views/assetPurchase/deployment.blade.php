@@ -33,6 +33,10 @@
                 <div class="card-body">
                   {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
                   <div class="form-group">
+                    <label for="assetProcurementNumber" class="form-label">Procurement Number <span class="text-danger">*</span></label>
+                    <p>{{ $assetProcurement->assetProcurementNumber }}</p>
+                  </div>
+                  <div class="form-group">
                     <label for="employeeName" class="form-label">Name <span class="text-danger">*</span></label>
                     <p>{{ $assetProcurement->user->employeeName }}</p>
                   </div>
@@ -85,6 +89,7 @@
                     <div class="card-body">
                       <!-- form start -->
                     @if (count($assetProcurementDevices) > 0)
+                    <div class="table-responsive-md">
                     <table class="table table-sm">
                       <thead>
                         <tr>
@@ -92,7 +97,7 @@
                           <th>Device</th>
                           <th>Image</th>
                           <th>Quantity</th>
-                          <th>Price / Unit</th>
+                          <th>Price/Unit</th>
                           <th>Total</th>
                           <th>Supplier</th>
                         </tr>
@@ -108,8 +113,8 @@
                           <td>{{ $assetProcurementDevice->assetModel->assetModelName }}</td>
                           <td><img src="{{ asset('storage/' .  $assetProcurementDevice->assetModel->assetModelImage ) }}" alt="{{ $assetProcurementDevice->assetModel->assetModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
                           <td>{{ $assetProcurementDevice->assetProcurementDeviceQuantity }}</td>
-                          <td>{{ $assetProcurementDevice->assetProcurementDevicePrice }}</td>
-                          <td>{{ $assetProcurementDevice->assetProcurementDeviceTotal }}</td>
+                          <td>{{ "Rp " . number_format($assetProcurementDevice->assetProcurementDevicePrice, 0, ',', '.') }}</td>
+                          <td>{{ "Rp " . number_format($assetProcurementDevice->assetProcurementDeviceTotal, 0, ',', '.') }}</td>
                           <td>{{ $assetProcurementDevice->supplier->supplierName }}</td>
                         </tr>
                         @php
@@ -118,6 +123,7 @@
                         @endforeach
                       </tbody>
                     </table>
+                    </div>
                     @else
                       <p class="text-center">No data available in table</p>
                     @endif

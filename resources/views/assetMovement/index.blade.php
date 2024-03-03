@@ -13,7 +13,7 @@ $menuData = json_decode($jsonData, true);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Asset Procurement</h1>
+            <h1>Asset Movement</h1>
           </div>
           <div class="col-sm-6">
             <div class="float-sm-right">
@@ -32,7 +32,7 @@ $menuData = json_decode($jsonData, true);
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Asset Procurement List</h3>
+          <h3 class="card-title">Asset Movement List</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -63,7 +63,7 @@ $menuData = json_decode($jsonData, true);
               <td>{{ $assetProcurement->user->employeeName }}</td>
               @if ($assetProcurement->user->managerId)
                 @php
-                  $manager = User::where('userId', $assetProcurement->managerId)->first()
+                  $manager = User::where('userId', $assetProcurement->user->managerId)->first()
                 @endphp
                 <td>{{ $manager->employeeName }}</td>
               @else
@@ -73,17 +73,21 @@ $menuData = json_decode($jsonData, true);
               <td>{{ $assetProcurement->assetProcurementStatus }}</td>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
               <td class="py-0 align-middle">
-                  {{-- @if($assetProcurement->assetProcurementStatus == 'Approval Required') --}}
-                  <div class="btn-group btn-group-sm">
-                  <a href="/assetProcurementAll/detail/{{ $assetProcurement->assetProcurementId }}" class="btn btn-primary">Detail</a>
+                <div class="btn-group btn-group-sm">
                   {{-- @if($menuData['assetModelEdit']['index']) --}}
-                  {{-- <a href="/assetProcurement/device/{{ $assetProcurement->assetProcurementId }}" class="btn btn-primary">Edit</a> --}}
+                  @if($assetProcurement->assetProcurementStatus == 'Approved by IT Manager')
+                    <a href="/assetMovement/movement/{{ $assetProcurement->assetProcurementId }}" class="btn btn-success">Movement</a>
+                  @endif
+                  @if($assetProcurement->assetProcurementStatus == 'Asset Movement')
+                    <a href="/assetMovement/device/{{ $assetProcurement->assetProcurementId }}" class="btn btn-success">Device</a>
+                  @endif
+                  
+                  <a href="/assetPurchase/detail/{{ $assetProcurement->assetProcurementId }}" class="btn btn-primary">Detail</a>
                   {{-- @endif --}}
                   {{-- @if($menuData['assetModelDelete']['index']) --}}
                   {{-- <a href="/assetModel/destroy/{{ $assetProcurement->assetProcurementId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a> --}}
                   {{-- @endif --}}
                 </div>
-                {{-- @endif --}}
               </td>
               {{-- @endif --}}
             </tr>    

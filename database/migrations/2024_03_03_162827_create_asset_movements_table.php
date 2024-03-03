@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('asset_procurement_details', function (Blueprint $table) {
-            $table->uuid('assetProcurementDetailId')->primary();
+        Schema::create('asset_movements', function (Blueprint $table) {
+            $table->uuid('assetMovementId')->primary();
+            $table->char('assetMovementNumber', 20)->unique();
+            $table->date('assetMovementDate');
             $table->uuid('assetProcurementId');
             $table->foreign('assetProcurementId')->references('assetProcurementId')->on('asset_procurements')->onUpdate('cascade')->onDelete('restrict');
-            $table->text('assetProcurementDetailNote')->nullable();
-            $table->date('assetProcurementDetailDate');
-            $table->enum('assetProcurementDetailStatus', ['Approval Required', 'Approved by Manager', 'Rejected by Manager', 'Approved by IT Manager', 'Rejected by IT Manager', 'Asset Purchase', 'Asset Movement', 'Asset Deployment']);
+            $table->char('locationId', 8);
+            $table->foreign('locationId')->references('locationId')->on('locations')->onUpdate('cascade')->onDelete('restrict');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('asset_procurement_details');
+        Schema::dropIfExists('asset_movements');
     }
 };

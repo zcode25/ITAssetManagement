@@ -33,6 +33,10 @@
               <div class="card-body">
                 {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
                 <div class="form-group">
+                  <label for="assetProcurementNumber" class="form-label">Procurement Number <span class="text-danger">*</span></label>
+                  <p>{{ $assetProcurement->assetProcurementNumber }}</p>
+                </div>
+                <div class="form-group">
                   <label for="employeeName" class="form-label">Name <span class="text-danger">*</span></label>
                   <p>{{ $assetProcurement->user->employeeName }}</p>
                 </div>
