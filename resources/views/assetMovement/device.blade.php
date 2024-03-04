@@ -127,12 +127,12 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="/assetProcurement/device/store/{{ $assetProcurement->assetProcurementId }}" method="POST" class="form-horizontal">
+            <form action="/assetMovement/device/store/{{ $assetProcurement->assetProcurementId }}" method="POST" class="form-horizontal">
             @csrf
             <div class="card-body">
                 <div class="form-group">
-                    <label for="assetModelId" class="form-label">Asset Deployment Ready <span class="text-danger">*</span></label>
-                    <select class="form-control select2bs4" id="assetModelId" name="assetModelId" data-placeholder="Select a Asset Model">
+                    <label for="assetDeploymentId" class="form-label">Asset Deployment Ready <span class="text-danger">*</span></label>
+                    <select class="form-control select2bs4" id="assetDeploymentId" name="assetDeploymentId" data-placeholder="Select a Asset Deployment">
                         <option value=""></option>
                         @foreach ($assetDeployments as $assetDeployment)
                             @if (old('assetDeploymentId') == $assetDeployment->assetDeploymentId)
@@ -150,14 +150,14 @@
                 {{-- @php
                     dd(count($assetProcurementDevices))
                 @endphp --}}
-                @if (count($assetProcurementDevices) > 0)
+                @if (count($assetMovementDevices) > 0)
                 <table class="table table-sm">
                 <thead>
                     <tr>
                     <th>No</th>
+                    <th>Deployment Number</th>
                     <th>Device</th>
-                    <th>Device Image</th>
-                    <th>Quantity</th>
+                    <th>SN</th>
                     <th>Action</th>
                     </tr>
                 </thead>
@@ -165,14 +165,14 @@
                     @php
                         $i = 1;
                     @endphp
-                    @foreach ($assetProcurementDevices as $assetProcurementDevice)
+                    @foreach ($assetMovementDevices as $assetMovementDevice)
                     <tr>
                     <td>{{ $i++ }}</td>
-                    <td>{{ $assetProcurementDevice->assetModel->assetModelName }}</td>
-                    <td><img src="{{ asset('storage/' .  $assetProcurementDevice->assetModel->assetModelImage ) }}" alt="{{ $assetProcurementDevice->assetModel->assetModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
-                    <td>{{ $assetProcurementDevice->assetProcurementDeviceQuantity }}</td>
+                    <td>{{ $assetMovementDevice->assetDeployment->assetDeploymentNumber }}</td>
+                    <td>{{ $assetMovementDevice->assetDeployment->assetModel->assetModelName }}</td>
+                    <td>{{ $assetMovementDevice->assetDeployment->assetSerialNumber }}</td>
                     <td>
-                        <a href="/assetProcurement/device/destroy/{{ $assetProcurementDevice->assetProcurementDeviceId }}" class="btn btn-outline-danger btn-sm" data-confirm-delete="true">Delete</a>
+                        <a href="/assetMovement/device/destroy/{{ $assetMovementDevice->assetMovementDeviceId }}" class="btn btn-outline-danger btn-sm" data-confirm-delete="true">Delete</a>
                     </td>
                     </tr>
                     @endforeach

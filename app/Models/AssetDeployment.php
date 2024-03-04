@@ -28,4 +28,8 @@ class AssetDeployment extends Model
     public function user(){
         return $this->belongsTo(User::class, 'userId');
     }
+
+    public function assetMovementDevice(){
+        return $this->hasMany(AssetMovementDevice::class, 'assetDeploymentId', 'assetDeploymentId');
+    }
 }

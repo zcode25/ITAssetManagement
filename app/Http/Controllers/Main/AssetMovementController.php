@@ -11,6 +11,7 @@ use App\Models\AssetProcurement;
 use App\Http\Controllers\Controller;
 use App\Models\AssetDeployment;
 use App\Models\AssetModel;
+use App\Models\AssetMovementDevice;
 use App\Models\AssetProcurementDetail;
 use App\Models\AssetProcurementDevice;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -68,8 +69,23 @@ class AssetMovementController extends Controller
             'assetDeployments' => AssetDeployment::where('locationId', $assetMovement->locationId)->get(),
             'assetProcurement' => AssetProcurement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first(),
             'assetMovement' => AssetMovement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first(),
+            'assetMovementDevices' => AssetMovementDevice::where('assetMovementId', $assetMovement->assetMovementId)->get(),
             'assetProcurementDevices' => AssetProcurementDevice::where('assetProcurementId', $assetProcurement->assetProcurementId)->get(),
             'locations' => Location::whereNot('locationId', $assetProcurement->user->locationId)->get(),
         ]);
+    }
+
+    public function deviceStore(AssetProcurement $assetProcurement, Request $request) {
+        $validatedData = $request->validate([
+            'assetDeploymentId' => 'required',
+        ]);
+
+        $assetMovement = AssetMovement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first();
+        $validatedData['assetMovementId'] =  $assetMovement->assetMovementId;
+        $validatedData['assetMovementDeviceId'] =  Str::uuid();
+
+        AssetMovementDevice::Create($validatedData);
+
+        return back();
     }
 }
