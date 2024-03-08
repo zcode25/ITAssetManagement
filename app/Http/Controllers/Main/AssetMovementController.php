@@ -10,6 +10,7 @@ use App\Models\AssetMovement;
 use App\Models\AssetProcurement;
 use App\Http\Controllers\Controller;
 use App\Models\AssetDeployment;
+use App\Models\AssetDeploymentDetail;
 use App\Models\AssetModel;
 use App\Models\AssetMovementDevice;
 use App\Models\AssetProcurementDetail;
@@ -61,6 +62,9 @@ class AssetMovementController extends Controller
     }
     
     public function device(AssetProcurement $assetProcurement) {
+        $title = 'Delete Data!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
 
         $assetMovement = AssetMovement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first();
         // dd($assetMovement);
@@ -86,6 +90,73 @@ class AssetMovementController extends Controller
 
         AssetMovementDevice::Create($validatedData);
 
+
+
         return back();
+    }
+
+    public function deviceDestroy(AssetMovementDevice $assetMovementDevice) {
+        try{
+            AssetMovementDevice::where('assetMovementDeviceId', $assetMovementDevice->assetMovementDeviceId)->delete();
+        } catch (\Illuminate\Database\QueryException){
+            return back()->with([
+                'error' => 'Data cannot be deleted, because the data is still needed!',
+            ]);
+        }
+        
+        return back();
+    }
+
+    public function deviceSave(AssetMovement $assetMovement) {
+
+        $assetMovementDevices = AssetMovementDevice::where('assetMovementId', $assetMovement->assetMovementId)->get();
+        $assetProcurement = AssetProcurement::where('assetProcurementId', $assetMovement->assetProcurementId)->first();
+
+        foreach ($assetMovementDevices as $assetMovementDevice) {
+            AssetDeployment::where('assetDeploymentId', $assetMovementDevice->assetDeploymentId)->update([
+                'userId' => null,
+                'locationId' => $assetProcurement->locationId,
+                'assetDeploymentStatus' => 'Asset Movement',
+            ]);
+
+            $assetDeploymentDetail['assetDeploymentDetailId'] = Str::uuid();
+            $assetDeploymentDetail['assetDeploymentId'] = $assetMovementDevice->assetDeploymentId;
+            $assetDeploymentDetail['userId'] = null;
+            $assetDeploymentDetail['locationId'] = $assetProcurement->locationId;
+            $assetDeploymentDetail['assetDeploymentDetailDate'] = date('Y-m-d');
+            $assetDeploymentDetail['assetDeploymentDetailNote'] = 'Movement';
+            $assetDeploymentDetail['assetDeploymentDetailStatus'] = 'Asset Movement';
+            AssetDeploymentDetail::Create($assetDeploymentDetail);
+
+            sleep(1);
+
+            AssetDeployment::where('assetDeploymentId', $assetMovementDevice->assetDeploymentId)->update([
+                'userId' => null,
+                'locationId' => $assetProcurement->locationId,
+                'assetDeploymentStatus' => 'Deployment Ready',
+            ]);
+
+            $assetDeploymentDetail['assetDeploymentDetailId'] = Str::uuid();
+            $assetDeploymentDetail['assetDeploymentId'] = $assetMovementDevice->assetDeploymentId;
+            $assetDeploymentDetail['userId'] = null;
+            $assetDeploymentDetail['locationId'] = $assetProcurement->locationId;
+            $assetDeploymentDetail['assetDeploymentDetailDate'] = date('Y-m-d');
+            $assetDeploymentDetail['assetDeploymentDetailNote'] = 'Deployment Ready';
+            $assetDeploymentDetail['assetDeploymentDetailStatus'] = 'Deployment Ready';
+            AssetDeploymentDetail::Create($assetDeploymentDetail);
+        }
+
+        AssetProcurement::where('assetProcurementId', $assetMovement->assetProcurementId)->update([
+            'assetProcurementStatus' => 'Asset Deployment',
+        ]);
+
+        $assetProcurementDetail['assetProcurementDetailId'] =  Str::uuid();
+        $assetProcurementDetail['assetProcurementId'] =  $assetProcurement->assetProcurementId;
+        $assetProcurementDetail['assetProcurementDetailDate'] = date('Y-m-d');
+        $assetProcurementDetail['assetProcurementDetailStatus'] = 'Asset Deployment';
+        
+        AssetProcurementDetail::Create($assetProcurementDetail);
+
+        return redirect('/assetProcurement')->with('success', 'Data saved successfully');
     }
 }

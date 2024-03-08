@@ -61,15 +61,8 @@ $menuData = json_decode($jsonData, true);
               <td>{{ $assetProcurement->assetProcurementNumber }}</td>
               <td>{{ $assetProcurement->assetProcurementDate }}</td>
               <td>{{ $assetProcurement->user->employeeName }}</td>
-              @if ($assetProcurement->user->managerId)
-                @php
-                  $manager = User::where('userId', $assetProcurement->user->managerId)->first()
-                @endphp
-                <td>{{ $manager->employeeName }}</td>
-              @else
-                <td></td>                  
-              @endif
-              <td>{{ $assetProcurement->user->location->company->companyName }} - {{ $assetProcurement->user->location->locationName }}</td>
+              <td>{{ $assetProcurement->manager->employeeName }}</td>
+              <td>{{ $assetProcurement->location->company->companyName }} - {{ $assetProcurement->location->locationName }}</td>
               <td>{{ $assetProcurement->assetProcurementStatus }}</td>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
               <td class="py-0 align-middle">

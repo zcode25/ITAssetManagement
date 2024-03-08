@@ -54,7 +54,7 @@ class AssetDeploymentController extends Controller
 
     public function deploymentReady() {
         return view('assetDeployment.deploymentReady', [
-            'assetDeployments' => ModelsAssetDeployment::where('assetDeploymentStatus', 'Deployment Ready')->get(),
+            'assetDeployments' => ModelsAssetDeployment::where('assetDeploymentStatus', 'Deployment Ready')->where('locationId', auth()->user()->locationId)->get(),
         ]);
     }
 

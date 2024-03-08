@@ -18,6 +18,9 @@ return new class extends Migration
             $table->uuid('userId');
             $table->foreign('userId')->references('userId')->on('users')->onUpdate('cascade')->onDelete('restrict');
             $table->uuid('managerId')->nullable();
+            $table->foreign('managerId')->references('userId')->on('users')->onUpdate('cascade')->onDelete('restrict');
+            $table->char('locationId', 8)->nullable();
+            $table->foreign('locationId')->references('locationId')->on('locations')->onUpdate('cascade')->onDelete('restrict');
             $table->text('assetProcurementNote')->nullable();
             $table->enum('assetProcurementType', ['Asset Purchase', 'Asset Lending', 'Asset Movement'])->nullable();
             $table->enum('assetProcurementStatus', ['Approval Required', 'Approved by Manager', 'Rejected by Manager', 'Approved by IT Manager', 'Rejected by IT Manager', 'Asset Purchase', 'Asset Movement', 'Asset Deployment']);

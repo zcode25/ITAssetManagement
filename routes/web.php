@@ -12,6 +12,7 @@ use App\Http\Controllers\Main\AssetPurchaseController as MainAssetPurchaseContro
 use App\Http\Controllers\Main\AssetRepairController;
 use App\Http\Controllers\Main\CategoryController;
 use App\Http\Controllers\Main\CompanyController as MainCompanyController;
+use App\Http\Controllers\Main\ConsumableModelController;
 use App\Http\Controllers\Main\DashboardController as MainDashboardController;
 use App\Http\Controllers\Main\DepartementController;
 use App\Http\Controllers\Main\LocationController as MainLocationController;
@@ -176,6 +177,8 @@ Route::controller(AssetMovementController::class)->group(function() {
     Route::post('/assetMovement/movement/store/{assetProcurement:assetProcurementId}', 'movementStore')->name('assetMovement.movementStore')->middleware('auth');
     Route::get('/assetMovement/device/{assetProcurement:assetProcurementId}', 'device')->name('assetMovement.device')->middleware('auth');
     Route::post('/assetMovement/device/store/{assetProcurement:assetProcurementId}', 'deviceStore')->name('assetMovement.deviceStore')->middleware('auth');
+    Route::delete('/assetMovement/device/destroy/{assetMovementDevice:assetMovementDeviceId}', 'deviceDestroy')->name('assetMovement.deviceDestroy')->middleware('auth');
+    Route::get('/assetMovement/device/save/{assetMovement:assetMovementId}', 'deviceSave')->name('assetMovement.deviceSave')->middleware('auth');
 });
 
 Route::controller(AssetDeploymentController::class)->group(function() {
@@ -211,4 +214,9 @@ Route::controller(AssetRepairController::class)->group(function() {
     Route::get('/assetRepair', 'index')->name('assetRepair.index')->middleware('auth', 'check.menu.access:assetRepairIndex');
     Route::get('/assetRepair/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetRepair.detail')->middleware('auth', 'check.menu.access:assetRepairIndex');
     Route::get('/assetRepair/manage/{assetDeployment:assetDeploymentId}', 'manage')->name('assetRepair.manage')->middleware('auth', 'check.menu.access:assetRepairIndex');
+});
+
+Route::controller(ConsumableModelController::class)->group(function() {
+    Route::get('/consumableModel', 'index')->middleware('auth');
+    Route::get('/consumableModel/create', 'create')->middleware('auth');
 });

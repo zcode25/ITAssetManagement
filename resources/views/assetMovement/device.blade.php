@@ -42,7 +42,7 @@
                   </div>
                   <div class="form-group">
                     <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
-                    <p>{{ $assetProcurement->user->location->company->companyName }} - {{ $assetProcurement->user->location->locationName }}</p>
+                    <p>{{ $assetProcurement->location->company->companyName }} - {{ $assetProcurement->location->locationName }}</p>
                   </div>
                   <div class="form-group">
                     <label for="departementId" class="form-label">Departement <span class="text-danger">*</span></label>
@@ -54,14 +54,7 @@
                   </div>
                   <div class="form-group">
                     <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
-                    @if ($assetProcurement->user->managerId)
-                      @php
-                        $manager = User::where('userId', $assetProcurement->user->managerId)->first()
-                      @endphp
-                      <p>{{ $manager->employeeName }}</p>
-                    @else
-                      <p></p>                  
-                    @endif
+                    <p>{{ $assetProcurement->manager->employeeName }}</p>
                   </div>
                   <hr>
                   <div class="form-group">
@@ -186,7 +179,7 @@
             </form>
             <!-- /.card-body -->
             <div class="card-footer">
-                <a href="/assetProcurement/save" class="btn btn-success float-right">Save</a>
+              <a href="/assetMovement/device/save/{{ $assetMovement->assetMovementId }}" class="btn btn-success float-right">Save</a>
             </div>
             <!-- /.card-footer -->
         </div>

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreign('locationId')->references('locationId')->on('locations')->onUpdate('cascade')->onDelete('restrict');
             $table->date('assetDeploymentDetailDate');
             $table->text('assetDeploymentDetailNote')->nullable();
-            $table->enum('assetDeploymentDetailStatus', ['Pre Deployment', 'Deployment Ready', 'Checkout', 'Archive', 'Repair', 'Broken']);
+            $table->enum('assetDeploymentDetailStatus', ['Pre Deployment', 'Deployment Ready', 'Checkout', 'Archive', 'Repair', 'Broken', 'Asset Movement']);
             $table->timestamps();
         });
     }

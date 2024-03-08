@@ -56,6 +56,7 @@ class AssetProcurementController extends Controller
         $user = User::where('userId', $request->userId)->first();
         $manager = User::where('userId', $user->managerId)->first();
         $validatedData['managerId'] = $manager->userId;
+        $validatedData['locationId'] = $user->locationId;
         $validatedData['assetProcurementId'] = Str::uuid();
         $validatedData['assetProcurementNumber'] = IdGenerator::generate(['table' => 'asset_procurements', 'field' => 'assetProcurementNumber', 'length' => 20, 'prefix' => 'IT/PO/'. date('d/m/y', strtotime($validatedData['assetProcurementDate'])) . '/']);
         $validatedData['assetProcurementStatus'] = 'Approval Required';
