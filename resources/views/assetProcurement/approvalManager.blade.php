@@ -41,7 +41,7 @@ $menuData = json_decode($jsonData, true);
           </div>
         </div>
         <div class="card-body">
-          <table id="example1" class="table table-hover">
+          <table id="example2" class="table table-hover">
             <thead>
             <tr>
               <th>Procurement Number</th>

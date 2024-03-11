@@ -96,6 +96,13 @@
                     @enderror
                   </div>
                   <div class="form-group">
+                    <label for="assetDeploymentDetailNote" class="form-label">Note <span class="text-danger">*</span></label>
+                    <textarea class="form-control @error('assetDeploymentDetailNote') is-invalid @enderror"s="3" id="assetDeploymentDetailNote" name="assetDeploymentDetailNote">{{ old('assetDeploymentDetailNote') }}</textarea>
+                    @error('assetDeploymentDetailNote') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div> 
+                  <div class="form-group">
                     <label for="assetDeploymentStatus" class="form-label">Status <span class="text-danger">*</span></label>
                     <select class="form-control select2bs4" id="assetDeploymentStatus" name="assetDeploymentStatus" data-placeholder="Select a Type">
                       <option value=""></option>
@@ -119,56 +126,7 @@
             </div>
             <!-- /.card -->
         </div>
-        <div class="col-xl-6">
-            <!-- Horizontal Form -->
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Form Procurement</h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form action="/assetProcurementApprovalITManager/approval/store/{{ $assetDeployment->assetDeploymentId }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
-                @csrf
-                <div class="card-body">
-                  {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
-                  <div class="form-group">
-                    <label for="assetProcurementNumber" class="form-label">Procurement Number <span class="text-danger">*</span></label>
-                    <p>{{ $assetDeployment->assetprocurement->assetProcurementNumber }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="employeeName" class="form-label">Name <span class="text-danger">*</span></label>
-                    <p>{{ $assetDeployment->assetProcurement->user->employeeName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
-                    <p>{{ $assetDeployment->assetProcurement->user->location->company->companyName }} - {{ $assetDeployment->assetProcurement->user->location->locationName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="departementId" class="form-label">Departement <span class="text-danger">*</span></label>
-                    <p>{{ $assetDeployment->assetProcurement->user->departement->departementName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="positionId" class="form-label">Position <span class="text-danger">*</span></label>
-                    <p>{{ $assetDeployment->assetProcurement->user->position->positionName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
-                    @if ($assetDeployment->assetProcurement->user->managerId)
-                      @php
-                        $manager = User::where('userId', $assetDeployment->assetProcurement->managerId)->first()
-                      @endphp
-                      <p>{{ $manager->employeeName }}</p>
-                    @else
-                      <p></p>                  
-                    @endif
-                  </div>
-                </div>
-                <!-- /.card-body -->
-                
-              </form>
-            </div>
-            <!-- /.card -->
-        </div>
+        
       </div>
       
 

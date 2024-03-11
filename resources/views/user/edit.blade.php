@@ -30,7 +30,7 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="employeeNumber" class="form-label">Employee Number <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control @error('employeeNumber') is-invalid @enderror" id="employeeNumber" name="employeeNumber" value="{{ old('employeeNumber', $user->employeeNumber) }}" readonly>
+                    <input type="text" class="form-control @error('employeeNumber') is-invalid @enderror" id="employeeNumber" name="employeeNumber" value="{{ old('employeeNumber', $user->employeeNumber) }}">
                     @error('employeeNumber') 
                       <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

@@ -33,23 +33,23 @@
                 <div class="card-body">
                   <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}">
                   <div class="form-group">
-                    <label for="employeeName" class="form-label">Name <span class="text-danger">*</span></label>
+                    <label for="employeeName" class="form-label">Name</label>
                     <p>{{ $user->employeeName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
+                    <label for="locationId" class="form-label">Location</label>
                     <p>{{ $user->location->company->companyName }} - {{ $user->location->locationName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="departementId" class="form-label">Departement <span class="text-danger">*</span></label>
+                    <label for="departementId" class="form-label">Departement</label>
                     <p>{{ $user->departement->departementName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="positionId" class="form-label">Position <span class="text-danger">*</span></label>
+                    <label for="positionId" class="form-label">Position</label>
                     <p>{{ $user->position->positionName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
+                    <label for="managerId" class="form-label">Manager</label>
                     @if ($user->managerId)
                       @php
                         $manager = User::where('userId', $user->managerId)->first()

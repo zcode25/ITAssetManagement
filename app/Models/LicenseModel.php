@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AccessoryModel extends Model
+class LicenseModel extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $primaryKey = 'accessoryModelId';
+    protected $primaryKey = 'licenseModelId';
     public $incrementing = false;
     protected $keyType = 'string';
 

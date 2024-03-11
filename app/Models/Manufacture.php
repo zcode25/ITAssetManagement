@@ -13,10 +13,6 @@ class Manufacture extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
-    public function accessoryModel(){
-        return $this->hasMany(AccessoryModel::class, 'manufactureId', 'manufactureId');
-    }
-
     public function assetModel(){
         return $this->hasMany(assetModel::class, 'manufactureId', 'manufactureId');
     }

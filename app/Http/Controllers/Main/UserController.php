@@ -201,6 +201,7 @@ class UserController extends Controller
 
     public function update(Request $request, User $user) {
         $validatedData = $request->validate([
+            'employeeNumber' => 'required',
             'employeeName' => 'required|max:100',
             'locationId' => 'required',
             'departementId' => 'required',
@@ -214,7 +215,19 @@ class UserController extends Controller
             'employeeProvince' => 'required|max:100',
         ]);
 
-        User::where('userId', $user->userId)->update($validatedData);
+        $user = user::where('userId', $user->userId)->first();
+
+        if ($request->employeeNumber == $user->employeeNumber) {
+            $validatedData['employeeNumber'] = $request->employeeNumber;
+        }
+
+        try{
+            User::where('userId', $user->userId)->update($validatedData);
+        } catch (\Illuminate\Database\QueryException){
+            return back()->with([
+                'error' => 'The employee number has already been taken.',
+            ]);
+        }
 
         return redirect('/user')->with('success', 'Data updated successfully');
     }

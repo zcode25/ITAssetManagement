@@ -33,62 +33,36 @@
                 <div class="card-body">
                   {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
                   <div class="form-group">
-                    <label for="assetProcurementNumber" class="form-label">Procurement Number <span class="text-danger">*</span></label>
+                    <label for="assetProcurementNumber" class="form-label">Procurement Number</label>
                     <p>{{ $assetProcurement->assetProcurementNumber }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="employeeName" class="form-label">Name <span class="text-danger">*</span></label>
-                    <p>{{ $assetProcurement->user->employeeName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
-                    <p>{{ $assetProcurement->location->company->companyName }} - {{ $assetProcurement->location->locationName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="departementId" class="form-label">Departement <span class="text-danger">*</span></label>
-                    <p>{{ $assetProcurement->user->departement->departementName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="positionId" class="form-label">Position <span class="text-danger">*</span></label>
-                    <p>{{ $assetProcurement->user->position->positionName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
-                    <p>{{ $assetProcurement->manager->employeeName }}</p>
-                  </div>
-                  <hr>
-                  <div class="form-group">
-                    <label for="assetProcurementDate" class="form-label">Procurement Date <span class="text-danger">*</span></label>
+                    <label for="assetProcurementDate" class="form-label">Procurement Date</label>
                     <p>{{ $assetProcurement->assetProcurementDate }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="assetProcurementNote" class="form-label">Procurement Note <span class="text-danger">*</span></label>
-                    <p>{{ $assetProcurement->assetProcurementNote }}</p>
+                    <label for="employeeName" class="form-label">Name</label>
+                    <p>{{ $assetProcurement->user->employeeName }}</p>
                   </div>
-                  <hr>
-                  <label for="assetProcurementHistory" class="form-label mb-3">Procurement History <span class="text-danger">*</span></label>
-                  <div class="timeline">
-                    @foreach($assetProcurementDetails as $assetProcurementDetail)
-                    <!-- timeline item -->
-                    <div>
-                      @if ($loop->first)
-                        <i class="fas fa-circle bg-success"></i> <!-- Untuk item pertama -->
-                      @else
-                        <i class="fas fa-circle bg-secondary"></i> <!-- Untuk item terakhir -->
-                      @endif
-                      <div class="timeline-item">
-                        <span class="time">{{ $assetProcurementDetail->assetProcurementDetailDate }}</span>
-                        <h3 class="timeline-header"><span class="text-bold">{{ $assetProcurement->assetProcurementNumber }}</span> - {{ $assetProcurementDetail->assetProcurementDetailStatus }}</h3>
-                        @if($assetProcurementDetail->assetProcurementDetailNote)
-                          <div class="timeline-body">{{ $assetProcurementDetail->assetProcurementDetailNote }}</div>
-                        @endif
-                      </div>
-                    </div>
-                    <!-- END timeline item -->
-                    @endforeach
-                    <div>
-                      <i class="fas fa-circle bg-secondary"></i>
-                    </div>
+                  <div class="form-group">
+                    <label for="locationId" class="form-label">Location</label>
+                    <p>{{ $assetProcurement->location->company->companyName }} - {{ $assetProcurement->location->locationName }}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="departementId" class="form-label">Departement</label>
+                    <p>{{ $assetProcurement->user->departement->departementName }}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="positionId" class="form-label">Position</label>
+                    <p>{{ $assetProcurement->user->position->positionName }}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="managerId" class="form-label">Manager</label>
+                    <p>{{ $assetProcurement->manager->employeeName }}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="assetProcurementNote" class="form-label">Procurement Note</label>
+                    <p>{{ $assetProcurement->assetProcurementNote }}</p>
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -132,6 +106,40 @@
             @else
               <p class="text-center">No data available in table</p>
             @endif
+            </div>
+          </div>
+          <!-- /.card -->
+
+          <!-- Horizontal Form -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Procurement History</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="timeline">
+                @foreach($assetProcurementDetails as $assetProcurementDetail)
+                <!-- timeline item -->
+                <div>
+                  @if ($loop->first)
+                    <i class="fas fa-circle bg-success"></i> <!-- Untuk item pertama -->
+                  @else
+                    <i class="fas fa-circle bg-secondary"></i> <!-- Untuk item terakhir -->
+                  @endif
+                  <div class="timeline-item">
+                    <span class="time">{{ $assetProcurementDetail->assetProcurementDetailDate }}</span>
+                    <h3 class="timeline-header"><span class="text-bold">{{ $assetProcurement->assetProcurementNumber }}</span> - {{ $assetProcurementDetail->assetProcurementDetailStatus }}</h3>
+                    @if($assetProcurementDetail->assetProcurementDetailNote)
+                      <div class="timeline-body">{{ $assetProcurementDetail->assetProcurementDetailNote }}</div>
+                    @endif
+                  </div>
+                </div>
+                <!-- END timeline item -->
+                @endforeach
+                <div>
+                  <i class="fas fa-circle bg-secondary"></i>
+                </div>
+              </div>
             </div>
           </div>
           <!-- /.card -->

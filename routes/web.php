@@ -12,9 +12,11 @@ use App\Http\Controllers\Main\AssetPurchaseController as MainAssetPurchaseContro
 use App\Http\Controllers\Main\AssetRepairController;
 use App\Http\Controllers\Main\CategoryController;
 use App\Http\Controllers\Main\CompanyController as MainCompanyController;
+use App\Http\Controllers\Main\ComponentModelController;
 use App\Http\Controllers\Main\ConsumableModelController;
 use App\Http\Controllers\Main\DashboardController as MainDashboardController;
 use App\Http\Controllers\Main\DepartementController;
+use App\Http\Controllers\Main\LicenseModelController;
 use App\Http\Controllers\Main\LocationController as MainLocationController;
 use App\Http\Controllers\Main\ManufactureController;
 use App\Http\Controllers\Main\PositionController;
@@ -123,15 +125,6 @@ Route::controller(CategoryController::class)->group(function() {
     Route::delete('/category/destroy/{category:categoryId}', 'destroy')->name('category.destroy')->middleware('auth', 'check.menu.access:categoryDelete');
 });
 
-Route::controller(AccessoryModelController::class)->group(function() {
-    Route::get('/accessoryModel', 'index')->name('accessoryModel.index')->middleware('auth', 'check.menu.access:accessoryModelIndex');
-    Route::get('/accessoryModel/create', 'create')->name('accessoryModel.create')->middleware('auth', 'check.menu.access:accessoryModelCreate');
-    Route::post('/accessoryModel/store', 'store')->name('accessoryModel.store')->middleware('auth', 'check.menu.access:accessoryModelCreate');
-    Route::get('/accessoryModel/edit/{accessoryModel:accessoryModelId}', 'edit')->name('accessoryModel.edit')->middleware('auth', 'check.menu.access:accessoryModelEdit');
-    Route::post('/accessoryModel/update/{accessoryModel:accessoryModelId}', 'update')->name('accessoryModel.update')->middleware('auth', 'check.menu.access:accessoryModelEdit');
-    Route::delete('/accessoryModel/destroy/{accessoryModel:accessoryModelId}', 'destroy')->name('accessoryModel.destroy')->middleware('auth', 'check.menu.access:accessoryModelDelete');
-});
-
 Route::controller(AssetModelController::class)->group(function() {
     Route::get('/assetModel', 'index')->name('assetModel.index')->middleware('auth', 'check.menu.access:assetModelIndex');
     Route::get('/assetModel/create', 'create')->name('assetModel.create')->middleware('auth', 'check.menu.access:assetModelCreate');
@@ -214,9 +207,4 @@ Route::controller(AssetRepairController::class)->group(function() {
     Route::get('/assetRepair', 'index')->name('assetRepair.index')->middleware('auth', 'check.menu.access:assetRepairIndex');
     Route::get('/assetRepair/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetRepair.detail')->middleware('auth', 'check.menu.access:assetRepairIndex');
     Route::get('/assetRepair/manage/{assetDeployment:assetDeploymentId}', 'manage')->name('assetRepair.manage')->middleware('auth', 'check.menu.access:assetRepairIndex');
-});
-
-Route::controller(ConsumableModelController::class)->group(function() {
-    Route::get('/consumableModel', 'index')->middleware('auth');
-    Route::get('/consumableModel/create', 'create')->middleware('auth');
 });

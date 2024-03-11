@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\AssetDeploymentDetail;
 use App\Models\AssetDeployment as ModelsAssetDeployment;
+use App\Models\Category;
 use App\Models\User;
 
 class AssetDeploymentController extends Controller
@@ -30,11 +31,23 @@ class AssetDeploymentController extends Controller
     }
 
     public function preDeploymentManageStore(ModelsAssetDeployment $assetDeployment, Request $request) {
-        $validatedData = $request->validate([
-            'assetSerialNumber' => 'required|unique:asset_deployments',
-            'assetDeploymentStatus' => 'required',
-            'assetDeploymentImage' => 'required|mimes:png,jpg|max:2048',
-        ]);
+        // dd($request);
+
+        if($assetDeployment->assetModel->category->categoryType != 'License') {
+            $validatedData = $request->validate([
+                'assetSerialNumber' => 'max:50',
+                'assetDeploymentStatus' => 'required',
+                'assetDeploymentImage' => 'required|mimes:png,jpg|max:2048',
+            ]);
+        } else {
+            $validatedData = $request->validate([
+                'assetProductKey' => 'required|max:50',
+                'assetExpirationDate' => 'max:50',
+                'assetDeploymentStatus' => 'required',
+                'assetDeploymentImage' => 'required|mimes:png,jpg|max:2048',
+            ]);
+        }
+        
 
         if($request->file('assetDeploymentImage')) {
             $validatedData['assetDeploymentImage'] = $request->file('assetDeploymentImage')->store('assetDeploymentImage');
@@ -54,13 +67,15 @@ class AssetDeploymentController extends Controller
 
     public function deploymentReady() {
         return view('assetDeployment.deploymentReady', [
-            'assetDeployments' => ModelsAssetDeployment::where('assetDeploymentStatus', 'Deployment Ready')->where('locationId', auth()->user()->locationId)->get(),
+            'assetDeployments' => ModelsAssetDeployment::where('assetDeploymentStatus', 'Deployment Ready')->get(),
+            'categories' => Category::all(),
         ]);
     }
 
     public function deploymentReadyCheckout(ModelsAssetDeployment $assetDeployment) {
         return view('assetDeployment.deploymentReadyCheckout', [
             'assetDeployment' => ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->first(),
+            'assetDeployments' => ModelsAssetDeployment::whereNot('assetDeploymentStatus', 'Pre Deployment')->get(),
             'users'  => User::where('locationId', $assetDeployment->locationId)->get()
         ]);
     }
@@ -68,20 +83,39 @@ class AssetDeploymentController extends Controller
     public function deploymentReadyCheckoutStore(ModelsAssetDeployment $assetDeployment, Request $request) {
         $validatedData = $request->validate([
             'assetDeploymentDetailDate' => 'required',
-            'userId' => 'required',
+            'userId' => 'max:50',
+            'assetId' => 'max:50',
             'assetDeploymentStatus' => 'required',
             'assetDeploymentDetailNote' => 'required',
         ]);
 
-        ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->update([
-            'userId' => $validatedData['userId'],
-            'assetDeploymentStatus' => $validatedData['assetDeploymentStatus'],
-        ]);
+        if(isset($validatedData['userId'])) {
+            $validatedData['assetId'] = null;
+        } else {
+            $validatedData['userId'] = null;
+        }
+
+        if(isset($validatedData['userId'])) {
+            ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->update([
+                'userId' => $validatedData['userId'],
+                'assetDeploymentStatus' => $validatedData['assetDeploymentStatus'],
+            ]);
+        } else {
+            ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->update([
+                'assetId' => $validatedData['assetId'],
+                'locationId' => null,
+                'assetDeploymentStatus' => $validatedData['assetDeploymentStatus'],
+            ]);
+        }
 
         $assetDeploymentDetail['assetDeploymentDetailId'] = Str::uuid();
         $assetDeploymentDetail['assetDeploymentId'] = $assetDeployment['assetDeploymentId'];
-        $assetDeploymentDetail['userId'] = $validatedData['userId'];
-        $assetDeploymentDetail['locationId'] = $assetDeployment['locationId'];
+        if(isset($validatedData['userId'])) {
+            $assetDeploymentDetail['userId'] = $validatedData['userId'];
+            $assetDeploymentDetail['locationId'] = $assetDeployment['locationId'];
+        } else {
+            $assetDeploymentDetail['assetId'] = $validatedData['assetId'];
+        }
         $assetDeploymentDetail['assetDeploymentDetailDate'] = $validatedData['assetDeploymentDetailDate'];
         $assetDeploymentDetail['assetDeploymentDetailNote'] = $validatedData['assetDeploymentDetailNote'];
         $assetDeploymentDetail['assetDeploymentDetailStatus'] = $validatedData['assetDeploymentStatus'];
@@ -92,6 +126,7 @@ class AssetDeploymentController extends Controller
 
     public function detail(ModelsAssetDeployment $assetDeployment) {
         return view('assetDeployment.detail', [
+            'items' => ModelsAssetDeployment::where('assetId', $assetDeployment->assetDeploymentId)->get(),
             'assetDeployment' => ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->first(),
             'users'  => User::where('locationId', $assetDeployment->locationId)->get(),
             'assetDeploymentDetails' => AssetDeploymentDetail::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->orderBy('created_at', 'desc')->get(),

@@ -44,7 +44,8 @@ $menuData = json_decode($jsonData, true);
           <table id="example1" class="table table-hover">
             <thead>
             <tr>
-              <th>Name</th>
+              <th>Employee Name</th>
+              <th>Employee Number</th>
               <th>Company</th>
               <th>Location</th>
               <th>Departement</th>
@@ -58,8 +59,8 @@ $menuData = json_decode($jsonData, true);
             <tbody>
             @foreach ($users as $user)
             <tr>
-
               <td>{{ $user->employeeName }}</td>
+              <td>{{ $user->employeeNumber }}</td>
               <td>{{ $user->location->company->companyName }}</td>
               <td>{{ $user->location->locationName }}</td>
               <td>{{ $user->departement->departementName }}</td>

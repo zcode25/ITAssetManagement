@@ -32,35 +32,79 @@
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="assetDeployNumber" class="form-label">Deployment Number <span class="text-danger">*</span></label>
+                    <label for="assetProcurementId" class="form-label">Procurement Number</label>
+                    <p>{{ $assetDeployment->assetProcurement->assetProcurementNumber }}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="assetDeployNumber" class="form-label">Deployment Number</label>
                     <p>{{ $assetDeployment->assetDeploymentNumber }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="assetDeploymentDate" class="form-label">Deployment Date <span class="text-danger">*</span></label>
+                    <label for="assetDeploymentDate" class="form-label">Deployment Date</label>
                     <p>{{ $assetDeployment->assetDeploymentDate }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
-                    <p>{{ $assetDeployment->location->company->companyName }} - {{ $assetDeployment->location->locationName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="assetModelName" class="form-label">Device <span class="text-danger">*</span></label>
+                    <label for="assetModelName" class="form-label">Device</label>
                     <p>{{ $assetDeployment->assetModel->assetModelName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="categoryId" class="form-label">Category <span class="text-danger">*</span></label>
+                    <label for="categoryId" class="form-label">Category</label>
                     <p>{{ $assetDeployment->assetModel->category->categoryName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="manufactureId" class="form-label">Manufacture <span class="text-danger">*</span></label>
+                    <label for="manufactureId" class="form-label">Manufacture</label>
                     <p>{{ $assetDeployment->assetModel->manufacture->manufactureName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="assetModelNumber" class="form-label">Model No <span class="text-danger">*</span></label>
+                    <label for="assetModelNumber" class="form-label">Model No</label>
                     <p>{{ $assetDeployment->assetModel->assetModelNumber }}</p>
                   </div>
+                  @if ($assetDeployment->assetSerialNumber != null)
                   <div class="form-group">
-                    <label for="assetModelImage" class="form-label">Image <span class="text-danger">*</span></label>
+                    <label for="assetSerialNumber" class="form-label">Serial Number</label>
+                    <p>{{ $assetDeployment->assetSerialNumber }}</p>
+                  </div>
+                  @endif
+                  @if ($assetDeployment->assetId != null)
+                  <div class="form-group">
+                    <label for="assetId" class="form-label">Checked Out To</label>
+                    @php
+                      $asset = assetDeployment::where('assetDeploymentId', $assetDeployment->assetId)->first();
+                    @endphp
+                    <p><i class="fa-solid fa-barcode mr-2"></i> {{ $asset->assetDeploymentNumber }}</p>
+                  </div>
+                  @endif
+                  @if ($assetDeployment->userId != null)
+                  <div class="form-group">
+                    <label for="userId" class="form-label">Checked Out To</label>
+                    <p><i class="fa-regular fa-user mr-2"></i> {{ $assetDeployment->user->employeeName }}</p>
+                  </div>
+                  @endif
+                  @if ($assetDeployment->locationId != null)
+                  <div class="form-group">
+                    <label for="locationId" class="form-label">Location</label>
+                    <p>{{ $assetDeployment->location->company->companyName }} - {{ $assetDeployment->location->locationName }}</p>
+                  </div>
+                  @endif
+                  @if ($assetDeployment->assetProductKey != null)
+                  <div class="form-group">
+                    <label for="assetProductKey" class="form-label">Product Key</label>
+                    <p>{{ $assetDeployment->assetProductKey }}</p>
+                  </div>
+                  @endif
+                  @if ($assetDeployment->assetExpirationDate != null)
+                  <div class="form-group">
+                    <label for="assetExpirationDate" class="form-label">Expiration Date</label>
+                    <p>{{ $assetDeployment->assetExpirationDate }}</p>
+                  </div>
+                  @elseIf($assetDeployment->assetModel->category->categoryType == 'License')
+                  <div class="form-group">
+                    <label for="assetExpirationDate" class="form-label">Expiration Date</label>
+                    <p>Lifetime</p>
+                  </div>
+                  @endif
+                  <div class="form-group">
+                    <label for="assetModelImage" class="form-label">Image</label>
                     <div class="mb-3">
                         <img src="{{ asset('storage/' .  $assetDeployment->assetModel->assetModelImage ) }}" alt="{{ $assetDeployment->assetModel->assetModelName }}" class="img-responsive" style="max-height: 300px; width: auto;">
                     </div>
@@ -73,13 +117,34 @@
                       <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                   </div>
+                  @if ($assetDeployment->assetModel->category->categoryType == 'License')
                   <div class="form-group">
-                    <label for="assetSerialNumber" class="form-label">Serial Number <span class="text-danger">*</span></label>
+                    <label for="assetProductKey" class="form-label">Product Key</label>
+                    <input type="text" class="form-control @error('assetProductKey') is-invalid @enderror" id="assetProductKey" name="assetProductKey" value="{{ old('assetProductKey') }}">
+                    @error('assetProductKey') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
+                  <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="lifetimeCheckbox">
+                    <label class="form-check-label" for="lifetimeCheckbox">Lifetime</label>
+                  </div>
+                  <div class="form-group" id="expirationDateGroup">
+                    <label for="assetExpirationDate" class="form-label">Expiration Date <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control @error('assetExpirationDate') is-invalid @enderror" id="assetExpirationDate" name="assetExpirationDate" value="{{ old('assetExpirationDate') }}">
+                    @error('assetExpirationDate') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
+                  @else
+                  <div class="form-group">
+                    <label for="assetSerialNumber" class="form-label">Serial Number</label>
                     <input type="text" class="form-control @error('assetSerialNumber') is-invalid @enderror" id="assetSerialNumber" name="assetSerialNumber" value="{{ old('assetSerialNumber') }}">
                     @error('assetSerialNumber') 
                       <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                   </div>
+                  @endif
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
@@ -91,96 +156,7 @@
             </div>
             <!-- /.card -->
         </div>
-        <div class="col-xl-6">
-            <!-- Horizontal Form -->
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Form Procurement</h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form action="/assetProcurementApprovalITManager/approval/store/{{ $assetDeployment->assetDeploymentId }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
-                @csrf
-                <div class="card-body">
-                  {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
-                  <div class="form-group">
-                    <label for="assetProcurementNumber" class="form-label">Procurement Number <span class="text-danger">*</span></label>
-                    <p>{{ $assetDeployment->assetprocurement->assetProcurementNumber }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="employeeName" class="form-label">Name <span class="text-danger">*</span></label>
-                    <p>{{ $assetDeployment->assetProcurement->user->employeeName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
-                    <p>{{ $assetDeployment->assetProcurement->user->location->company->companyName }} - {{ $assetDeployment->assetProcurement->user->location->locationName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="departementId" class="form-label">Departement <span class="text-danger">*</span></label>
-                    <p>{{ $assetDeployment->assetProcurement->user->departement->departementName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="positionId" class="form-label">Position <span class="text-danger">*</span></label>
-                    <p>{{ $assetDeployment->assetProcurement->user->position->positionName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
-                    @if ($assetDeployment->assetProcurement->user->managerId)
-                      @php
-                        $manager = User::where('userId', $assetDeployment->assetProcurement->managerId)->first()
-                      @endphp
-                      <p>{{ $manager->employeeName }}</p>
-                    @else
-                      <p></p>                  
-                    @endif
-                  </div>
-                </div>
-                <!-- /.card-body -->
-                
-              </form>
-            </div>
-            <!-- /.card -->
-        </div>
-        {{-- <div class="col-xl-6">
-          <!-- Horizontal Form -->
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Form Create Procurement</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <!-- form start -->
-            @if (count($assetProcurementDevices) > 0)
-            <table class="table table-sm">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Device</th>
-                  <th>Device Image</th>
-                  <th>Quantity</th>
-                </tr>
-              </thead>
-              <tbody>
-                @php
-                    $i = 1;
-                @endphp
-                @foreach ($assetProcurementDevices as $assetProcurementDevice)
-                <tr>
-                  <td>{{ $i++ }}</td>
-                  <td>{{ $assetProcurementDevice->assetModel->assetModelName }}</td>
-                  <td><img src="{{ asset('storage/' .  $assetProcurementDevice->assetModel->assetModelImage ) }}" alt="{{ $assetProcurementDevice->assetModel->assetModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
-                  <td>{{ $assetProcurementDevice->assetProcurementDeviceQuantity }}</td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-            @else
-              <p class="text-center">No data available in table</p>
-            @endif
-            </div>
-          </div>
-          <!-- /.card -->
-        </div> --}}
+        
       </div>
       
 
@@ -188,5 +164,27 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var lifetimeCheckbox = document.getElementById('lifetimeCheckbox');
+        var expirationDateGroup = document.getElementById('expirationDateGroup');
+    
+        function toggleExpirationDate() {
+            // Check if the lifetime checkbox is checked
+            if (lifetimeCheckbox.checked) {
+                expirationDateGroup.style.display = 'none'; // Hide
+            } else {
+                expirationDateGroup.style.display = 'block'; // Show
+            }
+        }
+    
+        // Listen for changes on the lifetime checkbox
+        lifetimeCheckbox.addEventListener('change', toggleExpirationDate);
+    
+        // Initial check in case of pre-filled forms
+        toggleExpirationDate();
+    });
+  </script>
 
 @endsection

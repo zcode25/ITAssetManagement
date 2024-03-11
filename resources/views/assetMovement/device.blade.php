@@ -33,40 +33,44 @@
                 <div class="card-body">
                   {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
                   <div class="form-group">
-                    <label for="assetProcurementNumber" class="form-label">Procurement Number <span class="text-danger">*</span></label>
+                    <label for="assetProcurementNumber" class="form-label">Procurement Number</label>
                     <p>{{ $assetProcurement->assetProcurementNumber }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="employeeName" class="form-label">Name <span class="text-danger">*</span></label>
+                    <label for="assetProcurementDate" class="form-label">Procurement Date</label>
+                    <p>{{ $assetProcurement->assetProcurementDate }}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="employeeName" class="form-label">Name</label>
                     <p>{{ $assetProcurement->user->employeeName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
+                    <label for="locationId" class="form-label">Location</label>
                     <p>{{ $assetProcurement->location->company->companyName }} - {{ $assetProcurement->location->locationName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="departementId" class="form-label">Departement <span class="text-danger">*</span></label>
+                    <label for="departementId" class="form-label">Departement</label>
                     <p>{{ $assetProcurement->user->departement->departementName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="positionId" class="form-label">Position <span class="text-danger">*</span></label>
+                    <label for="positionId" class="form-label">Position</label>
                     <p>{{ $assetProcurement->user->position->positionName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
+                    <label for="managerId" class="form-label">Manager</label>
                     <p>{{ $assetProcurement->manager->employeeName }}</p>
                   </div>
                   <hr>
                   <div class="form-group">
-                    <label for="assetMovementNumber" class="form-label">Movement Number <span class="text-danger">*</span></label>
+                    <label for="assetMovementNumber" class="form-label">Movement Number</label>
                     <p>{{ $assetMovement->assetMovementNumber }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="assetMovementDate" class="form-label">Movement Date <span class="text-danger">*</span></label>
+                    <label for="assetMovementDate" class="form-label">Movement Date</label>
                     <p>{{ $assetMovement->assetMovementDate }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
+                    <label for="locationId" class="form-label">Location</label>
                     <p>{{ $assetMovement->location->company->companyName }} - {{ $assetMovement->location->locationName }}</p>
                   </div>
                 </div>
@@ -129,9 +133,9 @@
                         <option value=""></option>
                         @foreach ($assetDeployments as $assetDeployment)
                             @if (old('assetDeploymentId') == $assetDeployment->assetDeploymentId)
-                                <option value="{{ $assetDeployment->assetDeploymentId }}" selected>{{ $assetDeployment->assetDeploymentNumber }} - {{ $assetDeployment->assetModel->assetModelName }} - SN: {{ $assetDeployment->assetSerialNumber }}</option>
+                                <option value="{{ $assetDeployment->assetDeploymentId }}" selected>({{ $assetDeployment->assetDeploymentNumber }}) - {{ $assetDeployment->assetModel->assetModelName }}</option>
                                 @else
-                                <option value="{{ $assetDeployment->assetDeploymentId }}">{{ $assetDeployment->assetDeploymentNumber }} - {{ $assetDeployment->assetModel->assetModelName }} - SN: {{ $assetDeployment->assetSerialNumber }}</option>
+                                <option value="{{ $assetDeployment->assetDeploymentId }}">({{ $assetDeployment->assetDeploymentNumber }}) - {{ $assetDeployment->assetModel->assetModelName }}</option>
                             @endif
                         @endforeach
                     </select>

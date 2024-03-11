@@ -32,46 +32,64 @@
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="assetDeployNumber" class="form-label">Deployment Number <span class="text-danger">*</span></label>
+                    <label for="assetProcurementId" class="form-label">Procurement Number</label>
+                    <p>{{ $assetDeployment->assetProcurement->assetProcurementNumber }}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="assetDeployNumber" class="form-label">Deployment Number</label>
                     <p>{{ $assetDeployment->assetDeploymentNumber }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="assetDeploymentDate" class="form-label">Deployment Date <span class="text-danger">*</span></label>
+                    <label for="assetDeploymentDate" class="form-label">Deployment Date</label>
                     <p>{{ $assetDeployment->assetDeploymentDate }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
+                    <label for="locationId" class="form-label">Location</label>
                     <p>{{ $assetDeployment->location->company->companyName }} - {{ $assetDeployment->location->locationName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="assetModelName" class="form-label">Device <span class="text-danger">*</span></label>
+                    <label for="assetModelName" class="form-label">Device</label>
                     <p>{{ $assetDeployment->assetModel->assetModelName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="categoryId" class="form-label">Category <span class="text-danger">*</span></label>
+                    <label for="categoryId" class="form-label">Category</label>
                     <p>{{ $assetDeployment->assetModel->category->categoryName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="manufactureId" class="form-label">Manufacture <span class="text-danger">*</span></label>
+                    <label for="manufactureId" class="form-label">Manufacture</label>
                     <p>{{ $assetDeployment->assetModel->manufacture->manufactureName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="assetModelNumber" class="form-label">Model No <span class="text-danger">*</span></label>
+                    <label for="assetModelNumber" class="form-label">Model No</label>
                     <p>{{ $assetDeployment->assetModel->assetModelNumber }}</p>
                   </div>
+                  @if ($assetDeployment->assetSerialNumber != null)
                   <div class="form-group">
-                    <label for="assetSerialNumber" class="form-label">Serial Number <span class="text-danger">*</span></label>
+                    <label for="assetSerialNumber" class="form-label">Serial Number</label>
                     <p>{{ $assetDeployment->assetSerialNumber }}</p>
                   </div>
+                  @endif
+                  @if ($assetDeployment->assetProductKey != null)
                   <div class="form-group">
-                    <label for="assetDeploymentlImage" class="form-label">Image <span class="text-danger">*</span></label>
+                    <label for="assetProductKey" class="form-label">Product Key</label>
+                    <p>{{ $assetDeployment->assetProductKey }}</p>
+                  </div>
+                  @endif
+                  @if ($assetDeployment->assetExpirationDate != null)
+                  <div class="form-group">
+                    <label for="assetExpirationDate" class="form-label">Expiration Date</label>
+                    <p>{{ $assetDeployment->assetExpirationDate }}</p>
+                  </div>
+                  @endif
+                  <div class="form-group">
+                    <label for="assetDeploymentlImage" class="form-label">Image</label>
                     <div class="mb-3">
                         <img src="{{ asset('storage/' .  $assetDeployment->assetDeploymentImage ) }}" alt="{{ $assetDeployment->assetDeploymentNumber }}" class="img-responsive" style="max-height: 300px; width: auto;">
                     </div>
                   </div>
                   <hr>
                   <div class="form-group">
-                    <label for="assetDeploymentQR" class="form-label">Asset Deployment QR <span class="text-danger">*</span></label>
+                    <label for="assetDeploymentQR" class="form-label">Asset Deployment QR</label>
                     <div class="mb-3">
                       <table class="table table-bordered">
                         <tr>
@@ -122,56 +140,6 @@
                   <button type="submit" name="submit" class="btn btn-success float-right mr-2">Checkin</button>
                 </div>
                 <!-- /.card-footer -->
-              </form>
-            </div>
-            <!-- /.card -->
-        </div>
-        <div class="col-xl-6">
-            <!-- Horizontal Form -->
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Form Procurement</h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form action="/assetProcurementApprovalITManager/approval/store/{{ $assetDeployment->assetDeploymentId }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
-                @csrf
-                <div class="card-body">
-                  {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
-                  <div class="form-group">
-                    <label for="assetProcurementNumber" class="form-label">Procurement Number <span class="text-danger">*</span></label>
-                    <p>{{ $assetDeployment->assetprocurement->assetProcurementNumber }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="employeeName" class="form-label">Name <span class="text-danger">*</span></label>
-                    <p>{{ $assetDeployment->assetProcurement->user->employeeName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
-                    <p>{{ $assetDeployment->assetProcurement->user->location->company->companyName }} - {{ $assetDeployment->assetProcurement->user->location->locationName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="departementId" class="form-label">Departement <span class="text-danger">*</span></label>
-                    <p>{{ $assetDeployment->assetProcurement->user->departement->departementName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="positionId" class="form-label">Position <span class="text-danger">*</span></label>
-                    <p>{{ $assetDeployment->assetProcurement->user->position->positionName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
-                    @if ($assetDeployment->assetProcurement->user->managerId)
-                      @php
-                        $manager = User::where('userId', $assetDeployment->assetProcurement->managerId)->first()
-                      @endphp
-                      <p>{{ $manager->employeeName }}</p>
-                    @else
-                      <p></p>                  
-                    @endif
-                  </div>
-                </div>
-                <!-- /.card-body -->
-                
               </form>
             </div>
             <!-- /.card -->

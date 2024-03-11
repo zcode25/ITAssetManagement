@@ -20,4 +20,8 @@ class AssetDeploymentDetail extends Model
     public function location(){
         return $this->belongsTo(Location::class, 'locationId');
     }
+
+    public function assetDeployment(){
+        return $this->belongsTo(AssetDeployment::class, 'assetDeploymentId');
+    }
 }

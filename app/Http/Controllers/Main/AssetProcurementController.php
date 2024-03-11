@@ -162,9 +162,6 @@ class AssetProcurementController extends Controller
                 "type" => "Asset Purchase"
             ],
             [
-                "type" => "Asset Lending"
-            ],
-            [
                 "type" => "Asset Movement"
             ],
         ];

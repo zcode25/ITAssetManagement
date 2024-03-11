@@ -70,7 +70,7 @@ class AssetMovementController extends Controller
         // dd($assetMovement);
 
         return view('assetMovement.device', [
-            'assetDeployments' => AssetDeployment::where('locationId', $assetMovement->locationId)->get(),
+            'assetDeployments' => AssetDeployment::where('locationId', $assetMovement->locationId)->where('assetDeploymentStatus', 'Deployment Ready')->get(),
             'assetProcurement' => AssetProcurement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first(),
             'assetMovement' => AssetMovement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first(),
             'assetMovementDevices' => AssetMovementDevice::where('assetMovementId', $assetMovement->assetMovementId)->get(),

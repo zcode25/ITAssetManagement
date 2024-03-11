@@ -33,36 +33,35 @@
                 <div class="card-body">
                   {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
                   <div class="form-group">
-                    <label for="assetProcurementNumber" class="form-label">Procurement Number <span class="text-danger">*</span></label>
+                    <label for="assetProcurementNumber" class="form-label">Procurement Number</label>
                     <p>{{ $assetProcurement->assetProcurementNumber }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="employeeName" class="form-label">Name <span class="text-danger">*</span></label>
-                    <p>{{ $assetProcurement->user->employeeName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
-                    <p>{{ $assetProcurement->location->company->companyName }} - {{ $assetProcurement->location->locationName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="departementId" class="form-label">Departement <span class="text-danger">*</span></label>
-                    <p>{{ $assetProcurement->user->departement->departementName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="positionId" class="form-label">Position <span class="text-danger">*</span></label>
-                    <p>{{ $assetProcurement->user->position->positionName }}</p>
-                  </div>
-                  <div class="form-group">
-                    <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
-                    <p>{{ $assetProcurement->manager->employeeName }}</p>
-                  </div>
-                  <hr>
-                  <div class="form-group">
-                    <label for="assetProcurementDate" class="form-label">Procurement Date <span class="text-danger">*</span></label>
+                    <label for="assetProcurementDate" class="form-label">Procurement Date</label>
                     <p>{{ $assetProcurement->assetProcurementDate }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="assetProcurementNote" class="form-label">Procurement Note <span class="text-danger">*</span></label>
+                    <label for="employeeName" class="form-label">Name</label>
+                    <p>{{ $assetProcurement->user->employeeName }}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="locationId" class="form-label">Location</label>
+                    <p>{{ $assetProcurement->location->company->companyName }} - {{ $assetProcurement->location->locationName }}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="departementId" class="form-label">Departement</label>
+                    <p>{{ $assetProcurement->user->departement->departementName }}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="positionId" class="form-label">Position</label>
+                    <p>{{ $assetProcurement->user->position->positionName }}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="managerId" class="form-label">Manager</label>
+                    <p>{{ $assetProcurement->manager->employeeName }}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="assetProcurementNote" class="form-label">Procurement Note</label>
                     <p>{{ $assetProcurement->assetProcurementNote }}</p>
                   </div>
                   <hr>
@@ -132,5 +131,53 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const approveButton = document.querySelector('button[name="assetProcurementStatus"][value="Approved by Manager"]');
+        const rejectButton = document.querySelector('button[name="assetProcurementStatus"][value="Rejected by Manager"]');
+    
+        const submitForm = (message, form, statusValue) => {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: message,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Cek jika input tersembunyi sudah ada, jika tidak, buat baru.
+                    let hiddenInput = form.querySelector('input[name="assetProcurementStatus"]');
+                    if (!hiddenInput) {
+                        hiddenInput = document.createElement('input');
+                        hiddenInput.type = 'hidden';
+                        hiddenInput.name = 'assetProcurementStatus';
+                        form.appendChild(hiddenInput);
+                    }
+                    // Set nilai input tersembunyi sesuai dengan tombol yang diklik.
+                    hiddenInput.value = statusValue;
+    
+                    // Submit form
+                    form.submit();
+                }
+            });
+        };
+    
+        approveButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            const form = this.closest('form');
+            submitForm("Do you want to approve this?", form, this.value);
+        });
+    
+        rejectButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            const form = this.closest('form');
+            submitForm("Do you want to reject this?", form, this.value);
+        });
+    });
+  </script>
+    
 
 @endsection

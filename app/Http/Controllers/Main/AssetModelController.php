@@ -24,7 +24,7 @@ class AssetModelController extends Controller
 
     public function create() {
         return view('assetModel.create', [
-            'categories' => Category::where('categoryType', 'Asset')->get(),
+            'categories' => Category::all(),
             'manufactures' => Manufacture::all()
         ]);
     }
@@ -52,7 +52,7 @@ class AssetModelController extends Controller
     public function edit(AssetModel $assetModel) {
         return view('assetModel.edit', [
             'assetModel' => $assetModel,
-            'categories' => Category::where('categoryType', 'Asset')->get(),
+            'categories' => Category::all(),
             'manufactures' => Manufacture::all()
         ]);
     }

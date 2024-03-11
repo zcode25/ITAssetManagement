@@ -17,6 +17,8 @@ return new class extends Migration
             $table->date('assetDeploymentDate');
             $table->uuid('userId')->nullable();
             $table->foreign('userId')->references('userId')->on('users')->onUpdate('cascade')->onDelete('restrict');
+            $table->uuid('assetId')->nullable();
+            $table->foreign('assetId')->references('assetDeploymentId')->on('asset_deployments')->onUpdate('cascade')->onDelete('restrict');
             $table->char('locationId', 8)->nullable();
             $table->foreign('locationId')->references('locationId')->on('locations')->onUpdate('cascade')->onDelete('restrict');
             $table->uuid('assetProcurementId');
@@ -24,7 +26,9 @@ return new class extends Migration
             $table->char('assetModelId', 8);
             $table->foreign('assetModelId')->references('assetModelId')->on('asset_models')->onUpdate('cascade')->onDelete('restrict');
             $table->string('assetDeploymentImage', 100)->nullable();
-            $table->char('assetSerialNumber', 50)->nullable()->unique();
+            $table->char('assetSerialNumber', 50)->nullable();
+            $table->char('assetProductKey', 50)->nullable();
+            $table->date('assetExpirationDate')->nullable();
             $table->enum('assetDeploymentStatus', ['Pre Deployment', 'Deployment Ready', 'Checkout', 'Archive', 'Repair', 'Broken', 'Asset Movement']);
             $table->timestamps();
         });

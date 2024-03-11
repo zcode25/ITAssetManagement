@@ -33,41 +33,45 @@
                 <div class="card-body">
                   {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
                   <div class="form-group">
-                    <label for="assetProcurementNumber" class="form-label">Procurement Number <span class="text-danger">*</span></label>
+                    <label for="assetProcurementNumber" class="form-label">Procurement Number</label>
                     <p>{{ $assetProcurement->assetProcurementNumber }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="employeeName" class="form-label">Name <span class="text-danger">*</span></label>
+                    <label for="assetProcurementDate" class="form-label">Procurement Date</label>
+                    <p>{{ $assetProcurement->assetProcurementDate }}</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="employeeName" class="form-label">Name</label>
                     <p>{{ $assetProcurement->user->employeeName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
+                    <label for="locationId" class="form-label">Location</label>
                     <p>{{ $assetProcurement->location->company->companyName }} - {{ $assetProcurement->location->locationName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="departementId" class="form-label">Departement <span class="text-danger">*</span></label>
+                    <label for="departementId" class="form-label">Departement</label>
                     <p>{{ $assetProcurement->user->departement->departementName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="positionId" class="form-label">Position <span class="text-danger">*</span></label>
+                    <label for="positionId" class="form-label">Position</label>
                     <p>{{ $assetProcurement->user->position->positionName }}</p>
                   </div>
                   <div class="form-group">
-                    <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
+                    <label for="managerId" class="form-label">Manager</label>
                     <p>{{ $assetProcurement->manager->employeeName }}</p>
                   </div>
                   <hr>
                   <div class="form-group">
-                    <label for="assetPurchaseDate" class="form-label">Purchase Date <span class="text-danger">*</span></label>
-                    <input type="date" class="form-control @error('assetPurchaseDate') is-invalid @enderror" id="assetPurchaseDate" name="assetPurchaseDate" value="{{ old('assetPurchaseDate') }}">
-                    @error('assetPurchaseDate') 
+                    <label for="assetPurchaseNumber" class="form-label">Purchase Number <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control @error('assetPurchaseNumber') is-invalid @enderror" id="assetPurchaseNumber" name="assetPurchaseNumber" value="{{ old('assetPurchaseNumber') }}">
+                    @error('assetPurchaseNumber') 
                       <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                   </div>
                   <div class="form-group">
-                    <label for="assetPurchaseNumber" class="form-label">Purchase Number <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control @error('assetPurchaseNumber') is-invalid @enderror" id="assetPurchaseNumber" name="assetPurchaseNumber" value="{{ old('assetPurchaseNumber') }}">
-                    @error('assetPurchaseNumber') 
+                    <label for="assetPurchaseDate" class="form-label">Purchase Date <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control @error('assetPurchaseDate') is-invalid @enderror" id="assetPurchaseDate" name="assetPurchaseDate" value="{{ old('assetPurchaseDate') }}">
+                    @error('assetPurchaseDate') 
                       <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                   </div>

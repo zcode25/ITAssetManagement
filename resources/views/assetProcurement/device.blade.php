@@ -33,36 +33,35 @@
               <div class="card-body">
                 {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
                 <div class="form-group">
-                  <label for="assetProcurementNumber" class="form-label">Procurement Number <span class="text-danger">*</span></label>
+                  <label for="assetProcurementNumber" class="form-label">Procurement Number</label>
                   <p>{{ $assetProcurement->assetProcurementNumber }}</p>
                 </div>
                 <div class="form-group">
-                  <label for="employeeName" class="form-label">Name <span class="text-danger">*</span></label>
-                  <p>{{ $assetProcurement->user->employeeName }}</p>
-                </div>
-                <div class="form-group">
-                  <label for="locationId" class="form-label">Location <span class="text-danger">*</span></label>
-                  <p>{{ $assetProcurement->location->company->companyName }} - {{ $assetProcurement->location->locationName }}</p>
-                </div>
-                <div class="form-group">
-                  <label for="departementId" class="form-label">Departement <span class="text-danger">*</span></label>
-                  <p>{{ $assetProcurement->user->departement->departementName }}</p>
-                </div>
-                <div class="form-group">
-                  <label for="positionId" class="form-label">Position <span class="text-danger">*</span></label>
-                  <p>{{ $assetProcurement->user->position->positionName }}</p>
-                </div>
-                <div class="form-group">
-                  <label for="managerId" class="form-label">Manager <span class="text-danger">*</span></label>
-                  <p>{{ $assetProcurement->manager->employeeName }}</p>
-                </div>
-                <hr>
-                <div class="form-group">
-                  <label for="assetProcurementDate" class="form-label">Procurement Date <span class="text-danger">*</span></label>
+                  <label for="assetProcurementDate" class="form-label">Procurement Date</label>
                   <p>{{ $assetProcurement->assetProcurementDate }}</p>
                 </div>
                 <div class="form-group">
-                  <label for="assetProcurementNote" class="form-label">Procurement Note <span class="text-danger">*</span></label>
+                  <label for="employeeName" class="form-label">Name</label>
+                  <p>{{ $assetProcurement->user->employeeName }}</p>
+                </div>
+                <div class="form-group">
+                  <label for="locationId" class="form-label">Location</label>
+                  <p>{{ $assetProcurement->location->company->companyName }} - {{ $assetProcurement->location->locationName }}</p>
+                </div>
+                <div class="form-group">
+                  <label for="departementId" class="form-label">Departement</label>
+                  <p>{{ $assetProcurement->user->departement->departementName }}</p>
+                </div>
+                <div class="form-group">
+                  <label for="positionId" class="form-label">Position</label>
+                  <p>{{ $assetProcurement->user->position->positionName }}</p>
+                </div>
+                <div class="form-group">
+                  <label for="managerId" class="form-label">Manager</label>
+                  <p>{{ $assetProcurement->manager->employeeName }}</p>
+                </div>
+                <div class="form-group">
+                  <label for="assetProcurementNote" class="form-label">Procurement Note</label>
                   <p>{{ $assetProcurement->assetProcurementNote }}</p>
                 </div>
               </div>

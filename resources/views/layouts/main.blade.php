@@ -113,6 +113,12 @@
       // "buttons": ["colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });
+  $(function () {
+    $("#example2").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false, "order": [[1, 'desc']]
+      // "buttons": ["colvis"]
+    }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+  });
 </script>
 <script>
   $(function () {
