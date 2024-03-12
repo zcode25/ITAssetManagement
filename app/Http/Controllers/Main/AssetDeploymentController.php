@@ -163,18 +163,30 @@ class AssetDeploymentController extends Controller
             'assetDeploymentDetailNote' => 'required',
         ]);
 
-        $test = ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetId)->where('assetDeploymentStatus', 'Checkout')->first();
-        dd($test);
+        $asset = ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetId)->first();
 
-        ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->update([
-            'userId' => null,
-            'assetDeploymentStatus' => $validatedData['assetDeploymentStatus'],
-        ]);
+        if($asset == null) {
+            ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->update([
+                'userId' => null,
+                'assetDeploymentStatus' => $validatedData['assetDeploymentStatus'],
+            ]);
+        } else {
+            ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->update([
+                'assetId' => null,
+                'locationId' => $asset->locationId,
+                'assetDeploymentStatus' => $validatedData['assetDeploymentStatus'],
+            ]);
+        }
 
         $assetDeploymentDetail['assetDeploymentDetailId'] = Str::uuid();
         $assetDeploymentDetail['assetDeploymentId'] = $assetDeployment['assetDeploymentId'];
-        $assetDeploymentDetail['userId'] = null;
-        $assetDeploymentDetail['locationId'] = $assetDeployment['locationId'];
+        if($asset == null) { 
+            $assetDeploymentDetail['userId'] = null;
+            $assetDeploymentDetail['locationId'] = $assetDeployment['locationId'];
+        } else {
+            $assetDeploymentDetail['assetId'] = null;
+            $assetDeploymentDetail['locationId'] = $asset->locationId;
+        }
         $assetDeploymentDetail['assetDeploymentDetailDate'] = $validatedData['assetDeploymentDetailDate'];
         $assetDeploymentDetail['assetDeploymentDetailNote'] = $validatedData['assetDeploymentDetailNote'];
         $assetDeploymentDetail['assetDeploymentDetailStatus'] = $validatedData['assetDeploymentStatus'];

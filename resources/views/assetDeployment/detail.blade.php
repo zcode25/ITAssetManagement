@@ -271,10 +271,10 @@
                               <div class="col-md-6">
                                 <p class="text-bold mb-2">Asset</p>
                                 @php
-                                  $asset = assetDeploymentDetail::where('assetDeploymentId', $assetDeployment->assetId)->first()
+                                  $asset = assetDeployment::where('assetDeploymentId', $assetDeploymentDetail->assetId)->first();
                                 @endphp
-                                <p class="mb-2"><i class="fa-solid fa-barcode mr-2"></i> {{ $asset->assetDeployment->assetDeploymentNumber }}</p>
-                                <p><i class="fa-solid fa-computer mr-2"></i> {{ $asset->assetDeployment->assetModel->assetModelName }}</p>
+                                <p class="mb-2"><i class="fa-solid fa-barcode mr-2"></i> {{ $asset->assetDeploymentNumber }}</p>
+                                <p><i class="fa-solid fa-computer mr-2"></i> {{ $asset->assetModel->assetModelName }}</p>
                               </div>
                             @endif
                             </div>

@@ -1,7 +1,7 @@
 @extends('layouts/main')
 @section('container')
 @php
-    use App\Models\User;
+    use App\Models\AssetDeployment;
 @endphp
 
   <!-- Content Wrapper. Contains page content -->
@@ -75,7 +75,7 @@
                   <div class="form-group">
                     <label for="assetId" class="form-label">Checked Out To</label>
                     @php
-                      $asset = assetDeployment::where('assetDeploymentId', $assetDeployment->assetId)->first();
+                      $asset = AssetDeployment::where('assetDeploymentId', $assetDeployment->assetId)->first();
                     @endphp
                     <p><i class="fa-solid fa-barcode mr-2"></i> {{ $asset->assetDeploymentNumber }}</p>
                   </div>
