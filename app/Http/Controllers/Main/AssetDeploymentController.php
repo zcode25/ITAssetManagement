@@ -126,7 +126,7 @@ class AssetDeploymentController extends Controller
 
     public function detail(ModelsAssetDeployment $assetDeployment) {
         return view('assetDeployment.detail', [
-            'items' => ModelsAssetDeployment::where('assetId', $assetDeployment->assetDeploymentId)->get(),
+            'items' => ModelsAssetDeployment::where('assetId', $assetDeployment->assetDeploymentId)->where('assetDeploymentStatus', 'Checkout')->get(),
             'assetDeployment' => ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->first(),
             'users'  => User::where('locationId', $assetDeployment->locationId)->get(),
             'assetDeploymentDetails' => AssetDeploymentDetail::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->orderBy('created_at', 'desc')->get(),
@@ -162,6 +162,9 @@ class AssetDeploymentController extends Controller
             'assetDeploymentStatus' => 'required',
             'assetDeploymentDetailNote' => 'required',
         ]);
+
+        $test = ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetId)->where('assetDeploymentStatus', 'Checkout')->first();
+        dd($test);
 
         ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->update([
             'userId' => null,
