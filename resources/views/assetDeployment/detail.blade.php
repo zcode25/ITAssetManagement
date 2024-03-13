@@ -180,8 +180,6 @@
                       <td>{{ $item->assetExpirationDate }}</td>
                     @endif
                   </tr>
-                  @else
-                    <p class="text-center">No data available in table</p>
                   @endif
                   @endforeach
                 </tbody>
@@ -218,10 +216,6 @@
                     @else
                       <td>{{ $item->assetSerialNumber }}</td>
                     @endif
-                  </tr>
-                  @else
-                  <tr>
-                    <td colspan="3"><p class="text-center">No data available in table</p></td>
                   </tr>
                   @endif
                   @endforeach
