@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\AssetDeployment;
 use App\Http\Controllers\Controller;
 use App\Models\AssetDeploymentDetail;
+use App\Models\Supplier;
 
 class AssetRepairController extends Controller
 {
@@ -18,6 +19,7 @@ class AssetRepairController extends Controller
 
     public function detail(AssetDeployment $assetDeployment) {
         return view('assetRepair.detail', [
+            'items' => AssetDeployment::where('assetId', $assetDeployment->assetDeploymentId)->where('assetDeploymentStatus', 'Checkout')->get(),
             'assetDeployment' => AssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->first(),
             'users'  => User::where('locationId', $assetDeployment->locationId)->get(),
             'assetDeploymentDetails' => AssetDeploymentDetail::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->orderBy('created_at', 'desc')->get(),
@@ -32,10 +34,14 @@ class AssetRepairController extends Controller
             [
                 "type" => "Repair"
             ],
+            [
+                "type" => "Broken"
+            ],
         ];
 
         return view('assetRepair.manage', [
             'assetDeployment' => AssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->first(),
+            'suppliers' => Supplier::all(),
             'users'  => User::where('locationId', $assetDeployment->locationId)->get(),
             'types' => $types
         ]); 

@@ -75,7 +75,7 @@ class AssetDeploymentController extends Controller
     public function deploymentReadyCheckout(ModelsAssetDeployment $assetDeployment) {
         return view('assetDeployment.deploymentReadyCheckout', [
             'assetDeployment' => ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->first(),
-            'assetDeployments' => ModelsAssetDeployment::whereNot('assetDeploymentStatus', 'Pre Deployment')->get(),
+            'assetDeployments' => ModelsAssetDeployment::whereNot('assetDeploymentStatus', 'Pre Deployment')->where('locationId', $assetDeployment->locationId)->get(),
             'users'  => User::where('locationId', $assetDeployment->locationId)->get()
         ]);
     }

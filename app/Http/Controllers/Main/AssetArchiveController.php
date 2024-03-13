@@ -19,8 +19,7 @@ class AssetArchiveController extends Controller
 
     public function detail(AssetDeployment $assetDeployment) {
         return view('assetArchive.detail', [
-            'licenses' => AssetDeployment::where('assetId', $assetDeployment->assetDeploymentId)->get(),
-            'components' => AssetDeployment::where('assetId', $assetDeployment->assetDeploymentId)->get(),
+            'items' => AssetDeployment::where('assetId', $assetDeployment->assetDeploymentId)->where('assetDeploymentStatus', 'Checkout')->get(),
             'assetDeployment' => AssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->first(),
             'users'  => User::where('locationId', $assetDeployment->locationId)->get(),
             'assetDeploymentDetails' => AssetDeploymentDetail::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->orderBy('created_at', 'desc')->get(),

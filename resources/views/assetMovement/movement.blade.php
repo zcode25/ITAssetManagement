@@ -83,7 +83,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <a href="/assetPurchase" class="btn btn-default">Cancel</a>
+                  <a href="/assetMovement" class="btn btn-default">Cancel</a>
                   <button type="submit" name="submit" class="btn btn-primary float-right">Save</button>
                 </div>
                 <!-- /.card-footer -->

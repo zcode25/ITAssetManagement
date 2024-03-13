@@ -1,6 +1,7 @@
 @extends('layouts/main')
 @section('container')
 @php
+    use App\Models\AssetDeployment;
     use App\Models\AssetDeploymentDetail;
 @endphp
 
@@ -43,10 +44,12 @@
                     <label for="assetDeploymentDate" class="form-label">Deployment Date</label>
                     <p>{{ $assetDeployment->assetDeploymentDate }}</p>
                   </div>
+                  @if ($assetDeployment->assetLocation != null)
                   <div class="form-group">
                     <label for="locationId" class="form-label">Location</label>
                     <p>{{ $assetDeployment->location->company->companyName }} - {{ $assetDeployment->location->locationName }}</p>
                   </div>
+                  @endif
                   <div class="form-group">
                     <label for="assetModelName" class="form-label">Device</label>
                     <p>{{ $assetDeployment->assetModel->assetModelName }}</p>
@@ -67,6 +70,44 @@
                   <div class="form-group">
                     <label for="assetSerialNumber" class="form-label">Serial Number</label>
                     <p>{{ $assetDeployment->assetSerialNumber }}</p>
+                  </div>
+                  @endif
+                  @if ($assetDeployment->assetId != null)
+                  <div class="form-group">
+                    <label for="assetId" class="form-label">Checked Out To</label>
+                    @php
+                      $asset = assetDeployment::where('assetDeploymentId', $assetDeployment->assetId)->first();
+                    @endphp
+                    <p><i class="fa-solid fa-barcode mr-2"></i> {{ $asset->assetDeploymentNumber }}</p>
+                  </div>
+                  @endif
+                  @if ($assetDeployment->userId != null)
+                  <div class="form-group">
+                    <label for="userId" class="form-label">Checked Out To</label>
+                    <p><i class="fa-regular fa-user mr-2"></i> {{ $assetDeployment->user->employeeName }}</p>
+                  </div>
+                  @endif
+                  @if ($assetDeployment->locationId != null)
+                  <div class="form-group">
+                    <label for="locationId" class="form-label">Location</label>
+                    <p>{{ $assetDeployment->location->company->companyName }} - {{ $assetDeployment->location->locationName }}</p>
+                  </div>
+                  @endif
+                  @if ($assetDeployment->assetProductKey != null)
+                  <div class="form-group">
+                    <label for="assetProductKey" class="form-label">Product Key</label>
+                    <p>{{ $assetDeployment->assetProductKey }}</p>
+                  </div>
+                  @endif
+                  @if ($assetDeployment->assetExpirationDate != null)
+                  <div class="form-group">
+                    <label for="assetExpirationDate" class="form-label">Expiration Date</label>
+                    <p>{{ $assetDeployment->assetExpirationDate }}</p>
+                  </div>
+                  @elseIf($assetDeployment->assetModel->category->categoryType == 'License')
+                  <div class="form-group">
+                    <label for="assetExpirationDate" class="form-label">Expiration Date</label>
+                    <p>Lifetime</p>
                   </div>
                   @endif
                   <div class="form-group">
@@ -108,7 +149,7 @@
             <!-- /.card -->
         </div>
         <div class="col-xl-6">
-          @if (count($licenses) > 0)
+          @if (count($items) > 0)
             <!-- Horizontal Form -->
             <div class="card">
               <div class="card-header">
@@ -120,26 +161,23 @@
               <table class="table table-sm">
                 <thead>
                   <tr>
-                    <th>No</th>
+                    <th>Deployment Number</th>
                     <th>License</th>
                     <th>Product Key</th>
                     <th>Expiration Date</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @php
-                      $i = 1;
-                  @endphp
-                  @foreach ($licenses as $license)
-                  @if ($license->assetModel->category->categoryType == 'License')
+                  @foreach ($items as $item)
+                  @if ($item->assetModel->category->categoryType == 'License')
                   <tr>
-                    <td>{{ $i++ }}</td>
-                    <td>{{ $license->assetModel->assetModelName }}</td>
-                    <td>{{ $license->assetProductKey }}</td>
-                    @if ($license->assetExpirationDate == null)
+                    <td>{{ $item->assetDeploymentNumber }}</td>
+                    <td>{{ $item->assetModel->assetModelName }}</td>
+                    <td>{{ $item->assetProductKey }}</td>
+                    @if ($item->assetExpirationDate == null)
                       <td>Lifetime</td>
                     @else
-                      <td>{{ $license->assetExpirationDate }}</td>
+                      <td>{{ $item->assetExpirationDate }}</td>
                     @endif
                   </tr>
                   @endif
@@ -150,8 +188,7 @@
             </div>
             <!-- /.card -->
           @endif
-
-          @if (count($components) > 0)
+          @if (count($items) > 0)
             <!-- Horizontal Form -->
             <div class="card">
               <div class="card-header">
@@ -163,24 +200,21 @@
               <table class="table table-sm">
                 <thead>
                   <tr>
-                    <th>No</th>
+                    <th>Deployment Number</th>
                     <th>Device</th>
                     <th>Serial Number</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @php
-                      $i = 1;
-                  @endphp
-                  @foreach ($components as $component)
-                  @if ($component->assetModel->category->categoryType == 'Component')
+                  @foreach ($items as $item)
+                  @if ($item->assetModel->category->categoryType == 'Component')
                   <tr>
-                    <td>{{ $i++ }}</td>
-                    <td>{{ $component->assetModel->assetModelName }}</td>
-                    @if ($component->assetSerialNumber == null)
+                    <td>{{ $item->assetDeploymentNumber }}</td>
+                    <td>{{ $item->assetModel->assetModelName }}</td>
+                    @if ($item->assetSerialNumber == null)
                       <td>-</td>
                     @else
-                      <td>{{ $component->assetSerialNumber }}</td>
+                      <td>{{ $item->assetSerialNumber }}</td>
                     @endif
                   </tr>
                   @endif
@@ -231,10 +265,10 @@
                               <div class="col-md-6">
                                 <p class="text-bold mb-2">Asset</p>
                                 @php
-                                  $asset = assetDeploymentDetail::where('assetDeploymentId', $assetDeployment->assetId)->first()
+                                  $asset = assetDeployment::where('assetDeploymentId', $assetDeploymentDetail->assetId)->first();
                                 @endphp
-                                <p class="mb-2"><i class="fa-solid fa-barcode mr-2"></i> {{ $asset->assetDeployment->assetDeploymentNumber }}</p>
-                                <p><i class="fa-solid fa-computer mr-2"></i> {{ $asset->assetDeployment->assetModel->assetModelName }}</p>
+                                <p class="mb-2"><i class="fa-solid fa-barcode mr-2"></i> {{ $asset->assetDeploymentNumber }}</p>
+                                <p><i class="fa-solid fa-computer mr-2"></i> {{ $asset->assetModel->assetModelName }}</p>
                               </div>
                             @endif
                             </div>

@@ -75,7 +75,7 @@ $menuData = json_decode($jsonData, true);
                     <a href="/assetMovement/device/{{ $assetProcurement->assetProcurementId }}" class="btn btn-success">Device</a>
                   @endif
                   
-                  <a href="/assetPurchase/detail/{{ $assetProcurement->assetProcurementId }}" class="btn btn-primary">Detail</a>
+                  <a href="/assetMovement/detail/{{ $assetProcurement->assetProcurementId }}" class="btn btn-primary">Detail</a>
                   {{-- @endif --}}
                   {{-- @if($menuData['assetModelDelete']['index']) --}}
                   {{-- <a href="/assetModel/destroy/{{ $assetProcurement->assetProcurementId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a> --}}

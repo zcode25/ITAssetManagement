@@ -49,9 +49,9 @@ $menuData = json_decode($jsonData, true);
               <th>Device</th>
               <th>Image</th>
               <th>Category</th>
+              <th>Type</th>
               <th>Manufacture</th>
               <th>Location</th>
-              <th>Status</th>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
               <th>Action</th>
               {{-- @endif --}}
@@ -65,9 +65,9 @@ $menuData = json_decode($jsonData, true);
               <td>{{ $assetDeployment->assetModel->assetModelName }}</td>
               <td><img src="{{ asset('storage/' .  $assetDeployment->assetModel->assetModelImage ) }}" alt="{{ $assetDeployment->assetModel->assetModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
               <td>{{ $assetDeployment->assetModel->category->categoryName }}</td>
+              <td>{{ $assetDeployment->assetModel->category->categoryType }}</td>
               <td>{{ $assetDeployment->assetModel->manufacture->manufactureName }}</td>
               <td>{{ $assetDeployment->location->company->companyName }} - {{ $assetDeployment->location->locationName }}</td>
-              <td>{{ $assetDeployment->assetDeploymentStatus }}</td>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
               <td class="py-0 align-middle">
                   <div class="btn-group btn-group-sm">

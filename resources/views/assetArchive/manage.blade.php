@@ -43,10 +43,12 @@
                     <label for="assetDeploymentDate" class="form-label">Deployment Date</label>
                     <p>{{ $assetDeployment->assetDeploymentDate }}</p>
                   </div>
+                  @if ($assetDeployment->assetLocation != null)
                   <div class="form-group">
                     <label for="locationId" class="form-label">Location</label>
                     <p>{{ $assetDeployment->location->company->companyName }} - {{ $assetDeployment->location->locationName }}</p>
                   </div>
+                  @endif
                   <div class="form-group">
                     <label for="assetModelName" class="form-label">Device</label>
                     <p>{{ $assetDeployment->assetModel->assetModelName }}</p>
@@ -69,6 +71,27 @@
                     <p>{{ $assetDeployment->assetSerialNumber }}</p>
                   </div>
                   @endif
+                  @if ($assetDeployment->assetId != null)
+                  <div class="form-group">
+                    <label for="assetId" class="form-label">Checked Out To</label>
+                    @php
+                      $asset = assetDeployment::where('assetDeploymentId', $assetDeployment->assetId)->first();
+                    @endphp
+                    <p><i class="fa-solid fa-barcode mr-2"></i> {{ $asset->assetDeploymentNumber }}</p>
+                  </div>
+                  @endif
+                  @if ($assetDeployment->userId != null)
+                  <div class="form-group">
+                    <label for="userId" class="form-label">Checked Out To</label>
+                    <p><i class="fa-regular fa-user mr-2"></i> {{ $assetDeployment->user->employeeName }}</p>
+                  </div>
+                  @endif
+                  @if ($assetDeployment->locationId != null)
+                  <div class="form-group">
+                    <label for="locationId" class="form-label">Location</label>
+                    <p>{{ $assetDeployment->location->company->companyName }} - {{ $assetDeployment->location->locationName }}</p>
+                  </div>
+                  @endif
                   @if ($assetDeployment->assetProductKey != null)
                   <div class="form-group">
                     <label for="assetProductKey" class="form-label">Product Key</label>
@@ -79,6 +102,11 @@
                   <div class="form-group">
                     <label for="assetExpirationDate" class="form-label">Expiration Date</label>
                     <p>{{ $assetDeployment->assetExpirationDate }}</p>
+                  </div>
+                  @elseIf($assetDeployment->assetModel->category->categoryType == 'License')
+                  <div class="form-group">
+                    <label for="assetExpirationDate" class="form-label">Expiration Date</label>
+                    <p>Lifetime</p>
                   </div>
                   @endif
                   <div class="form-group">

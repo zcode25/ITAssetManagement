@@ -167,6 +167,7 @@ Route::controller(MainAssetPurchaseController::class)->group(function() {
 Route::controller(AssetMovementController::class)->group(function() {
     Route::get('/assetMovement', 'index')->name('assetMovement.index')->middleware('auth');
     Route::get('/assetMovement/movement/{assetProcurement:assetProcurementId}', 'movement')->name('assetMovement.movement')->middleware('auth');
+    Route::get('/assetMovement/detail/{assetProcurement:assetProcurementId}', 'detail')->name('assetMovement.detail')->middleware('auth');
     Route::post('/assetMovement/movement/store/{assetProcurement:assetProcurementId}', 'movementStore')->name('assetMovement.movementStore')->middleware('auth');
     Route::get('/assetMovement/device/{assetProcurement:assetProcurementId}', 'device')->name('assetMovement.device')->middleware('auth');
     Route::post('/assetMovement/device/store/{assetProcurement:assetProcurementId}', 'deviceStore')->name('assetMovement.deviceStore')->middleware('auth');

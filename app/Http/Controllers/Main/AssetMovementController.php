@@ -27,6 +27,14 @@ class AssetMovementController extends Controller
         ]);
     }
 
+    public function detail(AssetProcurement $assetProcurement) {
+        return view('assetProcurement.detail', [
+            'assetProcurement' => AssetProcurement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first(),
+            'assetProcurementDevices' => AssetProcurementDevice::where('assetProcurementId', $assetProcurement->assetProcurementId)->get(),
+            'assetProcurementDetails' => AssetProcurementDetail::where('assetProcurementId', $assetProcurement->assetProcurementId)->orderBy('created_at', 'desc')->get(),
+        ]);
+    }
+
     public function movement(AssetProcurement $assetProcurement) {
         return view('assetMovement.movement', [
             'assetProcurement' => AssetProcurement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first(),
@@ -157,6 +165,6 @@ class AssetMovementController extends Controller
         
         AssetProcurementDetail::Create($assetProcurementDetail);
 
-        return redirect('/assetProcurement')->with('success', 'Data saved successfully');
+        return redirect('/assetMovement')->with('success', 'Data saved successfully');
     }
 }
