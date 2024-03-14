@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\AssetDeploymentDetail;
 use App\Models\AssetDeployment as ModelsAssetDeployment;
+use App\Models\AssetRepair;
 use App\Models\Category;
 use App\Models\User;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class AssetDeploymentController extends Controller
 {
@@ -191,6 +193,13 @@ class AssetDeploymentController extends Controller
         $assetDeploymentDetail['assetDeploymentDetailNote'] = $validatedData['assetDeploymentDetailNote'];
         $assetDeploymentDetail['assetDeploymentDetailStatus'] = $validatedData['assetDeploymentStatus'];
         AssetDeploymentDetail::Create($assetDeploymentDetail);
+
+        $assetRepair['assetRepairId'] = Str::uuid();
+        $assetRepair['assetRepairNumber'] = IdGenerator::generate(['table' => 'asset_repairs', 'field' => 'assetRepairNumber', 'length' => 20, 'prefix' => 'IT/RP/'. date('d/m/y', strtotime($validatedData['assetDeploymentDetailDate'])) . '/']);
+        $assetRepair['assetDeploymentId'] = $assetDeployment['assetDeploymentId'];
+        $assetRepair['assetRepairDate'] = $validatedData['assetDeploymentDetailDate'];
+        AssetRepair::create($assetRepair);
+
 
         return redirect('/assetDeploymentCheckout')->with('success', 'Data updated successfully');
     }

@@ -208,4 +208,5 @@ Route::controller(AssetRepairController::class)->group(function() {
     Route::get('/assetRepair', 'index')->name('assetRepair.index')->middleware('auth', 'check.menu.access:assetRepairIndex');
     Route::get('/assetRepair/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetRepair.detail')->middleware('auth', 'check.menu.access:assetRepairIndex');
     Route::get('/assetRepair/manage/{assetDeployment:assetDeploymentId}', 'manage')->name('assetRepair.manage')->middleware('auth', 'check.menu.access:assetRepairIndex');
+    Route::post('/assetRepair/manage/store/{assetDeployment:assetDeploymentId}', 'manageStore')->name('assetRepair.manageStore')->middleware('auth', 'check.menu.access:assetRepairIndex');
 });
