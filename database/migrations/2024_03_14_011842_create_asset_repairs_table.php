@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('assetDeploymentId');
             $table->foreign('assetDeploymentId')->references('assetDeploymentId')->on('asset_deployments')->onUpdate('cascade')->onDelete('restrict');
             $table->date('assetRepairDate');
+            $table->string('assetRepairNote');
             $table->date('assetRepairCompletionDate')->nullable();
             $table->char('supplierId', 8)->nullable();
             $table->foreign('supplierId')->references('supplierId')->on('suppliers')->onUpdate('cascade')->onDelete('restrict');

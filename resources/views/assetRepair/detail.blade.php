@@ -225,6 +225,45 @@
             </div>
             <!-- /.card -->
           @endif
+          @if (count($repairs) > 0)
+            <!-- Horizontal Form -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Repair List</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <!-- form start -->
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Note</th>
+                    <th>Repair</th>
+                    <th>Cost</th>
+                    <th>Completion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($repairs as $repair)
+                  <tr>
+                    <td>{{ $repair->assetRepairDate }}</td>
+                    <td>{{ $repair->assetRepairNote }}</td>
+                    @if ($repair->supplierID != null)
+                      <td>{{ $repair->supplierID }}</td>
+                    @else
+                      <td>Self-repair</td>      
+                    @endif
+                    <td>{{ $repair->assetRepairCost }}</td>
+                    <td>{{ $repair->assetRepairCompletionDate }}</td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+              </div>
+            </div>
+            <!-- /.card -->
+          @endif
 
             <!-- Horizontal Form -->
             <div class="card">

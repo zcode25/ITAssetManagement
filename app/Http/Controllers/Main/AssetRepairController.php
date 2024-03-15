@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Main;
 
 use App\Models\User;
+use App\Models\Supplier;
+use App\Models\AssetRepair;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\AssetDeployment;
 use App\Http\Controllers\Controller;
 use App\Models\AssetDeploymentDetail;
-use App\Models\AssetRepair;
-use App\Models\Supplier;
 
 class AssetRepairController extends Controller
 {
@@ -30,10 +31,7 @@ class AssetRepairController extends Controller
     public function manage(AssetDeployment $assetDeployment) {
         $types = [
             [
-                "type" => "Deployment Ready"
-            ],
-            [
-                "type" => "Repair"
+                "type" => "Archive"
             ],
             [
                 "type" => "Broken"
@@ -83,6 +81,15 @@ class AssetRepairController extends Controller
             'assetDeploymentStatus' => $validatedData['assetDeploymentStatus'],
         ]);
 
+        $assetDeploymentDetail['assetDeploymentDetailId'] = Str::uuid();
+        $assetDeploymentDetail['assetDeploymentId'] = $assetDeployment->assetDeploymentId;
+        $assetDeploymentDetail['userId'] = null;
+        $assetDeploymentDetail['locationId'] = $assetDeployment->locationId;
+        $assetDeploymentDetail['assetDeploymentDetailDate'] = $validatedData['assetRepairCompletionDate'];
+        $assetDeploymentDetail['assetDeploymentDetailNote'] = $validatedData['assetDeploymentDetailNote'];
+        $assetDeploymentDetail['assetDeploymentDetailStatus'] = $validatedData['assetDeploymentStatus'];
+        AssetDeploymentDetail::Create($assetDeploymentDetail);
 
+        return redirect('/assetRepair')->with('success', 'Data updated successfully');
     }
 }

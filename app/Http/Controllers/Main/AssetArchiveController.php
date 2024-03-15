@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Main;
 
 use App\Models\User;
+use App\Models\AssetRepair;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\AssetDeployment;
 use App\Http\Controllers\Controller;
 use App\Models\AssetDeploymentDetail;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class AssetArchiveController extends Controller
 {
@@ -19,6 +21,7 @@ class AssetArchiveController extends Controller
 
     public function detail(AssetDeployment $assetDeployment) {
         return view('assetArchive.detail', [
+            'repairs' => AssetRepair::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->get(),
             'items' => AssetDeployment::where('assetId', $assetDeployment->assetDeploymentId)->where('assetDeploymentStatus', 'Checkout')->get(),
             'assetDeployment' => AssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->first(),
             'users'  => User::where('locationId', $assetDeployment->locationId)->get(),
@@ -62,6 +65,15 @@ class AssetArchiveController extends Controller
         $assetDeploymentDetail['assetDeploymentDetailDate'] = $validatedData['assetDeploymentDetailDate'];
         $assetDeploymentDetail['assetDeploymentDetailStatus'] = $validatedData['assetDeploymentStatus'];
         AssetDeploymentDetail::Create($assetDeploymentDetail);
+
+        if($validatedData['assetDeploymentStatus'] == 'Repair') {
+            $assetRepair['assetRepairId'] = Str::uuid();
+            $assetRepair['assetRepairNumber'] = IdGenerator::generate(['table' => 'asset_repairs', 'field' => 'assetRepairNumber', 'length' => 20, 'prefix' => 'IT/RP/'. date('d/m/y', strtotime($validatedData['assetDeploymentDetailDate'])) . '/']);
+            $assetRepair['assetDeploymentId'] = $assetDeployment['assetDeploymentId'];
+            $assetRepair['assetRepairNote'] = $validatedData['assetDeploymentDetailNote'];
+            $assetRepair['assetRepairDate'] = $validatedData['assetDeploymentDetailDate'];
+            AssetRepair::create($assetRepair);
+        }
 
         return redirect('/assetArchive')->with('success', 'Data updated successfully');
     }
