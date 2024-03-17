@@ -11,7 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Asset Purchase</h1>
+            <h1>Asset Procurement</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -20,15 +20,15 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-xl-8">
+        <div class="col-xl-6">
             <!-- Horizontal Form -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Form Asset Purchase</h3>
+                <h3 class="card-title">Form Procurement</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="/assetPurchase/deployment/store/{{ $assetProcurement->assetProcurementId }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+              <form action="/assetProcurementApprovalITManager/approval/store/{{ $assetProcurement->assetProcurementId }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                 @csrf
                 <div class="card-body">
                   {{-- <input type="hidden" id="userId" name="userId" value="{{ $user->userId }}"> --}}
@@ -61,86 +61,32 @@
                     <p>{{ $assetProcurement->manager->employeeName }}</p>
                   </div>
                   <div class="form-group">
+                    <label for="assetProcurementNote" class="form-label">Procurement Note</label>
+                    <p>{{ $assetProcurement->assetProcurementNote }}</p>
+                  </div>
+                  @if ($assetPurchase->assetPurchaseNumber != null)
+                  <div class="form-group">
                     <label for="assetPurchaseNumber" class="form-label">Purchase Number</label>
                     <p>{{ $assetPurchase->assetPurchaseNumber }}</p>
                   </div>
+                  @endif
+                  @if ($assetPurchase->assetPurchaseDate != null)
                   <div class="form-group">
                     <label for="assetPurchaseDate" class="form-label">Purchase Date</label>
                     <p>{{ $assetPurchase->assetPurchaseDate }}</p>
                   </div>
-                  <hr>
-                  <div class="form-group">
-                    <label for="assetDeploymentDate" class="form-label">Deployment Date <span class="text-danger">*</span></label>
-                    <input type="date" class="form-control @error('assetDeploymentDate') is-invalid @enderror" id="assetDeploymentDate" name="assetDeploymentDate" value="{{ old('assetDeploymentDate') }}">
-                    @error('assetDeploymentDate') 
-                      <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                  </div>
-                  <hr>
-                  <div class="card">
-                    <div class="card-header">
-                      <h3 class="card-title">Form Create Procurement</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                      <!-- form start -->
-                    @if (count($assetProcurementDevices) > 0)
-                    <div class="table-responsive-md">
-                    <table class="table table-sm">
-                      <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>Device</th>
-                          <th>Image</th>
-                          <th>Quantity</th>
-                          <th>Price/Unit</th>
-                          <th>Total</th>
-                          <th>Supplier</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @php
-                            $i = 1;
-                        @endphp
-                        @foreach ($assetProcurementDevices as $assetProcurementDevice)
-                        <tr>
-                          <td>{{ $i }}</td>
-                          {{-- <input type="hidden" class="form-control" id="assetModelId-{{ $i }}" name="assetModelId-{{ $i }}" value="{{ $assetProcurementDevice->assetModel->assetModelId }}"> --}}
-                          <td>{{ $assetProcurementDevice->assetModel->assetModelName }}</td>
-                          <td><img src="{{ asset('storage/' .  $assetProcurementDevice->assetModel->assetModelImage ) }}" alt="{{ $assetProcurementDevice->assetModel->assetModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
-                          <td>{{ $assetProcurementDevice->assetProcurementDeviceQuantity }}</td>
-                          <td>{{ "Rp " . number_format($assetProcurementDevice->assetProcurementDevicePrice, 0, ',', '.') }}</td>
-                          <td>{{ "Rp " . number_format($assetProcurementDevice->assetProcurementDeviceTotal, 0, ',', '.') }}</td>
-                          <td>{{ $assetProcurementDevice->supplier->supplierName }}</td>
-                        </tr>
-                        @php
-                            $i++;
-                        @endphp
-                        @endforeach
-                      </tbody>
-                    </table>
-                    </div>
-                    @else
-                      <p class="text-center">No data available in table</p>
-                    @endif
-                    </div>
-                  </div>
+                  @endif
                 </div>
                 <!-- /.card-body -->
-                <div class="card-footer">
-                  <a href="/assetPurchase" class="btn btn-default">Cancel</a>
-                  <button type="submit" name="assetProcurementStatus" value="Asset Deployment" class="btn btn-success float-right">Asset Deployment</button>
-                </div>
-                <!-- /.card-footer -->
               </form>
             </div>
             <!-- /.card -->
         </div>
-        {{-- <div class="col-xl-6">
+        <div class="col-xl-6">
           <!-- Horizontal Form -->
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Form Create Procurement</h3>
+              <h3 class="card-title">Form Asset Device</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -175,7 +121,41 @@
             </div>
           </div>
           <!-- /.card -->
-        </div> --}}
+
+          <!-- Horizontal Form -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Procurement History</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="timeline">
+                @foreach($assetProcurementDetails as $assetProcurementDetail)
+                <!-- timeline item -->
+                <div>
+                  @if ($loop->first)
+                    <i class="fas fa-circle bg-success"></i> <!-- Untuk item pertama -->
+                  @else
+                    <i class="fas fa-circle bg-secondary"></i> <!-- Untuk item terakhir -->
+                  @endif
+                  <div class="timeline-item">
+                    <span class="time">{{ $assetProcurementDetail->assetProcurementDetailDate }}</span>
+                    <h3 class="timeline-header"><span class="text-bold">{{ $assetProcurement->assetProcurementNumber }}</span> - {{ $assetProcurementDetail->assetProcurementDetailStatus }}</h3>
+                    @if($assetProcurementDetail->assetProcurementDetailNote)
+                      <div class="timeline-body">{{ $assetProcurementDetail->assetProcurementDetailNote }}</div>
+                    @endif
+                  </div>
+                </div>
+                <!-- END timeline item -->
+                @endforeach
+                <div>
+                  <i class="fas fa-circle bg-secondary"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.card -->
+        </div>
       </div>
       
 

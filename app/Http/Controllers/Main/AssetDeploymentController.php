@@ -83,13 +83,24 @@ class AssetDeploymentController extends Controller
     }
 
     public function deploymentReadyCheckoutStore(ModelsAssetDeployment $assetDeployment, Request $request) {
-        $validatedData = $request->validate([
-            'assetDeploymentDetailDate' => 'required',
-            'userId' => 'max:50',
-            'assetId' => 'max:50',
-            'assetDeploymentStatus' => 'required',
-            'assetDeploymentDetailNote' => 'required',
-        ]);
+
+        if($request->userId != null) {
+            $validatedData = $request->validate([
+                'assetDeploymentDetailDate' => 'required',
+                'userId' => 'required',
+                'assetDeploymentStatus' => 'required',
+                'assetDeploymentDetailNote' => 'required',
+            ]);
+        } else {
+            $validatedData = $request->validate([
+                'assetDeploymentDetailDate' => 'required',
+                'assetId' => 'required',
+                'assetDeploymentStatus' => 'required',
+                'assetDeploymentDetailNote' => 'required',
+            ]);
+        }
+
+        
 
         if(isset($validatedData['userId'])) {
             $validatedData['assetId'] = null;

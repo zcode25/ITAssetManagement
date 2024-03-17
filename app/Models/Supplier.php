@@ -16,4 +16,8 @@ class Supplier extends Model
     public function assetProcurementDevice(){
         return $this->hasMany(AssetProcurementDevice::class, 'supplierId', 'supplierId');
     }
+
+    public function assetDisposal(){
+        return $this->hasMany(AssetDisposal::class, 'supplierId', 'supplierId');
+    }
 }

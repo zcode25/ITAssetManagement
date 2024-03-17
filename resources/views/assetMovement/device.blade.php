@@ -60,7 +60,6 @@
                     <label for="managerId" class="form-label">Manager</label>
                     <p>{{ $assetProcurement->manager->employeeName }}</p>
                   </div>
-                  <hr>
                   <div class="form-group">
                     <label for="assetMovementNumber" class="form-label">Movement Number</label>
                     <p>{{ $assetMovement->assetMovementNumber }}</p>
@@ -128,7 +127,7 @@
             @csrf
             <div class="card-body">
                 <div class="form-group">
-                    <label for="assetDeploymentId" class="form-label">Asset Deployment Ready <span class="text-danger">*</span></label>
+                    <label for="assetDeploymentId" class="form-label">Asset Deployment <span class="text-danger">*</span></label>
                     <select class="form-control select2bs4" id="assetDeploymentId" name="assetDeploymentId" data-placeholder="Select a Asset Deployment">
                         <option value=""></option>
                         @foreach ($assetDeployments as $assetDeployment)
@@ -182,10 +181,33 @@
             </div>
             </form>
             <!-- /.card-body -->
-            <div class="card-footer">
-              <a href="/assetMovement/device/save/{{ $assetMovement->assetMovementId }}" class="btn btn-success float-right">Save</a>
+            
+        </div>
+        <!-- Horizontal Form -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Form Deployment</h3>
+          </div>
+          <!-- /.card-header -->
+          <form method="POST" action="/assetMovement/device/save/{{ $assetMovement->assetMovementId }}">
+          @csrf
+          <div class="card-body">
+            <!-- form start -->
+            <div class="form-group">
+              <label for="assetDeploymentDate" class="form-label">Deployment Date <span class="text-danger">*</span></label>
+              <input type="date" class="form-control @error('assetDeploymentDate') is-invalid @enderror" id="assetDeploymentDate" name="assetDeploymentDate" value="{{ old('assetDeploymentDate') }}">
+              @error('assetDeploymentDate') 
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
-            <!-- /.card-footer -->
+          
+          </div>
+          <div class="card-footer">
+            <a href="/assetMovement" class="btn btn-default">Cancel</a>
+            <button type="submit" class="btn btn-success float-right">Deployment</button>
+          </div>
+          </form>
+          <!-- /.card-footer -->
         </div>
         </div>
       </div>

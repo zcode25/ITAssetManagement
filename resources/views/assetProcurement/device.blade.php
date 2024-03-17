@@ -144,7 +144,8 @@
               </form>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <a href="/assetProcurement/save" class="btn btn-success float-right">Save</a>
+                  <a href="/assetProcurement" class="btn btn-default">Cancel</a>
+                  <a href="/assetProcurement/save/{{ $assetProcurement->assetProcurementId }}" class="btn btn-success float-right">Save</a>
                 </div>
                 <!-- /.card-footer -->
             </div>

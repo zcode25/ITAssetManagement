@@ -3,8 +3,10 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Main\AccessoryModelController;
 use App\Http\Controllers\Main\AssetArchiveController;
+use App\Http\Controllers\Main\AssetBrokenController;
 use App\Http\Controllers\Main\AssetController;
 use App\Http\Controllers\Main\AssetDeploymentController;
+use App\Http\Controllers\Main\AssetDisposalController;
 use App\Http\Controllers\Main\AssetModelController;
 use App\Http\Controllers\Main\AssetMovementController;
 use App\Http\Controllers\Main\AssetProcurementController;
@@ -144,7 +146,7 @@ Route::controller(AssetProcurementController::class)->group(function () {
     Route::get('/assetProcurement/device/{assetProcurement:assetProcurementId}', 'device')->name('assetProcurement.device')->middleware('auth', 'check.menu.access:assetProcurementIndex');
     Route::post('/assetProcurement/device/store/{assetProcurement:assetProcurementId}', 'deviceStore')->name('assetProcurement.deviceStore')->middleware('auth', 'check.menu.access:assetProcurementIndex');
     Route::delete('/assetProcurement/device/destroy/{assetProcurementDevice:assetProcurementDeviceId}', 'deviceDestroy')->name('assetProcurement.deviceDestroy')->middleware('auth', 'check.menu.access:assetProcurementIndex');
-    Route::get('/assetProcurement/save', 'deviceSave')->name('assetProcurement.save')->middleware('auth', 'check.menu.access:assetProcurementIndex');;
+    Route::get('/assetProcurement/save/{assetProcurement:assetProcurementId}', 'deviceSave')->name('assetProcurement.save')->middleware('auth', 'check.menu.access:assetProcurementIndex');;
     Route::get('/assetProcurementApprovalManager', 'approvalManager')->name('assetProcurementApprovalManager.index')->middleware('auth', 'check.menu.access:assetProcurementApprovalManager');
     Route::get('/assetProcurementApprovalManager/approval/{assetProcurement:assetProcurementId}', 'approvalManagerCreate')->name('assetProcurementApprovalManager.create')->middleware('auth', 'check.menu.access:assetProcurementApprovalManager');
     Route::post('/assetProcurementApprovalManager/approval/store/{assetProcurement:assetProcurementId}', 'approvalManagerStore')->name('assetProcurement.approvalManagerStore')->middleware('auth', 'check.menu.access:assetProcurementApprovalManager');
@@ -172,7 +174,7 @@ Route::controller(AssetMovementController::class)->group(function() {
     Route::get('/assetMovement/device/{assetProcurement:assetProcurementId}', 'device')->name('assetMovement.device')->middleware('auth');
     Route::post('/assetMovement/device/store/{assetProcurement:assetProcurementId}', 'deviceStore')->name('assetMovement.deviceStore')->middleware('auth');
     Route::delete('/assetMovement/device/destroy/{assetMovementDevice:assetMovementDeviceId}', 'deviceDestroy')->name('assetMovement.deviceDestroy')->middleware('auth');
-    Route::get('/assetMovement/device/save/{assetMovement:assetMovementId}', 'deviceSave')->name('assetMovement.deviceSave')->middleware('auth');
+    Route::post('/assetMovement/device/save/{assetMovement:assetMovementId}', 'deviceSave')->name('assetMovement.deviceSave')->middleware('auth');
 });
 
 Route::controller(AssetDeploymentController::class)->group(function() {
@@ -209,4 +211,24 @@ Route::controller(AssetRepairController::class)->group(function() {
     Route::get('/assetRepair/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetRepair.detail')->middleware('auth', 'check.menu.access:assetRepairIndex');
     Route::get('/assetRepair/manage/{assetDeployment:assetDeploymentId}', 'manage')->name('assetRepair.manage')->middleware('auth', 'check.menu.access:assetRepairIndex');
     Route::post('/assetRepair/manage/store/{assetDeployment:assetDeploymentId}', 'manageStore')->name('assetRepair.manageStore')->middleware('auth', 'check.menu.access:assetRepairIndex');
+});
+
+Route::controller(AssetBrokenController::class)->group(function() {
+    Route::get('/assetBroken', 'index')->name('assetBroken.index')->middleware('auth');
+    Route::get('/assetBroken/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetBroken.detail')->middleware('auth');
+    Route::get('/assetBroken/manage/{assetDeployment:assetDeploymentId}', 'manage')->name('assetBroken.manage')->middleware('auth');
+    Route::post('/assetBroken/manage/store/{assetDeployment:assetDeploymentId}', 'manageStore')->name('assetBroken.manageStore')->middleware('auth');
+});
+
+Route::controller(AssetDisposalController::class)->group(function() {
+    Route::get('/assetDisposal', 'index')->name('assetDisposal.index')->middleware('auth');
+    Route::get('/assetDisposal/create', 'create')->name('assetDisposal.create')->middleware('auth');
+    Route::post('/assetDisposal/store', 'store')->name('assetDisposal.store')->middleware('auth');
+    Route::get('/assetDisposal/device/{assetDisposal:assetDisposalId}', 'device')->name('assetDisposal.device')->middleware('auth');
+    Route::post('/assetDisposal/device/store/{assetDisposal:assetDisposalId}', 'deviceStore')->name('assetDisposal.deviceStore')->middleware('auth');
+    Route::delete('/assetDisposal/device/destroy/{assetDisposalDevice:assetDisposalDeviceId}', 'deviceDestroy')->name('assetDisposal.deviceDestroy')->middleware('auth');
+    Route::get('/assetDisposal/device/save/{assetDisposal:assetDisposalId}', 'deviceSave')->name('assetDisposal.deviceSave')->middleware('auth');
+    Route::get('/assetDisposal/disposal/{assetDisposal:assetDisposalId}', 'disposal')->name('assetDisposal.disposal')->middleware('auth');
+    Route::post('/assetDisposal/disposal/store/{assetDisposal:assetDisposalId}', 'disposalStore')->name('assetDisposal.disposalStore')->middleware('auth');
+    Route::get('/assetDisposal/detail/{assetDisposal:assetDisposalId}', 'detail')->name('assetDisposal.detail')->middleware('auth');
 });

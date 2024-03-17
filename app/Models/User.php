@@ -39,5 +39,9 @@ class User extends Authenticatable
     public function assetDeploymentDetail(){
         return $this->hasMany(AssetDeploymentDetail::class, 'userId', 'userId');
     }
+
+    public function assetDisposal(){
+        return $this->hasMany(AssetDisposal::class, 'userId', 'userId');
+    }
     
 }

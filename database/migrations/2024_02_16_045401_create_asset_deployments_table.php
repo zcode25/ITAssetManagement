@@ -29,7 +29,7 @@ return new class extends Migration
             $table->char('assetSerialNumber', 50)->nullable();
             $table->char('assetProductKey', 50)->nullable();
             $table->date('assetExpirationDate')->nullable();
-            $table->enum('assetDeploymentStatus', ['Pre Deployment', 'Deployment Ready', 'Checkout', 'Archive', 'Repair', 'Broken', 'Asset Movement']);
+            $table->enum('assetDeploymentStatus', ['Pre Deployment', 'Deployment Ready', 'Checkout', 'Archive', 'Repair', 'Broken', 'Asset Movement', 'Asset Disposal']);
             $table->timestamps();
         });
     }

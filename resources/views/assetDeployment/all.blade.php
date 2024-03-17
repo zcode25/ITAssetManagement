@@ -98,7 +98,11 @@ $menuData = json_decode($jsonData, true);
                 @else
                 <td>-</td>
                 @endif
+                @if ($assetDeployment->locationId != null)
                 <td>{{ $assetDeployment->location->company->companyName }} - {{ $assetDeployment->location->locationName }}</td>
+                @else
+                <td>-</td>
+                @endif
               @endif
               <td>{{ $assetDeployment->assetDeploymentStatus }}</td>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}

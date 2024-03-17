@@ -28,10 +28,11 @@ class AssetMovementController extends Controller
     }
 
     public function detail(AssetProcurement $assetProcurement) {
-        return view('assetProcurement.detail', [
+        return view('assetMovement.detail', [
             'assetProcurement' => AssetProcurement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first(),
             'assetProcurementDevices' => AssetProcurementDevice::where('assetProcurementId', $assetProcurement->assetProcurementId)->get(),
             'assetProcurementDetails' => AssetProcurementDetail::where('assetProcurementId', $assetProcurement->assetProcurementId)->orderBy('created_at', 'desc')->get(),
+            'assetMovement' => AssetMovement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first(),
         ]);
     }
 
@@ -78,7 +79,7 @@ class AssetMovementController extends Controller
         // dd($assetMovement);
 
         return view('assetMovement.device', [
-            'assetDeployments' => AssetDeployment::where('locationId', $assetMovement->locationId)->where('assetDeploymentStatus', 'Deployment Ready')->get(),
+            'assetDeployments' => AssetDeployment::where('locationId', $assetMovement->locationId)->where('assetDeploymentStatus', 'Archive')->get(),
             'assetProcurement' => AssetProcurement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first(),
             'assetMovement' => AssetMovement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first(),
             'assetMovementDevices' => AssetMovementDevice::where('assetMovementId', $assetMovement->assetMovementId)->get(),
@@ -91,14 +92,22 @@ class AssetMovementController extends Controller
         $validatedData = $request->validate([
             'assetDeploymentId' => 'required',
         ]);
-
+        
         $assetMovement = AssetMovement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first();
+        $assetMovementDevices = AssetMovementDevice::where('assetMovementId', $assetMovement->assetMovementId)->get();
+        
+        foreach($assetMovementDevices as $assetMovementDevice) {
+            if($assetMovementDevice->assetDeploymentId == $validatedData['assetDeploymentId']) {
+                return back()->with([
+                    'error' => 'The asset deployment has already been taken',
+                ]);
+            }
+        }
+        
         $validatedData['assetMovementId'] =  $assetMovement->assetMovementId;
         $validatedData['assetMovementDeviceId'] =  Str::uuid();
 
         AssetMovementDevice::Create($validatedData);
-
-
 
         return back();
     }
@@ -115,10 +124,21 @@ class AssetMovementController extends Controller
         return back();
     }
 
-    public function deviceSave(AssetMovement $assetMovement) {
+    public function deviceSave(AssetMovement $assetMovement, Request $request) {
+
+        $validatedData = $request->validate([
+            'assetDeploymentDate' => 'required',
+        ]);
 
         $assetMovementDevices = AssetMovementDevice::where('assetMovementId', $assetMovement->assetMovementId)->get();
         $assetProcurement = AssetProcurement::where('assetProcurementId', $assetMovement->assetProcurementId)->first();
+
+        
+        if(count($assetMovementDevices) == 0) {
+            return back()->with([
+                'error' => 'No data available in table',
+            ]);
+        }
 
         foreach ($assetMovementDevices as $assetMovementDevice) {
             AssetDeployment::where('assetDeploymentId', $assetMovementDevice->assetDeploymentId)->update([
@@ -131,7 +151,7 @@ class AssetMovementController extends Controller
             $assetDeploymentDetail['assetDeploymentId'] = $assetMovementDevice->assetDeploymentId;
             $assetDeploymentDetail['userId'] = null;
             $assetDeploymentDetail['locationId'] = $assetProcurement->locationId;
-            $assetDeploymentDetail['assetDeploymentDetailDate'] = date('Y-m-d');
+            $assetDeploymentDetail['assetDeploymentDetailDate'] = $validatedData['assetDeploymentDate'];
             $assetDeploymentDetail['assetDeploymentDetailNote'] = 'Movement';
             $assetDeploymentDetail['assetDeploymentDetailStatus'] = 'Asset Movement';
             AssetDeploymentDetail::Create($assetDeploymentDetail);
@@ -148,7 +168,7 @@ class AssetMovementController extends Controller
             $assetDeploymentDetail['assetDeploymentId'] = $assetMovementDevice->assetDeploymentId;
             $assetDeploymentDetail['userId'] = null;
             $assetDeploymentDetail['locationId'] = $assetProcurement->locationId;
-            $assetDeploymentDetail['assetDeploymentDetailDate'] = date('Y-m-d');
+            $assetDeploymentDetail['assetDeploymentDetailDate'] = $validatedData['assetDeploymentDate'];
             $assetDeploymentDetail['assetDeploymentDetailNote'] = 'Deployment Ready';
             $assetDeploymentDetail['assetDeploymentDetailStatus'] = 'Deployment Ready';
             AssetDeploymentDetail::Create($assetDeploymentDetail);
@@ -160,7 +180,7 @@ class AssetMovementController extends Controller
 
         $assetProcurementDetail['assetProcurementDetailId'] =  Str::uuid();
         $assetProcurementDetail['assetProcurementId'] =  $assetProcurement->assetProcurementId;
-        $assetProcurementDetail['assetProcurementDetailDate'] = date('Y-m-d');
+        $assetProcurementDetail['assetProcurementDetailDate'] = $validatedData['assetDeploymentDate'];
         $assetProcurementDetail['assetProcurementDetailStatus'] = 'Asset Deployment';
         
         AssetProcurementDetail::Create($assetProcurementDetail);

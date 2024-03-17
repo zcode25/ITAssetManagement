@@ -21,6 +21,7 @@ class AssetRepairController extends Controller
 
     public function detail(AssetDeployment $assetDeployment) {
         return view('assetRepair.detail', [
+            'repairs' => AssetRepair::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->get(),
             'items' => AssetDeployment::where('assetId', $assetDeployment->assetDeploymentId)->where('assetDeploymentStatus', 'Checkout')->get(),
             'assetDeployment' => AssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->first(),
             'users'  => User::where('locationId', $assetDeployment->locationId)->get(),

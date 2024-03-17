@@ -63,6 +63,7 @@ class AssetArchiveController extends Controller
         $assetDeploymentDetail['userId'] = null;
         $assetDeploymentDetail['locationId'] = $assetDeployment['locationId'];
         $assetDeploymentDetail['assetDeploymentDetailDate'] = $validatedData['assetDeploymentDetailDate'];
+        $assetDeploymentDetail['assetDeploymentDetailNote'] = $validatedData['assetDeploymentDetailNote'];
         $assetDeploymentDetail['assetDeploymentDetailStatus'] = $validatedData['assetDeploymentStatus'];
         AssetDeploymentDetail::Create($assetDeploymentDetail);
 

@@ -25,10 +25,11 @@ class AssetPurchaseController extends Controller
     }
 
     public function detail(AssetProcurement $assetProcurement) {
-        return view('assetProcurement.detail', [
+        return view('assetPurchase.detail', [
             'assetProcurement' => AssetProcurement::where('assetProcurementId', $assetProcurement->assetProcurementId)->first(),
             'assetProcurementDevices' => AssetProcurementDevice::where('assetProcurementId', $assetProcurement->assetProcurementId)->get(),
             'assetProcurementDetails' => AssetProcurementDetail::where('assetProcurementId', $assetProcurement->assetProcurementId)->orderBy('created_at', 'desc')->get(),
+            'assetPurchase' => ModelsAssetPurchase::where('assetProcurementId', $assetProcurement->assetProcurementId)->first(),
         ]);
     }
 
@@ -121,7 +122,7 @@ class AssetPurchaseController extends Controller
                 $assetDeploymentDetail['assetDeploymentDetailId'] = Str::uuid();
                 $assetDeploymentDetail['assetDeploymentId'] = $assetDeployment['assetDeploymentId'];
                 $assetDeploymentDetail['locationId'] = $assetDeployment['locationId'];
-                $assetDeploymentDetail['assetDeploymentDetailDate'] = date('Y-m-d');
+                $assetDeploymentDetail['assetDeploymentDetailDate'] = $validatedData['assetDeploymentDate'];
                 $assetDeploymentDetail['assetDeploymentDetailStatus'] = 'Pre Deployment';
                 AssetDeploymentDetail::Create($assetDeploymentDetail);
             }
@@ -133,7 +134,7 @@ class AssetPurchaseController extends Controller
 
         $assetProcurementDetail['assetProcurementDetailId'] =  Str::uuid();
         $assetProcurementDetail['assetProcurementId'] =  $assetProcurement->assetProcurementId;
-        $assetProcurementDetail['assetProcurementDetailDate'] = date('Y-m-d');
+        $assetProcurementDetail['assetProcurementDetailDate'] = $validatedData['assetDeploymentDate'];
         $assetProcurementDetail['assetProcurementDetailStatus'] = $validatedData['assetProcurementStatus'];
         
         AssetProcurementDetail::Create($assetProcurementDetail);

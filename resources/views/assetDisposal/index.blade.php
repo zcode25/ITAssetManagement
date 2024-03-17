@@ -13,12 +13,12 @@ $menuData = json_decode($jsonData, true);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Asset Deployment</h1>
+            <h1>Asset Disposal</h1>
           </div>
           <div class="col-sm-6">
             <div class="float-sm-right">
               {{-- @if($menuData['assetModelCreate']['index']) --}}
-              {{-- <a href="/assetProcurement/create" class="btn btn-primary">Create New</a> --}}
+              <a href="/assetDisposal/create" class="btn btn-primary">Create New</a>
               {{-- @endif --}}
             </div>
           </div>
@@ -32,7 +32,7 @@ $menuData = json_decode($jsonData, true);
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Asset Deployment List</h3>
+          <h3 class="card-title">Asset Disposal List</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -44,39 +44,37 @@ $menuData = json_decode($jsonData, true);
           <table id="example2" class="table table-hover">
             <thead>
             <tr>
-              <th>Deployment Number</th>
-              <th>Deployment Date</th>
-              <th>Device</th>
-              <th>Image</th>
-              <th>Category</th>
-              <th>Type</th>
-              <th>Manufacture</th>
+              <th>Disposal Number</th>
+              <th>Disposal Date</th>
+              <th>User</th>
+              <th>Manager</th>
               <th>Location</th>
+              <th>Status</th>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
               <th>Action</th>
               {{-- @endif --}}
             </tr>
             </thead>
             <tbody>
-            @foreach ($assetDeployments as $assetDeployment)
+            @foreach ($assetDisposals as $assetDisposal)
             <tr>
-              <td>{{ $assetDeployment->assetDeploymentNumber }}</td>
-              <td>{{ $assetDeployment->assetDeploymentDate }}</td>
-              <td>{{ $assetDeployment->assetModel->assetModelName }}</td>
-              <td><img src="{{ asset('storage/' .  $assetDeployment->assetModel->assetModelImage ) }}" alt="{{ $assetDeployment->assetModel->assetModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
-              <td>{{ $assetDeployment->assetModel->category->categoryName }}</td>
-              <td>{{ $assetDeployment->assetModel->category->categoryType }}</td>
-              <td>{{ $assetDeployment->assetModel->manufacture->manufactureName }}</td>
-              <td>{{ $assetDeployment->location->company->companyName }} - {{ $assetDeployment->location->locationName }}</td>
-              {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
+              <td>{{ $assetDisposal->assetDisposalNumber }}</td>
+              <td>{{ $assetDisposal->assetDisposalDate }}</td>
+              <td>{{ $assetDisposal->user->employeeName }}</td>
+              <td>{{ $assetDisposal->manager->employeeName }}</td>
+              <td>{{ $assetDisposal->location->company->companyName }} - {{ $assetDisposal->location->locationName }}</td>
+              <td>{{ $assetDisposal->assetDisposalStatus }}</td>
               <td class="py-0 align-middle">
-                  <div class="btn-group btn-group-sm">
-                    <a href="/assetRepair/manage/{{ $assetDeployment->assetDeploymentId }}" class="btn btn-success">Manage</a>
-                    <a href="/assetRepair/detail/{{ $assetDeployment->assetDeploymentId }}" class="btn btn-primary">Detail</a>
-                  </div>
-                {{-- @endif --}}
+                <div class="btn-group btn-group-sm">
+                  @if($assetDisposal->assetDisposalStatus == 'Pre Disposal')
+                    <a href="/assetDisposal/device/{{ $assetDisposal->assetDisposalId }}" class="btn btn-success">Device</a>
+                  @endif
+                  @if($assetDisposal->assetDisposalStatus == 'Asset for Disposal')
+                    <a href="/assetDisposal/disposal/{{ $assetDisposal->assetDisposalId }}" class="btn btn-success">Disposal</a>
+                  @endif
+                  <a href="/assetDisposal/detail/{{ $assetDisposal->assetDisposalId }}" class="btn btn-primary">Detail</a>
+                </div>
               </td>
-              {{-- @endif --}}
             </tr>    
             @endforeach
             </tfoot>

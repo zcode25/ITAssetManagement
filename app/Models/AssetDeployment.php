@@ -33,6 +33,10 @@ class AssetDeployment extends Model
         return $this->hasMany(AssetMovementDevice::class, 'assetDeploymentId', 'assetDeploymentId');
     }
 
+    public function assetDisposalDevice(){
+        return $this->hasMany(AssetDisposalDevice::class, 'assetDeploymentId', 'assetDeploymentId');
+    }
+
     public function assetDeploymentDetail(){
         return $this->hasMany(AssetDeploymentDetail::class, 'assetDeploymentId', 'assetDeploymentId');
     }

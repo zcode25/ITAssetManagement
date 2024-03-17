@@ -92,6 +92,15 @@ class AssetProcurementController extends Controller
             'assetProcurementDeviceQuantity' => 'required',
         ]);
 
+        $assetProcurementDevices = AssetProcurementDevice::where('assetProcurementId', $assetProcurement->assetProcurementId)->get();
+        foreach($assetProcurementDevices as $assetProcurementDevice) {
+            if($assetProcurementDevice->assetModelId == $validatedData['assetModelId']) {
+                return back()->with([
+                    'error' => 'The asset model has already been taken',
+                ]);
+            }
+        }
+
         $validatedData['assetProcurementDeviceId'] = Str::uuid();
         $validatedData['assetProcurementId'] = $assetProcurement->assetProcurementId;
 
@@ -112,7 +121,16 @@ class AssetProcurementController extends Controller
         return back();
     }
 
-    public function deviceSave() {
+    public function deviceSave(ModelsAssetProcurement  $assetProcurement) {
+
+        $assetProcurementDevices = AssetProcurementDevice::where('assetProcurementId', $assetProcurement->assetProcurementId)->get();
+
+        if(count($assetProcurementDevices) == 0) {
+            return back()->with([
+                'error' => 'No data available in table',
+            ]);
+        }
+
         return redirect('/assetProcurement')->with('success', 'Data saved successfully');
     }
 
@@ -134,6 +152,14 @@ class AssetProcurementController extends Controller
             'assetProcurementStatus' => 'required',
             'assetProcurementDetailNote' => 'required',
         ]);
+
+        $assetProcurementDevices = AssetProcurementDevice::where('assetProcurementId', $assetProcurement->assetProcurementId)->get();
+
+        if(count($assetProcurementDevices) == 0) {
+            return back()->with([
+                'error' => 'No data available in table',
+            ]);
+        }
 
         ModelsAssetProcurement::where('assetProcurementId', $assetProcurement->assetProcurementId)->update([
             'assetProcurementStatus' => $validatedData['assetProcurementStatus'],

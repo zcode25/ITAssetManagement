@@ -1,7 +1,7 @@
 @extends('layouts/main')
 @section('container')
 @php
-    use App\Models\AssetDeployment;
+    use App\Models\User;
 @endphp
 
   <!-- Content Wrapper. Contains page content -->
@@ -28,7 +28,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="/assetDeploymentReady/checkout/store/{{ $assetDeployment->assetDeploymentId }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+              <form action="/assetBroken/manage/store/{{ $assetDeployment->assetDeploymentId }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
@@ -75,7 +75,7 @@
                   <div class="form-group">
                     <label for="assetId" class="form-label">Checked Out To</label>
                     @php
-                      $asset = AssetDeployment::where('assetDeploymentId', $assetDeployment->assetId)->first();
+                      $asset = assetDeployment::where('assetDeploymentId', $assetDeployment->assetId)->first();
                     @endphp
                     <p><i class="fa-solid fa-barcode mr-2"></i> {{ $asset->assetDeploymentNumber }}</p>
                   </div>
@@ -127,9 +127,7 @@
                           <td>
                             <p class="text-bold mb-1">{{ $assetDeployment->assetDeploymentNumber }}</p>
                             <p>{{ $assetDeployment->assetModel->assetModelName }}</p>
-                            @if ($assetDeployment->assetSerialNumber != null)
                             <p>SN: {{ $assetDeployment->assetSerialNumber }}</p>
-                            @endif
                           </td>
                         </tr>
                       </table>
@@ -137,66 +135,25 @@
                   </div>
                   <hr>
                   <div class="form-group">
-                    <label for="assetDeploymentDetailDate" class="form-label">Checkout Date <span class="text-danger">*</span></label>
+                    <label for="assetDeploymentDetailDate" class="form-label">Date <span class="text-danger">*</span></label>
                     <input type="date" class="form-control @error('assetDeploymentDetailDate') is-invalid @enderror" id="assetDeploymentDetailDate" name="assetDeploymentDetailDate" value="{{ old('assetDeploymentDetailDate') }}">
                     @error('assetDeploymentDetailDate') 
                       <div class="invalid-feedback">{{ $message }}</div>
-                      @enderror
-                    </div>
-                  @if ($assetDeployment->assetModel->category->categoryType == 'License' || $assetDeployment->assetModel->category->categoryType == 'Component')
+                    @enderror
+                  </div>
                   <div class="form-group">
-                    <label for="" class="form-label">Checkout to <span class="text-danger">*</span></label>
-                    <div>
-                      <div class="btn-group" role="group" aria-label="Input Selection">
-                        <button type="button" id="btnUserId" class="btn btn-primary btn-sm" onclick="showInput('user')">User ID</button>
-                        <button type="button" id="btnAssetId" class="btn btn-outline-primary btn-sm" onclick="showInput('asset')">Asset ID</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group" id="assetInput" style="display: none;">
-                    <label for="assetId" class="form-label">Asset <span class="text-danger">*</span></label>
-                    <select class="form-control select2bs4" id="assetId" name="assetId" data-placeholder="Select a Asset">
+                    <label for="assetDeploymentStatus" class="form-label">Status <span class="text-danger">*</span></label>
+                    <select class="form-control select2bs4" id="assetDeploymentStatus" name="assetDeploymentStatus" data-placeholder="Select a Type">
                       <option value=""></option>
-                      @foreach ($assetDeployments as $assetDeployment)
-                        @if ($assetDeployment->assetModel->category->categoryType == 'Asset')
-                          @if (old('assetDeploymentId') == $assetDeployment->assetDeploymentId)
-                              <option value="{{ $assetDeployment->assetDeploymentId }}" selected>({{ $assetDeployment->assetDeploymentNumber }}) - {{ $assetDeployment->assetModel->assetModelName }}</option>
+                      @foreach ($types as $type)
+                          @if (old('assetDeploymentStatus') == $type['type'])
+                              <option value="{{ $type['type'] }}" selected>{{ $type['type'] }}</option>
                               @else
-                              <option value="{{ $assetDeployment->assetDeploymentId }}">({{ $assetDeployment->assetDeploymentNumber }}) - {{ $assetDeployment->assetModel->assetModelName }}</option>
-                          @endif
-                        @endif
-                      @endforeach
-                    </select>
-                  </div>
-                  <div class="form-group" id="userInput">
-                    <label for="userId" class="form-label">User <span class="text-danger">*</span></label>
-                    <select class="form-control select2bs4" id="userId" name="userId" data-placeholder="Select a User">
-                      <option value=""></option>
-                      @foreach ($users as $user)
-                          @if (old('userId') == $user->userId)
-                              <option value="{{ $user->userId }}" selected>{{ $user->employeeName }} - {{ $user->departement->departementName }}</option>
-                              @else
-                              <option value="{{ $user->userId }}">{{ $user->employeeName }} - {{ $user->departement->departementName }}</option>
+                              <option value="{{ $type['type'] }}">{{ $type['type'] }}</option>
                           @endif
                       @endforeach
                     </select>
                   </div>
-                  @else
-                  <div class="form-group">
-                    <label for="userId" class="form-label">User <span class="text-danger">*</span></label>
-                    <select class="form-control select2bs4" id="userId" name="userId" data-placeholder="Select a User">
-                      <option value=""></option>
-                      @foreach ($users as $user)
-                          @if (old('userId') == $user->userId)
-                              <option value="{{ $user->userId }}" selected>{{ $user->employeeName }} - {{ $user->departement->departementName }}</option>
-                              @else
-                              <option value="{{ $user->userId }}">{{ $user->employeeName }} - {{ $user->departement->departementName }}</option>
-                          @endif
-                      @endforeach
-                    </select>
-                  </div>
-                  @endif
-                  
                   <div class="form-group">
                     <label for="assetDeploymentDetailNote" class="form-label">Note <span class="text-danger">*</span></label>
                     <textarea class="form-control @error('assetDeploymentDetailNote') is-invalid @enderror"s="3" id="assetDeploymentDetailNote" name="assetDeploymentDetailNote">{{ old('assetDeploymentDetailNote') }}</textarea>
@@ -208,7 +165,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <a href="/preDeployment" class="btn btn-default">Cancel</a>
-                  <button type="submit" name="assetDeploymentStatus" value="Checkout" class="btn btn-success float-right mr-2">Checkout</button>
+                  <button type="submit" name="submit" class="btn btn-success float-right mr-2">Checkin</button>
                 </div>
                 <!-- /.card-footer -->
               </form>
@@ -222,44 +179,5 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-  <script>
-    function showInput(inputType) {
-      // Mendapatkan referensi ke input
-      var userInput = document.getElementById('userInput');
-      var assetInput = document.getElementById('assetInput');
-      var userIdInput = document.getElementById('userId');
-      var assetIdInput = document.getElementById('assetId');
-    
-      // Sembunyikan kedua input dan nonaktifkan
-      userInput.style.display = 'none';
-      assetInput.style.display = 'none';
-      userIdInput.disabled = true; // Menonaktifkan input
-      assetIdInput.disabled = true; // Menonaktifkan input
-    
-      // Set kembali kelas untuk kedua tombol ke default (inactive)
-      var btnUserId = document.getElementById('btnUserId');
-      var btnAssetId = document.getElementById('btnAssetId');
-      btnUserId.classList.remove('btn-primary');
-      btnUserId.classList.add('btn-outline-primary');
-      btnAssetId.classList.remove('btn-primary');
-      btnAssetId.classList.add('btn-outline-primary');
-    
-      // Tampilkan input yang sesuai, aktifkan, dan ubah kelas tombolnya
-      if (inputType === 'user') {
-        userInput.style.display = 'block';
-        userIdInput.disabled = false; // Mengaktifkan input
-        btnUserId.classList.add('btn-primary');
-        btnUserId.classList.remove('btn-outline-primary');
-      } else if (inputType === 'asset') {
-        assetInput.style.display = 'block';
-        assetIdInput.disabled = false; // Mengaktifkan input
-        btnAssetId.classList.add('btn-primary');
-        btnAssetId.classList.remove('btn-outline-primary');
-      }
-    }
-    </script>
-    
-    
 
 @endsection
