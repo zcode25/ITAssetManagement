@@ -58,7 +58,7 @@ class AssetProcurementController extends Controller
         $validatedData['managerId'] = $manager->userId;
         $validatedData['locationId'] = $user->locationId;
         $validatedData['assetProcurementId'] = Str::uuid();
-        $validatedData['assetProcurementNumber'] = IdGenerator::generate(['table' => 'asset_procurements', 'field' => 'assetProcurementNumber', 'length' => 20, 'prefix' => 'IT/PO/'. date('d/m/y', strtotime($validatedData['assetProcurementDate'])) . '/']);
+        $validatedData['assetProcurementNumber'] = IdGenerator::generate(['table' => 'asset_procurements', 'field' => 'assetProcurementNumber', 'length' => 20, 'prefix' => 'IT/PO/'. date('y/m/d', strtotime($validatedData['assetProcurementDate'])) . '/']);
         $validatedData['assetProcurementStatus'] = 'Approval Required';
         
         ModelsAssetProcurement::create($validatedData);
@@ -150,6 +150,7 @@ class AssetProcurementController extends Controller
     public function approvalManagerStore(ModelsAssetProcurement $assetProcurement, Request $request) {
         $validatedData = $request->validate([
             'assetProcurementStatus' => 'required',
+            'assetProcurementDetailDate' => 'required',
             'assetProcurementDetailNote' => 'required',
         ]);
 
@@ -168,7 +169,7 @@ class AssetProcurementController extends Controller
         $assetProcurementDetail['assetProcurementDetailId'] =  Str::uuid();
         $assetProcurementDetail['assetProcurementId'] =  $assetProcurement->assetProcurementId;
         $assetProcurementDetail['assetProcurementDetailNote'] = $validatedData['assetProcurementDetailNote'];
-        $assetProcurementDetail['assetProcurementDetailDate'] = date('Y-m-d');
+        $assetProcurementDetail['assetProcurementDetailDate'] = $validatedData['assetProcurementDetailDate'];
         $assetProcurementDetail['assetProcurementDetailStatus'] = $validatedData['assetProcurementStatus'];
         
         AssetProcurementDetail::Create($assetProcurementDetail);
@@ -203,6 +204,7 @@ class AssetProcurementController extends Controller
         $validatedData = $request->validate([
             'assetProcurementType' => 'required',
             'assetProcurementDetailNote' => 'required',
+            'assetProcurementDetailDate' => 'required',
             'assetProcurementStatus' => 'required',
         ]);
 
@@ -215,7 +217,7 @@ class AssetProcurementController extends Controller
         $assetProcurementDetail['assetProcurementDetailId'] =  Str::uuid();
         $assetProcurementDetail['assetProcurementId'] =  $assetProcurement->assetProcurementId;
         $assetProcurementDetail['assetProcurementDetailNote'] = $validatedData['assetProcurementDetailNote'];
-        $assetProcurementDetail['assetProcurementDetailDate'] = date('Y-m-d');
+        $assetProcurementDetail['assetProcurementDetailDate'] = $validatedData['assetProcurementDetailDate'];
         $assetProcurementDetail['assetProcurementDetailStatus'] = $validatedData['assetProcurementStatus'];
         
         AssetProcurementDetail::Create($assetProcurementDetail);

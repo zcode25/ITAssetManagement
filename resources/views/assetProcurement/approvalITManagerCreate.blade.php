@@ -66,6 +66,13 @@
                   </div>
                   <hr>
                   <div class="form-group">
+                    <label for="assetProcurementDetailDate" class="form-label">Date <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control @error('assetProcurementDetailDate') is-invalid @enderror" id="assetProcurementDetailDate" name="assetProcurementDetailDate" value="{{ old('assetProcurementDetailDate') }}">
+                    @error('assetProcurementDetailDate') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
+                  <div class="form-group">
                     <label for="assetProcurementType" class="form-label">Procurement Type <span class="text-danger">*</span></label>
                     <select class="form-control select2bs4" id="assetProcurementType" name="assetProcurementType" data-placeholder="Select a Procurement Type">
                       <option value=""></option>

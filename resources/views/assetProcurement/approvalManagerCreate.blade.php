@@ -66,6 +66,13 @@
                   </div>
                   <hr>
                   <div class="form-group">
+                    <label for="assetProcurementDetailDate" class="form-label">Date <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control @error('assetProcurementDetailDate') is-invalid @enderror" id="assetProcurementDetailDate" name="assetProcurementDetailDate" value="{{ old('assetProcurementDetailDate') }}">
+                    @error('assetProcurementDetailDate') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
+                  <div class="form-group">
                     <label for="assetProcurementDetailNote" class="form-label">Note <span class="text-danger">*</span></label>
                     <textarea class="form-control @error('assetProcurementDetailNote') is-invalid @enderror"s="3" id="assetProcurementDetailNote" name="assetProcurementDetailNote">{{ old('assetProcurementDetailNote') }}</textarea>
                     @error('assetProcurementDetailNote') 

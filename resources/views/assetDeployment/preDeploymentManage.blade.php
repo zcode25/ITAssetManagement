@@ -111,6 +111,13 @@
                   </div>
                   <hr>
                   <div class="form-group">
+                    <label for="assetDeploymentDetailDate" class="form-label">Date <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control @error('assetDeploymentDetailDate') is-invalid @enderror" id="assetDeploymentDetailDate" name="assetDeploymentDetailDate" value="{{ old('assetDeploymentDetailDate') }}">
+                    @error('assetDeploymentDetailDate') 
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
+                  <div class="form-group">
                     <label for="assetDeploymentImage" class="form-label">Deployment Image <span class="text-danger">*</span></label>
                     <input type="file" class="form-control @error('assetDeploymentImage') is-invalid @enderror" id="assetDeploymentImage" name="assetDeploymentImage" value="{{ old('assetDeploymentImage') }}">
                     @error('assetDeploymentImage') 

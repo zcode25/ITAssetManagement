@@ -55,7 +55,6 @@ class AssetPurchaseController extends Controller
             if (strpos($key, 'assetProcurementDeviceId-') === 0) {
                 // Dapatkan nomor index dari key
                 $index = str_replace('assetProcurementDeviceId-', '', $key);
-
                 
                 // Dapatkan ID device
                 $deviceId = $value;
@@ -65,6 +64,13 @@ class AssetPurchaseController extends Controller
                 
                 $device = AssetProcurementDevice::where('assetProcurementDeviceId', $deviceId)->first();
                 $deviceTotal = $devicePrice * $device->assetProcurementDeviceQuantity;
+
+
+                if($devicePrice == null || $deviceTotal == null || $supplierId == null) {
+                    return back()->with([
+                        'error' => 'No data available in table',
+                    ]);
+                }
 
                 AssetProcurementDevice::where('assetProcurementDeviceId', $deviceId)->update([
                     'assetProcurementDevicePrice' => $devicePrice,

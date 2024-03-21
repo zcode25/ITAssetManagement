@@ -11,6 +11,7 @@ use App\Models\AssetRepair;
 use App\Models\Category;
 use App\Models\User;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Contracts\Support\ValidatedData;
 
 class AssetDeploymentController extends Controller
 {
@@ -39,6 +40,7 @@ class AssetDeploymentController extends Controller
             $validatedData = $request->validate([
                 'assetSerialNumber' => 'max:50',
                 'assetDeploymentStatus' => 'required',
+                'assetDeploymentDetailDate' => 'required',
                 'assetDeploymentImage' => 'required|mimes:png,jpg|max:2048',
             ]);
         } else {
@@ -46,6 +48,7 @@ class AssetDeploymentController extends Controller
                 'assetProductKey' => 'required|max:50',
                 'assetExpirationDate' => 'max:50',
                 'assetDeploymentStatus' => 'required',
+                'assetDeploymentDetailDate' => 'required',
                 'assetDeploymentImage' => 'required|mimes:png,jpg|max:2048',
             ]);
         }
@@ -55,12 +58,26 @@ class AssetDeploymentController extends Controller
             $validatedData['assetDeploymentImage'] = $request->file('assetDeploymentImage')->store('assetDeploymentImage');
         }
 
-        ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->update($validatedData);
+        if($assetDeployment->assetModel->category->categoryType != 'License') {
+            ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->update([
+                'assetSerialNumber' => $validatedData['assetSerialNumber'],
+                'assetDeploymentStatus' => $validatedData['assetDeploymentStatus'],
+                'assetDeploymentImage' => $validatedData['assetDeploymentImage'],
+            ]);
+        } else {
+            ModelsAssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->update([
+                'assetProductKey' => $validatedData['assetProductKey'],
+                'assetExpirationDate' => $validatedData['assetExpirationDate'],
+                'assetDeploymentStatus' => $validatedData['assetDeploymentStatus'],
+                'assetDeploymentImage' => $validatedData['assetDeploymentImage'],
+            ]);
+        }
+
 
         $assetDeploymentDetail['assetDeploymentDetailId'] = Str::uuid();
         $assetDeploymentDetail['assetDeploymentId'] = $assetDeployment['assetDeploymentId'];
         $assetDeploymentDetail['locationId'] = $assetDeployment['locationId'];
-        $assetDeploymentDetail['assetDeploymentDetailDate'] = date('Y-m-d');
+        $assetDeploymentDetail['assetDeploymentDetailDate'] = $validatedData['assetDeploymentDetailDate'];
         $assetDeploymentDetail['assetDeploymentDetailStatus'] = $validatedData['assetDeploymentStatus'];
         AssetDeploymentDetail::Create($assetDeploymentDetail);
 
@@ -99,8 +116,6 @@ class AssetDeploymentController extends Controller
                 'assetDeploymentDetailNote' => 'required',
             ]);
         }
-
-        
 
         if(isset($validatedData['userId'])) {
             $validatedData['assetId'] = null;

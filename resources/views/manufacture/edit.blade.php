@@ -17,7 +17,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-xl-8">
+        <div class="col-xl-6">
             <!-- Horizontal Form -->
             <div class="card">
               <div class="card-header">
