@@ -117,7 +117,7 @@ class AssetPurchaseController extends Controller
             $qty = $device->assetProcurementDeviceQuantity;
             for ($i=0; $i < $qty; $i++) { 
                 $assetDeployment['assetDeploymentId'] =  Str::uuid();
-                $assetDeployment['assetDeploymentNumber'] = IdGenerator::generate(['table' => 'asset_deployments', 'field' => 'assetDeploymentNumber', 'length' => 20, 'prefix' => 'IT/DO/'. date('d/m/y', strtotime($validatedData['assetDeploymentDate'])) . '/']);
+                $assetDeployment['assetDeploymentNumber'] = IdGenerator::generate(['table' => 'asset_deployments', 'field' => 'assetDeploymentNumber', 'length' => 20, 'prefix' => 'IT/DO/'. date('y/m/d', strtotime($validatedData['assetDeploymentDate'])) . '/']);
                 $assetDeployment['assetDeploymentDate'] =  $validatedData['assetDeploymentDate'];
                 $assetDeployment['locationId'] = $assetProcurement->user->locationId;
                 $assetDeployment['assetProcurementId'] =  $device->assetProcurementId;

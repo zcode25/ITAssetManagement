@@ -1,7 +1,10 @@
 @extends('layouts/main')
 @section('container')
 @php
-    use App\Models\User;
+  use App\Models\User;
+  use App\Models\AssetProcurementDevice;
+  use App\Models\Depreciation;
+  $totalNilaiBuku = 0;
 @endphp
 
   <!-- Content Wrapper. Contains page content -->
@@ -136,6 +139,7 @@
                     <th>Deployment Number</th>
                     <th>Device</th>
                     <th>SN</th>
+                    <th>Current Value</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -144,12 +148,62 @@
                     @endphp
                     @foreach ($assetDisposalDevices as $assetDisposalDevice)
                     <tr>
-                    <td>{{ $i++ }}</td>
-                    <td>{{ $assetDisposalDevice->assetDeployment->assetDeploymentNumber }}</td>
-                    <td>{{ $assetDisposalDevice->assetDeployment->assetModel->assetModelName }}</td>
-                    <td>{{ $assetDisposalDevice->assetDeployment->assetSerialNumber }}</td>
+                      <td>{{ $i++ }}</td>
+                      <td>{{ $assetDisposalDevice->assetDeployment->assetDeploymentNumber }}</td>
+                      <td>{{ $assetDisposalDevice->assetDeployment->assetModel->assetModelName }}</td>
+                      <td>{{ $assetDisposalDevice->assetDeployment->assetSerialNumber }}</td>
+                      @php
+                        $cost = AssetProcurementDevice::where('assetProcurementId', $assetDisposalDevice->assetDeployment->assetProcurementId)
+                                          ->where('assetModelId', $assetDisposalDevice->assetDeployment->assetModelId)
+                                          ->first();
+
+                        if ($cost) {
+                            $costAmount = $cost->assetProcurementDevicePrice; // Nilai biaya aset
+                            $deploymentDate = new DateTime($assetDisposalDevice->assetDeployment->assetDeploymentDate);
+                            $costYear = $deploymentDate->format('Y'); // Tahun penyebaran
+                        } else {
+                            $costAmount = 0;
+                            $costYear = date("Y");
+                        }
+
+                        $test = Depreciation::where('categoryId', $assetDisposalDevice->assetDeployment->assetModel->categoryId)->first();
+
+                        if ($test) {
+                            $useful = $test->depreciationUseful;
+                            $residual = $test->depreciationResidual;
+                            $biaya_penyusutan = ($costAmount - $residual) / $useful;
+                          } else {
+                            $useful = 0; // Pastikan ini diatur ke nilai non-nol jika tidak ada data
+                            $residual = 0;
+                            $biaya_penyusutan = 0;
+                        }
+
+                        // Tambahkan pengecekan untuk menghindari division by zero
+                        if ($useful <= 0) {
+                          $nilaiBukuSaatIni = $cost->assetProcurementDevicePrice;
+                        } else {
+                            $tahunSaatIni = date("Y");
+                            $lamaPenyusutan = $tahunSaatIni - $costYear;
+                            
+                            if ($lamaPenyusutan > $useful) {
+                                $lamaPenyusutan = $useful;
+                            }
+
+                            $totalDepresiasi = (($costAmount - $residual) / $useful) * $lamaPenyusutan; // Depresiasi total hingga tahun saat ini.
+                            $nilaiBukuSaatIni = $costAmount - $totalDepresiasi; // Nilai buku berdasarkan depresiasi yang terakumulasi.
+
+                        }
+
+                        $totalNilaiBuku += $nilaiBukuSaatIni; 
+
+                      @endphp
+                      <td>{{ "Rp " . number_format($nilaiBukuSaatIni, 0, ',', '.') }}</td>
                     </tr>
                     @endforeach
+                    <tr>
+                      <td colspan="4" style="text-align: center;"><strong>Total</strong></td>
+                      <td><strong>{{ "Rp " . number_format($totalNilaiBuku, 0, ',', '.') }}</strong></td>
+                    </tr>
                 </tbody>
                 </table>
                 @else

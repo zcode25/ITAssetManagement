@@ -126,7 +126,26 @@ class AssetDisposalController extends Controller
             ]);
         }
 
+        
         foreach ($assetDisposalDevices as $assetDisposalDevice) {
+            $assetDeployments = AssetDeployment::where('assetId', $assetDisposalDevice->assetDeploymentId)->get();
+            foreach($assetDeployments as $assetDeployment) {
+                AssetDeployment::where('assetDeploymentId', $assetDeployment->assetDeploymentId)->update([
+                    'locationId' => null,
+                    'assetDeploymentStatus' => 'Asset Disposal',
+                ]);
+    
+                $assetDeploymentDetail['assetDeploymentDetailId'] = Str::uuid();
+                $assetDeploymentDetail['assetDeploymentId'] = $assetDeployment->assetDeploymentId;
+                $assetDeploymentDetail['userId'] = null;
+                $assetDeploymentDetail['locationId'] = null;
+                $assetDeploymentDetail['assetDeploymentDetailDate'] =  $assetDisposal->assetDisposalDate;
+                $assetDeploymentDetail['assetDeploymentDetailNote'] = 'Disposal';
+                $assetDeploymentDetail['assetDeploymentDetailStatus'] = 'Asset Disposal';
+                AssetDeploymentDetail::Create($assetDeploymentDetail);
+            }
+            
+
             AssetDeployment::where('assetDeploymentId', $assetDisposalDevice->assetDeploymentId)->update([
                 'userId' => null,
                 'locationId' => null,
@@ -137,7 +156,7 @@ class AssetDisposalController extends Controller
             $assetDeploymentDetail['assetDeploymentId'] = $assetDisposalDevice->assetDeploymentId;
             $assetDeploymentDetail['userId'] = null;
             $assetDeploymentDetail['locationId'] = null;
-            $assetDeploymentDetail['assetDeploymentDetailDate'] = date('Y-m-d');
+            $assetDeploymentDetail['assetDeploymentDetailDate'] = $assetDisposal->assetDisposalDate;
             $assetDeploymentDetail['assetDeploymentDetailNote'] = 'Disposal';
             $assetDeploymentDetail['assetDeploymentDetailStatus'] = 'Asset Disposal';
             AssetDeploymentDetail::Create($assetDeploymentDetail);

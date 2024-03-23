@@ -6,6 +6,7 @@ use App\Http\Controllers\Main\AssetArchiveController;
 use App\Http\Controllers\Main\AssetBrokenController;
 use App\Http\Controllers\Main\AssetController;
 use App\Http\Controllers\Main\AssetDeploymentController;
+use App\Http\Controllers\Main\AssetDepreciationController;
 use App\Http\Controllers\Main\AssetDisposalController;
 use App\Http\Controllers\Main\AssetModelController;
 use App\Http\Controllers\Main\AssetMovementController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Main\ComponentModelController;
 use App\Http\Controllers\Main\ConsumableModelController;
 use App\Http\Controllers\Main\DashboardController as MainDashboardController;
 use App\Http\Controllers\Main\DepartementController;
+use App\Http\Controllers\Main\DepreciationController;
 use App\Http\Controllers\Main\LicenseModelController;
 use App\Http\Controllers\Main\LocationController as MainLocationController;
 use App\Http\Controllers\Main\ManufactureController;
@@ -231,4 +233,17 @@ Route::controller(AssetDisposalController::class)->group(function() {
     Route::get('/assetDisposal/disposal/{assetDisposal:assetDisposalId}', 'disposal')->name('assetDisposal.disposal')->middleware('auth');
     Route::post('/assetDisposal/disposal/store/{assetDisposal:assetDisposalId}', 'disposalStore')->name('assetDisposal.disposalStore')->middleware('auth');
     Route::get('/assetDisposal/detail/{assetDisposal:assetDisposalId}', 'detail')->name('assetDisposal.detail')->middleware('auth');
+});
+
+Route::controller(DepreciationController::class)->group(function() {
+    Route::get('/depreciation', 'index')->name('depreciation.index')->middleware('auth');
+    Route::get('/depreciation/create', 'create')->name('depreciation.create')->middleware('auth');
+    Route::post('/depreciation/store', 'store')->name('depreciation.store')->middleware('auth');
+    Route::get('/depreciation/edit/{depreciation:depreciationId}', 'edit')->name('depreciation.edit')->middleware('auth');
+    Route::post('/depreciation/update/{depreciation:depreciationId}', 'update')->name('depreciation.update')->middleware('auth');
+    Route::delete('/depreciation/destroy/{depreciation:depreciationId}', 'destroy')->name('depreciation.destroy')->middleware('auth');
+});
+
+Route::controller(AssetDepreciationController::class)->group(function() {
+    Route::get('/assetDepreciation', 'index')->name('assetDepreciation.index')->middleware('auth');
 });

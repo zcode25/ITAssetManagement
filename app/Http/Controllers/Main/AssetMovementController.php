@@ -51,7 +51,7 @@ class AssetMovementController extends Controller
         ]);
 
         $validatedData['assetMovementId'] =  Str::uuid();
-        $validatedData['assetMovementNumber'] = IdGenerator::generate(['table' => 'asset_movements', 'field' => 'assetMovementNumber', 'length' => 20, 'prefix' => 'IT/MV/'. date('d/m/y', strtotime($validatedData['assetMovementDate'])) . '/']);
+        $validatedData['assetMovementNumber'] = IdGenerator::generate(['table' => 'asset_movements', 'field' => 'assetMovementNumber', 'length' => 20, 'prefix' => 'IT/MV/'. date('y/m/d', strtotime($validatedData['assetMovementDate'])) . '/']);
         $validatedData['assetProcurementId'] =  $assetProcurement->assetProcurementId;
 
         AssetMovement::Create($validatedData);

@@ -16,4 +16,8 @@ class Category extends Model
     public function assetModel(){
         return $this->hasMany(assetModel::class, 'categoryId', 'categoryId');
     }
+
+    public function depreciation(){
+        return $this->hasMany(depreciation::class, 'categoryId', 'categoryId');
+    }
 }

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreign('locationId')->references('locationId')->on('locations')->onUpdate('cascade')->onDelete('restrict');
             $table->char('supplierId', 8)->nullable();
             $table->foreign('supplierId')->references('supplierId')->on('suppliers')->onUpdate('cascade')->onDelete('restrict');
-            $table->enum('assetDisposalType', ['Asset Discard', 'Asset Auction']);
+            $table->enum('assetDisposalType', ['Asset Discard', 'Asset Auction'])->nullable();
             $table->enum('assetDisposalStatus', ['Pre Disposal', 'Asset for Disposal','Asset Disposed']);
             $table->string('assetDisposalNote');
             $table->integer('assetDisposalAmount')->nullable();

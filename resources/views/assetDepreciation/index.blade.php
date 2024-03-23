@@ -2,6 +2,8 @@
 @section('container')
 @php
 use App\Models\AssetDeployment;
+use App\Models\AssetProcurementDevice;
+use App\Models\Depreciation;
 $jsonData = auth()->user()->permission;
 $menuData = json_decode($jsonData, true);
 @endphp
@@ -53,9 +55,10 @@ $menuData = json_decode($jsonData, true);
               <th>Type</th>
               <th>Checked Out To</th>
               <th>Location</th>
-              {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
-              <th>Action</th>
-              {{-- @endif --}}
+              <th>Status</th>
+              <th>Purchase Cost</th>
+              <th>Yearly Depreciation</th>
+              <th>Current Value</th>
             </tr>
             </thead>
             <tbody>
@@ -79,18 +82,61 @@ $menuData = json_decode($jsonData, true);
                 @else
                 <td>-</td>
                 @endif
+                @if ($assetDeployment->locationId != null)
                 <td>{{ $assetDeployment->location->company->companyName }} - {{ $assetDeployment->location->locationName }}</td>
+                @else
+                <td>-</td>
+                @endif
               @endif
-              {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
-              <td class="py-0 align-middle">
-                  <div class="btn-group btn-group-sm">
-                    <a href="/assetDeploymentCheckout/checkin/{{ $assetDeployment->assetDeploymentId }}" class="btn btn-success">Checkin</a>
-                    <a href="/assetDeploymentCheckout/detail/{{ $assetDeployment->assetDeploymentId }}" class="btn btn-primary">Detail</a>
-                  </div>
-                {{-- @endif --}}
-              </td>
+              <td>{{ $assetDeployment->assetDeploymentStatus }}</td>
+              @php
+                $cost = AssetProcurementDevice::where('assetProcurementId', $assetDeployment->assetProcurementId)
+                                  ->where('assetModelId', $assetDeployment->assetModelId)
+                                  ->first();
+
+                if ($cost) {
+                    $costAmount = $cost->assetProcurementDevicePrice; // Nilai biaya aset
+                    $deploymentDate = new DateTime($assetDeployment->assetDeploymentDate);
+                    $costYear = $deploymentDate->format('Y'); // Tahun penyebaran
+                } else {
+                    $costAmount = 0;
+                    $costYear = date("Y");
+                }
+
+                $test = Depreciation::where('categoryId', $assetDeployment->assetModel->categoryId)->first();
+
+                if ($test) {
+                    $useful = $test->depreciationUseful;
+                    $residual = $test->depreciationResidual;
+                    $biaya_penyusutan = ($costAmount - $residual) / $useful;
+                  } else {
+                    $useful = 0; // Pastikan ini diatur ke nilai non-nol jika tidak ada data
+                    $residual = 0;
+                    $biaya_penyusutan = 0;
+                }
+
+                // Tambahkan pengecekan untuk menghindari division by zero
+                if ($useful <= 0) {
+                  $nilaiBukuSaatIni = $cost->assetProcurementDevicePrice;
+                } else {
+                    $tahunSaatIni = date("Y");
+                    $lamaPenyusutan = $tahunSaatIni - $costYear;
+                    
+                    if ($lamaPenyusutan > $useful) {
+                        $lamaPenyusutan = $useful;
+                    }
+
+                    $totalDepresiasi = (($costAmount - $residual) / $useful) * $lamaPenyusutan; // Depresiasi total hingga tahun saat ini.
+                    $nilaiBukuSaatIni = $costAmount - $totalDepresiasi; // Nilai buku berdasarkan depresiasi yang terakumulasi.
+
+                    // echo "Nilai buku aset untuk tahun $tahunSaatIni adalah $nilaiBukuSaatIni";
+                }
+              @endphp
+              <td>{{ "Rp " . number_format($cost->assetProcurementDevicePrice, 0, ',', '.') }}</td>
+              <td>{{ "Rp " . number_format($biaya_penyusutan, 0, ',', '.') }}</td>
+              <td>{{ "Rp " . number_format($nilaiBukuSaatIni, 0, ',', '.') }}</td>
               {{-- @endif --}}
-            </tr>
+            </tr>    
             @endforeach
             </tfoot>
           </table>

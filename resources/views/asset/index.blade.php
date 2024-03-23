@@ -41,22 +41,6 @@ $menuData = json_decode($jsonData, true);
           </div>
         </div>
         <div class="card-body">
-
-          <div class="row">
-            <div class="col-xl-4 col-md-6">
-              <div class="card-filter mb-3">
-                <label for="categoryTypeFilter" class="form-label">Category Type</label>
-                <select id="categoryTypeFilter" class="form-control custom-select">
-                  <option value="">All Categories</option>
-                  <option value="Asset">Asset</option>
-                  <option value="Accessory">Accessory</option>
-                  <option value="Consumable">Consumable</option>
-                  <option value="Component">Component</option>
-                  <option value="License">License</option>
-                </select>
-              </div>
-            </div>
-          </div>
           
           <table id="example1" class="table table-hover">
             <thead>
@@ -106,28 +90,5 @@ $menuData = json_decode($jsonData, true);
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function(){
-      // Fungsi untuk memfilter tabel
-      function filterTable(categoryType) {
-        const rows = document.querySelectorAll("#example1 tbody tr");
-    
-        rows.forEach(row => {
-          const tdCategoryType = row.querySelector("td:nth-child(6)").textContent;
-          if (categoryType === "" || tdCategoryType === categoryType) {
-            row.style.display = "";
-          } else {
-            row.style.display = "none";
-          }
-        });
-      }
-    
-      // Event listener untuk dropdown filter
-      document.querySelector("#categoryTypeFilter").addEventListener("change", function() {
-        filterTable(this.value);
-      });
-    });
-  </script>
 
 @endsection

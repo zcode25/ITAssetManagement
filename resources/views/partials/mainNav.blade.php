@@ -189,9 +189,17 @@
           </a>
         </li>
         {{-- @endif --}}
+        {{-- @if($menuData['assetBrokenIndex']['index']) --}}
+        <li class="nav-item">
+          <a href="/assetDepreciation" class="nav-link {{ Request::is('assetDepreciation*') ? 'active' : '' }}">
+            <i class="far fa fa-clock nav-icon"></i>
+            <p>Asset Depreciation</p>
+          </a>
+        </li>
+        {{-- @endif --}}
         @if($menuData['supplierIndex']['index'] || $menuData['manufactureIndex']['index'] || $menuData['categoryIndex']['index'] || $menuData['accessoryModelIndex']['index'] || $menuData['assetModelIndex']['index'])
-        <li class="nav-item {{ Request::is('supplier*', 'manufacture*', 'category*', 'accessoryModel*', 'assetModel*', 'consumableModel*', 'componentModel*', 'licenseModel*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ Request::is('supplier*', 'manufacture*', 'category*', 'accessoryModel*', 'assetModel*', 'consumableModel*', 'componentModel*', 'licenseModel*') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('supplier*', 'manufacture*', 'category*', 'accessoryModel*', 'assetModel*', 'depreciation*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::is('supplier*', 'manufacture*', 'category*', 'accessoryModel*', 'assetModel*', 'depreciation*') ? 'active' : '' }}">
             <i class="nav-icon fas fa fa-box"></i>
             <p>
               Master Asset
@@ -231,6 +239,12 @@
               </a>
             </li>
             @endif
+            <li class="nav-item">
+              <a href="/depreciation" class="nav-link {{ Request::is('depreciation*') ? 'active' : '' }}">
+                <i class="far fa fa-clock nav-icon"></i>
+                <p>Depreciation</p>
+              </a>
+            </li>
           </ul>
         </li>
         @endif

@@ -42,22 +42,6 @@ $menuData = json_decode($jsonData, true);
         </div>
         <div class="card-body">
 
-          <div class="row">
-            <div class="col-xl-4 col-md-6">
-              <div class="card-filter mb-3">
-                <label for="categoryTypeFilter" class="form-label">Category Type</label>
-                <select id="categoryTypeFilter" class="form-control custom-select">
-                  <option value="">All Categories</option>
-                  <option value="Asset">Asset</option>
-                  <option value="Accessory">Accessory</option>
-                  <option value="Consumable">Consumable</option>
-                  <option value="Component">Component</option>
-                  <option value="License">License</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
           <table id="example2" class="table table-hover">
             <thead>
             <tr>
@@ -67,7 +51,6 @@ $menuData = json_decode($jsonData, true);
               <th>Image</th>
               <th>Category</th>
               <th>Type</th>
-              <th>Manufacture</th>
               <th>Location</th>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
               <th>Action</th>
@@ -83,7 +66,6 @@ $menuData = json_decode($jsonData, true);
               <td><img src="{{ asset('storage/' .  $assetDeployment->assetModel->assetModelImage ) }}" alt="{{ $assetDeployment->assetModel->assetModelName }}" class="img-responsive" style="max-height: 30px; width: auto;"></td>
               <td>{{ $assetDeployment->assetModel->category->categoryName }}</td>
               <td>{{ $assetDeployment->assetModel->category->categoryType }}</td>
-              <td>{{ $assetDeployment->assetModel->manufacture->manufactureName }}</td>
               <td>{{ $assetDeployment->location->company->companyName }} - {{ $assetDeployment->location->locationName }}</td>
               {{-- @if($menuData['assetModelEdit']['index'] || $menuData['assetModelDelete']['index']) --}}
               <td class="py-0 align-middle">
@@ -107,28 +89,5 @@ $menuData = json_decode($jsonData, true);
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function(){
-      // Fungsi untuk memfilter tabel
-      function filterTable(categoryType) {
-        const rows = document.querySelectorAll("#example2 tbody tr");
-    
-        rows.forEach(row => {
-          const tdCategoryType = row.querySelector("td:nth-child(6)").textContent;
-          if (categoryType === "" || tdCategoryType === categoryType) {
-            row.style.display = "";
-          } else {
-            row.style.display = "none";
-          }
-        });
-      }
-    
-      // Event listener untuk dropdown filter
-      document.querySelector("#categoryTypeFilter").addEventListener("change", function() {
-        filterTable(this.value);
-      });
-    });
-  </script>
 
 @endsection
