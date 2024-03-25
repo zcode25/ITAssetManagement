@@ -15,7 +15,7 @@ use Illuminate\Contracts\Support\ValidatedData;
 
 class AssetDeploymentController extends Controller
 {
-    public function all() {
+    public function all(Request $request) {
         return view('assetDeployment.all', [
             'assetDeployments' => ModelsAssetDeployment::all(),
         ]);
