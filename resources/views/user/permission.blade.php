@@ -751,7 +751,7 @@
                   </div>
                   <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title">Accessory Model</h3>
+                      <h3 class="card-title">Depreciation</h3>
                       <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                           <i class="fas fa-minus"></i>
@@ -772,14 +772,14 @@
                             <td>View</td>
                             <td>
                                 <div class="icheck-primary">
-                                    <input type="radio" id="accessoryModelIndex1" name="accessoryModelIndex" value="true" @if ($menuData['accessoryModelIndex']['index'] == true) checked @endif>
-                                    <label for="accessoryModelIndex1"></label>
+                                    <input type="radio" id="depreciationIndex1" name="depreciationIndex" value="true" @if ($menuData['depreciationIndex']['index'] == true) checked @endif>
+                                    <label for="depreciationIndex1"></label>
                                 </div>
                             </td>
                             <td>
                                 <div class="icheck-danger">
-                                    <input type="radio" id="accessoryModelIndex2" name="accessoryModelIndex" value="false" @if ($menuData['accessoryModelIndex']['index'] == false) checked @endif>
-                                    <label for="accessoryModelIndex2"></label>
+                                    <input type="radio" id="depreciationIndex2" name="depreciationIndex" value="false" @if ($menuData['depreciationIndex']['index'] == false) checked @endif>
+                                    <label for="depreciationIndex2"></label>
                                 </div>
                             </td>
                           </tr>
@@ -787,14 +787,14 @@
                             <td>Create</td>
                             <td>
                                 <div class="icheck-primary">
-                                    <input type="radio" id="accessoryModelCreate1" name="accessoryModelCreate" value="true" @if ($menuData['accessoryModelCreate']['index'] == true) checked @endif>
-                                    <label for="accessoryModelCreate1"></label>
+                                    <input type="radio" id="depreciationCreate1" name="depreciationCreate" value="true" @if ($menuData['depreciationCreate']['index'] == true) checked @endif>
+                                    <label for="depreciationCreate1"></label>
                                 </div>
                             </td>
                             <td>
                                 <div class="icheck-danger">
-                                    <input type="radio" id="accessoryModelCreate2" name="accessoryModelCreate" value="false" @if ($menuData['accessoryModelCreate']['index'] == false) checked @endif>
-                                    <label for="accessoryModelCreate2"></label>
+                                    <input type="radio" id="depreciationCreate2" name="depreciationCreate" value="false" @if ($menuData['depreciationCreate']['index'] == false) checked @endif>
+                                    <label for="depreciationCreate2"></label>
                                 </div>
                             </td>
                           </tr>
@@ -802,14 +802,14 @@
                             <td>Edit</td>
                             <td>
                                 <div class="icheck-primary">
-                                    <input type="radio" id="accessoryModelEdit1" name="accessoryModelEdit" value="true" @if ($menuData['accessoryModelEdit']['index'] == true) checked @endif>
-                                    <label for="accessoryModelEdit1"></label>
+                                    <input type="radio" id="depreciationEdit1" name="depreciationEdit" value="true" @if ($menuData['depreciationEdit']['index'] == true) checked @endif>
+                                    <label for="depreciationEdit1"></label>
                                 </div>
                             </td>
                             <td>
                                 <div class="icheck-danger">
-                                    <input type="radio" id="accessoryModelEdit2" name="accessoryModelEdit" value="false" @if ($menuData['accessoryModelEdit']['index'] == false) checked @endif> 
-                                    <label for="accessoryModelEdit2"></label>
+                                    <input type="radio" id="depreciationEdit2" name="depreciationEdit" value="false" @if ($menuData['depreciationEdit']['index'] == false) checked @endif> 
+                                    <label for="depreciationEdit2"></label>
                                 </div>
                             </td>
                           </tr>
@@ -817,14 +817,14 @@
                             <td>Delete</td>
                             <td>
                                 <div class="icheck-primary">
-                                    <input type="radio" id="accessoryModelDelete1" name="accessoryModelDelete" value="true" @if ($menuData['accessoryModelDelete']['index'] == true) checked @endif>
-                                    <label for="accessoryModelDelete1"></label>
+                                    <input type="radio" id="depreciationDelete1" name="depreciationDelete" value="true" @if ($menuData['depreciationDelete']['index'] == true) checked @endif>
+                                    <label for="depreciationDelete1"></label>
                                 </div>
                             </td>
                             <td>
                                 <div class="icheck-danger">
-                                    <input type="radio" id="accessoryModelDelete2" name="accessoryModelDelete" value="false" @if ($menuData['accessoryModelDelete']['index'] == false) checked @endif>
-                                    <label for="accessoryModelDelete2"></label>
+                                    <input type="radio" id="depreciationDelete2" name="depreciationDelete" value="false" @if ($menuData['depreciationDelete']['index'] == false) checked @endif>
+                                    <label for="depreciationDelete2"></label>
                                 </div>
                             </td>
                           </tr>
@@ -991,6 +991,36 @@
                                 <div class="icheck-danger">
                                     <input type="radio" id="assetBrokenIndex2" name="assetBrokenIndex" value="false" @if ($menuData['assetBrokenIndex']['index'] == false) checked @endif>
                                     <label for="assetBrokenIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Asset Disposal</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetDisposalIndex1" name="assetDisposalIndex" value="true" @if ($menuData['assetDisposalIndex']['index'] == true) checked @endif>
+                                    <label for="assetDisposalIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetDisposalIndex2" name="assetDisposalIndex" value="false" @if ($menuData['assetDisposalIndex']['index'] == false) checked @endif>
+                                    <label for="assetDisposalIndex2"></label>
+                                </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Asset Depreciation</td>
+                            <td>
+                                <div class="icheck-primary">
+                                    <input type="radio" id="assetDepreciationIndex1" name="assetDepreciationIndex" value="true" @if ($menuData['assetDepreciationIndex']['index'] == true) checked @endif>
+                                    <label for="assetDepreciationIndex1"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="icheck-danger">
+                                    <input type="radio" id="assetDepreciationIndex2" name="assetDepreciationIndex" value="false" @if ($menuData['assetDepreciationIndex']['index'] == false) checked @endif>
+                                    <label for="assetDepreciationIndex2"></label>
                                 </div>
                             </td>
                           </tr>

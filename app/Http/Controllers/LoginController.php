@@ -22,8 +22,17 @@ class LoginController extends Controller
  
         if (Auth::attempt(['employeeNumber' =>  $credentials['employeeNumber'], 'password' => $credentials['password']])) {
             $request->session()->regenerate();
- 
-            return redirect()->intended('/dashboard');
+    
+            // Cek akses pengguna ke dashboard setelah login berhasil
+            if ($this->userCanAccessDashboard()) {
+                return redirect()->intended('/dashboard');
+            } else {
+                // Jika tidak memiliki akses, logout dan kirim pesan error
+                Auth::logout();
+                return back()->with([
+                    'loginError' => 'Access denied to the dashboard.',
+                ]);
+            }
         }
 
         return back()->with([
@@ -41,4 +50,22 @@ class LoginController extends Controller
 
         return redirect('/');
     }
+
+    /**
+     * Pengecekan sederhana untuk mengidentifikasi apakah pengguna terautentikasi
+     * memiliki akses ke dashboard. Anda perlu mengimplementasikan logika sesuai 
+     * kebijakan akses aplikasi Anda.
+     *
+     * @return bool
+     */
+    protected function userCanAccessDashboard()
+    {
+        $jsonData = auth()->user()->permission;
+        $menuData = json_decode($jsonData, true);
+
+        return $menuData['dashboardIndex']['index'];
+    }
+
 }
+
+

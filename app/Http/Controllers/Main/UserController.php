@@ -87,10 +87,10 @@ class UserController extends Controller
             "categoryCreate":{"index":false},
             "categoryEdit":{"index":false},
             "categoryDelete":{"index":false},
-            "accessoryModelIndex":{"index":false}, 
-            "accessoryModelCreate":{"index":false},
-            "accessoryModelEdit":{"index":false},
-            "accessoryModelDelete":{"index":false},
+            "depreciationIndex":{"index":false}, 
+            "depreciationCreate":{"index":false},
+            "depreciationEdit":{"index":false},
+            "depreciationDelete":{"index":false},
             "assetyModelIndex":{"index":false}, 
             "assetyModelCreate":{"index":false},
             "assetyModelEdit":{"index":false},
@@ -107,7 +107,9 @@ class UserController extends Controller
             "assetDeploymentCheckoutIndex":{"index":false},
             "assetArchiveIndex":{"index":false},
             "assetRepairIndex":{"index":false},
-            "assetBrokenIndex":{"index":false}
+            "assetBrokenIndex":{"index":false},
+            "assetDisposalIndex":{"index":false},
+            "assetDepreciationIndex":{"index":false}
         }';
 
         User::create($validatedData);
@@ -160,10 +162,10 @@ class UserController extends Controller
             "categoryCreate":{"index":'. $request->categoryCreate .'},
             "categoryEdit":{"index":'. $request->categoryEdit .'},
             "categoryDelete":{"index":'. $request->categoryDelete .'},
-            "accessoryModelIndex":{"index":'. $request->accessoryModelIndex .'}, 
-            "accessoryModelCreate":{"index":'. $request->accessoryModelCreate .'},
-            "accessoryModelEdit":{"index":'. $request->accessoryModelEdit .'},
-            "accessoryModelDelete":{"index":'. $request->accessoryModelDelete .'},
+            "depreciationIndex":{"index":'. $request->depreciationIndex .'}, 
+            "depreciationCreate":{"index":'. $request->depreciationCreate .'},
+            "depreciationEdit":{"index":'. $request->depreciationEdit .'},
+            "depreciationDelete":{"index":'. $request->depreciationDelete .'},
             "assetModelIndex":{"index":'. $request->assetModelIndex .'}, 
             "assetModelCreate":{"index":'. $request->assetModelCreate .'},
             "assetModelEdit":{"index":'. $request->assetModelEdit .'},
@@ -180,7 +182,9 @@ class UserController extends Controller
             "assetDeploymentCheckoutIndex":{"index":'. $request->assetDeploymentCheckoutIndex .'},
             "assetArchiveIndex":{"index":'. $request->assetArchiveIndex .'},
             "assetRepairIndex":{"index":'. $request->assetRepairIndex .'},
-            "assetBrokenIndex":{"index":'. $request->assetBrokenIndex .'}
+            "assetBrokenIndex":{"index":'. $request->assetBrokenIndex .'},
+            "assetDisposalIndex":{"index":'. $request->assetDisposalIndex .'},
+            "assetDepreciationIndex":{"index":'. $request->assetDepreciationIndex .'}
         }';
 
         User::where('userId', $user->userId)->update(['permission' => $permission]);

@@ -181,23 +181,23 @@
           </a>
         </li>
         @endif
-        {{-- @if($menuData['assetBrokenIndex']['index']) --}}
+        @if($menuData['assetDisposalIndex']['index'])
         <li class="nav-item">
           <a href="/assetDisposal" class="nav-link {{ Request::is('assetDisposal*') ? 'active' : '' }}">
             <i class="far fa fa-trash nav-icon"></i>
             <p>Asset Disposal</p>
           </a>
         </li>
-        {{-- @endif --}}
-        {{-- @if($menuData['assetBrokenIndex']['index']) --}}
+        @endif
+        @if($menuData['assetDepreciationIndex']['index'])
         <li class="nav-item">
           <a href="/assetDepreciation" class="nav-link {{ Request::is('assetDepreciation*') ? 'active' : '' }}">
             <i class="far fa fa-clock nav-icon"></i>
             <p>Asset Depreciation</p>
           </a>
         </li>
-        {{-- @endif --}}
-        @if($menuData['supplierIndex']['index'] || $menuData['manufactureIndex']['index'] || $menuData['categoryIndex']['index'] || $menuData['accessoryModelIndex']['index'] || $menuData['assetModelIndex']['index'])
+        @endif
+        @if($menuData['supplierIndex']['index'] || $menuData['manufactureIndex']['index'] || $menuData['categoryIndex']['index'] || $menuData['depreciationIndex']['index'] || $menuData['assetModelIndex']['index'])
         <li class="nav-item {{ Request::is('supplier*', 'manufacture*', 'category*', 'accessoryModel*', 'assetModel*', 'depreciation*') ? 'menu-open' : '' }}">
           <a href="#" class="nav-link {{ Request::is('supplier*', 'manufacture*', 'category*', 'accessoryModel*', 'assetModel*', 'depreciation*') ? 'active' : '' }}">
             <i class="nav-icon fas fa fa-box"></i>
@@ -239,12 +239,14 @@
               </a>
             </li>
             @endif
+            @if($menuData['depreciationIndex']['index'])
             <li class="nav-item">
               <a href="/depreciation" class="nav-link {{ Request::is('depreciation*') ? 'active' : '' }}">
                 <i class="far fa fa-clock nav-icon"></i>
                 <p>Depreciation</p>
               </a>
             </li>
+            @endif
           </ul>
         </li>
         @endif
@@ -302,11 +304,9 @@
         </li>
         @endif
         <li class="nav-item">
-          <a href="/logout" class="nav-link">
-            <i class="far fa fa-arrow-left nav-icon text-danger"></i>
-            <p class="text-danger">
-              Logout
-            </p>
+          <a href="#" class="nav-link" id="logoutLink">
+              <i class="far fa fa-arrow-left nav-icon"></i>
+              <p>Logout</p>
           </a>
         </li>
       </ul>
@@ -325,3 +325,23 @@
   </div>
 </aside>
 <!-- /.control-sidebar -->
+
+<script>
+  document.getElementById('logoutLink').addEventListener('click', function(event) {
+      event.preventDefault(); // Menghentikan link agar tidak langsung terjadi redirect
+
+      Swal.fire({
+          title: 'Are you sure?',
+          text: "You will be logged out.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, log me out!'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              window.location.href = '/logout'; // Redirect ke URL logout
+          }
+      });
+  });
+</script>

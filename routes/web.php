@@ -216,34 +216,34 @@ Route::controller(AssetRepairController::class)->group(function() {
 });
 
 Route::controller(AssetBrokenController::class)->group(function() {
-    Route::get('/assetBroken', 'index')->name('assetBroken.index')->middleware('auth');
-    Route::get('/assetBroken/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetBroken.detail')->middleware('auth');
-    Route::get('/assetBroken/manage/{assetDeployment:assetDeploymentId}', 'manage')->name('assetBroken.manage')->middleware('auth');
-    Route::post('/assetBroken/manage/store/{assetDeployment:assetDeploymentId}', 'manageStore')->name('assetBroken.manageStore')->middleware('auth');
+    Route::get('/assetBroken', 'index')->name('assetBroken.index')->middleware('auth', 'check.menu.access:assetBrokenIndex');
+    Route::get('/assetBroken/detail/{assetDeployment:assetDeploymentId}', 'detail')->name('assetBroken.detail')->middleware('auth', 'check.menu.access:assetBrokenIndex');
+    Route::get('/assetBroken/manage/{assetDeployment:assetDeploymentId}', 'manage')->name('assetBroken.manage')->middleware('auth', 'check.menu.access:assetBrokenIndex');
+    Route::post('/assetBroken/manage/store/{assetDeployment:assetDeploymentId}', 'manageStore')->name('assetBroken.manageStore')->middleware('auth', 'check.menu.access:assetBrokenIndex');
 });
 
 Route::controller(AssetDisposalController::class)->group(function() {
-    Route::get('/assetDisposal', 'index')->name('assetDisposal.index')->middleware('auth');
-    Route::get('/assetDisposal/create', 'create')->name('assetDisposal.create')->middleware('auth');
-    Route::post('/assetDisposal/store', 'store')->name('assetDisposal.store')->middleware('auth');
-    Route::get('/assetDisposal/device/{assetDisposal:assetDisposalId}', 'device')->name('assetDisposal.device')->middleware('auth');
-    Route::post('/assetDisposal/device/store/{assetDisposal:assetDisposalId}', 'deviceStore')->name('assetDisposal.deviceStore')->middleware('auth');
-    Route::delete('/assetDisposal/device/destroy/{assetDisposalDevice:assetDisposalDeviceId}', 'deviceDestroy')->name('assetDisposal.deviceDestroy')->middleware('auth');
-    Route::get('/assetDisposal/device/save/{assetDisposal:assetDisposalId}', 'deviceSave')->name('assetDisposal.deviceSave')->middleware('auth');
-    Route::get('/assetDisposal/disposal/{assetDisposal:assetDisposalId}', 'disposal')->name('assetDisposal.disposal')->middleware('auth');
-    Route::post('/assetDisposal/disposal/store/{assetDisposal:assetDisposalId}', 'disposalStore')->name('assetDisposal.disposalStore')->middleware('auth');
-    Route::get('/assetDisposal/detail/{assetDisposal:assetDisposalId}', 'detail')->name('assetDisposal.detail')->middleware('auth');
+    Route::get('/assetDisposal', 'index')->name('assetDisposal.index')->middleware('auth', 'check.menu.access:assetDisposalIndex');
+    Route::get('/assetDisposal/create', 'create')->name('assetDisposal.create')->middleware('auth', 'check.menu.access:assetDisposalIndex');
+    Route::post('/assetDisposal/store', 'store')->name('assetDisposal.store')->middleware('auth', 'check.menu.access:assetDisposalIndex');
+    Route::get('/assetDisposal/device/{assetDisposal:assetDisposalId}', 'device')->name('assetDisposal.device')->middleware('auth', 'check.menu.access:assetDisposalIndex');
+    Route::post('/assetDisposal/device/store/{assetDisposal:assetDisposalId}', 'deviceStore')->name('assetDisposal.deviceStore')->middleware('auth', 'check.menu.access:assetDisposalIndex');
+    Route::delete('/assetDisposal/device/destroy/{assetDisposalDevice:assetDisposalDeviceId}', 'deviceDestroy')->name('assetDisposal.deviceDestroy')->middleware('auth', 'check.menu.access:assetDisposalIndex');
+    Route::get('/assetDisposal/device/save/{assetDisposal:assetDisposalId}', 'deviceSave')->name('assetDisposal.deviceSave')->middleware('auth', 'check.menu.access:assetDisposalIndex');
+    Route::get('/assetDisposal/disposal/{assetDisposal:assetDisposalId}', 'disposal')->name('assetDisposal.disposal')->middleware('auth', 'check.menu.access:assetDisposalIndex');
+    Route::post('/assetDisposal/disposal/store/{assetDisposal:assetDisposalId}', 'disposalStore')->name('assetDisposal.disposalStore')->middleware('auth', 'check.menu.access:assetDisposalIndex');
+    Route::get('/assetDisposal/detail/{assetDisposal:assetDisposalId}', 'detail')->name('assetDisposal.detail')->middleware('auth', 'check.menu.access:assetDisposalIndex');
 });
 
 Route::controller(DepreciationController::class)->group(function() {
-    Route::get('/depreciation', 'index')->name('depreciation.index')->middleware('auth');
-    Route::get('/depreciation/create', 'create')->name('depreciation.create')->middleware('auth');
-    Route::post('/depreciation/store', 'store')->name('depreciation.store')->middleware('auth');
-    Route::get('/depreciation/edit/{depreciation:depreciationId}', 'edit')->name('depreciation.edit')->middleware('auth');
-    Route::post('/depreciation/update/{depreciation:depreciationId}', 'update')->name('depreciation.update')->middleware('auth');
-    Route::delete('/depreciation/destroy/{depreciation:depreciationId}', 'destroy')->name('depreciation.destroy')->middleware('auth');
+    Route::get('/depreciation', 'index')->name('depreciation.index')->middleware('auth', 'check.menu.access:depreciationIndex');
+    Route::get('/depreciation/create', 'create')->name('depreciation.create')->middleware('auth', 'check.menu.access:depreciationCreate');
+    Route::post('/depreciation/store', 'store')->name('depreciation.store')->middleware('auth', 'check.menu.access:depreciationCreate');
+    Route::get('/depreciation/edit/{depreciation:depreciationId}', 'edit')->name('depreciation.edit')->middleware('auth', 'check.menu.access:depreciationEdit');
+    Route::post('/depreciation/update/{depreciation:depreciationId}', 'update')->name('depreciation.update')->middleware('auth', 'check.menu.access:depreciationEdit');
+    Route::delete('/depreciation/destroy/{depreciation:depreciationId}', 'destroy')->name('depreciation.destroy')->middleware('auth', 'check.menu.access:depreciationDelete');
 });
 
 Route::controller(AssetDepreciationController::class)->group(function() {
-    Route::get('/assetDepreciation', 'index')->name('assetDepreciation.index')->middleware('auth');
+    Route::get('/assetDepreciation', 'index')->name('assetDepreciation.index')->middleware('auth', 'check.menu.access:assetDepreciationIndex');
 });

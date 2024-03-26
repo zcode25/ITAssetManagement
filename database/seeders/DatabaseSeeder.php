@@ -114,10 +114,10 @@ class DatabaseSeeder extends Seeder
             "categoryCreate":{"index":true},
             "categoryEdit":{"index":true},
             "categoryDelete":{"index":true},
-            "accessoryModelIndex":{"index":true}, 
-            "accessoryModelCreate":{"index":true},
-            "accessoryModelEdit":{"index":true},
-            "accessoryModelDelete":{"index":true},
+            "depreciationIndex":{"index":true}, 
+            "depreciationCreate":{"index":true},
+            "depreciationEdit":{"index":true},
+            "depreciationDelete":{"index":true},
             "assetModelIndex":{"index":true}, 
             "assetModelCreate":{"index":true},
             "assetModelEdit":{"index":true},
@@ -134,7 +134,10 @@ class DatabaseSeeder extends Seeder
             "assetDeploymentCheckoutIndex":{"index":true},
             "assetArchiveIndex":{"index":true},
             "assetRepairIndex":{"index":true},
-            "assetBrokenIndex":{"index":true}
+            "assetBrokenIndex":{"index":true},
+            "assetDisposalIndex":{"index":true},
+            "assetDepreciationIndex":{"index":true},
+            "depreciationIndex":{"index":true}
         }';
 
         // $permission = str_replace(array("\r", "\n", ' '), '', $permission);
@@ -192,10 +195,10 @@ class DatabaseSeeder extends Seeder
             "categoryCreate":{"index":false},
             "categoryEdit":{"index":false},
             "categoryDelete":{"index":false},
-            "accessoryModelIndex":{"index":false}, 
-            "accessoryModelCreate":{"index":false},
-            "accessoryModelEdit":{"index":false},
-            "accessoryModelDelete":{"index":false},
+            "depreciationIndex":{"index":false}, 
+            "depreciationCreate":{"index":false},
+            "depreciationEdit":{"index":false},
+            "depreciationDelete":{"index":false},
             "assetModelIndex":{"index":false}, 
             "assetModelCreate":{"index":false},
             "assetModelEdit":{"index":false},
@@ -213,7 +216,9 @@ class DatabaseSeeder extends Seeder
             "assetDeploymentCheckoutIndex":{"index":false},
             "assetArchiveIndex":{"index":false},
             "assetRepairIndex":{"index":false},
-            "assetBrokenIndex":{"index":false}
+            "assetBrokenIndex":{"index":false},
+            "assetDisposalIndex":{"index":false},
+            "assetDepreciationIndex":{"index":false}
         }';
 
         User::create([
@@ -267,10 +272,10 @@ class DatabaseSeeder extends Seeder
             "categoryCreate":{"index":false},
             "categoryEdit":{"index":false},
             "categoryDelete":{"index":false},
-            "accessoryModelIndex":{"index":false}, 
-            "accessoryModelCreate":{"index":false},
-            "accessoryModelEdit":{"index":false},
-            "accessoryModelDelete":{"index":false},
+            "depreciationIndex":{"index":false}, 
+            "depreciationCreate":{"index":false},
+            "depreciationEdit":{"index":false},
+            "depreciationDelete":{"index":false},
             "assetModelIndex":{"index":false}, 
             "assetModelCreate":{"index":false},
             "assetModelEdit":{"index":false},
@@ -287,7 +292,9 @@ class DatabaseSeeder extends Seeder
             "assetDeploymentCheckoutIndex":{"index":false},
             "assetArchiveIndex":{"index":false},
             "assetRepairIndex":{"index":false},
-            "assetBrokenIndex":{"index":false}
+            "assetBrokenIndex":{"index":false},
+            "assetDisposalIndex":{"index":false},
+            "assetDepreciationIndex":{"index":false}
         }';
 
         User::create([

@@ -16,9 +16,9 @@ $menuData = json_decode($jsonData, true);
           </div>
           <div class="col-sm-6">
             <div class="float-sm-right">
-              {{-- @if($menuData['categoryCreate']['index']) --}}
+              @if($menuData['depreciationCreate']['index'])
               <a href="/depreciation/create" class="btn btn-primary">Create New</a>
-              {{-- @endif --}}
+              @endif
             </div>
           </div>
         </div>
@@ -47,9 +47,9 @@ $menuData = json_decode($jsonData, true);
               <th>Category</th>
               <th>Useful Period</th>
               <th>Residual Value</th>
-              {{-- @if($menuData['categoryEdit']['index'] || $menuData['categoryDelete']['index']) --}}
+              @if($menuData['depreciationEdit']['index'] || $menuData['depreciationDelete']['index'])
               <th>Action</th>
-              {{-- @endif --}}
+              @endif
             </tr>
             </thead>
             <tbody>
@@ -58,14 +58,14 @@ $menuData = json_decode($jsonData, true);
               <td>{{ $depreciation->depreciationName }}</td>
               <td>{{ $depreciation->category->categoryName }}</td>
               <td>{{ $depreciation->depreciationUseful }} Years</td>
-              <td>{{ $depreciation->depreciationResidual }}</td>
-              @if($menuData['categoryEdit']['index'] || $menuData['categoryDelete']['index'])
+              <td>{{ "Rp " . number_format($depreciation->depreciationResidual, 0, ',', '.') }}</td>
+              @if($menuData['depreciationEdit']['index'] || $menuData['depreciationDelete']['index'])
               <td class="py-0 align-middle">
                 <div class="btn-group btn-group-sm">
-                  @if($menuData['categoryEdit']['index'])
+                  @if($menuData['depreciationEdit']['index'])
                   <a href="/depreciation/edit/{{ $depreciation->depreciationId }}" class="btn btn-primary">Edit</a>
                   @endif
-                  @if($menuData['categoryDelete']['index'])
+                  @if($menuData['depreciationDelete']['index'])
                   <a href="/depreciation/destroy/{{ $depreciation->depreciationId }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
                   @endif
                 </div>
